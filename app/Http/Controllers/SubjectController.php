@@ -12,7 +12,7 @@ class SubjectController extends Controller
      */
     public function index(): View
     {
-        return view('classes', [
+        return view('layouts.information.classes', [
             //
         ]);
     }
