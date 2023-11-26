@@ -62,7 +62,7 @@ new class extends Component
         </div>
         <div>
             <x-info-label>{{_("PLM Email:")}}</x-info-label> 
-            <span>{{ $user->plm_email }}</span>
+            <span>{{ $user->email }}</span>
         </div>
         <div>
             <x-info-label>{{_("Personal Email:")}}</x-info-label> 
