@@ -15,8 +15,8 @@ new class extends Component {
     } 
 }; ?>
 
-<div class="grid grid-cols-1 overflow-hidden bg-white sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 rounded-xl">
-    <div class="border">
+<div class="grid grid-cols-1 overflow-hidden bg-white sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 rounded-xl">
+    <div class="-mr-px border">
         <div class="px-6 py-4 border-b-2">
             Monday
         </div>
@@ -31,12 +31,12 @@ new class extends Component {
             </div>       
         </div>
     </div>
-    <div class="border">
+    <div class="-mr-px border">
         <div class="px-6 py-4 border-b-2">
             Tuesday
         </div>
     </div>
-    <div class="border">
+    <div class="-mr-px border">
         <div class="px-6 py-4 border-b-2">
             Wednesday
         </div>
@@ -61,7 +61,7 @@ new class extends Component {
             </div>       
         </div>
     </div>
-    <div class="border">
+    <div class="-mr-px border">
         <div class="px-6 py-4 border-b-2">
             Thursday
         </div>
@@ -76,7 +76,7 @@ new class extends Component {
             </div>       
         </div>
     </div>
-    <div class="border">
+    <div class="-mr-px border">
         <div class="px-6 py-4 border-b-2">
             Friday
         </div>
@@ -111,14 +111,9 @@ new class extends Component {
             </div>       
         </div>
     </div>
-    <div class="border">
+    <div class="-mr-px border">
         <div class="px-6 py-4 border-b-2">
             Saturday
-        </div>
-    </div>
-    <div class="border">
-        <div class="px-6 py-4 border-b-2">
-            Sunday
         </div>
     </div>
 </div>
