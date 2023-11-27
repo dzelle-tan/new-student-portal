@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\StudentViolationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,5 +28,9 @@ Route::view('profile', 'profile')
 Route::get('classes', [SubjectController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('classes'); 
+
+Route::get('student_violations', [StudentViolationController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('student_violations'); 
 
 require __DIR__.'/auth.php';

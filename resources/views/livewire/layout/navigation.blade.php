@@ -59,7 +59,7 @@ new class extends Component
                                 <x-dropdown-link :href="route('profile')" wire:navigate>
                                     {{ __('Grades') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('profile')" wire:navigate>
+                                <x-dropdown-link :href="route('student_violations')" wire:navigate>
                                     {{ __('Violations') }}
                                 </x-dropdown-link>
                             </x-slot>
@@ -169,6 +169,9 @@ new class extends Component
         <div class="py-4 border-t border-gray-200">
             <x-responsive-nav-link :href="route('classes')" :active="request()->routeIs('classes')" wire:navigate>
                 {{ __('Classes') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('student_violations')" :active="request()->routeIs('student_violations')" wire:navigate>
+                {{ __('Violations') }}
             </x-responsive-nav-link>
         </div>
 
