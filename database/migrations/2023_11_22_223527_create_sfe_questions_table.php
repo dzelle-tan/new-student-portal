@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('student_violations', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('sfe_questions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('question')->nullable();
+            $table->string('type', 45)->nullable();
+            $table->timestamps(); // Created_at and updated_at columns
         });
     }
 
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('student_violations');
+        Schema::dropIfExists('sfe_questions');
     }
 };

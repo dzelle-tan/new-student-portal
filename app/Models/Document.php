@@ -6,12 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class StudentViolation extends Model
+class Document extends Model
 {
     use HasFactory;
 
-    public function student(): BelongsTo
+    protected $fillable = [
+        'no_of_copies',
+    ];
+
+    public function studentRequest(): BelongsTo
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(StudentRequest::class);
     }
 }
