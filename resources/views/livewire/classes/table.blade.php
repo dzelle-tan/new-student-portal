@@ -15,16 +15,155 @@ new class extends Component {
     } 
 }; ?>
 
-<!-- Table responsive wrapper -->
-<div class="overflow-x-auto bg-white">
+<div class="flex bg-white rounded-xl">
+    <div class="border-r">
+        <div class="px-6 py-4 border-b-2">
+            Monday
+        </div>
+        <div class="p-2">
+            <div class="w-full h-full p-2 pl-3 space-y-3 text-white rounded-md bg-secondary ">
+                <p>9am - 12pm</p>
+                <div>
+                    <p>CSC 0134.1 - 2</p>
+                    <p>Operating System (Lab)</p>
+                </div>
+                <p>GV 311</p>
+            </div>       
+        </div>
+    </div>
+    <div class="border-r">
+        <div class="px-6 py-4 border-b-2">
+            Tuesday
+        </div>
+    </div>
+    <div class="border-r">
+        <div class="px-6 py-4 border-b-2">
+            Wednesday
+        </div>
+        <div class="p-2">
+            <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
+                <p>9am - 12pm</p>
+                <div>
+                    <p>CSC 0134.1 - 2</p>
+                    <p>Operating System (Lab)</p>
+                </div>
+                <p>GV 311</p>
+            </div>       
+        </div>
+        <div class="p-1">
+            <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
+                <p>9am - 12pm</p>
+                <div>
+                    <p>CSC 0134.1 - 2</p>
+                    <p>Operating System (Lab)</p>
+                </div>
+                <p>GV 311</p>
+            </div>       
+        </div>
+    </div>
+    <div class="border-r">
+        <div class="px-6 py-4 border-b-2">
+            Thursday
+        </div>
+        <div class="p-2">
+            <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
+                <p>9am - 12pm</p>
+                <div>
+                    <p>CSC 0134.1 - 2</p>
+                    <p>Operating System (Lab)</p>
+                </div>
+                <p>GV 311</p>
+            </div>       
+        </div>
+    </div>
+    <div class="border-r">
+        <div class="px-6 py-4 border-b-2">
+            Friday
+        </div>
+        <div class="p-2">
+            <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
+                <p>9am - 12pm</p>
+                <div>
+                    <p>CSC 0134.1 - 2</p>
+                    <p>Operating System (Lab)</p>
+                </div>
+                <p>GV 311</p>
+            </div>       
+        </div>
+        <div class="p-1">
+            <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
+                <p>9am - 12pm</p>
+                <div>
+                    <p>CSC 0134.1 - 2</p>
+                    <p>Operating System (Lab)</p>
+                </div>
+                <p>GV 311</p>
+            </div>       
+        </div>
+        <div class="p-1">
+            <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
+                <p>9am - 12pm</p>
+                <div>
+                    <p>CSC 0134.1 - 2</p>
+                    <p>Operating System (Lab)</p>
+                </div>
+                <p>GV 311</p>
+            </div>       
+        </div>
+    </div>
+    <div class="border-r">
+        <div class="px-6 py-4 border-b-2">
+            Saturday
+        </div>
+        <div class="p-2">
+            <div class="w-full h-full p-2 pl-3 space-y-3 text-white rounded-md bg-primary">
+                <p>9am - 12pm</p>
+                <div>
+                    <p>CSC 0134.1 - 2</p>
+                    <p>Operating System (Lab)</p>
+                </div>
+                <p>GV 311</p>
+            </div>       
+        </div>
+        <div class="p-1">
+            <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
+                <p>9am - 12pm</p>
+                <div>
+                    <p>CSC 0134.1 - 2</p>
+                    <p>Operating System (Lab)</p>
+                </div>
+                <p>GV 311</p>
+            </div>       
+        </div>
+    </div>
+    <div class="">
+        <div class="px-6 py-4 border-b-2">
+            Sunday
+        </div>
+        <div class="p-2">
+            <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
+                <p>9am - 12pm</p>
+                <div>
+                    <p>CSC 0134.1 - 2</p>
+                    <p>Operating System (Lab)</p>
+                </div>
+                <p>GV 311</p>
+            </div>       
+        </div>
+
+    </div>
+
+</div>
+{{-- <!-- Table responsive wrapper -->
+<div class="overflow-x-auto bg-white rounded-xl">
 
         <!-- Table -->
         <table class="min-w-full text-sm text-left whitespace-nowrap">
     
         <!-- Table head -->
-        <thead class="tracking-wider border-t border-b-2">
+        <thead class="tracking-wider border-b-2">
             <tr>
-                <th scope="col" class="px-6 py-4 border-x">
+                <th scope="col" class="w-1/6 px-6 py-4">
                     Monday
                 </th>
                 <th scope="col" class="px-6 py-4 border-x">
@@ -51,50 +190,43 @@ new class extends Component {
         <!-- Table body -->
         <tbody>
     
-            <tr class="border-b ">
-                <td class="px-6 py-4 border-x">
-                    <div>
-                        
+            <tr class="flex flex-col border-b ">
+                <td class="p-1 border-x">
+                    <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
+                        <p>9am - 12pm</p>
+                        <div>
+                            <p>CSC 0134.1 - 2</p>
+                            <p>Operating System (Lab)</p>
+                        </div>
+                        <p>GV 311</p>
                     </div>
                 </td>
-                <td class="px-6 py-4 border-x">30</td>
-                <td class="px-6 py-4 border-x ">In Stock</td>
+                <td class="p-1 border-x">
+                    <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
+                        <p>9am - 12pm</p>
+                        <div>
+                            <p>CSC 0134.1 - 2</p>
+                            <p>Operating System (Lab)</p>
+                        </div>
+                        <p>GV 311</p>
+                    </div>
+                </td>
+                <td class="p-1 border-x">
+                    <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
+                        <p>9am - 12pm</p>
+                        <div>
+                            <p>CSC 0134.1 - 2</p>
+                            <p>Operating System (Lab)</p>
+                        </div>
+                        <p>GV 311</p>
+                    </div>
+                </td>
             </tr>
-    
-            <tr class="border-b ">
-                <td class="px-6 py-4 border-x ">$89.50</td>
-                <td class="px-6 py-4 border-x ">25</td>
-                <td class="px-6 py-4 border-x ">In Stock</td>
-            </tr>
-    
-            <tr class="border-b ">
-                <td class="px-6 py-4 border-x ">$69.99</td>
-                <td class="px-6 py-4 border-x ">40</td>
-                <td class="px-6 py-4 border-x ">In Stock</td>
-            </tr>
-    
-            <tr class="border-b ">
-                <td class="px-6 py-4 border-x ">$449.99</td>
-                <td class="px-6 py-4 border-x ">5</td>
-                <td class="px-6 py-4 border-x ">In Stock</td>
-            </tr>
-    
-            <tr class="border-b ">
-                <td class="px-6 py-4 border-x ">$24.95</td>
-                <td class="px-6 py-4 border-x ">50</td>
-                <td class="px-6 py-4 border-x ">In Stock</td>
-            </tr>
-            <tr class="border-b ">
-                <td class="px-6 py-4 border-x ">$24.95</td>
-                <td class="px-6 py-4 border-x ">50</td>
-                <td class="px-6 py-4 border-x ">In Stock</td>
-            </tr>
-    
         </tbody>
     
         </table>
   
-</div>
+</div> --}}
     {{-- @foreach ($classes as $class)
         <div class="flex p-6 space-x-2" wire:key="{{ $class->id }}">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600 -scale-x-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
