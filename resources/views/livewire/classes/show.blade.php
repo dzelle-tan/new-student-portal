@@ -15,8 +15,8 @@ new class extends Component {
     } 
 }; ?>
 
-<div class="flex bg-white rounded-xl">
-    <div class="border-r">
+<div class="grid grid-cols-1 overflow-hidden bg-white sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 rounded-xl">
+    <div class="border">
         <div class="px-6 py-4 border-b-2">
             Monday
         </div>
@@ -31,12 +31,12 @@ new class extends Component {
             </div>       
         </div>
     </div>
-    <div class="border-r">
+    <div class="border">
         <div class="px-6 py-4 border-b-2">
             Tuesday
         </div>
     </div>
-    <div class="border-r">
+    <div class="border">
         <div class="px-6 py-4 border-b-2">
             Wednesday
         </div>
@@ -61,7 +61,7 @@ new class extends Component {
             </div>       
         </div>
     </div>
-    <div class="border-r">
+    <div class="border">
         <div class="px-6 py-4 border-b-2">
             Thursday
         </div>
@@ -76,7 +76,7 @@ new class extends Component {
             </div>       
         </div>
     </div>
-    <div class="border-r">
+    <div class="border">
         <div class="px-6 py-4 border-b-2">
             Friday
         </div>
@@ -100,21 +100,6 @@ new class extends Component {
                 <p>GV 311</p>
             </div>       
         </div>
-        <div class="p-1">
-            <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
-                <p>9am - 12pm</p>
-                <div>
-                    <p>CSC 0134.1 - 2</p>
-                    <p>Operating System (Lab)</p>
-                </div>
-                <p>GV 311</p>
-            </div>       
-        </div>
-    </div>
-    <div class="border-r">
-        <div class="px-6 py-4 border-b-2">
-            Saturday
-        </div>
         <div class="p-2">
             <div class="w-full h-full p-2 pl-3 space-y-3 text-white rounded-md bg-primary">
                 <p>9am - 12pm</p>
@@ -125,34 +110,17 @@ new class extends Component {
                 <p>GV 311</p>
             </div>       
         </div>
-        <div class="p-1">
-            <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
-                <p>9am - 12pm</p>
-                <div>
-                    <p>CSC 0134.1 - 2</p>
-                    <p>Operating System (Lab)</p>
-                </div>
-                <p>GV 311</p>
-            </div>       
+    </div>
+    <div class="border">
+        <div class="px-6 py-4 border-b-2">
+            Saturday
         </div>
     </div>
-    <div class="">
+    <div class="border">
         <div class="px-6 py-4 border-b-2">
             Sunday
         </div>
-        <div class="p-2">
-            <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md border-primary-light-1 bg-indigo-50">
-                <p>9am - 12pm</p>
-                <div>
-                    <p>CSC 0134.1 - 2</p>
-                    <p>Operating System (Lab)</p>
-                </div>
-                <p>GV 311</p>
-            </div>       
-        </div>
-
     </div>
-
 </div>
 {{-- <!-- Table responsive wrapper -->
 <div class="overflow-x-auto bg-white rounded-xl">

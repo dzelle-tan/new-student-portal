@@ -49,6 +49,9 @@ export default {
                 'secondary-muted': '#b8a179',
                 'secondary-muted-2': '#cfc1a4',
             },
+            width: {
+                '1/7': '11.4285714rem', 
+            },
         },
     },
 
