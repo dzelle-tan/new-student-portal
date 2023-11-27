@@ -102,7 +102,7 @@ new class extends Component
                     <x-icon name="calendar-days" solid class="text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"/>
 
                     <div class="absolute z-50 hidden w-24 text-center text-black transform -translate-x-1/2 bg-white border rounded-md left-1/2 group-hover:block">
-                        <div class="text-sm py-0.5 font-medium text-white bg-secondary rounded-t-md">
+                        <div class="text-sm py-0.5 font-medium text-white bg-red-700 rounded-t-md">
                             {{ date('F') }}
                         </div>
                         <div class="text-3xl">
