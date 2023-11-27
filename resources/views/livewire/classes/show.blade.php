@@ -39,7 +39,7 @@ new class extends Component {
     ];
 @endphp
 
-<div class="grid grid-cols-1 overflow-hidden bg-white sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 rounded-xl">
+<div class="grid grid-cols-1 overflow-hidden bg-white shadow-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 rounded-xl">
     @foreach ($days as $day => $classes)
         <div class="-mr-px border">
             <div class="px-6 py-4 border-b-2">
