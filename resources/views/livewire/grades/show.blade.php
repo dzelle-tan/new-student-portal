@@ -11,7 +11,7 @@ use Livewire\Volt\Component;
 
 new class extends Component
 {
-    public $selectedTerm;
+    public $selectedTerm = "All";
     public Collection $terms;
     public Collection $grades;
     public Student $user;
@@ -78,12 +78,6 @@ new class extends Component
             <option value = "{{ $term->id }}">{{ $term->school_year }}, Term {{ $term->semester }}</option>
         @endforeach
         </select>
-        <div>
-            @if ($selectedTerm == null)
-                shet
-            @endif
-
-        </div>
     </div>
 
     <div class="mt-6 space-y-2">
@@ -98,6 +92,28 @@ new class extends Component
 
             @foreach ($grades as $grade)
             @if ($selectedTerm == $grade->student_record_id)
+                <div>
+                    <span class="inline-block">{{ ($grade->classes)->code }}</span>
+                </div>
+                <div>
+                    <span class="inline-block">{{ ($grade->classes)->section }}</span>
+                </div>
+                <div>
+                    <span class="inline-block">{{ ($grade->classes)->units }}</span>
+                </div>
+                <div>
+                    <span class="inline-block">{{ ($grade->classes)->name }}</span>
+                </div>
+                <div>
+                    <span class="inline-block">{{ $grade->grade }}</span>
+                </div>
+                <div>
+                    <span class="inline-block">{{ $grade->completion_grade }}</span>
+                </div>
+                <div>
+                    <span class="inline-block">{{ $grade->remarks}}</span>
+                </div>
+            @elseif ($selectedTerm == "All")
                 <div>
                     <span class="inline-block">{{ ($grade->classes)->code }}</span>
                 </div>

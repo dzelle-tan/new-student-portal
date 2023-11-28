@@ -13,9 +13,8 @@ class Student extends Seeder
      */
     public function run(): void
     {
-        $studentIds = [];
 
-        $studentIds[] = DB::table('students')->insert([
+         DB::table('students')->insert([
             'email' => 'merlindabinalla@gmail.com',
             'student_no' => '202101350',
             'last_name' => 'binalla',
@@ -41,7 +40,7 @@ class Student extends Seeder
 
         ]);
 
-        $studentIds[] = DB::table('students')->insert([
+         DB::table('students')->insert([
             'email' => 'merlindabinalla@gmail.com',
             'student_no' => '202101351',
             'last_name' => 'Swift',
@@ -66,7 +65,7 @@ class Student extends Seeder
             'password' => bcrypt('adminadmin'),
     ]);
 
-        $studentIds[] = DB::table('students')->insert([
+         DB::table('students')->insert([
             'email' => 'chimchimmiepark@gmail.com',
             'student_no' => '20230001',
             'last_name' => 'Ishigami',
@@ -92,7 +91,7 @@ class Student extends Seeder
 
         ]);
 
-        $studentIds[] = DB::table('students')->insert([
+         DB::table('students')->insert([
             'email' => 'chimchimmiepark@gmail.com',
             'student_no' => '20235002',
             'last_name' => 'Taiju',
@@ -117,7 +116,7 @@ class Student extends Seeder
             'password' => bcrypt('20235002')
         ]);
 
-        $studentIds[] = DB::table('students')->insert([
+         DB::table('students')->insert([
             'email' => 'chimchimmiepark@gmail.com',
             'student_no' => '20235003',
             'last_name' => 'Yuzuriha',
@@ -144,7 +143,7 @@ class Student extends Seeder
         ]);
 
 
-        $studentIds[] = DB::table('students')->insert([
+         DB::table('students')->insert([
             'email' => 'chimchimmiepark@gmail.com',
             'student_no' => '20235005',
             'last_name' => 'Kohaku',
@@ -168,9 +167,5 @@ class Student extends Seeder
             'photo_link' => 'https://example.com/kohaku_photo',
             'password' => bcrypt('20235005')
         ]);
-
-    // Store the course IDs in a file for later use
-    file_put_contents(database_path('student_ids.txt'), implode(',', $studentIds));
-
     }
 }

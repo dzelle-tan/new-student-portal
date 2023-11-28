@@ -29,16 +29,16 @@ new #[Layout('layouts.guest')] class extends Component
 }; ?>
 
 <div>
-    <h2 class="text-primary font-semibold text-2xl mt-2">Login</h2>
+    <h2 class="mt-2 text-2xl font-semibold text-primary">Login</h2>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form wire:submit="login">
         <!-- Email Address -->
         <div class="mt-6">
-            <x-input-label for="email" :value="__('PLM Email')" />
-            <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-label for="student_no" :value="__('Student Number')" />
+            <x-text-input wire:model="form.student_no" id="student_no" class="block w-full mt-1" type="text" name="student_no" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('student_no')" class="mt-2" />
         </div>
 
         <!-- Password -->
@@ -46,13 +46,13 @@ new #[Layout('layouts.guest')] class extends Component
             <div class="flex justify-between">
                 <x-input-label for="password" :value="__('Password')" />
                 @if (Route::has('password.request'))
-                    <a class="text-xs text-primary-light-1 hover:text-primary hover:underline rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
+                    <a class="text-xs rounded-md text-primary-light-1 hover:text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
                         {{ __('Forgot password?') }}
                     </a>
                 @endif
             </div>
 
-            <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
+            <x-text-input wire:model="form.password" id="password" class="block w-full mt-1"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
@@ -63,8 +63,8 @@ new #[Layout('layouts.guest')] class extends Component
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                <input wire:model="form.remember" id="remember" type="checkbox" class="text-indigo-600 border-gray-300 rounded shadow-sm focus:ring-indigo-500" name="remember">
+                <span class="text-sm text-gray-600 ms-2">{{ __('Remember me') }}</span>
             </label>
         </div>
 
