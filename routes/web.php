@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-Route::view('home', 'home')
+Route::view('home', 'layouts.home')
     ->middleware(['auth', 'verified'])
     ->name('home');
 
-Route::view('profile', 'profile')
+Route::view('profile', 'layouts.information.profile')
     ->middleware(['auth'])
     ->name('profile');
 
