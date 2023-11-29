@@ -26,7 +26,6 @@
                         'remarks' => 'Go to the OSDS office',
                         'resolution' => 'Warning',
                         'status' => 'Resolved',
-                        'status_color' => 'text-green-700'
                     ],
                     [
                         'sm_no' => '4',
@@ -36,7 +35,6 @@
                         'remarks' => 'Go to the OSDS office',
                         'resolution' => '5 hours Community/Campus Service',
                         'status' => 'Resolving',
-                        'status_color' => 'text-yellow-600'
                     ],
                     [
                         'sm_no' => '3',
@@ -46,7 +44,6 @@
                         'remarks' => 'Go to the OSDS office',
                         'resolution' => 'Warning',
                         'status' => 'Unresolved',
-                        'status_color' => 'text-red-600'
                     ],
                     // More offenses...
                 ],
@@ -59,7 +56,6 @@
                         'remarks' => 'Go to the OSDS office',
                         'resolution' => 'Warning',
                         'status' => 'Resolved',
-                        'status_color' => 'text-green-700'
                     ],
                     [
                         'sm_no' => '4',
@@ -69,7 +65,6 @@
                         'remarks' => 'Go to the OSDS office',
                         'resolution' => '5 hours Community/Campus Service',
                         'status' => 'Resolving',
-                        'status_color' => 'text-yellow-600'
                     ],
                     [
                         'sm_no' => '3',
@@ -79,7 +74,6 @@
                         'remarks' => 'Go to the OSDS office',
                         'resolution' => 'Warning',
                         'status' => 'Unresolved',
-                        'status_color' => 'text-red-600'
                     ],
                     // More offenses...
                 ],
@@ -92,7 +86,6 @@
                         'remarks' => 'Go to the OSDS office',
                         'resolution' => 'Warning',
                         'status' => 'Resolved',
-                        'status_color' => 'text-green-700'
                     ],
                     [
                         'sm_no' => '4',
@@ -102,7 +95,6 @@
                         'remarks' => 'Go to the OSDS office',
                         'resolution' => '5 hours Community/Campus Service',
                         'status' => 'Resolving',
-                        'status_color' => 'text-yellow-600'
                     ],
                     [
                         'sm_no' => '3',
@@ -112,7 +104,6 @@
                         'remarks' => 'Go to the OSDS office',
                         'resolution' => 'Warning',
                         'status' => 'Unresolved',
-                        'status_color' => 'text-red-600'
                     ],
                     // More offenses...
                 ],
