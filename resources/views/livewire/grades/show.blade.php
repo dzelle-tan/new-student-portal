@@ -43,7 +43,6 @@ new class extends Component
     public function updateSelectedTerm($value): void
     {
         $this->selectedTerm = $value;
-        $this->getStudentGrades();
     }
 }; ?>
 

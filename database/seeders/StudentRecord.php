@@ -13,7 +13,7 @@ class StudentRecord extends Seeder
      */
     public function run(): void
     {
-         DB::table('student_records')->insert([
+        DB::table('student_records')->insert([
             'fees_id' => 1,
             'student_id' => 1,
             'control_no' => 202101350,
@@ -23,7 +23,7 @@ class StudentRecord extends Seeder
             'gwa' => 1.00,
         ]);
 
-         DB::table('student_records')->insert([
+        DB::table('student_records')->insert([
             'fees_id' => 2,
             'student_id' => 1,
             'control_no' => 202101350,
@@ -33,7 +33,7 @@ class StudentRecord extends Seeder
             'gwa' => 1.00,
         ]);
 
-         DB::table('student_records')->insert([
+        DB::table('student_records')->insert([
             'fees_id' => 1,
             'student_id' => 1,
             'control_no' => 202101350,
@@ -43,7 +43,7 @@ class StudentRecord extends Seeder
             'gwa' => 1.00,
         ]);
 
-         DB::table('student_records')->insert([
+        DB::table('student_records')->insert([
             'fees_id' => 1,
             'student_id' => 1,
             'control_no' => 202101350,
@@ -53,7 +53,7 @@ class StudentRecord extends Seeder
             'gwa' => 1.00,
         ]);
 
-         DB::table('student_records')->insert([
+        DB::table('student_records')->insert([
             'fees_id' => 1,
             'student_id' => 2,
             'control_no' => 202101350,
@@ -63,7 +63,7 @@ class StudentRecord extends Seeder
             'gwa' => 1.00,
         ]);
 
-         DB::table('student_records')->insert([
+        DB::table('student_records')->insert([
             'fees_id' => 2,
             'student_id' => 2,
             'control_no' => 202101350,

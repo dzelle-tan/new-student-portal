@@ -29,9 +29,9 @@ return new class extends Migration
                 ->onUpdate('NO ACTION');
 
             $table->foreign('student_id')
-            ->references('id')->on('students')
-            ->onDelete('NO ACTION')
-            ->onUpdate('NO ACTION');
+                ->references('id')->on('students')
+                ->onDelete('NO ACTION')
+                ->onUpdate('NO ACTION');
         });
     }
 
