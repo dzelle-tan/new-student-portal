@@ -36,7 +36,7 @@ new class extends Component
                     </x-nav-link>
                     <x-div-nav-link
                         class="sm:flex sm:items-center sm:ms-6"
-                        :active="request()->routeIs('classes')"
+                        :active="request()->routeIs('classes') || request()->routeIs('student_violations')"
                     >
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">

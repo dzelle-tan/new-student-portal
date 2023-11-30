@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\StudentViolationController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,15 +17,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-Route::view('home', 'home')
+Route::view('home', 'layouts.home')
     ->middleware(['auth', 'verified'])
     ->name('home');
 
-Route::view('profile', 'profile')
+Route::view('profile', 'layouts.information.profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::get('classes', [SubjectController::class, 'index'])
+Route::get('classes', [ClassesController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('classes');
 

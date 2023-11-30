@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Subject; 
+use App\Models\Classes; 
 use Illuminate\Database\Eloquent\Collection; 
 use Livewire\Volt\Component;
 
@@ -9,8 +9,7 @@ new class extends Component {
  
     public function mount(): void
     {
-        $this->classes = Subject::with('user')
-            ->latest()
+        $this->classes = Classes::with('student')
             ->get();
     } 
 }; ?>
@@ -39,7 +38,7 @@ new class extends Component {
     ];
 @endphp
 
-<div class="grid grid-cols-1 overflow-hidden bg-white shadow-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 rounded-xl">
+<div class="grid grid-cols-1 overflow-hidden bg-white shadow-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 rounded-xl lg:min-h-[38rem]">
     @foreach ($days as $day => $classes)
         <div class="-mr-px border">
             <div class="px-6 py-4 border-b-2">
@@ -49,7 +48,7 @@ new class extends Component {
                 <div class="p-2 {{ $loop->first ? '' : 'pt-0' }}">
                     <x-class-block time="{{ $class['time'] }}" code="{{ $class['code'] }}" section="{{ $class['section'] }}" subject="{{ $class['subject'] }}" room="{{ $class['room'] }}" type="{{ $class['type'] }}"/>     
                 </div>
-            @endforeach
+            @endforeach              
         </div>
     @endforeach
 </div>
