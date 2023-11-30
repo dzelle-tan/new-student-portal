@@ -85,7 +85,10 @@ new class extends Component
         @endphp
         @foreach ($groupedGrades as $termId => $grades)
             @if ($selectedTerm == 'All' || $termId == $selectedTerm)
-                <h2 class="mt-8">{{ $terms[$termId]->school_year }}, Term {{ $terms[$termId]->semester }}</h2> 
+                @php
+                    $termDetails = collect($terms)->firstWhere('id', $termId);
+                @endphp
+                <h2 class="mt-8">{{ $termDetails->school_year }}, Term {{ $termDetails->semester }}</h2> 
                 <div class="w-full mt-4 overflow-x-auto">
                     <table class="w-full text-left whitespace-nowrap">
                         <thead>
