@@ -36,7 +36,7 @@ new class extends Component
                     </x-nav-link>
                     <x-div-nav-link
                         class="sm:flex sm:items-center sm:ms-6"
-                        :active="request()->routeIs('classes') || request()->routeIs('student_violations')"
+                        :active="request()->routeIs('classes') || request()->routeIs('student_violations') || request()->routeIs('grades')"
                     >
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
@@ -169,6 +169,9 @@ new class extends Component
         <div class="py-4 border-t border-gray-200">
             <x-responsive-nav-link :href="route('classes')" :active="request()->routeIs('classes')" wire:navigate>
                 {{ __('Classes') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('grades')" :active="request()->routeIs('grades')" wire:navigate>
+                {{ __('Grades') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('student_violations')" :active="request()->routeIs('student_violations')" wire:navigate>
                 {{ __('Violations') }}

@@ -15,7 +15,7 @@ class Student extends Seeder
     {
 
          DB::table('students')->insert([
-            'email' => 'merlindabinalla@gmail.com',
+            'email' => 'dzellefaith@gmail.com',
             'student_no' => '202101350',
             'last_name' => 'binalla',
             'first_name' => 'merlin',
