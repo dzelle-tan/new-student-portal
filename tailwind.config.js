@@ -48,6 +48,8 @@ export default {
                 // Tones of secondary color
                 'secondary-muted': '#b8a179',
                 'secondary-muted-2': '#cfc1a4',
+
+                'table-header': '#6B7280',
             },
             width: {
                 '1/7': '11.4285714rem', 

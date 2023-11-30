@@ -122,7 +122,7 @@
                 <div class="w-full mt-4 overflow-x-auto">
                     <table class="w-full text-left whitespace-nowrap">
                         <thead>
-                            <tr class="text-xs tracking-wider text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                            <tr class="text-xs tracking-wider uppercase border-b border-gray-200 text-table-header bg-gray-50">
                                 <th class="px-4 py-3 font-medium">SM No.</th>
                                 <th class="px-4 py-3 font-medium">Violation</th>
                                 <th class="px-4 py-3 font-medium">Date</th>
