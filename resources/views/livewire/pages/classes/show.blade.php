@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Subject; 
+use App\Models\Classes; 
 use Illuminate\Database\Eloquent\Collection; 
 use Livewire\Volt\Component;
 
@@ -9,8 +9,7 @@ new class extends Component {
  
     public function mount(): void
     {
-        $this->classes = Subject::with('user')
-            ->latest()
+        $this->classes = Classes::with('student')
             ->get();
     } 
 }; ?>
