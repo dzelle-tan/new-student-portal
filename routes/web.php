@@ -29,7 +29,7 @@ Route::get('classes', [ClassesController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('classes');
 
-Route::view('grades', 'grades')
+Route::view('grades', 'layouts.information.grades')
 ->middleware(['auth'])
 ->name('grades');
 
