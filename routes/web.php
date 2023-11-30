@@ -27,10 +27,14 @@ Route::view('profile', 'layouts.information.profile')
 
 Route::get('classes', [ClassesController::class, 'index'])
     ->middleware(['auth', 'verified'])
-    ->name('classes'); 
+    ->name('classes');
+
+Route::view('grades', 'grades')
+->middleware(['auth'])
+->name('grades');
 
 Route::get('student_violations', [StudentViolationController::class, 'index'])
     ->middleware(['auth', 'verified'])
-    ->name('student_violations'); 
+    ->name('student_violations');
 
 require __DIR__.'/auth.php';

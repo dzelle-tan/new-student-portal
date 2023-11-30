@@ -13,9 +13,7 @@ class Classes extends Seeder
      */
     public function run(): void
     {
-        $classesIds = [];
-
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 1,
             'professor_id' => 1,
             'code' => 'CMSC 11',
@@ -29,7 +27,7 @@ class Classes extends Seeder
             'room' => 'Sala',
         ]);
 
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 1,
             'professor_id' => 2,
             'code' => 'CMSC 11',
@@ -43,7 +41,7 @@ class Classes extends Seeder
             'room' => 'Kitchen',
         ]);
 
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 1,
             'professor_id' => 3,
             'code' => 'CMRJ 11',
@@ -57,7 +55,7 @@ class Classes extends Seeder
             'room' => 'Bedroom',
         ]);
 
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 1,
             'professor_id' => 4,
             'code' => 'CMGS 11',
@@ -72,7 +70,7 @@ class Classes extends Seeder
         ]);
 
 
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 2,
             'professor_id' => 1,
             'code' => 'CMSC 11',
@@ -86,7 +84,7 @@ class Classes extends Seeder
             'room' => 'Sala',
         ]);
 
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 2,
             'professor_id' => 2,
             'code' => 'CMSC 11',
@@ -100,7 +98,7 @@ class Classes extends Seeder
             'room' => 'Kitchen',
         ]);
 
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 2,
             'professor_id' => 3,
             'code' => 'CMRJ 11',
@@ -114,7 +112,7 @@ class Classes extends Seeder
             'room' => 'Bedroom',
         ]);
 
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 2,
             'professor_id' => 4,
             'code' => 'CMGS 11',
@@ -128,7 +126,7 @@ class Classes extends Seeder
             'room' => 'Garden',
         ]);
 
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 3,
             'professor_id' => 1,
             'code' => 'CMSC 11',
@@ -142,7 +140,7 @@ class Classes extends Seeder
             'room' => 'Sala',
         ]);
 
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 3,
             'professor_id' => 2,
             'code' => 'CMSC 11',
@@ -156,7 +154,7 @@ class Classes extends Seeder
             'room' => 'Kitchen',
         ]);
 
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 3,
             'professor_id' => 3,
             'code' => 'CMRJ 11',
@@ -170,7 +168,7 @@ class Classes extends Seeder
             'room' => 'Bedroom',
         ]);
 
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 4,
             'professor_id' => 4,
             'code' => 'CMGS 11',
@@ -184,7 +182,7 @@ class Classes extends Seeder
             'room' => 'Garden',
         ]);
 
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 5,
             'professor_id' => 3,
             'code' => 'CMRJ 11',
@@ -198,7 +196,7 @@ class Classes extends Seeder
             'room' => 'Bedroom',
         ]);
 
-        $classesIds[] = DB::table('classes')->insert([
+         DB::table('classes')->insert([
             'student_id' => 6,
             'professor_id' => 4,
             'code' => 'CMGS 11',
@@ -211,8 +209,5 @@ class Classes extends Seeder
             'building' => 'Kwangya',
             'room' => 'Garden',
         ]);
-
-        // Store the class IDs in a file for later use
-        file_put_contents(database_path('classes_ids.txt'), implode(',', $classesIds));
     }
 }

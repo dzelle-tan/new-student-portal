@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('student_records', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('fees_id');
+            $table->unsignedInteger('student_id');
             $table->unsignedInteger('control_no');
             $table->string('school_year')->nullable();
             $table->unsignedTinyInteger('semester')->nullable();
@@ -24,6 +25,11 @@ return new class extends Migration
 
             $table->foreign('fees_id')
                 ->references('id')->on('fees')
+                ->onDelete('NO ACTION')
+                ->onUpdate('NO ACTION');
+
+            $table->foreign('student_id')
+                ->references('id')->on('students')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
         });

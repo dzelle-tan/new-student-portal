@@ -34,7 +34,7 @@ new class extends Component
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
                         <x-icon name="home" class="w-5 h-5 mr-2" solid/> {{ __('Home') }}
                     </x-nav-link>
-                    <x-div-nav-link 
+                    <x-div-nav-link
                         class="sm:flex sm:items-center sm:ms-6"
                         :active="request()->routeIs('classes') || request()->routeIs('student_violations')"
                     >
@@ -43,7 +43,7 @@ new class extends Component
                                 <button class="inline-flex items-center py-2 text-sm font-medium leading-4 transition duration-150 ease-in-out border border-transparent rounded-md focus:outline-none">
                                     <x-icon name="identification" class="w-5 h-5 mr-2" solid/>
                                     <div x-data="{ name: 'Information' }" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
-        
+
                                     <div class="ms-1">
                                         <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -51,12 +51,12 @@ new class extends Component
                                     </div>
                                 </button>
                             </x-slot>
-        
+
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('classes')" wire:navigate>
                                     {{ __('Classes') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('profile')" wire:navigate>
+                                <x-dropdown-link :href="route('grades')" wire:navigate>
                                     {{ __('Grades') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('student_violations')" wire:navigate>
@@ -71,7 +71,7 @@ new class extends Component
                                 <button class="inline-flex items-center py-2 text-sm font-medium leading-4 transition duration-150 ease-in-out border border-transparent rounded-md focus:outline-none">
                                     <x-icon name="building-office-2" class="w-5 h-5 mr-2" solid/>
                                     <div x-data="{ name: 'Services' }" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
-        
+
                                     <div class="ms-1">
                                         <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -79,7 +79,7 @@ new class extends Component
                                     </div>
                                 </button>
                             </x-slot>
-        
+
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('profile')" wire:navigate>
                                     {{ __('Enrollment') }}
@@ -165,7 +165,7 @@ new class extends Component
                 {{ __('Home') }}
             </x-responsive-nav-link>
         </div>
-        
+
         <div class="py-4 border-t border-gray-200">
             <x-responsive-nav-link :href="route('classes')" :active="request()->routeIs('classes')" wire:navigate>
                 {{ __('Classes') }}

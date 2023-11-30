@@ -56,6 +56,11 @@ class Student extends Authenticatable implements MustVerifyEmail
         return $this->HasOne(SfeStatus::class);
     }
 
+    public function studentRecords(): HasMany
+    {
+        return $this->hasMany(StudentRecord::class);
+    }
+
     public function studentRequest(): HasMany
     {
         return $this->hasMany(studentRequest::class);

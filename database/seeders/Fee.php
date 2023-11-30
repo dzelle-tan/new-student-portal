@@ -13,9 +13,7 @@ class Fee extends Seeder
      */
     public function run(): void
     {
-        $feeIds = [];
-
-        $feeIds[] = DB::table('fees')->insert([
+         DB::table('fees')->insert([
             'tuition_fee' => 1500.00,
             'tuition_units' => 12.5,
             'athletic_fee' => 50.00,
@@ -37,7 +35,7 @@ class Fee extends Seeder
             'status' => 'Paid',
         ]);
 
-        $feeIds[] = DB::table('fees')->insert([
+         DB::table('fees')->insert([
             'tuition_fee' => 1800.00,
             'tuition_units' => 15.0,
             'athletic_fee' => 50.00,
@@ -59,7 +57,7 @@ class Fee extends Seeder
             'status' => 'Mahirap',
         ]);
 
-        $feeIds[] = DB::table('fees')->insert([
+         DB::table('fees')->insert([
             'tuition_fee' => 1800.00,
             'tuition_units' => 15.0,
             'athletic_fee' => 50.00,
@@ -81,7 +79,7 @@ class Fee extends Seeder
             'status' => 'Paid',
         ]);
 
-        $feeIds[] = DB::table('fees')->insert([
+         DB::table('fees')->insert([
             'tuition_fee' => 1800.00,
             'tuition_units' => 15.0,
             'athletic_fee' => 50.00,
@@ -103,7 +101,7 @@ class Fee extends Seeder
             'status' => 'hehe',
         ]);
 
-        $feeIds[] = DB::table('fees')->insert([
+         DB::table('fees')->insert([
             'tuition_fee' => 1800.00,
             'tuition_units' => 15.0,
             'athletic_fee' => 50.00,
@@ -125,7 +123,7 @@ class Fee extends Seeder
             'status' => 'Wala Pambayad',
         ]);
 
-        $feeIds[] = DB::table('fees')->insert([
+         DB::table('fees')->insert([
             'tuition_fee' => 1800.00,
             'tuition_units' => 15.0,
             'athletic_fee' => 50.00,
@@ -146,8 +144,5 @@ class Fee extends Seeder
             'ssc_fee' => 80.00,
             'status' => 'Unpaid',
         ]);
-
-        // Store the Fees IDs in a file for later use
-        file_put_contents(database_path('fee_ids.txt'), implode(',', $feeIds));
     }
 }
