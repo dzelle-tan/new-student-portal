@@ -82,10 +82,14 @@ new class extends Component
         {{-- Grades --}}
         @php
             $groupedGrades = $grades->groupBy('student_record_id');
+            $totalUnits = 0;
         @endphp
         @foreach ($groupedGrades as $termId => $grades)
             @if ($selectedTerm == 'All' || $termId == $selectedTerm)
-                <h2 class="mt-8">{{ $terms[$termId]->school_year }}, Term {{ $terms[$termId]->semester }}</h2> 
+                @php
+                    $termDetails = collect($terms)->firstWhere('id', $termId);
+                @endphp
+                <h2 class="mt-8">{{ $termDetails->school_year }}, Term {{ $termDetails->semester }}</h2> 
                 <div class="w-full mt-4 overflow-x-auto">
                     <table class="w-full text-left whitespace-nowrap">
                         <thead>
@@ -110,10 +114,20 @@ new class extends Component
                                     <td class="px-4 py-3">{{ $grade->completion_grade }}</td>
                                     <td class="px-4 py-3">{{ $grade->remarks }}</td>
                                 </tr>
+                                @php
+                                    $totalUnits += $grade->classes->units;
+                                @endphp
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+                <div class="flex items-center justify-end py-2 pr-12 space-x-8 text-sm">
+                    <p>{{_("Total Units:")}} <span class="font-medium">{{ $totalUnits }}</span></p>
+                    <p>{{_("GWA:")}} <span class="font-medium">1.00</span></p>
+                </div>
+                @php
+                    $totalUnits = 0;
+                @endphp
             @endif
         @endforeach
         </div>
