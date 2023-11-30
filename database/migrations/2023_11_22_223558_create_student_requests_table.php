@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -14,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('student_requests', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('document_info_id');
             $table->unsignedInteger('student_id');
             $table->string('mode', 45)->nullable();
             $table->text('purpose')->nullable();
@@ -26,6 +26,11 @@ return new class extends Migration
             $table->dateTime('date_requested')->nullable();
             $table->dateTime('date_received')->nullable();
             $table->timestamps(); // Created_at and updated_at columns
+
+            $table->foreign('document_info_id')
+                ->references('id')->on('document_infos')
+                ->onDelete('NO ACTION')
+                ->onUpdate('NO ACTION');
 
             $table->foreign('student_id')
                 ->references('id')->on('students')

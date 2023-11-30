@@ -30,8 +30,12 @@ Route::get('classes', [ClassesController::class, 'index'])
     ->name('classes');
 
 Route::view('grades', 'layouts.information.grades')
-->middleware(['auth'])
-->name('grades');
+    ->middleware(['auth'])
+    ->name('grades');
+
+Route::view('registrar', 'layouts.services.registrar')
+    ->middleware(['auth'])
+    ->name('registrar');
 
 Route::get('student_violations', [StudentViolationController::class, 'index'])
     ->middleware(['auth', 'verified'])
