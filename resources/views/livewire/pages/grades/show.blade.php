@@ -82,6 +82,7 @@ new class extends Component
         {{-- Grades --}}
         @php
             $groupedGrades = $grades->groupBy('student_record_id');
+            $totalUnits = 0;
         @endphp
         @foreach ($groupedGrades as $termId => $grades)
             @if ($selectedTerm == 'All' || $termId == $selectedTerm)
@@ -113,10 +114,20 @@ new class extends Component
                                     <td class="px-4 py-3">{{ $grade->completion_grade }}</td>
                                     <td class="px-4 py-3">{{ $grade->remarks }}</td>
                                 </tr>
+                                @php
+                                    $totalUnits += $grade->classes->units;
+                                @endphp
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+                <div class="flex items-center justify-end py-2 pr-12 space-x-8 text-sm">
+                    <p>{{_("Total Units:")}} <span class="font-medium">{{ $totalUnits }}</span></p>
+                    <p>{{_("GWA:")}} <span class="font-medium">1.00</span></p>
+                </div>
+                @php
+                    $totalUnits = 0;
+                @endphp
             @endif
         @endforeach
         </div>
