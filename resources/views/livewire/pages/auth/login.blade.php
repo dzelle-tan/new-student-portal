@@ -34,10 +34,15 @@ new #[Layout('layouts.guest')] class extends Component
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form wire:submit="login">
-        <!-- Email Address -->
+         <!-- Student Number -->
         <div class="mt-6">
             <x-input-label for="student_no" :value="__('Student Number')" />
-            <x-text-input wire:model="form.student_no" id="student_no" class="block w-full mt-1" type="text" name="student_no" required autofocus autocomplete="username" />
+            <x-text-input wire:model="form.student_no" id="student_no" class="block w-full mt-1"
+                type="text"
+                name="student_no"
+                placeholder="xxxxxxxxx"
+                required autofocus autocomplete="username" />
+
             <x-input-error :messages="$errors->get('student_no')" class="mt-2" />
         </div>
 
@@ -55,6 +60,7 @@ new #[Layout('layouts.guest')] class extends Component
             <x-text-input wire:model="form.password" id="password" class="block w-full mt-1"
                             type="password"
                             name="password"
+                            placeholder="••••••••"
                             required autocomplete="current-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
@@ -63,7 +69,10 @@ new #[Layout('layouts.guest')] class extends Component
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="text-indigo-600 border-gray-300 rounded shadow-sm focus:ring-indigo-500" name="remember">
+                <input wire:model="form.remember" id="remember" class="text-indigo-600 border-gray-300 rounded shadow-sm focus:ring-indigo-500"
+                        type="checkbox"
+                        name="remember">
+
                 <span class="text-sm text-gray-600 ms-2">{{ __('Remember me') }}</span>
             </label>
         </div>
