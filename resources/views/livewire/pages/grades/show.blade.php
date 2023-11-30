@@ -85,8 +85,7 @@ new class extends Component
         @endphp
         @foreach ($groupedGrades as $termId => $grades)
             @if ($selectedTerm == 'All' || $termId == $selectedTerm)
-        {{-- if all is selected i want to indicate ayterm --}}
-                <h2 class="mt-8">School Year, Term #</h2> 
+                <h2 class="mt-8">{{ $terms[$termId]->school_year }}, Term {{ $terms[$termId]->semester }}</h2> 
                 <div class="w-full mt-4 overflow-x-auto">
                     <table class="w-full text-left whitespace-nowrap">
                         <thead>
