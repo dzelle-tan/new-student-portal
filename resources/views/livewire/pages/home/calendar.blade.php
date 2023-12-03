@@ -6,7 +6,7 @@ new class extends Component {
     //
 }; ?>
 
-<div class="h-[33rem]">
+<div class="h-[30rem]">
     <h3 class="text-lg font-medium">{{__("University Calendar")}}</h3>
     <div class="w-full max-h-full mt-4 overflow-x-auto overflow-y-auto">
         <table class="w-full text-left whitespace-nowrap">
@@ -124,5 +124,10 @@ new class extends Component {
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="flex justify-end mt-4">
+        <a href="{{ asset('files/University-Calendar2324.pdf') }}" download class="flex px-4 py-2 text-gray-500 bg-gray-200 rounded hover:text-gray-700 hover:bg-gray-300">
+            <x-icon name="arrow-down-tray" solid class="w-5 h-5 mr-2" /> {{ __('Download PDF') }}
+        </a>
     </div>
 </div>
