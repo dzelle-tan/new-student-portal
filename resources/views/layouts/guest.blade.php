@@ -16,7 +16,7 @@
     </head>
     <body class="font-sans antialiased text-gray-900">
         <div class="relative flex flex-col items-center min-h-screen bg-gray-100 sm:justify-center sm:pt-0" style="background-image: url('{{ asset('images/hero-banner-facade.jpg') }}'); background-size: cover; background-position: center;">
-            <div class="flex items-center justify-center w-full h-screen backdrop-brightness-75 bg-black/50">
+            <div class="flex items-center justify-center w-full h-screen backdrop-brightness-75 bg-black/60">
                 <div class="w-full h-screen px-6 py-4 overflow-hidden bg-white shadow-md sm:mt-6 sm:max-w-md sm:rounded-lg sm:h-auto">
                     <div>
                         <a href="/" wire:navigate>
