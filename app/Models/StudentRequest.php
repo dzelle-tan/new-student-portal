@@ -24,7 +24,7 @@ class StudentRequest extends Model
         'date_received',
     ];
 
-    public function document(): HasMany
+    public function documents(): HasMany
     {
         return $this->hasMany(Document::class);
     }

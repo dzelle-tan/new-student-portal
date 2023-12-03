@@ -61,7 +61,7 @@ class Student extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(StudentRecord::class);
     }
 
-    public function studentRequest(): HasMany
+    public function studentRequests(): HasMany
     {
         return $this->hasMany(studentRequest::class);
     }

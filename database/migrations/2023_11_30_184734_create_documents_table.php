@@ -13,17 +13,11 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('document_info_id');
             $table->unsignedInteger('student_request_id');
-            // $table->string('document_name', 255)->nullable();
-            // $table->decimal('amount', 10, 2)->nullable();
+            $table->string('document_name');
+            $table->decimal('amount', 10, 2)->nullable();
             $table->integer('no_of_copies')->nullable();
             $table->timestamps(); // Created_at and updated_at columns
-
-            $table->foreign('document_info_id')
-            ->references('id')->on('document_infos')
-            ->onDelete('NO ACTION')
-            ->onUpdate('NO ACTION');
 
             $table->foreign('student_request_id')
                 ->references('id')->on('student_requests')
