@@ -6,7 +6,7 @@
     </x-slot>
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="p-10 overflow-hidden text-gray-900 bg-white shadow-sm sm:rounded-lg h-[40rem]">
+            <div class="p-10 overflow-hidden text-gray-900 bg-white shadow-sm sm:rounded-lg min-h-[40rem]">
                 <livewire:pages.registrar.show/>
             </div>
         </div>
