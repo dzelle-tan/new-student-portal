@@ -56,7 +56,7 @@ class Fee extends Seeder
             'development_fund' => 100.00,
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
-            'status' => 'Mahirap',
+            'status' => 'Unpaid',
         ]);
 
          DB::table('fees')->insert([
@@ -102,7 +102,7 @@ class Fee extends Seeder
             'development_fund' => 100.00,
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
-            'status' => 'hehe',
+            'status' => 'Unpaid',
         ]);
 
          DB::table('fees')->insert([
@@ -125,7 +125,7 @@ class Fee extends Seeder
             'development_fund' => 100.00,
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
-            'status' => 'Wala Pambayad',
+            'status' => 'Unpaid',
         ]);
 
          DB::table('fees')->insert([

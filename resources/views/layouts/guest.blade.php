@@ -15,17 +15,18 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased text-gray-900">
-        <div class="flex flex-col items-center min-h-screen bg-gray-100 sm:justify-center sm:pt-0" style="background-image: url('{{ asset('images/bg.svg') }}'); background-size: cover; background-position: center;">
-            
-            <div class="w-full h-screen px-6 py-4 bg-white shadow-md ov:erflow-hidden sm:mt-6 sm:max-w-md sm:rounded-lg sm:h-auto">
-                <div>
-                    <a href="/" wire:navigate>
-                        <img src="{{ asset('images/plm-logo-with-header.png') }}" alt="PLM logo" class="h-16">
-                    </a>
-                </div>
-                <h1 class="mt-8 text-3xl font-bold text-primary">PLM Student Portal</h1>
-                {{ $slot }}
-                <p class="mt-12">For more inquiries or concerns, please email <a href="" class="text-primary">ithelp@plm.edu.ph</a>.</p>
+        <div class="relative flex flex-col items-center min-h-screen bg-gray-100 sm:justify-center sm:pt-0" style="background-image: url('{{ asset('images/hero-banner-facade.jpg') }}'); background-size: cover; background-position: center;">
+            <div class="flex items-center justify-center w-full h-screen backdrop-brightness-75 bg-black/60">
+                <div class="w-full h-screen px-6 py-4 overflow-hidden bg-white shadow-md sm:mt-6 sm:max-w-md sm:rounded-lg sm:h-auto">
+                    <div>
+                        <a href="/" wire:navigate>
+                            <img src="{{ asset('images/plm-logo-with-header.png') }}" alt="PLM logo" class="h-16">
+                        </a>
+                    </div>
+                    <h1 class="mt-8 text-3xl font-bold text-primary">PLM Student Portal</h1>
+                    {{ $slot }}
+                    <p class="mt-12">For more inquiries or concerns, please email <a href="" class="text-primary">ithelp@plm.edu.ph</a>.</p>
+                </div>       
             </div>
         </div>
     </body>
