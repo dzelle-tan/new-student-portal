@@ -33,6 +33,8 @@ class Fee extends Seeder
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
             'status' => 'Paid',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('fees')->insert([
@@ -55,6 +57,8 @@ class Fee extends Seeder
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
             'status' => 'Unpaid',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('fees')->insert([
@@ -77,6 +81,8 @@ class Fee extends Seeder
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
             'status' => 'Paid',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('fees')->insert([
@@ -99,6 +105,8 @@ class Fee extends Seeder
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
             'status' => 'Unpaid',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('fees')->insert([
@@ -121,6 +129,8 @@ class Fee extends Seeder
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
             'status' => 'Unpaid',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('fees')->insert([
@@ -143,6 +153,8 @@ class Fee extends Seeder
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
             'status' => 'Unpaid',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
