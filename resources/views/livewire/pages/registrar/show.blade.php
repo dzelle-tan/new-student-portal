@@ -151,45 +151,52 @@ new class extends Component
     }
 }; ?>
 
-<div>
+<div class="">
+    <h2 class="text-lg font-medium ml-9">Request Form</h2>
     <div>
         @if($current_step == 1)
 
-            <livewire:pages.registrar.infos/>
-            <div>
-                Request For
-                <div>
-                    @foreach($inputs as $key=>$value)
-                    @if(!$loop->first)
-                        <div wire:key="remove-button{{ $key }}">
-                            <x-secondary-button wire:click="remove({{$key}})" class="w-full mt-8">Remove</x-secondary-button>
-                        </div>
-                    @endif
+            {{-- <livewire:pages.registrar.infos/> --}}
+            <div class="mt-6">
+                <x-input-label class="ml-9">Request For</x-input-label>
+                @foreach($inputs as $key=>$value)
+                    <div class="flex">
+                        @if(!$loop->first)
+                            <div wire:key="remove-button{{ $key }}">
+                                <button wire:click="remove({{$key}})" class="w-full">
+                                    <x-icon name="minus-circle" class="w-5 h-5 mt-3 mr-4 text-gray-500 hover:text-red-700"/>
+                                </button>
+                            </div>
+                        @endif
                         <div>
-                            <select class="form-control" wire:model="inputs.{{$key}}.document_info_id">
+                            <select class="py-2 overflow-auto w-96 form-control overflow-ellipsis {{ $loop->first ? 'ml-9' : '' }} border-gray-300 rounded-md mr-2" wire:model="inputs.{{$key}}.document_info_id">
                                 @foreach ($documentsInfo as $document)
                                     <option hidden value = "">--- Select a Document ---</option>
-                                    <option option value = "{{ $document->id }}">{{ $document->document }}</option>
+                                    <option value = "{{ $document->id }}">{{ $document->document }}</option>
                                 @endforeach
                             </select>
-
-                            <x-input-error :messages="$errors->get('inputs.'.$key.'.document_info_id')" class="mt-2" />
+                            
+                            <x-input-error :messages="$errors->get('inputs.'.$key.'.document_info_id')" class="mt-1 {{ $loop->first ? 'ml-9' : '' }}" />
                         </div>
-                            <div>
-                                <x-text-input wire:model="inputs.{{$key}}.no_of_copies" type="text" placeholder="No. of Copies"/>
-                                <x-input-error :messages="$errors->get('inputs.'.$key.'.no_of_copies')" class="mt-2" />
-                            </div>
-                        <div wire:key="add-button-{{ $key }}">
-                            <x-secondary-button wire:click="add" class="w-full">Add Document</x-secondary-button>
+                        <div>
+                            <x-text-input wire:model="inputs.{{$key}}.no_of_copies" type="text" placeholder="No. of Copies"/>
+                            <x-input-error :messages="$errors->get('inputs.'.$key.'.no_of_copies')" class="mt-1" />
                         </div>
+                    </div>
                     @endforeach
-                </div>
-                    <x-input-label class="mt-8" for="purpose" :value="__('Purpose')" />
-                    <x-text-input wire:model="purpose" type="text" id="purpose" />
-                    <x-input-error :messages="$errors->get('purpose')" class="mt-2" />
-
+                    <div wire:key="add-button-{{ $key }}">
+                        <button wire:click="add" class="flex items-center justify-center text-gray-500 bg-gray-200 rounded w-[37.4rem] ml-9 hover:text-gray-700 hover:bg-gray-300 py-1.5">
+                            <x-icon name="plus-circle" class="w-5 h-5 mr-3"/>
+                            Add Document
+                        </button>
+                    </div>
+                    <div class="ml-9">
+                        <x-input-label class="mt-8" for="purpose" :value="__('Purpose')" />
+                        <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400"></textarea>
+                        <x-input-error :messages="$errors->get('purpose')" class="mt-1" />                     
+                    </div>
             </div>
-            <div>
+            <div class="flex justify-end">
                 <x-primary-button wire:key="increment-button" wire:click="incrementStep" class="w-20 mt-8">Next</x-primary-button>
             </div>
         @elseif($current_step == 2)
