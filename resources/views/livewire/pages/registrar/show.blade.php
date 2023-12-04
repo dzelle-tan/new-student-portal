@@ -168,19 +168,19 @@ new class extends Component
                                 </button>
                             </div>
                         @endif
-                        <div>
-                            <select class="py-2 overflow-auto w-96 form-control overflow-ellipsis {{ $loop->first ? 'ml-9' : '' }} border-gray-300 rounded-md mr-2" wire:model="inputs.{{$key}}.document_info_id">
+                        <div class="mb-2 mr-2">
+                            <select class="py-2 overflow-auto w-96 form-control overflow-ellipsis {{ $loop->first ? 'ml-9' : '' }} border-gray-300 rounded-md" wire:model="inputs.{{$key}}.document_info_id">
                                 @foreach ($documentsInfo as $document)
                                     <option hidden value = "">--- Select a Document ---</option>
                                     <option value = "{{ $document->id }}">{{ $document->document }}</option>
                                 @endforeach
                             </select>
                             
-                            <x-input-error :messages="$errors->get('inputs.'.$key.'.document_info_id')" class="mt-1 {{ $loop->first ? 'ml-9' : '' }}" />
+                            <x-input-error :messages="$errors->get('inputs.'.$key.'.document_info_id')" class="{{ $loop->first ? 'ml-9' : '' }}" />
                         </div>
                         <div>
                             <x-text-input wire:model="inputs.{{$key}}.no_of_copies" type="text" placeholder="No. of Copies"/>
-                            <x-input-error :messages="$errors->get('inputs.'.$key.'.no_of_copies')" class="mt-1" />
+                            <x-input-error :messages="$errors->get('inputs.'.$key.'.no_of_copies')" class="" />
                         </div>
                     </div>
                     @endforeach
@@ -193,7 +193,7 @@ new class extends Component
                     <div class="ml-9">
                         <x-input-label class="mt-8" for="purpose" :value="__('Purpose')" />
                         <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400"></textarea>
-                        <x-input-error :messages="$errors->get('purpose')" class="mt-1" />                     
+                        <x-input-error :messages="$errors->get('purpose')" class="" />                     
                     </div>
             </div>
             <div class="flex justify-end">
