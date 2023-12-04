@@ -179,7 +179,7 @@ new class extends Component
                             <x-input-error :messages="$errors->get('inputs.'.$key.'.document_info_id')" class="{{ $loop->first ? 'ml-9' : '' }}" />
                         </div>
                         <div>
-                            <x-text-input wire:model="inputs.{{$key}}.no_of_copies" type="text" placeholder="No. of Copies"/>
+                            <x-text-input wire:model="inputs.{{$key}}.no_of_copies" type="number" placeholder="No. of Copies"/>
                             <x-input-error :messages="$errors->get('inputs.'.$key.'.no_of_copies')" class="" />
                         </div>
                     </div>
