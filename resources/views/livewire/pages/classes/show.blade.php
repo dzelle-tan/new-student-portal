@@ -1,17 +1,54 @@
 <?php
 
-use App\Models\Classes; 
-use Illuminate\Database\Eloquent\Collection; 
+use App\Models\Student;
+use App\Models\StudentRecord;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Volt\Component;
 
 new class extends Component {
-    public Collection $classes; 
- 
+    // public Collection $classes;
+    public StudentRecord $record;
+    public Collection $grades;
+    public Student $user;
+
+    public Collection $days;
+    public $daysOfWeek;
+    public $dayString;
+    public $daysArray;
+
     public function mount(): void
     {
-        $this->classes = Classes::with('student')
-            ->get();
-    } 
+        // $this->classes = Classes::with('student')
+        //     ->get();
+
+        $this->user = Auth::user();
+
+
+        $this->record = StudentRecord::where('student_id', $this->user->id)
+            ->with('grade')
+            ->latest()
+            ->first();
+
+        foreach ($this->record->grade as $class) {
+            $dayString = $class->classes->day;
+            $daysArray = str_split($dayString);
+
+            $daysOfWeek = [
+                'M' => 'Monday',
+                'T' => 'Tuesday',
+                'W' => 'Wednesday',
+                'H' => 'Thursday',
+                'F' => 'Friday',
+                'S' => 'Saturday',
+            ];
+
+            $days = array_map(function ($day) use ($daysOfWeek) {
+                return $daysOfWeek[$day];
+            }, $daysArray);
+            }
+            // dd($this->record->grade);
+            dd($days);
+        }
 }; ?>
 
 @php
@@ -37,18 +74,17 @@ new class extends Component {
         ],
     ];
 @endphp
-
 <div class="grid grid-cols-1 overflow-hidden bg-white shadow-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 rounded-md lg:min-h-[38rem]">
     @foreach ($days as $day => $classes)
         <div class="-mr-px border">
             <div class="px-6 py-4 text-sm font-medium tracking-wider uppercase border-b-2 text-table-header bg-gray-50">
                 {{ $day }}
             </div>
-            @foreach ($classes as $class)
+            @foreach ($record->grade as $class)
                 <div class="p-2 {{ $loop->first ? '' : 'pt-0' }}">
-                    <x-class-block time="{{ $class['time'] }}" code="{{ $class['code'] }}" section="{{ $class['section'] }}" subject="{{ $class['subject'] }}" room="{{ $class['room'] }}" type="{{ $class['type'] }}"/>     
+                    <x-class-block time="{{ $class->classes->name }}" code="{{ $class['code'] }}" section="{{ $class['section'] }}" subject="{{ $class['subject'] }}" room="{{ $class['room'] }}" type="{{ $class['type'] }}"/>
                 </div>
-            @endforeach              
+            @endforeach
         </div>
     @endforeach
 </div>

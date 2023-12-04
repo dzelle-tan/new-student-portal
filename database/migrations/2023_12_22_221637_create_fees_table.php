@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('fees', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('student_record_id');
             $table->decimal('tuition_fee', 10, 2)->nullable();
             $table->decimal('tuition_units', 10, 2)->nullable();
             $table->decimal('athletic_fee', 10, 2)->nullable();
@@ -34,6 +35,11 @@ return new class extends Migration
             $table->decimal('ssc_fee', 10, 2)->nullable(); // Every first semester only
             $table->string('status')->nullable();
             $table->timestamps(); // Created_at and updated_at columns
+
+            $table->foreign('student_record_id')
+                ->references('id')->on('student_records')
+                ->onDelete('NO ACTION')
+                ->onUpdate('NO ACTION');
         });
     }
 

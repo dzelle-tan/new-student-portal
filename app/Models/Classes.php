@@ -14,7 +14,7 @@ class Classes extends Model
 
     public function grades(): HasOne
     {
-        return $this->HasOne(Grade::class);
+        return $this->hasOne(Grade::class);
     }
 
     public function professor(): BelongsTo
@@ -24,12 +24,12 @@ class Classes extends Model
 
     public function sfeAnswer(): HasMany
     {
-        return $this->HasMany(sfeAnswer::class);
+        return $this->hasMany(sfeAnswer::class);
     }
 
     public function sfeStatus(): HasOne
     {
-        return $this->HasOne(SfeStatus::class);
+        return $this->hasOne(SfeStatus::class);
     }
 
     public function student(): BelongsTo

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\EnrollmentDownloadsController;
 use App\Http\Controllers\StudentViolationController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Routes for Downloading Documents involving Enrollment
+Route::get('/enrollment/schedule', [EnrollmentDownloadsController::class, 'downloadSchedule'])
+    ->middleware(['auth', 'verified'])
+    ->name('enrollmentSchedule');
+
+Route::get('/enrollment/fees', [EnrollmentDownloadsController::class, 'downloadFee'])
+    ->middleware(['auth', 'verified'])
+    ->name('enrollmentFee');
+
+Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSER'])
+    ->middleware(['auth', 'verified'])
+    ->name('enrollmentSER');
 
 Route::view('/', 'welcome');
 
