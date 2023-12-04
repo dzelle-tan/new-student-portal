@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             SfeDate::class,
             SfeStatus::class,
             SfeQuestion::class,
-            // StudentRequest::class,
+            StudentRequest::class,
             Document::class,
             StudentViolation::class,
             SfeAnswer::class,
