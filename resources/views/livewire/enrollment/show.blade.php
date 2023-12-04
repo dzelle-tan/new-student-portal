@@ -70,7 +70,7 @@ new class extends Component {
                 <x-primary-button wire:click="next" class="mt-8 w-50">Next</x-primary-button>
             </div>
 
-        {{-- Enrollment Step 1 --}}
+        {{-- Enrollment Step 2 --}}
         @elseif($step == 2)
             <div>
                 <x-nav-link  href="{{ route('enrollmentFee') }}">
@@ -81,7 +81,7 @@ new class extends Component {
                 <x-primary-button wire:click="back" class="mt-8 w-50">Back</x-primary-button>
             </div>
 
-        {{-- Enrollment Step 1 --}}
+        {{-- Enrollment Step 3 --}}
         @elseif($step == 3)
             <div>
                 <x-nav-link  href="{{ route('enrollmentSER') }}">

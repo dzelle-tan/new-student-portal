@@ -13,7 +13,6 @@ new class extends Component {
     {
         $this->user = Auth::user();
 
-
         $this->record = StudentRecord::where('student_id', $this->user->id)
             ->with('fee', 'grade')
             ->latest()
@@ -175,4 +174,5 @@ new class extends Component {
             <div class="column" style="width: 15%">{{_("Date and Signature")}} <br> {{$user->year_level}}</div>
             <div class="column" style="width: 15%">{{_("Amount Due")}} <br> {{_("To be filled")}}</div>
         </div>
+    </div>
 </div>
