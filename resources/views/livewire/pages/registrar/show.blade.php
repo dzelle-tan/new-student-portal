@@ -192,11 +192,11 @@ new class extends Component
                     </div>
                     <div class="flex flex-col mt-2 ml-9">
                         <label class="mt-8" for="purpose">Purpose</label>
-                        <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400 h-52"></textarea>
+                        <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400 h-48"></textarea>
                         <x-input-error :messages="$errors->get('purpose')" class="" />                     
                     </div>
                     <div class="flex justify-end w-[39.5rem] mt-8">
-                        <x-primary-button wire:key="increment-button" wire:click="incrementStep" class="w-20 mt-8">Next</x-primary-button>
+                        <x-primary-button wire:key="increment-button" wire:click="incrementStep" class="w-20 mt-12">Next</x-primary-button>
                     </div>
             </div>
         @elseif($current_step == 2)
