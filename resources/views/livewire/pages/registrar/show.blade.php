@@ -154,7 +154,7 @@ new class extends Component
 <div class="">
     <div>
         @if($current_step == 1)
-        <h2 class="text-xl font-medium ml-9">Step 1: Request Form</h2>
+        <h2 class="text-xl font-medium ml-9"><span class="text-primary">Step 1:</span> Request Form</h2> 
 
             {{-- <livewire:pages.registrar.infos/> --}}
             <div class="mt-6">
