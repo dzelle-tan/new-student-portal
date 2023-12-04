@@ -35,7 +35,7 @@ class StudentViolation extends Seeder
             'sm_reference' => '', //not sure what this is
             'resolution' => '5 hours Community/Campus Service',
             'resolution_remarks' => 'Go to the OSDS Office',
-            'resolution_date' => '2022-11-10', //no date yet if status is in progress
+             //no date yet if status is in progress
             'status' => 'In Progress',
             //created_at automatically updated to store the timestamps
             //updated_at automatically updated to store the timestamps
@@ -77,7 +77,7 @@ class StudentViolation extends Seeder
             'sm_reference' => '', //not sure what this is
             'resolution' => '14 days to 25 days suspension',
             'resolution_remarks' => 'Go to the OSDS Office',
-            'resolution_date' => '2022-11-10', //no date yet if status is in progress
+             //no date yet if status is in progress
             'status' => 'In Progress',
             //created_at automatically updated to store the timestamps
             //updated_at automatically updated to store the timestamps
