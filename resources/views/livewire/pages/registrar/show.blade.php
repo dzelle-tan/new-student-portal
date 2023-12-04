@@ -306,8 +306,20 @@ new class extends Component
                 </div>
             </div>
         @elseif($current_step == 3)
-            <div>
-                YEY!!!
+            <div class="w-[38rem] ml-9">
+                <h2 class="flex items-center text-2xl font-medium text-gray-800">
+                    {{__("Request Sent!")}}
+                    <x-icon name="check-circle" class="w-6 h-6 ml-2 text-green-500"/>
+                </h2>
+                <p>
+                    Kindly wait 5-10 days to process your request. You may go to request records to keep track of your requests. Thank you for your patience.
+                    <x-icon name="face-smile" class="inline w-5 h-5 text-gray-700"/>
+                </p>
+                <p class="mt-10 text-lg font-medium">Reminders</p>
+                <ul class="pl-6 list-disc">
+                    <li>For follow-ups, you may go to the registrar’s office or email <a href="mailto:registrar@plm.edu.ph" class="text-primary">registrar@plm.edu.ph</a> after 15 working days.</li>
+                    <li>For payment concerns, you may email <a href="mailto:payonline@plm.edu.ph" class="text-primary">payonline@plm.edu.ph.</a></li>
+                </ul>
             </div>
         @endif
     </div>
