@@ -152,13 +152,13 @@ new class extends Component
 }; ?>
 
 <div class="">
-    <h2 class="text-lg font-medium ml-9">Request Form</h2>
     <div>
         @if($current_step == 1)
+        <h2 class="text-xl font-medium ml-9">Request Form</h2>
 
             {{-- <livewire:pages.registrar.infos/> --}}
             <div class="mt-6">
-                <x-input-label class="ml-9">Request For</x-input-label>
+                <label class="ml-9">Request For</label>
                 @foreach($inputs as $key=>$value)
                     <div class="flex">
                         @if(!$loop->first)
@@ -190,14 +190,14 @@ new class extends Component
                             Add Document
                         </button>
                     </div>
-                    <div class="ml-9">
-                        <x-input-label class="mt-8" for="purpose" :value="__('Purpose')" />
-                        <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400"></textarea>
+                    <div class="flex flex-col mt-2 ml-9">
+                        <label class="mt-8" for="purpose">Purpose</label>
+                        <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400 h-52"></textarea>
                         <x-input-error :messages="$errors->get('purpose')" class="" />                     
                     </div>
-            </div>
-            <div class="flex justify-end">
-                <x-primary-button wire:key="increment-button" wire:click="incrementStep" class="w-20 mt-8">Next</x-primary-button>
+                    <div class="flex justify-end w-[39.5rem] mt-8">
+                        <x-primary-button wire:key="increment-button" wire:click="incrementStep" class="w-20 mt-8">Next</x-primary-button>
+                    </div>
             </div>
         @elseif($current_step == 2)
 
