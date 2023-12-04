@@ -18,9 +18,9 @@ class SfeDate extends Seeder
             'sem' => '2nd',
             'academic_year' => '2022-2023',
             'start_date' => '2023-05-29 08:00:00',
-            'end_date' => '2023-06-12 23:58:00'
-            //created_at automatically updated to store the timestamps
-            //updated_at automatically updated to store the timestamps
+            'end_date' => '2023-06-12 23:58:00',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         DB::table('sfe_dates')->insert([
@@ -28,9 +28,9 @@ class SfeDate extends Seeder
             'sem' => '2nd',
             'academic_year' => '2022-2023',
             'start_date' => '2023-05-29 08:00:00',
-            'end_date' => '2023-06-12 23:58:00'
-            //created_at automatically updated to store the timestamps
-            //updated_at automatically updated to store the timestamps
+            'end_date' => '2023-06-12 23:58:00',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         DB::table('sfe_dates')->insert([
@@ -38,9 +38,9 @@ class SfeDate extends Seeder
             'sem' => '2nd',
             'academic_year' => '2022-2023',
             'start_date' => '2023-09-18 08:00:00',
-            'end_date' => '2023-09-30 23:58:00'
-            //created_at automatically updated to store the timestamps
-            //updated_at automatically updated to store the timestamps
+            'end_date' => '2023-09-30 23:58:00',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         DB::table('sfe_dates')->insert([
@@ -48,9 +48,9 @@ class SfeDate extends Seeder
             'sem' => '2nd',
             'academic_year' => '2022-2023',
             'start_date' => '2023-05-29 08:00:00',
-            'end_date' => '2023-06-12 23:58:00'
-            //created_at automatically updated to store the timestamps
-            //updated_at automatically updated to store the timestamps
+            'end_date' => '2023-06-12 23:58:00',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         DB::table('sfe_dates')->insert([
@@ -58,9 +58,9 @@ class SfeDate extends Seeder
             'sem' => '2nd',
             'academic_year' => '2022-2023',
             'start_date' => '2023-05-15 08:00:00',
-            'end_date' => '2023-06-11 23:58:00'
-            //created_at automatically updated to store the timestamps
-            //updated_at automatically updated to store the timestamps
+            'end_date' => '2023-06-11 23:58:00',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         DB::table('sfe_dates')->insert([
@@ -68,9 +68,9 @@ class SfeDate extends Seeder
             'sem' => '2nd',
             'academic_year' => '2022-2023',
             'start_date' => '2023-05-22 08:00:00',
-            'end_date' => '2023-06-04 08:00:00'
-            //created_at automatically updated to store the timestamps
-            //updated_at automatically updated to store the timestamps
+            'end_date' => '2023-06-04 08:00:00',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }
