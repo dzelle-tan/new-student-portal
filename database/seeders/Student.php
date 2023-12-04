@@ -37,7 +37,8 @@ class Student extends Seeder
             'mobile_no' => '09123456789',
             'photo_link' => 'https://example.com/pectureko',
             'password' => bcrypt('testtest'),
-
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('students')->insert([
@@ -63,6 +64,8 @@ class Student extends Seeder
             'mobile_no' => '09123456789',
             'photo_link' => 'https://example.com/taylorswift_photo',
             'password' => bcrypt('adminadmin'),
+            'created_at' => now(),
+            'updated_at' => now()
     ]);
 
          DB::table('students')->insert([
@@ -87,8 +90,9 @@ class Student extends Seeder
             'plm_email' => 'mcbinalla2021@plm.edu.ph',
             'mobile_no' => '09123456789',
             'photo_link' => 'https://example.com/senkuphoto',
-            'password' => bcrypt('20230001')
-
+            'password' => bcrypt('20230001'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
          DB::table('students')->insert([
@@ -113,7 +117,9 @@ class Student extends Seeder
             'plm_email' => 'mcbinalla2021@plm.edu.ph',
             'mobile_no' => '09123456789',
             'photo_link' => 'https://example.com/taiju_photo',
-            'password' => bcrypt('20235002')
+            'password' => bcrypt('20235002'),
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('students')->insert([
@@ -138,8 +144,9 @@ class Student extends Seeder
             'plm_email' => 'mcbinalla2021@plm.edu.ph',
             'mobile_no' => '09123456789',
             'photo_link' => 'https://example.com/yuzuriha_photo',
-            'password' => bcrypt('20235003')
-
+            'password' => bcrypt('20235003'),
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
 
@@ -165,7 +172,9 @@ class Student extends Seeder
             'plm_email' => 'mcbinalla2021@plm.edu.ph',
             'mobile_no' => '09123456789',
             'photo_link' => 'https://example.com/kohaku_photo',
-            'password' => bcrypt('20235005')
+            'password' => bcrypt('20235005'),
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
