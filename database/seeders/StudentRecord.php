@@ -21,6 +21,8 @@ class StudentRecord extends Seeder
             'semester' => 1,
             'date_enrolled' => '2021-06-22',
             'gwa' => 1.00,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('student_records')->insert([
@@ -31,6 +33,8 @@ class StudentRecord extends Seeder
             'semester' => 2,
             'date_enrolled' => '2021-06-22',
             'gwa' => 1.00,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('student_records')->insert([
@@ -41,6 +45,8 @@ class StudentRecord extends Seeder
             'semester' => 1,
             'date_enrolled' => '2021-06-22',
             'gwa' => 1.00,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('student_records')->insert([
@@ -51,6 +57,8 @@ class StudentRecord extends Seeder
             'semester' => 2,
             'date_enrolled' => '2021-06-22',
             'gwa' => 1.00,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('student_records')->insert([
@@ -61,6 +69,8 @@ class StudentRecord extends Seeder
             'semester' => 1,
             'date_enrolled' => '2021-06-22',
             'gwa' => 1.00,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('student_records')->insert([
@@ -71,6 +81,8 @@ class StudentRecord extends Seeder
             'semester' => 2,
             'date_enrolled' => '2021-06-22',
             'gwa' => 1.00,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 
