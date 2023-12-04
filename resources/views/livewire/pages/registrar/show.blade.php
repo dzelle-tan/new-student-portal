@@ -20,6 +20,7 @@ new class extends Component
     public $current_step = 1;
     public $selectedDocument;
     public Collection $documentsInfo;
+    public $selectedTerm = "";
 
     public function mount(): void
     {
@@ -149,130 +150,153 @@ new class extends Component
             session()->flash('status', 'Document successfully uploaded.');
         }
     }
+    public function updateSelectedTerm($value): void
+    {
+        $this->selectedTerm = $value;
+    }
 }; ?>
 
 <div class="">
     <div>
         @if($current_step == 1)
-        <div class="flex justify-between">
-            <div>
-                <h2 class="mb-6 text-xl font-medium ml-9"><span class="text-primary">Step 1:</span> Request Form</h2> 
-                <label class="ml-9">Request For</label>
-                @foreach($inputs as $key=>$value)
-                    <div class="flex">
-                        @if(!$loop->first)
-                            <div wire:key="remove-button{{ $key }}">
-                                <button wire:click="remove({{$key}})" class="w-full">
-                                    <x-icon name="minus-circle" class="w-5 h-5 mt-3 mr-4 text-gray-500 hover:text-red-700"/>
-                                </button>
-                            </div>
-                        @endif
-                        <div class="mb-2 mr-2">
-                            <select class="py-2 overflow-auto w-[28rem] form-control overflow-ellipsis {{ $loop->first ? 'ml-9' : '' }} border-gray-300 rounded-md" wire:model="inputs.{{$key}}.document_info_id">
-                                @foreach ($documentsInfo as $document)
-                                    <option hidden value = "">--- Select a Document ---</option>
-                                    <option value = "{{ $document->id }}">{{ $document->document }}</option>
-                                @endforeach
-                            </select>
-                            
-                            <x-input-error :messages="$errors->get('inputs.'.$key.'.document_info_id')" class="{{ $loop->first ? 'ml-9' : '' }}" />
-                        </div>
-                        <div>
-                            <x-text-input wire:model="inputs.{{$key}}.no_of_copies" type="number" placeholder="No. of Copies" class="w-[8.9rem]"/>
-                            <x-input-error :messages="$errors->get('inputs.'.$key.'.no_of_copies')" class="" />
-                        </div>
-                    </div>
-                @endforeach
-                <div wire:key="add-button-{{ $key }}">
-                    <button wire:click="add" class="flex items-center justify-center text-gray-500 bg-gray-200 rounded w-[37.4rem] ml-9 hover:text-gray-700 hover:bg-gray-300 py-1.5">
-                        <x-icon name="plus-circle" class="w-5 h-5 mr-3"/>
-                        Add Document
-                    </button>
-                </div>
-                <div class="flex flex-col mt-2 ml-9">
-                    <label class="mt-8" for="purpose">Purpose of Request</label>
-                    <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400 h-48"></textarea>
-                    <x-input-error :messages="$errors->get('purpose')" class="" />                     
-                </div>
-                <div class="flex justify-end w-[39.5rem] mt-8">
-                    <x-primary-button wire:key="increment-button" wire:click="incrementStep" class="w-20 mt-12">Next</x-primary-button>
-                </div>
-            </div>
-            <div class="mr-9">
-                <x-pop-up name="TOF" title="Table of Fees">
-                    <x-slot name="body">
-                        <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
-                            table of fees to be placed here hehe
-                        </div>
-                    </x-slot>
-                </x-pop-up>
-                <button class="flex items-center py-2 text-gray-500 rounded hover:border-secondary w-[10rem] justify-center border-gray-400 border hover:text-secondary mb-3" x-data x-on:click="$dispatch('open-modal')">
-                    <x-icon name="table-cells" class="w-5 h-5 mr-2"/>
-                    Table of Fees
-                </button>
-                <a href="{{ asset('files/OUR-Request-Form.pdf') }}" download>
-                    <button class="flex items-center py-2 text-gray-500 rounded hover:border-secondary w-[10rem] justify-center border-gray-400 border hover:text-secondary">
-                        <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
-                        Download
-                    </button>
-                </a>
-            </div>
-        </div>
-            {{-- <livewire:pages.registrar.infos/> --}}
-        @elseif($current_step == 2)
-        <h2 class="text-xl font-medium ml-9"><span class="text-primary">Step 2:</span> Payment</h2>
-            <div class="ml-9">
+            <div class="flex justify-between">
                 <div>
-                    <table>
+                    <h2 class="mb-6 text-xl font-medium ml-9"><span class="text-primary">Step 1:</span> Request Form</h2> 
+                    <label class="ml-9">Request For</label>
+                    @foreach($inputs as $key=>$value)
+                        <div class="flex">
+                            @if(!$loop->first)
+                                <div wire:key="remove-button{{ $key }}">
+                                    <button wire:click="remove({{$key}})" class="w-full">
+                                        <x-icon name="minus-circle" class="w-5 h-5 mt-3 mr-4 text-gray-500 hover:text-red-700"/>
+                                    </button>
+                                </div>
+                            @endif
+                            <div class="mb-2 mr-2">
+                                <select class="py-2 overflow-auto w-[28rem] form-control overflow-ellipsis {{ $loop->first ? 'ml-9' : '' }} border-gray-300 rounded-md" wire:model="inputs.{{$key}}.document_info_id">
+                                    @foreach ($documentsInfo as $document)
+                                        <option hidden value = "">--- Select a Document ---</option>
+                                        <option value = "{{ $document->id }}">{{ $document->document }}</option>
+                                    @endforeach
+                                </select>
+                                
+                                <x-input-error :messages="$errors->get('inputs.'.$key.'.document_info_id')" class="{{ $loop->first ? 'ml-9' : '' }}" />
+                            </div>
+                            <div>
+                                <x-text-input wire:model="inputs.{{$key}}.no_of_copies" type="number" placeholder="No. of Copies" class="w-[8.9rem]"/>
+                                <x-input-error :messages="$errors->get('inputs.'.$key.'.no_of_copies')" class="" />
+                            </div>
+                        </div>
+                    @endforeach
+                    <div wire:key="add-button-{{ $key }}">
+                        <button wire:click="add" class="flex items-center justify-center text-gray-500 bg-gray-200 rounded w-[37.4rem] ml-9 hover:text-gray-700 hover:bg-gray-300 py-1.5">
+                            <x-icon name="plus-circle" class="w-5 h-5 mr-3"/>
+                            Add Document
+                        </button>
+                    </div>
+                    <div class="flex flex-col mt-2 ml-9">
+                        <label class="mt-8" for="purpose">Purpose of Request</label>
+                        <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400 h-48"></textarea>
+                        <x-input-error :messages="$errors->get('purpose')" class="" />                     
+                    </div>
+                    <div class="flex justify-end w-[39.5rem] mt-8">
+                        <x-primary-button wire:key="increment-button" wire:click="incrementStep" class="w-20 mt-12">Next</x-primary-button>
+                    </div>
+                </div>
+                <div class="mr-9">
+                    <x-pop-up name="TOF" title="Table of Fees">
+                        <x-slot name="body">
+                            <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
+                                table of fees to be placed here hehe
+                            </div>
+                        </x-slot>
+                    </x-pop-up>
+                    <button class="flex items-center py-2 text-gray-500 rounded hover:border-secondary w-[10rem] justify-center border-gray-400 border hover:text-secondary mb-3" x-data x-on:click="$dispatch('open-modal')">
+                        <x-icon name="table-cells" class="w-5 h-5 mr-2"/>
+                        Table of Fees
+                    </button>
+                    <a href="{{ asset('files/OUR-Request-Form.pdf') }}" download>
+                        <button class="flex items-center py-2 text-gray-500 rounded hover:border-secondary w-[10rem] justify-center border-gray-400 border hover:text-secondary">
+                            <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
+                            Download
+                        </button>
+                    </a>
+                </div>
+            </div>
+        @elseif($current_step == 2)
+            <div class="ml-9 w-[37.4rem]">
+                <h2 class="text-xl font-medium"><span class="text-primary">Step 2:</span> Payment</h2>
+                <div class="w-full p-2 px-4 mt-4 overflow-x-auto border border-gray-200 rounded shadow">
+                    <table class="w-full text-left whitespace-nowrap">
                         <thead>
-                            <tr>
-                                <th>Document</th>
-                                <th>Quantity</th>
-                                <th>Amount</th>
+                            <tr class="text-xs tracking-wider uppercase border-b border-gray-300 border-dashed text-table-header">
+                                <th class="px-4 py-3 font-medium">{{_("Document")}}</th>
+                                <th class="px-4 py-3 font-medium">{{_("Quantity")}}</th>
+                                <th class="px-4 py-3 font-medium">{{_("Amount")}}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($inputs as $key=>$value)
-                            {{-- @php
-                                dd($value);
-                            @endphp --}}
-                                <tr>
-                                    <td>{{ $value['document_name'] }} </td>
-                                    <td>{{ $value['no_of_copies'] }}</td>
-                                    <td>{{ $value['amount'] }}</td>
+                            @foreach ($inputs as $key=>$value)
+                                <tr class="text-sm">
+                                    <td class="px-4 py-2 max-w-[300px] whitespace-normal">{{ $value['document_name'] }}</td>
+                                    <td class="px-4 py-2">{{ $value['no_of_copies'] }}</td>
+                                    <td class="px-4 py-2">{{ $value['amount'] }}</td>
                                 </tr>
-                            @endforeach
-                            <tr>
-                                <td>Total</td>
-                                <td>{{ $total }}</td>
-                            </tr>
+                                @endforeach
+                                <tr class="text-sm border-t border-gray-300 border-dashed">
+                                    <td class="px-4 py-2 max-w-[300px] whitespace-normal"></td>
+                                    <td class="px-4 py-2 text-right">{{_("Total:")}}</td>
+                                    <td class="px-4 py-2 font-medium">{{ $total }}</td>
+                                </tr>
                         </tbody>
                     </table>
                 </div>
-    
-                <div>
-                    <x-info-label>Mode of Payment</x-info-label>
-                </div>
-                <div>
-                    <select class="form-control" wire:model="mode">
-                            <option hidden value = "">--- Select Mode of Payment ---</option>
-                            <option value = "Landbank">Landbank</option>
-                            <option value = "University Cashier">University Cashier</option>
-                            <option value = "Bank Transfer">Bank Transfer</option>
+                <div class="mt-6">
+                    <label for="paymentMode" class="block text-sm text-gray-700">Mode of Payment</label>
+                    <select id="paymentMode" class="w-full border-gray-300 rounded-md form-control" wire:model="mode" wire:change="updateSelectedTerm($event.target.value)">
+                        <option hidden value="">--- Select Mode of Payment ---</option>
+                        <option value="Landbank">Landbank</option>
+                        <option value="University Cashier">University Cashier</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
                     </select>
                 </div>
-                <div>
-                    <p class="mt-12">Proceed to any branch of Landbank of the Philippines, secure a deposit slip and fill out the following details:</p>
-                    <p>Account Name: Pamantasan ng Lungsod ng Maynila</p>
-                    <p>Current Account # 2472-1006-56</p>
-                    <p>The total amount to be paid</p>
-                </div>
-                <form wire:submit="validateForm">
-                    <x-input-label class="form-label" :value="__('File')"/>
-                    <input wire:model="file" type="file" />
+                @if ($selectedTerm == 'Landbank')
+                    <div class="mt-4 text-sm">
+                        <p>Proceed to any branch of Landbank of the Philippines, secure a deposit slip and fill out the following details:</p>
+                        <ul class="pl-6 list-disc">
+                            <li>Account Name: Pamantasan ng Lungsod ng Maynila</li>
+                            <li>Current Account # 2472-1006-56</li>
+                            <li>The total amount to be paid</li>
+                        </ul>
+                    </div>
+                @endif
+                {{-- <form wire:submit="validateForm">
+                    <label for="proof" class="block text-sm text-gray-700">Upload proof of payment</label>
+                    <input wire:model="file" type="file" id="proof"/>
                     <x-input-error :messages="$errors->get('file')" class="mt-2" />
+                    </form> --}}
+                <p class="block mt-6 text-sm text-gray-700">Proof of payment</p>
+                <form class="flex items-center justify-center w-full" wire:submit="validateForm">
+                    <label for="proof" class="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer h-34 bg-gray-50 hover:bg-gray-100 ">
+                        @if ($file)
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <x-icon name="cloud-arrow-up" class="w-8 h-8 mb-4 text-green-500"/>
+                                <p class="mb-2 text-sm text-green-500 ">File uploaded successfully!</p>
+                                <p class="mb-2 text-sm text-gray-500 ">{{ $file->getClientOriginalName() }}</p>
+                                <button type="button" wire:click="$set('file', null)" class="px-4 py-2 mt-2 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700">Remove File</button>
+                            </div>
+                        @else
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <x-icon name="cloud-arrow-up" class="w-8 h-8 mb-4 text-gray-500"/>
+                                <p class="mb-2 text-sm text-gray-500 "><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                <p class="text-xs text-gray-500 ">PDF, JPG, JPEG, or PNG (MAX. 20MB)</p>
+                            </div>
+                        @endif
+                        <input wire:model="file" type="file" id="proof" class="hidden" />
+                    </label>
                 </form>
-                <div>
+                <x-input-error :messages="$errors->get('file')" class="mt-2" />
+                <div class="flex justify-between mt-4">
                     @if($current_step > 1 and $current_step < $total_steps)
                     <div>
                         <x-primary-button wire:click="decrementStep" class="w-20 mt-8">Back</x-primary-button>
