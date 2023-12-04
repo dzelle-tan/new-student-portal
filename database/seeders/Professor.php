@@ -14,35 +14,35 @@ class Professor extends Seeder
     public function run(): void
     {
          DB::table('professors')->insert([
-            'last_name' => 'binalla',
-            'first_name' => 'merlin',
-            'middle_name' => 'crtz',
-            'pronouns' => 'she/her',
-            'plm_email' => 'mcbinalla2021@plm.edu.ph'
+            'last_name' => 'Blanco',
+            'first_name' => 'Mark Christopher',
+            'middle_name' => 'Rodriguez',
+            'pronouns' => 'he/him',
+            'plm_email' => 'mcrblanco@plm.edu.ph'
         ]);
 
          DB::table('professors')->insert([
-            'last_name' => 'Grande',
-            'first_name' => 'Ariana',
-            'middle_name' => 'Slay',
+            'last_name' => 'Agustin',
+            'first_name' => 'Vivien',
+            'middle_name' => 'A',
             'pronouns' => 'she/her',
-            'plm_email' => 'mcbinalla2021@plm.edu.ph'
+            'plm_email' => 'vaagustin@plm.edu.ph'
         ]);
 
          DB::table('professors')->insert([
-            'last_name' => 'Bae',
-            'first_name' => 'Joo-hyun',
-            'middle_name' => 'Irene',
-            'pronouns' => 'she/her',
-            'plm_email' => 'mcbinalla2021@plm.edu.ph'
+            'last_name' => 'Cruz',
+            'first_name' => 'Joel',
+            'middle_name' => 'H',
+            'pronouns' => 'he/him',
+            'plm_email' => 'jhcruz@plm.edu.ph'
         ]);
 
          DB::table('professors')->insert([
-            'last_name' => 'Kang',
-            'first_name' => 'Seul',
-            'middle_name' => 'Gi',
-            'pronouns' => 'di sure',
-            'plm_email' => 'mcbinalla2021@plm.edu.ph'
+            'last_name' => 'Dioses',
+            'first_name' => 'Raymund',
+            'middle_name' => 'M',
+            'pronouns' => 'he/him',
+            'plm_email' => 'rmdioses@plm.edu.ph'
         ]);
     }
 }
