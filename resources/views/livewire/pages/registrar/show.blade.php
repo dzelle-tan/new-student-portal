@@ -154,10 +154,9 @@ new class extends Component
 <div class="">
     <div>
         @if($current_step == 1)
-        <h2 class="text-xl font-medium ml-9"><span class="text-primary">Step 1:</span> Request Form</h2> 
-
-            {{-- <livewire:pages.registrar.infos/> --}}
-            <div class="mt-6">
+        <div class="flex justify-between">
+            <div>
+                <h2 class="mb-6 text-xl font-medium ml-9"><span class="text-primary">Step 1:</span> Request Form</h2> 
                 <label class="ml-9">Request For</label>
                 @foreach($inputs as $key=>$value)
                     <div class="flex">
@@ -183,76 +182,104 @@ new class extends Component
                             <x-input-error :messages="$errors->get('inputs.'.$key.'.no_of_copies')" class="" />
                         </div>
                     </div>
-                    @endforeach
-                    <div wire:key="add-button-{{ $key }}">
-                        <button wire:click="add" class="flex items-center justify-center text-gray-500 bg-gray-200 rounded w-[37.4rem] ml-9 hover:text-gray-700 hover:bg-gray-300 py-1.5">
-                            <x-icon name="plus-circle" class="w-5 h-5 mr-3"/>
-                            Add Document
-                        </button>
-                    </div>
-                    <div class="flex flex-col mt-2 ml-9">
-                        <label class="mt-8" for="purpose">Purpose</label>
-                        <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400 h-48"></textarea>
-                        <x-input-error :messages="$errors->get('purpose')" class="" />                     
-                    </div>
-                    <div class="flex justify-end w-[39.5rem] mt-8">
-                        <x-primary-button wire:key="increment-button" wire:click="incrementStep" class="w-20 mt-12">Next</x-primary-button>
-                    </div>
+                @endforeach
+                <div wire:key="add-button-{{ $key }}">
+                    <button wire:click="add" class="flex items-center justify-center text-gray-500 bg-gray-200 rounded w-[37.4rem] ml-9 hover:text-gray-700 hover:bg-gray-300 py-1.5">
+                        <x-icon name="plus-circle" class="w-5 h-5 mr-3"/>
+                        Add Document
+                    </button>
+                </div>
+                <div class="flex flex-col mt-2 ml-9">
+                    <label class="mt-8" for="purpose">Purpose of Request</label>
+                    <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400 h-48"></textarea>
+                    <x-input-error :messages="$errors->get('purpose')" class="" />                     
+                </div>
+                <div class="flex justify-end w-[39.5rem] mt-8">
+                    <x-primary-button wire:key="increment-button" wire:click="incrementStep" class="w-20 mt-12">Next</x-primary-button>
+                </div>
             </div>
+            <div class="mr-9">
+                <x-pop-up name="TOF" title="Table of Fees">
+                    <x-slot name="body">
+                        <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
+                            table of fees to be placed here hehe
+                        </div>
+                    </x-slot>
+                </x-pop-up>
+                <button class="flex items-center py-2 text-gray-500 rounded hover:border-secondary w-[10rem] justify-center border-gray-400 border hover:text-secondary mb-3" x-data x-on:click="$dispatch('open-modal')">
+                    <x-icon name="table-cells" class="w-5 h-5 mr-2"/>
+                    Table of Fees
+                </button>
+                <a href="{{ asset('files/OUR-Request-Form.pdf') }}" download>
+                    <button class="flex items-center py-2 text-gray-500 rounded hover:border-secondary w-[10rem] justify-center border-gray-400 border hover:text-secondary">
+                        <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
+                        Download
+                    </button>
+                </a>
+            </div>
+        </div>
+            {{-- <livewire:pages.registrar.infos/> --}}
         @elseif($current_step == 2)
-
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Document</th>
-                            <th>Quantity</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($inputs as $key=>$value)
-                        {{-- @php
-                            dd($value);
-                        @endphp --}}
+        <h2 class="text-xl font-medium ml-9"><span class="text-primary">Step 2:</span> Payment</h2>
+            <div class="ml-9">
+                <div>
+                    <table>
+                        <thead>
                             <tr>
-                                <td>{{ $value['document_name'] }} </td>
-                                <td>{{ $value['no_of_copies'] }}</td>
-                                <td>{{ $value['amount'] }}</td>
+                                <th>Document</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
                             </tr>
-                        @endforeach
-                        <tr>
-                            <td>Total</td>
-                            <td>{{ $total }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div>
-                <x-info-label>Mode of Payment</x-info-label>
-            </div>
-            <div>
-                <select class="form-control" wire:model="mode">
-                        <option hidden value = "">--- Select Mode of Payment ---</option>
-                        <option value = "Landbank">Landbank</option>
-                        <option value = "University Cashier">University Cashier</option>
-                        <option value = "Bank Transfer">Bank Transfer</option>
-                </select>
-            </div>
-            <div>
-                <p class="mt-12">Proceed to any branch of Landbank of the Philippines, secure a deposit slip and fill out the following details:</p>
-                <p>Account Name: Pamantasan ng Lungsod ng Maynila</p>
-                <p>Current Account # 2472-1006-56</p>
-                <p>The total amount to be paid</p>
-            </div>
-            <form wire:submit="validateForm">
-                <x-input-label class="form-label" :value="__('File')"/>
-                <input wire:model="file" type="file" />
-                <x-input-error :messages="$errors->get('file')" class="mt-2" />
-            </form>
-            <div>
-                <x-primary-button wire:click="save" class="w-20 mt-8">Save</x-primary-button>
+                        </thead>
+                        <tbody>
+                            @foreach($inputs as $key=>$value)
+                            {{-- @php
+                                dd($value);
+                            @endphp --}}
+                                <tr>
+                                    <td>{{ $value['document_name'] }} </td>
+                                    <td>{{ $value['no_of_copies'] }}</td>
+                                    <td>{{ $value['amount'] }}</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td>Total</td>
+                                <td>{{ $total }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+    
+                <div>
+                    <x-info-label>Mode of Payment</x-info-label>
+                </div>
+                <div>
+                    <select class="form-control" wire:model="mode">
+                            <option hidden value = "">--- Select Mode of Payment ---</option>
+                            <option value = "Landbank">Landbank</option>
+                            <option value = "University Cashier">University Cashier</option>
+                            <option value = "Bank Transfer">Bank Transfer</option>
+                    </select>
+                </div>
+                <div>
+                    <p class="mt-12">Proceed to any branch of Landbank of the Philippines, secure a deposit slip and fill out the following details:</p>
+                    <p>Account Name: Pamantasan ng Lungsod ng Maynila</p>
+                    <p>Current Account # 2472-1006-56</p>
+                    <p>The total amount to be paid</p>
+                </div>
+                <form wire:submit="validateForm">
+                    <x-input-label class="form-label" :value="__('File')"/>
+                    <input wire:model="file" type="file" />
+                    <x-input-error :messages="$errors->get('file')" class="mt-2" />
+                </form>
+                <div>
+                    @if($current_step > 1 and $current_step < $total_steps)
+                    <div>
+                        <x-primary-button wire:click="decrementStep" class="w-20 mt-8">Back</x-primary-button>
+                    </div>
+                    @endif
+                    <x-primary-button wire:click="save" class="w-20 mt-8">Save</x-primary-button>
+                </div>
             </div>
         @elseif($current_step == 3)
             <div>
@@ -260,9 +287,9 @@ new class extends Component
             </div>
         @endif
     </div>
-    @if($current_step > 1 and $current_step < $total_steps)
-        <div>
+    {{-- @if($current_step > 1 and $current_step < $total_steps)
+        <div class="ml-9">
             <x-primary-button wire:click="decrementStep" class="w-20 mt-8">Back</x-primary-button>
         </div>
-    @endif
+    @endif --}}
 </div>
