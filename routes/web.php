@@ -22,7 +22,7 @@ Route::view('home', 'layouts.home')
     ->name('home');
 
 Route::view('profile', 'layouts.information.profile')
-    ->middleware(['auth'])
+    ->middleware(['auth', 'verified'])
     ->name('profile');
 
 Route::get('classes', [ClassesController::class, 'index'])
@@ -30,11 +30,27 @@ Route::get('classes', [ClassesController::class, 'index'])
     ->name('classes');
 
 Route::view('grades', 'layouts.information.grades')
-->middleware(['auth'])
-->name('grades');
+    ->middleware(['auth', 'verified'])
+    ->name('grades');
+
+Route::view('registrar', 'layouts.services.registrar')
+    ->middleware(['auth'])
+    ->name('registrar');
 
 Route::get('student_violations', [StudentViolationController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('student_violations');
+
+Route::view('enrollment', 'layouts.services.enrollment')
+    ->middleware(['auth', 'verified'])
+    ->name('enrollment');
+
+Route::view('registrar', 'layouts.services.registrar')
+    ->middleware(['auth', 'verified'])
+    ->name('registrar');
+
+Route::view('evaluation', 'layouts.services.evaluation')
+    ->middleware(['auth', 'verified'])
+    ->name('evaluation');
 
 require __DIR__.'/auth.php';

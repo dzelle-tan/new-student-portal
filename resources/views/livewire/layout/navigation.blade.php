@@ -34,9 +34,8 @@ new class extends Component
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
                         <x-icon name="home" class="w-5 h-5 mr-2" solid/> {{ __('Home') }}
                     </x-nav-link>
-                    <x-div-nav-link
-                        class="sm:flex sm:items-center sm:ms-6"
-                        :active="request()->routeIs('classes') || request()->routeIs('student_violations') || request()->routeIs('grades')"
+                    <x-div-nav-link class="sm:flex sm:items-center sm:ms-6"
+                                    :active="request()->routeIs('classes') || request()->routeIs('student_violations') || request()->routeIs('grades')"
                     >
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
@@ -65,7 +64,9 @@ new class extends Component
                             </x-slot>
                         </x-dropdown>
                     </x-div-nav-link>
-                    <x-div-nav-link class="hidden sm:flex sm:items-center sm:ms-6">
+                    <x-div-nav-link class="hidden sm:flex sm:items-center sm:ms-6"
+                                    :active="request()->routeIs('enrollment') || request()->routeIs('registrar') || request()->routeIs('evaluation')"
+                    >
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button class="inline-flex items-center py-2 text-sm font-medium leading-4 transition duration-150 ease-in-out border border-transparent rounded-md focus:outline-none">
@@ -81,13 +82,13 @@ new class extends Component
                             </x-slot>
 
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('profile')" wire:navigate>
+                                <x-dropdown-link :href="route('enrollment')" wire:navigate>
                                     {{ __('Enrollment') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('profile')" wire:navigate>
+                                <x-dropdown-link :href="route('registrar')" wire:navigate>
                                     {{ __('Registrar') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('profile')" wire:navigate>
+                                <x-dropdown-link :href="route('evaluation')" wire:navigate>
                                     {{ __('Evaluation') }}
                                 </x-dropdown-link>
                             </x-slot>
@@ -175,6 +176,18 @@ new class extends Component
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('student_violations')" :active="request()->routeIs('student_violations')" wire:navigate>
                 {{ __('Violations') }}
+            </x-responsive-nav-link>
+        </div>
+        
+        <div class="py-4 border-t border-gray-200">
+            <x-responsive-nav-link :href="route('enrollment')" :active="request()->routeIs('enrollment')" wire:navigate>
+                {{ __('Enrollment') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('registrar')" :active="request()->routeIs('registrar')" wire:navigate>
+                {{ __('Registrar') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('evaluation')" :active="request()->routeIs('evaluation')" wire:navigate>
+                {{ __('Evaluation') }}
             </x-responsive-nav-link>
         </div>
 
