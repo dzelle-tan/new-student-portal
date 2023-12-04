@@ -183,7 +183,7 @@ new class extends Component
                 3
                 <div class="absolute -bottom-[2rem] w-max text-center">
                 <h6 class="block font-sans text-base antialiased font-medium leading-relaxed tracking-normal text-gray-700">
-                    Request Sent
+                    Request Sent!
                 </h6>
                 </div>
             </div>
