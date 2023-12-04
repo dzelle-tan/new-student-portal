@@ -61,6 +61,7 @@ class Classes extends Seeder
             'code' => 'CSC 0315.1',
             'section' => 4,
             'name' => 'Intelligent System (LAB)',
+            'units' => 3,
             'day' => 'MF',
             'start_time' => '13:00:00',
             'end_time' => '16:00:00',
