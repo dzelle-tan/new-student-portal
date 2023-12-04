@@ -169,7 +169,7 @@ new class extends Component
                             </div>
                         @endif
                         <div class="mb-2 mr-2">
-                            <select class="py-2 overflow-auto w-96 form-control overflow-ellipsis {{ $loop->first ? 'ml-9' : '' }} border-gray-300 rounded-md" wire:model="inputs.{{$key}}.document_info_id">
+                            <select class="py-2 overflow-auto w-[28rem] form-control overflow-ellipsis {{ $loop->first ? 'ml-9' : '' }} border-gray-300 rounded-md" wire:model="inputs.{{$key}}.document_info_id">
                                 @foreach ($documentsInfo as $document)
                                     <option hidden value = "">--- Select a Document ---</option>
                                     <option value = "{{ $document->id }}">{{ $document->document }}</option>
@@ -179,7 +179,7 @@ new class extends Component
                             <x-input-error :messages="$errors->get('inputs.'.$key.'.document_info_id')" class="{{ $loop->first ? 'ml-9' : '' }}" />
                         </div>
                         <div>
-                            <x-text-input wire:model="inputs.{{$key}}.no_of_copies" type="number" placeholder="No. of Copies"/>
+                            <x-text-input wire:model="inputs.{{$key}}.no_of_copies" type="number" placeholder="No. of Copies" class="w-[8.9rem]"/>
                             <x-input-error :messages="$errors->get('inputs.'.$key.'.no_of_copies')" class="" />
                         </div>
                     </div>
