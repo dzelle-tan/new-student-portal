@@ -14,19 +14,14 @@ return new class extends Migration
     {
         Schema::create('student_records', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('fees_id');
             $table->unsignedInteger('student_id');
             $table->unsignedInteger('control_no');
+            $table->string('status', 45)->nullable();
             $table->string('school_year')->nullable();
             $table->unsignedTinyInteger('semester')->nullable();
             $table->date('date_enrolled')->nullable();
             $table->decimal('gwa', 5, 2)->nullable();
             $table->timestamps(); // // Created_at and updated_at columns
-
-            $table->foreign('fees_id')
-                ->references('id')->on('fees')
-                ->onDelete('NO ACTION')
-                ->onUpdate('NO ACTION');
 
             $table->foreign('student_id')
                 ->references('id')->on('students')
