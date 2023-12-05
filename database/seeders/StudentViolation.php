@@ -23,8 +23,8 @@ class StudentViolation extends Seeder
             'resolution_remarks' => 'Go to the OSDS Office',
             'resolution_date' => '2022-11-10',
             'status' => 'Closed',
-            //created_at automatically updated to store the timestamps
-            //updated_at automatically updated to store the timestamps
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('student_violations')->insert([
@@ -37,8 +37,8 @@ class StudentViolation extends Seeder
             'resolution_remarks' => 'Go to the OSDS Office',
              //no date yet if status is in progress
             'status' => 'In Progress',
-            //created_at automatically updated to store the timestamps
-            //updated_at automatically updated to store the timestamps
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('student_violations')->insert([
@@ -51,8 +51,8 @@ class StudentViolation extends Seeder
             'resolution_remarks' => 'Go to the OSDS Office',
             'resolution_date' => '2022-11-13',
             'status' => 'Closed',
-            //created_at automatically updated to store the timestamps
-            //updated_at automatically updated to store the timestamps
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('student_violations')->insert([
@@ -65,8 +65,8 @@ class StudentViolation extends Seeder
             'resolution_remarks' => 'Go to the OSDS Office',
             'resolution_date' => '2022-09-09',
             'status' => 'Closed',
-            //created_at automatically updated to store the timestamps
-            //updated_at automatically updated to store the timestamps
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         DB::table('student_violations')->insert([
@@ -74,13 +74,13 @@ class StudentViolation extends Seeder
             'violation' => 'Unauthorized use of funds or property of any person, group, class, organization/ student council.',
             'violation_date' => '2023-10-10',
             'offense_type' => 'Grave Offense',
-            'sm_reference' => '4', 
+            'sm_reference' => '4',
             'resolution' => '14 days to 25 days suspension',
             'resolution_remarks' => 'Go to the OSDS Office',
              //no date yet if status is in progress
             'status' => 'In Progress',
-            //created_at automatically updated to store the timestamps
-            //updated_at automatically updated to store the timestamps
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

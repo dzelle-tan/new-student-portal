@@ -18,7 +18,9 @@ class Professor extends Seeder
             'first_name' => 'Mark Christopher',
             'middle_name' => 'Rodriguez',
             'pronouns' => 'he/him',
-            'plm_email' => 'mcrblanco@plm.edu.ph'
+            'plm_email' => 'mcrblanco@plm.edu.ph',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('professors')->insert([
@@ -26,7 +28,9 @@ class Professor extends Seeder
             'first_name' => 'Vivien',
             'middle_name' => 'A',
             'pronouns' => 'she/her',
-            'plm_email' => 'vaagustin@plm.edu.ph'
+            'plm_email' => 'vaagustin@plm.edu.ph',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('professors')->insert([
@@ -34,7 +38,9 @@ class Professor extends Seeder
             'first_name' => 'Joel',
             'middle_name' => 'H',
             'pronouns' => 'he/him',
-            'plm_email' => 'jhcruz@plm.edu.ph'
+            'plm_email' => 'jhcruz@plm.edu.ph',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('professors')->insert([
@@ -42,7 +48,9 @@ class Professor extends Seeder
             'first_name' => 'Raymund',
             'middle_name' => 'M',
             'pronouns' => 'he/him',
-            'plm_email' => 'rmdioses@plm.edu.ph'
+            'plm_email' => 'rmdioses@plm.edu.ph',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

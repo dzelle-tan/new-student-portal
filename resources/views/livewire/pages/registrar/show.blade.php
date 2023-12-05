@@ -156,12 +156,45 @@ new class extends Component
     }
 }; ?>
 
-<div class="">
-    <div>
+<div>
+    {{-- Page/Step Indicator --}}
+    <div class="w-full px-24 mb-16">
+        <div class="relative flex items-center justify-between w-full">
+            <div class="absolute left-0 top-2/4 h-0.5 w-full -translate-y-2/4 bg-gray-300"></div>
+            <div class="absolute left-0 top-2/4 h-0.5 w-{{ $current_step == 2 ? '1/2' : ($current_step == 3 ? 'full' : '') }} -translate-y-2/4 bg-primary transition-all duration-500">
+            </div>
+            <div class="relative z-10 grid w-10 h-10 font-bold text-white transition-all duration-300 rounded-full place-items-center bg-primary">
+                1
+                <div class="absolute -bottom-[2rem] w-max text-center">
+                <h6 class="block font-sans text-base antialiased font-medium leading-relaxed tracking-normal text-gray-700">
+                    Request Form
+                </h6>
+                </div>
+            </div>
+            <div class="relative z-10 grid w-10 h-10 font-bold transition-all duration-300 rounded-full place-items-center {{ $current_step >= 2 ? ' text-white bg-primary' : 'bg-gray-300 text-gray-900' }}">
+                2
+                <div class="absolute -bottom-[2rem] w-max text-center">
+                    <h6 class="block font-sans text-base antialiased font-medium leading-relaxed tracking-normal text-gray-900">
+                        Payment
+                    </h6>
+                </div>
+            </div>
+            <div class="relative z-10 grid w-10 h-10 font-bold transition-all duration-300 rounded-full place-items-center {{ $current_step == 3 ? ' text-white bg-primary' : 'bg-gray-300 text-gray-900' }}">
+                3
+                <div class="absolute -bottom-[2rem] w-max text-center">
+                <h6 class="block font-sans text-base antialiased font-medium leading-relaxed tracking-normal text-gray-700">
+                    Request Sent!
+                </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Main Content --}}
+    <div class="p-10 overflow-hidden text-gray-900 bg-white shadow-sm sm:rounded-lg min-h-[38rem]">
         @if($current_step == 1)
             <div class="flex justify-between">
                 <div>
-                    <h2 class="mb-6 text-xl font-medium ml-9"><span class="text-primary">Step 1:</span> Request Form</h2> 
+                    <h2 class="mb-6 text-xl font-medium ml-9">Request Form</h2> 
                     <label class="ml-9">Request For</label>
                     @foreach($inputs as $key=>$value)
                         <div class="flex">
@@ -225,7 +258,7 @@ new class extends Component
             </div>
         @elseif($current_step == 2)
             <div class="ml-9 w-[37.4rem]">
-                <h2 class="text-xl font-medium"><span class="text-primary">Step 2:</span> Payment</h2>
+                <h2 class="text-xl font-medium">Payment</h2>
                 <div class="w-full p-2 px-4 mt-4 overflow-x-auto border border-gray-200 rounded shadow">
                     <table class="w-full text-left whitespace-nowrap">
                         <thead>

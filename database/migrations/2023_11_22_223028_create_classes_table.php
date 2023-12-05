@@ -25,6 +25,7 @@ return new class extends Migration
             $table->time('end_time')->nullable();
             $table->string('building', 45)->nullable();
             $table->string('room', 45)->nullable();
+            $table->string('type', 45)->nullable();
             $table->timestamps(); // Created_at and updated_at columns
 
             $table->foreign('professor_id')
