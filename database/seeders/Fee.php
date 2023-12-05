@@ -14,6 +14,7 @@ class Fee extends Seeder
     public function run(): void
     {
          DB::table('fees')->insert([
+            'student_record_id' => 1,
             'tuition_fee' => 1500.00,
             'tuition_units' => 12.5,
             'athletic_fee' => 50.00,
@@ -33,9 +34,12 @@ class Fee extends Seeder
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
             'status' => 'Paid',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('fees')->insert([
+            'student_record_id' => 2,
             'tuition_fee' => 1800.00,
             'tuition_units' => 15.0,
             'athletic_fee' => 50.00,
@@ -55,9 +59,12 @@ class Fee extends Seeder
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
             'status' => 'Unpaid',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('fees')->insert([
+            'student_record_id' => 3,
             'tuition_fee' => 1800.00,
             'tuition_units' => 15.0,
             'athletic_fee' => 50.00,
@@ -77,9 +84,12 @@ class Fee extends Seeder
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
             'status' => 'Paid',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('fees')->insert([
+            'student_record_id' => 4,
             'tuition_fee' => 1800.00,
             'tuition_units' => 15.0,
             'athletic_fee' => 50.00,
@@ -99,9 +109,12 @@ class Fee extends Seeder
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
             'status' => 'Unpaid',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('fees')->insert([
+            'student_record_id' => 5,
             'tuition_fee' => 1800.00,
             'tuition_units' => 15.0,
             'athletic_fee' => 50.00,
@@ -121,9 +134,12 @@ class Fee extends Seeder
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
             'status' => 'Unpaid',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
          DB::table('fees')->insert([
+            'student_record_id' => 6,
             'tuition_fee' => 1800.00,
             'tuition_units' => 15.0,
             'athletic_fee' => 50.00,
@@ -143,6 +159,8 @@ class Fee extends Seeder
             'ang_pamantasan_fee' => 45.00,
             'ssc_fee' => 80.00,
             'status' => 'Unpaid',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
