@@ -67,7 +67,7 @@ new class extends Component {
             foreach ($days as $day)
             {
                 $this->classes->push([
-                    'time' => $class->classes->start_time . ' - ' . $class->classes->start_time,
+                    'time' => $class->classes->start_time . ' - ' . $class->classes->end_time,
                     'code' => $class->classes->code,
                     'section' => $class->classes->section,
                     'subject' => $class->classes->name,
