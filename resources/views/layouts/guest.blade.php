@@ -25,7 +25,7 @@
                     </div>
                     <h1 class="mt-8 text-3xl font-bold text-primary">PLM Student Portal</h1>
                     {{ $slot }}
-                    <p class="mt-12">For more inquiries or concerns, please email <a href="" class="text-primary">ithelp@plm.edu.ph</a>.</p>
+                    <p class="mt-12">For more inquiries or concerns, please email <a href="mailto:ithelp@plm.edu.ph" class="text-primary">ithelp@plm.edu.ph</a>.</p>
                 </div>       
             </div>
         </div>
