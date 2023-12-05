@@ -13,7 +13,7 @@ class SfeStatus extends Seeder
      */
     public function run(): void
     {
-        DB::table('classes')->insert([
+        DB::table('sfe_statuses')->insert([
             'student_id' => 1,
             'class_id' => 1,
             'aysem' => '20231',
@@ -23,7 +23,7 @@ class SfeStatus extends Seeder
             'updated_at' => now()
         ]);
 
-        DB::table('classes')->insert([
+        DB::table('sfe_statuses')->insert([
             'student_id' => 2,
             'class_id' => 1,
             'aysem' => '20231',
@@ -33,7 +33,7 @@ class SfeStatus extends Seeder
             'updated_at' => now()
         ]);
 
-        DB::table('classes')->insert([
+        DB::table('sfe_statuses')->insert([
             'student_id' => 3,
             'class_id' => 1,
             'aysem' => '20231',
@@ -43,7 +43,7 @@ class SfeStatus extends Seeder
             'updated_at' => now()
         ]);
 
-        DB::table('classes')->insert([
+        DB::table('sfe_statuses')->insert([
             'student_id' => 4,
             'class_id' => 1,
             'aysem' => '20231',
@@ -53,8 +53,8 @@ class SfeStatus extends Seeder
             'updated_at' => now()
         ]);
 
-        DB::table('classes')->insert([
-            'student_id' => 1,
+        DB::table('sfe_statuses')->insert([
+            'student_id' => 5,
             'class_id' => 2,
             'aysem' => '20231',
             'status' => 'Completed',
