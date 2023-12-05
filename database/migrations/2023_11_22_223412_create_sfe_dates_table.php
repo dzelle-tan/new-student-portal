@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sfe_dates', function (Blueprint $table) {
             $table->increments('id');
             $table->string('category', 100)->nullable();
+            $table->string('sem', 10)->nullable();
             $table->string('academic_year', 45)->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();

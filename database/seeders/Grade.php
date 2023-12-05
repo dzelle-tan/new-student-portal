@@ -20,6 +20,8 @@ class Grade extends Seeder
             'grade' => 1.00,
             'completion_grade' => 1.00,
             'remarks' => 'Passed',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('grades')->insert([
@@ -29,6 +31,8 @@ class Grade extends Seeder
             'grade' => 1.00,
             'completion_grade' => 2.00,
             'remarks' => 'Passed',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('grades')->insert([
@@ -38,6 +42,8 @@ class Grade extends Seeder
             'grade' => 2.00,
             'completion_grade' => 2.00,
             'remarks' => 'Passed',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('grades')->insert([
@@ -47,6 +53,8 @@ class Grade extends Seeder
             'grade' => 1.03,
             'completion_grade' => 1.03,
             'remarks' => 'Passed',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('grades')->insert([
@@ -56,6 +64,8 @@ class Grade extends Seeder
             'grade' => 1.00,
             'completion_grade' => 1.00,
             'remarks' => 'Passed',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('grades')->insert([
@@ -65,6 +75,8 @@ class Grade extends Seeder
             'grade' => 1.00,
             'completion_grade' => 2.00,
             'remarks' => 'Passed',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('grades')->insert([
@@ -74,6 +86,8 @@ class Grade extends Seeder
             'grade' => 2.00,
             'completion_grade' => 2.00,
             'remarks' => 'Passed',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('grades')->insert([
@@ -83,6 +97,8 @@ class Grade extends Seeder
             'grade' => 1.03,
             'completion_grade' => 1.03,
             'remarks' => 'Passed',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('grades')->insert([
@@ -92,6 +108,8 @@ class Grade extends Seeder
             'grade' => 1.00,
             'completion_grade' => 1.00,
             'remarks' => 'Passed',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('grades')->insert([
@@ -101,6 +119,8 @@ class Grade extends Seeder
             'grade' => 1.00,
             'completion_grade' => 2.00,
             'remarks' => 'Passed',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('grades')->insert([
@@ -110,6 +130,8 @@ class Grade extends Seeder
             'grade' => 2.00,
             'completion_grade' => 2.00,
             'remarks' => 'Passed',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('grades')->insert([
@@ -119,6 +141,8 @@ class Grade extends Seeder
             'grade' => 1.03,
             'completion_grade' => 1.03,
             'remarks' => 'Passed',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
