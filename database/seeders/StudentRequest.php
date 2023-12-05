@@ -24,7 +24,9 @@ class StudentRequest extends Seeder
             'date_of_payment' => '2021-11-22 22:35:58',
             'expected_release' => '2021-12-07',
             'date_requested' => '2021-11-22 22:35:58',
-            'date_received' => '2021-12-08 08:13:58'
+            'date_received' => '2021-12-08 08:13:58',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('student_requests')->insert([
@@ -38,7 +40,9 @@ class StudentRequest extends Seeder
             'date_of_payment' => '2022-10-22 17:25:58',
             'expected_release' => '2022-11-02',
             'date_requested' => '2022-10-19 10:35:57',
-            'date_received' => '2022-10-27 09:35:58'
+            'date_received' => '2022-10-27 09:35:58',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('student_requests')->insert([
@@ -52,7 +56,9 @@ class StudentRequest extends Seeder
             'date_of_payment' => '2023-11-22 19:35:58',
             'expected_release' => '2023-12-07',
             'date_requested' => '2023-11-22 20:35:58',
-            'date_received' => '2023-12-06 22:35:58'
+            'date_received' => '2023-12-06 22:35:58',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('student_requests')->insert([
@@ -66,7 +72,9 @@ class StudentRequest extends Seeder
             'date_of_payment' => '2021-09-22 22:35:58',
             'expected_release' => '2021-09-30',
             'date_requested' => '2021-09-15 22:35:58',
-            'date_received' => '2021-09-30 22:17:00'
+            'date_received' => '2021-09-30 22:17:00',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('student_requests')->insert([
@@ -81,6 +89,8 @@ class StudentRequest extends Seeder
             'expected_release' => '2021-10-26',
             'date_requested' => '2021-10-22 22:35:58',
             'date_received' => '2021-10-27 22:35:58',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
