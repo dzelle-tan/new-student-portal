@@ -161,7 +161,7 @@ new class extends Component
     <div class="w-full px-24 mb-16">
         <div class="relative flex items-center justify-between w-full">
             <div class="absolute left-0 top-2/4 h-0.5 w-full -translate-y-2/4 bg-gray-300"></div>
-            <div class="absolute left-0 top-2/4 h-0.5 w-{{ $current_step == 2 ? '1/2' : ($current_step == 3 ? 'full' : '') }} -translate-y-2/4 bg-primary transition-all duration-500">
+            <div class="absolute left-0 top-2/4 h-0.5 {{ $current_step == 2 ? 'w-1/2' : ($current_step == 3 ? 'w-full' : '') }} -translate-y-2/4 bg-primary transition-all duration-500">
             </div>
             <div class="relative z-10 grid w-10 h-10 font-bold text-white transition-all duration-300 rounded-full place-items-center bg-primary">
                 1
