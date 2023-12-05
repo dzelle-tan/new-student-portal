@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             Student::class,
-            Fee::class,
             StudentRecord::class,
+            Fee::class,
             Professor::class,
             Classes::class,
             Grade::class,
