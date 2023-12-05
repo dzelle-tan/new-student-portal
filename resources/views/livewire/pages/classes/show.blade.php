@@ -1,26 +1,17 @@
 <?php
 
-use App\Models\Student;
 use App\Models\StudentRecord;
-use Illuminate\Database\Eloquent\Collection;
+
+use Illuminate\Support\Collection;
 use Livewire\Volt\Component;
 
 new class extends Component {
-    // public Collection $classes;
-    public StudentRecord $record;
-    public Collection $grades;
-    public Student $user;
 
-    public Collection $days;
+    public Collection $classes;
     public $daysOfWeek;
-    public $dayString;
-    public $daysArray;
 
     public function mount(): void
     {
-        // $this->classes = Classes::with('student')
-        //     ->get();
-
         $this->user = Auth::user();
 
 
@@ -29,7 +20,34 @@ new class extends Component {
             ->latest()
             ->first();
 
-        foreach ($this->record->grade as $class) {
+            $this->classes = collect([
+            [
+                'time' => '',
+                'code' => '',
+                'section' => '',
+                'subject' => '',
+                'room' => '',
+                'type' => '',
+                'day' => '',
+            ],
+        ]);
+
+        $this->daysOfWeek = [
+            'M' => 'Monday',
+            'T' => 'Tuesday',
+            'W' => 'Wednesday',
+            'H' => 'Thursday',
+            'F' => 'Friday',
+            'S' => 'Saturday',
+        ];
+
+        $this->classDay();
+    }
+
+    public function classDay()
+    {
+        foreach ($this->record->grade as $class)
+        {
             $dayString = $class->classes->day;
             $daysArray = str_split($dayString);
 
@@ -45,45 +63,35 @@ new class extends Component {
             $days = array_map(function ($day) use ($daysOfWeek) {
                 return $daysOfWeek[$day];
             }, $daysArray);
+
+            foreach ($days as $day)
+            {
+                $this->classes->push([
+                    'time' => $class->classes->start_time . ' - ' . $class->classes->start_time,
+                    'code' => $class->classes->code,
+                    'section' => $class->classes->section,
+                    'subject' => $class->classes->name,
+                    'room' => $class->classes->room,
+                    'type' => $class->classes->type,
+                    'day' => $day
+                ]);
             }
-            // dd($this->record->grade);
-            dd($days);
         }
+    }
 }; ?>
 
-@php
-    $days = [
-        'Monday' => [
-            ['time' => '9am - 12pm', 'code' => 'CSC 0134.1', 'section' => '2', 'subject' => 'Operating System (Lab)', 'room' => 'GV 311', 'type' => 'online']
-        ],
-        'Tuesday' => [
-            ['time' => '9am - 12pm', 'code' => 'CSC 0134.1', 'section' => '2', 'subject' => 'Operating System (Lab)', 'room' => 'GV 311', 'type' => 'face-to-face'],
-            ['time' => '9am - 12pm', 'code' => 'CSC 0134.1', 'section' => '2', 'subject' => 'Operating System (Lab)', 'room' => 'GV 311', 'type' => 'face-to-face']
-        ],
-        'Wednesday' => [
-            ['time' => '9am - 12pm', 'code' => 'CSC 0134.1', 'section' => '2', 'subject' => 'Operating System (Lab)', 'room' => 'GV 311', 'type' => 'face-to-face']
-        ],
-        'Thursday' => [
-            ['time' => '9am - 12pm', 'code' => 'CSC 0134.1', 'section' => '2', 'subject' => 'Operating System (Lab)', 'room' => 'GV 311', 'type' => 'online'],
-            ['time' => '9am - 12pm', 'code' => 'CSC 0134.1', 'section' => '2', 'subject' => 'Operating System (Lab)', 'room' => 'GV 311', 'type' => 'face-to-face']
-        ],
-        'Friday' => [
-            ['time' => '9am - 12pm', 'code' => 'CSC 0134.1', 'section' => '2', 'subject' => 'Operating System (Lab)', 'room' => 'GV 311', 'type' => 'face-to-face']
-        ],
-        'Saturday' => [
-        ],
-    ];
-@endphp
 <div class="grid grid-cols-1 overflow-hidden bg-white shadow-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 rounded-md lg:min-h-[38rem]">
-    @foreach ($days as $day => $classes)
+    @foreach ($this->daysOfWeek as $day)
         <div class="-mr-px border">
             <div class="px-6 py-4 text-sm font-medium tracking-wider uppercase border-b-2 text-table-header bg-gray-50">
                 {{ $day }}
             </div>
-            @foreach ($record->grade as $class)
-                <div class="p-2 {{ $loop->first ? '' : 'pt-0' }}">
-                    <x-class-block time="{{ $class->classes->name }}" code="{{ $class['code'] }}" section="{{ $class['section'] }}" subject="{{ $class['subject'] }}" room="{{ $class['room'] }}" type="{{ $class['type'] }}"/>
-                </div>
+            @foreach ($classes as $class)
+                @if ($class['day'] == $day)
+                    <div class="p-2 {{ $loop->first ? '' : 'pt-0' }}">
+                        <x-class-block time="{{ $class['time'] }}" code="{{ $class['code'] }}" section="{{ $class['section'] }}" subject="{{ $class['subject'] }}" room="{{ $class['room'] }}" type="{{ $class['type'] }}"/>
+                    </div>
+                @endif
             @endforeach
         </div>
     @endforeach
