@@ -20,17 +20,7 @@ new class extends Component {
             ->latest()
             ->first();
 
-            $this->classes = collect([
-            [
-                'time' => '',
-                'code' => '',
-                'section' => '',
-                'subject' => '',
-                'room' => '',
-                'type' => '',
-                'day' => '',
-            ],
-        ]);
+        $this->classes = collect();
 
         $this->daysOfWeek = [
             'M' => 'Monday',
@@ -67,7 +57,7 @@ new class extends Component {
             foreach ($days as $day)
             {
                 $this->classes->push([
-                    'time' => $class->classes->start_time . ' - ' . $class->classes->end_time,
+                    'time' => date('g:i A', strtotime($class->classes->start_time)) . ' - ' . date('g:i A', strtotime($class->classes->end_time)),
                     'code' => $class->classes->code,
                     'section' => $class->classes->section,
                     'subject' => $class->classes->name,
