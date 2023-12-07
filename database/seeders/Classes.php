@@ -25,8 +25,9 @@ class Classes extends Seeder
             'end_time' => '17:00:00',
             'building' => 'Gusaling Villegas',
             'room' => 'GV306',
+            'type' => 'online',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
          DB::table('classes')->insert([
@@ -41,8 +42,9 @@ class Classes extends Seeder
             'end_time' => '12:00:01',
             'building' => 'Gusaling Villegas',
             'room' => 'Computer Laboratory 4',
+            'type' => 'face-to-face',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
          DB::table('classes')->insert([
@@ -57,8 +59,9 @@ class Classes extends Seeder
             'end_time' => '21:00:00',
             'building' => 'Gusaling Villegas',
             'room' => 'Computer Laboratory 3',
+            'type' => 'face-to-face',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
          DB::table('classes')->insert([
@@ -73,8 +76,9 @@ class Classes extends Seeder
             'end_time' => '16:00:00',
             'building' => 'Gusaling Villegas',
             'room' => 'Computer Laboratory 3',
+            'type' => 'face-to-face',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
 
@@ -90,8 +94,9 @@ class Classes extends Seeder
             'end_time' => '15:00:00',
             'building' => 'Gusaling Lacson',
             'room' => 'GL311',
+            'type' => 'face-to-face',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
          DB::table('classes')->insert([
@@ -106,8 +111,9 @@ class Classes extends Seeder
             'end_time' => '15:00:01',
             'building' => 'Gusaling Lacson',
             'room' => 'GL304',
+            'type' => 'face-to-face',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
          DB::table('classes')->insert([
@@ -122,8 +128,9 @@ class Classes extends Seeder
             'end_time' => '14:00:00',
             'building' => 'Gusaling Villegas',
             'room' => 'Computer Laboratory 3',
+            'type' => 'face-to-face',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
          DB::table('classes')->insert([
@@ -138,8 +145,9 @@ class Classes extends Seeder
             'end_time' => '18:00:00',
             'building' => 'Gusaling Villegas',
             'room' => 'Computer Laboratory 3',
+            'type' => 'face-to-face',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
          DB::table('classes')->insert([
@@ -154,8 +162,9 @@ class Classes extends Seeder
             'end_time' => '09:00:01',
             'building' => 'Gusaling Villegas',
             'room' => 'GV304',
+            'type' => 'face-to-face',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
          DB::table('classes')->insert([
@@ -170,8 +179,9 @@ class Classes extends Seeder
             'end_time' => '12:00:00',
             'building' => 'Gusaling Villegas',
             'room' => 'GV309',
+            'type' => 'face-to-face',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
          DB::table('classes')->insert([
@@ -186,8 +196,9 @@ class Classes extends Seeder
             'end_time' => '21:00:00',
             'building' => 'Gusaling Villegas',
             'room' => 'GV307',
+            'type' => 'face-to-face',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
          DB::table('classes')->insert([
@@ -202,8 +213,9 @@ class Classes extends Seeder
             'end_time' => '13:00:00',
             'building' => 'Gusaling Villegas',
             'room' => 'GV305',
+            'type' => 'face-to-face',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
          DB::table('classes')->insert([
@@ -218,8 +230,9 @@ class Classes extends Seeder
             'end_time' => '19:00:00',
             'building' => 'Field',
             'room' => 'Field',
+            'type' => 'face-to-face',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
 
          DB::table('classes')->insert([
@@ -234,8 +247,9 @@ class Classes extends Seeder
             'end_time' => '10:00:00',
             'building' => 'Gusaling Villegas',
             'room' => 'Computer Laboratory 2',
+            'type' => 'face-to-face',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
     }
 }

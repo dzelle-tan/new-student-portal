@@ -6,19 +6,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class StudentRecord extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'status',
+    ];
 
     public function grade(): HasMany
     {
         return $this->hasMany(Grade::class);
     }
 
-    public function fee(): BelongsTo
+    public function fee(): HasOne
     {
-        return $this->belongsTo(Fee::class);
+        return $this->hasOne(Fee::class);
     }
 
     public function student(): BelongsTo

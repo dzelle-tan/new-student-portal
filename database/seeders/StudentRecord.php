@@ -14,7 +14,6 @@ class StudentRecord extends Seeder
     public function run(): void
     {
         DB::table('student_records')->insert([
-            'fees_id' => 1,
             'student_id' => 1,
             'control_no' => 202101350,
             'school_year' => '2021-2022',
@@ -26,7 +25,6 @@ class StudentRecord extends Seeder
         ]);
 
         DB::table('student_records')->insert([
-            'fees_id' => 2,
             'student_id' => 1,
             'control_no' => 202101350,
             'school_year' => '2021-2022',
@@ -38,7 +36,6 @@ class StudentRecord extends Seeder
         ]);
 
         DB::table('student_records')->insert([
-            'fees_id' => 1,
             'student_id' => 1,
             'control_no' => 202101350,
             'school_year' => '2022-2023',
@@ -50,7 +47,6 @@ class StudentRecord extends Seeder
         ]);
 
         DB::table('student_records')->insert([
-            'fees_id' => 1,
             'student_id' => 1,
             'control_no' => 202101350,
             'school_year' => '2022-2023',
@@ -62,7 +58,6 @@ class StudentRecord extends Seeder
         ]);
 
         DB::table('student_records')->insert([
-            'fees_id' => 1,
             'student_id' => 2,
             'control_no' => 202101350,
             'school_year' => '2023-2024',
@@ -74,7 +69,6 @@ class StudentRecord extends Seeder
         ]);
 
         DB::table('student_records')->insert([
-            'fees_id' => 2,
             'student_id' => 2,
             'control_no' => 202101350,
             'school_year' => '2022-2023',
