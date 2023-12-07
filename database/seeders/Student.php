@@ -17,8 +17,8 @@ class Student extends Seeder
          DB::table('students')->insert([
             'email' => 'dzellefaith@gmail.com',
             'student_no' => '202101350',
-            'last_name' => 'binalla',
-            'first_name' => 'merlin',
+            'last_name' => 'Binalla',
+            'first_name' => 'Merlin',
             'middle_name' => 'crtz',
             'maiden_name' => 'merlinmerlin',
             'pedigree' => 'Filipino',

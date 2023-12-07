@@ -1,14 +1,6 @@
-{{-- <?php
-
-// use function Livewire\Volt\{state};
-
-//
-
-?> --}}
-
 <?php
 
-use App\Models\StudentRecord;
+use App\Models\Classes;
 
 use Illuminate\Support\Collection;
 use Livewire\Volt\Component;
@@ -17,71 +9,20 @@ new class extends Component {
 
     public Collection $classes;
     public $daysOfWeek;
-    public $flag = true;
 
     public function mount(): void
     {
-        $this->user = Auth::user();
+        // Retrieve the authenticated user
+        $user = Auth::user();
 
-        $this->record = StudentRecord::where('student_id', $this->user->id)
-            ->with('grade')
-            ->latest()
-            ->first();
-
-        $this->classes = collect();
-
-        $this->daysOfWeek = [
-            'M' => 'Monday',
-            'T' => 'Tuesday',
-            'W' => 'Wednesday',
-            'H' => 'Thursday',
-            'F' => 'Friday',
-            'S' => 'Saturday',
-        ];
-
-        $this->classDay();
+        // Fetch all classes associated with the authenticated student
+        $this->classes = Classes::where('student_id', $user->id)
+                        ->where('day', date('l'))
+                        ->get();
     }
-
-    public function classDay()
+    public function formatTime($time)
     {
-        foreach ($this->record->grade as $class)
-        {
-            $dayString = $class->classes->day;
-            $daysArray = str_split($dayString);
-
-            $daysOfWeek = [
-                'M' => 'Monday',
-                'T' => 'Tuesday',
-                'W' => 'Wednesday',
-                'H' => 'Thursday',
-                'F' => 'Friday',
-                'S' => 'Saturday',
-            ];
-
-            $days = array_map(function ($day) use ($daysOfWeek) {
-                return $daysOfWeek[$day];
-            }, $daysArray);
-
-            $currentDay = date('l');
-
-            foreach ($days as $day)
-            {
-                if ($day == $currentDay)
-                {
-                    $this->classes->push([
-                        'time' => date('g:i A', strtotime($class->classes->start_time)) . ' - ' . date('g:i A', strtotime($class->classes->end_time)),
-                        'code' => $class->classes->code,
-                        'section' => $class->classes->section,
-                        'subject' => $class->classes->name,
-                        'room' => $class->classes->room,
-                        'type' => $class->classes->type,
-                        'day' => $day
-                    ]);
-
-                    $this->flag = false;
-                }
-            }
-        }
+        return \Carbon\Carbon::parse($time)->format('g:i A');
     }
 }; ?>
 
@@ -92,17 +33,18 @@ new class extends Component {
     </div>
     <div class="space-y-3 ">
         @foreach ($classes as $class)
-                <div class="p-2 {{ $loop->first ? '' : 'pt-0' }}">
-                    <x-class-block time="{{ $class['time'] }}" code="{{ $class['code'] }}" section="{{ $class['section'] }}" subject="{{ $class['subject'] }}" room="{{ $class['room'] }}" type="{{ $class['type'] }}"/>
-                </div>
+            <div class="w-full p-2 pl-3 space-y-3 border-l-4 rounded-md shadow-sm {{ $class->type === 'face-to-face' ? 'bg-indigo-50 border-primary-light-2 text-primary' : 'bg-amber-50 border-secondary-light-2 text-secondary-dark-1' }}">
+                <p>{{ $this->formatTime($class->start_time) }} - {{ $this->formatTime($class->end_time) }}</p>
+                <p>{{ $class->name }}</p>
+            </div>  
         @endforeach
-        @if ($flag)
+        {{-- @if ($flag)
             <div class="p-2">
                Yey! No Classes Today!!!
                <img src="{{ asset('files/dance-moves.gif') }}" alt="Celebration GIF">
             </div>
 
-        @endif
+        @endif --}}
     </div>
     <a href="{{ route('classes') }}" class="flex justify-end mt-10 text-gray-500 underline">See more...</a>
 </div>
