@@ -36,16 +36,6 @@ class Student extends Authenticatable implements MustVerifyEmail
         'student_no' => 'integer',
     ];
 
-    public function classes(): HasMany
-    {
-        return $this->hasMany(Classes::class, 'class_id');
-    }
-
-    public function grades(): HasMany
-    {
-        return $this->hasMany(Grade::class);
-    }
-
     public function sfeAnswers(): HasMany
     {
         return $this->hasMany(SfeAnswer::class);
@@ -69,10 +59,5 @@ class Student extends Authenticatable implements MustVerifyEmail
     public function studentViolation(): HasMany
     {
         return $this->hasMany(studentViolation::class);
-    }
-
-    public function chirps(): HasMany
-    {
-        return $this->hasMany(Chirp::class);
     }
 }
