@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>List of Students</h1>
+    <h1>Class Schedule</h1>
     <table>
         <thead>
             <th>Student No</th>
