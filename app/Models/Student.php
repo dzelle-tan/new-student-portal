@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Database\Seeders\SfeAnswer;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -60,4 +59,5 @@ class Student extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(studentViolation::class);
     }
+
 }
