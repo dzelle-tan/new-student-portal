@@ -1,9 +1,22 @@
 <?php
 
+use App\Models\Semester;
+use App\Models\Event;
+use Illuminate\Database\Eloquent\Collection;
+
 use Livewire\Volt\Component;
 
 new class extends Component {
-    //
+
+    public Collection $semesters;
+    public Collection $events;
+
+    public function mount()
+    {
+        $this->semesters = Semester::where('academic_year', '2023-2024')->get();
+        $this->events = Event::whereIn('semester_id', $this->semesters->pluck('id'))->get();
+    }
+
 }; ?>
 
 <div class="h-[30rem]">
@@ -13,115 +26,31 @@ new class extends Component {
             <thead>
                 <tr class="text-xs tracking-wider uppercase border-b border-gray-200 text-table-header bg-gray-50">
                     <th class="px-4 py-3 font-medium">Event</th>
-                    <th class="px-4 py-3 font-medium">
-                        First Semester
-                        <p class="text-xs font-normal normal-case">Aug 29, 2023 - Jan 16, 2024</p>
-                    </th>
-                    <th class="px-4 py-3 font-medium">
-                        Second Semester
-                        <p class="text-xs font-normal normal-case">Feb 5, 2024 - Jun 9, 2024</p>
-                    </th>
-                    <th class="px-4 py-3 font-medium">
-                        Midyear Term
-                        <p class="text-xs font-normal normal-case">Jul 1, 2024 - Aug 10, 2024</p>
-                    </th>
+                    @foreach ($semesters as $semester)
+                        <th class="px-4 py-3 font-medium">
+                            {{ $semester->name }}
+                            <p class="text-xs font-normal normal-case">{{ $semester->start_date }} {{_("-") }} {{ $semester->end_date }}</p>
+                        </th>
+                    @endforeach
                 </tr>
             </thead>
             <tbody>
-                <tr class="text-sm border-b border-gray-200">
-                    <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">
-                        Registration Period
-                    </th>
-                    <td class="px-4 py-3">Jul 31(M) - Aug 19(S), 2023</td>
-                    <td class="px-4 py-3">Jan 24(W) - Jan 30(T), 2024</td>
-                    <td class="px-4 py-3">Jun 25(T) - Jun 29(S), 2024</td>
-                </tr>
-                <tr class="text-sm border-b border-gray-200">
-                    <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">
-                        Late Registration
-                    </th>
-                    <td class="px-4 py-3">Jul 31(M) - Aug 19(S), 2023</td>
-                    <td class="px-4 py-3">Jan 24(W) - Jan 30(T), 2024</td>
-                    <td class="px-4 py-3">Jun 25(T) - Jun 29(S), 2024</td>
-                </tr>
-                <tr class="text-sm border-b border-gray-200">
-                    <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">
-                        Start of Classes
-                    </th>
-                    <td class="px-4 py-3">Jul 31(M) - Aug 19(S), 2023</td>
-                    <td class="px-4 py-3">Jan 24(W) - Jan 30(T), 2024</td>
-                    <td class="px-4 py-3">Jun 25(T) - Jun 29(S), 2024</td>
-                </tr>
-                <tr class="text-sm border-b border-gray-200">
-                    <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">
-                        Add-Drop Period
-                    </th>
-                    <td class="px-4 py-3">Jul 31(M) - Aug 19(S), 2023</td>
-                    <td class="px-4 py-3">Jan 24(W) - Jan 30(T), 2024</td>
-                    <td class="px-4 py-3">Jun 25(T) - Jun 29(S), 2024</td>
-                </tr>
-                <tr class="text-sm border-b border-gray-200">
-                    <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">
-                        Mid-Term Examinations
-                    </th>
-                    <td class="px-4 py-3">Jul 31(M) - Aug 19(S), 2023</td>
-                    <td class="px-4 py-3">Jan 24(W) - Jan 30(T), 2024</td>
-                    <td class="px-4 py-3">Jun 25(T) - Jun 29(S), 2024</td>
-                </tr>
-                <tr class="text-sm border-b border-gray-200">
-                    <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">
-                        Christmas Vacation
-                    </th>
-                    <td class="px-4 py-3">Jul 31(M) - Aug 19(S), 2023</td>
-                    <td class="px-4 py-3">-</td>
-                    <td class="px-4 py-3">-</td>
-                </tr>
-                <tr class="text-sm border-b border-gray-200">
-                    <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">
-                        End of Classes
-                    </th>
-                    <td class="px-4 py-3">Jul 31(M) - Aug 19(S), 2023</td>
-                    <td class="px-4 py-3">Jan 24(W) - Jan 30(T), 2024</td>
-                    <td class="px-4 py-3">Jun 25(T) - Jun 29(S), 2024</td>
-                </tr>
-                <tr class="text-sm border-b border-gray-200">
-                    <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">
-                        Final Examination
-                    </th>
-                    <td class="px-4 py-3">Jul 31(M) - Aug 19(S), 2023</td>
-                    <td class="px-4 py-3">Jan 24(W) - Jan 30(T), 2024</td>
-                    <td class="px-4 py-3">Jun 25(T) - Jun 29(S), 2024</td>
-                </tr>
-                <tr class="text-sm border-b border-gray-200">
-                    <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">
-                        Encoding of Grades
-                    </th>
-                    <td class="px-4 py-3">Jul 31(M) - Aug 19(S), 2023</td>
-                    <td class="px-4 py-3">Jan 24(W) - Jan 30(T), 2024</td>
-                    <td class="px-4 py-3">Jun 25(T) - Jun 29(S), 2024</td>
-                </tr>
-                <tr class="text-sm border-b border-gray-200">
-                    <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">
-                        Last Day of Submitting Report of Grades
-                    </th>
-                    <td class="px-4 py-3">Jul 31(M) - Aug 19(S), 2023</td>
-                    <td class="px-4 py-3">Jan 24(W) - Jan 30(T), 2024</td>
-                    <td class="px-4 py-3">Jun 25(T) - Jun 29(S), 2024</td>
-                </tr>
-                <tr class="text-sm border-b border-gray-200">
-                    <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">
-                        University Foundation Anniversary
-                    </th>
-                    <td class="px-4 py-3">Jul 31(M) - Aug 19(S), 2023</td>
-                    <td class="px-4 py-3">Jan 24(W) - Jan 30(T), 2024</td>
-                    <td class="px-4 py-3">Jun 25(T) - Jun 29(S), 2024</td>
-                </tr>
-                <tr class="text-sm">
-                    <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">Araw ng Maynila</th>
-                    <td class="px-4 py-3">-</td>
-                    <td class="px-4 py-3">Jun 24(M), 2024</td>
-                    <td class="px-4 py-3">-</td>
-                </tr>
+                @foreach ($events as $event)
+                    <tr class="text-sm border-b border-gray-200">
+                        <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">
+                            {{ $event->event_name }}
+                        </th>
+                        @foreach ($semesters as $semester)
+                            <td class="px-4 py-3">
+                                @if ($event->start_date !== null && $event->end_date !== null)
+                                    {{ (new DateTime($event->start_date))->format('M j, Y') }} - {{ (new DateTime($event->end_date))->format('M j, Y') }}
+                                @else
+                                    {{ __("---") }}
+                                @endif
+                            </td>
+                        @endforeach
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

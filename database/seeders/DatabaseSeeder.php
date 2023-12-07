@@ -34,6 +34,8 @@ class DatabaseSeeder extends Seeder
             Document::class,
             StudentViolation::class,
             SfeAnswer::class,
+            Semester::class,
+            Event::class,
         ]);
     }
 }
