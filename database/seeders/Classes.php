@@ -16,7 +16,6 @@ class Classes extends Seeder
         // Insert multiple class records
         DB::table('classes')->insert([
             [
-                'student_id' => 1,
                 'student_record_id' => 4,
                 'professor_id' => 1,
                 'code' => 'CSC 0314.1',
@@ -33,7 +32,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 4,
                 'professor_id' => 1,
                 'code' => 'CSC 0315.1',
@@ -50,7 +48,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 4,
                 'professor_id' => 1,
                 'code' => 'CSC 0311',
@@ -67,7 +64,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 4,
                 'professor_id' => 1,
                 'code' => 'CSC 0315',
@@ -84,7 +80,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 4,
                 'professor_id' => 1,
                 'code' => 'CSC 0312.1',
@@ -101,7 +96,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 4,
                 'professor_id' => 1,
                 'code' => 'CSC 0314',
@@ -118,7 +112,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 4,
                 'professor_id' => 1,
                 'code' => 'CSC 0313',
@@ -135,7 +128,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 4,
                 'professor_id' => 1,
                 'code' => 'CSC 0313.1',
@@ -152,7 +144,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 4,
                 'professor_id' => 1,
                 'code' => 'CSC 0312',
@@ -171,7 +162,6 @@ class Classes extends Seeder
 // -----------------------------------------------
 
             [
-                'student_id' => 1,
                 'student_record_id' => 3,
                 'professor_id' => 1,
                 'code' => 'CSC 0314.1',
@@ -188,7 +178,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 3,
                 'professor_id' => 1,
                 'code' => 'CSC 0315.1',
@@ -205,7 +194,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 3,
                 'professor_id' => 1,
                 'code' => 'CSC 0311',
@@ -222,7 +210,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 3,
                 'professor_id' => 1,
                 'code' => 'CSC 0315',
@@ -239,7 +226,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 3,
                 'professor_id' => 1,
                 'code' => 'CSC 0312.1',
@@ -256,7 +242,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 3,
                 'professor_id' => 1,
                 'code' => 'CSC 0314',
@@ -273,7 +258,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 3,
                 'professor_id' => 1,
                 'code' => 'CSC 0313',
@@ -290,7 +274,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 3,
                 'professor_id' => 1,
                 'code' => 'CSC 0313.1',
@@ -307,7 +290,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 3,
                 'professor_id' => 1,
                 'code' => 'CSC 0312',
@@ -327,7 +309,6 @@ class Classes extends Seeder
 // -------------------------------------------
 
             [
-                'student_id' => 1,
                 'student_record_id' => 2,
                 'professor_id' => 1,
                 'code' => 'CSC 0314.1',
@@ -344,7 +325,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 2,
                 'professor_id' => 1,
                 'code' => 'CSC 0315.1',
@@ -361,7 +341,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 2,
                 'professor_id' => 1,
                 'code' => 'CSC 0311',
@@ -378,7 +357,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 2,
                 'professor_id' => 1,
                 'code' => 'CSC 0315',
@@ -395,7 +373,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 2,
                 'professor_id' => 1,
                 'code' => 'CSC 0312.1',
@@ -412,7 +389,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 2,
                 'professor_id' => 1,
                 'code' => 'CSC 0314',
@@ -429,7 +405,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 2,
                 'professor_id' => 1,
                 'code' => 'CSC 0313',
@@ -446,7 +421,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 2,
                 'professor_id' => 1,
                 'code' => 'CSC 0313.1',
@@ -463,7 +437,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 2,
                 'professor_id' => 1,
                 'code' => 'CSC 0312',
@@ -483,7 +456,6 @@ class Classes extends Seeder
             // -------------------------------------------
 
             [
-                'student_id' => 1,
                 'student_record_id' => 1,
                 'professor_id' => 1,
                 'code' => 'CSC 0314.1',
@@ -500,7 +472,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 1,
                 'professor_id' => 1,
                 'code' => 'CSC 0315.1',
@@ -517,7 +488,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 1,
                 'professor_id' => 1,
                 'code' => 'CSC 0311',
@@ -534,7 +504,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 1,
                 'professor_id' => 1,
                 'code' => 'CSC 0315',
@@ -551,7 +520,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 1,
                 'professor_id' => 1,
                 'code' => 'CSC 0312.1',
@@ -568,7 +536,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 1,
                 'professor_id' => 1,
                 'code' => 'CSC 0314',
@@ -585,7 +552,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 1,
                 'professor_id' => 1,
                 'code' => 'CSC 0313',
@@ -602,7 +568,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 1,
                 'professor_id' => 1,
                 'code' => 'CSC 0313.1',
@@ -619,7 +584,6 @@ class Classes extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 1,
                 'student_record_id' => 1,
                 'professor_id' => 1,
                 'code' => 'CSC 0312',

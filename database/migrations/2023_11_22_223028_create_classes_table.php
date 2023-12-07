@@ -14,7 +14,6 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('student_id');
             $table->unsignedInteger('student_record_id');
             $table->unsignedInteger('professor_id')->nullable();
             $table->string('code', 45)->nullable();
@@ -31,11 +30,6 @@ return new class extends Migration
 
             $table->foreign('professor_id')
                 ->references('id')->on('professors')
-                ->onDelete('NO ACTION')
-                ->onUpdate('NO ACTION');
-
-            $table->foreign('student_id')
-                ->references('id')->on('students')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
 
