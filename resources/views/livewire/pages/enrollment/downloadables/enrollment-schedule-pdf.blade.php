@@ -37,14 +37,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($record->grade as $grade)
+                @foreach ($record->classes as $class)
                     <tr class="text-sm border-b border-gray-200">
-                        <td class="px-4 py-3">{{ $grade->classes->code }}</td>
-                        <td class="px-4 py-3">{{ $grade->classes->section }}</td>
-                        <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $grade->classes->name }}</td>
-                        <td class="px-4 py-3 ">{{ $grade->classes->units }} </td>
-                        <td class="px-4 py-3">{{ $grade->classes->day }} {{ $grade->classes->start_time }} {{_("-")}} {{ $grade->classes->end_time }}</td>
-                        <td class="px-4 py-3"> {{ $grade->classes->building }} {{ $grade->classes->room }}</td>
+                        <td class="px-4 py-3">{{ $class->code }}</td>
+                        <td class="px-4 py-3">{{ $class->section }}</td>
+                        <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->name }}</td>
+                        <td class="px-4 py-3 ">{{ $class->units }} </td>
+                        <td class="px-4 py-3">{{ $class->day }} {{ $class->start_time }} {{_("-")}} {{ $class->end_time }}</td>
+                        <td class="px-4 py-3"> {{ $class->building }} {{ $class->room }}</td>
                     </tr>
                 @endforeach
             </tbody>

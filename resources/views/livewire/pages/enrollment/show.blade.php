@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Student;
 use App\Models\StudentRecord;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -55,7 +54,7 @@ new class extends Component {
                 <x-nav-link  href="{{ route('enrollmentSchedule') }}">
                     <x-primary-button class="mt-8 w-50">Download Schedule</x-primary-button>
                 </x-nav-link >
-                <livewire:enrollment.schedule/>
+                <livewire:pages.enrollment.schedule/>
                 <x-primary-button wire:click="next" class="mt-8 w-50">Next</x-primary-button>
             </div>
 
@@ -65,7 +64,7 @@ new class extends Component {
                 <x-nav-link  href="{{ route('enrollmentFee') }}">
                     <x-primary-button class="mt-8 w-50">Download Fees</x-primary-button>
                 </x-nav-link >
-                <livewire:enrollment.fee/>
+                <livewire:pages.enrollment.fee/>
                 <x-primary-button wire:click="next" class="mt-8 w-50">Next</x-primary-button>
                 <x-primary-button wire:click="back" class="mt-8 w-50">Back</x-primary-button>
             </div>
@@ -76,7 +75,7 @@ new class extends Component {
                 <x-nav-link  href="{{ route('enrollmentSER') }}">
                     <x-primary-button class="mt-8 w-50">Download SER</x-primary-button>
                 </x-nav-link >
-                <livewire:enrollment.ser/>
+                <livewire:pages.enrollment.ser/>
                 <x-primary-button wire:click="back" class="mt-8 w-50">Back</x-primary-button>
             </div>
         @endif

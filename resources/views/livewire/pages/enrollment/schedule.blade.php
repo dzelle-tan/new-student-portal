@@ -10,7 +10,6 @@ use Livewire\Volt\Component;
 new class extends Component {
 
     public StudentRecord $record;
-    public Collection $grades;
     public Student $user;
 
     /**
