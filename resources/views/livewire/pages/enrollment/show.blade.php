@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Grade;
 use App\Models\Student;
 use App\Models\StudentRecord;
 use Illuminate\Database\Eloquent\Collection;
@@ -12,11 +11,9 @@ use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
 
 new class extends Component {
+
     public $step = 1;
-    public $data;
     public StudentRecord $record;
-    public Collection $grades;
-    public Student $user;
 
     /**
      * Mount the component.
@@ -24,19 +21,11 @@ new class extends Component {
     public function mount(): void
     {
         $this->user = Auth::user();
-        $this->getStudentGrades();
-    }
 
-    public function getStudentGrades(): void
-    {
         $this->record = StudentRecord::where('student_id', $this->user->id)
-        ->latest()
-        ->first();
+                        ->latest()
+                        ->first();
 
-        $this->grades = Grade::where('student_id', $this->user->id)
-        ->where('student_record_id', $this->record->id)
-        ->with('classes')
-        ->get();
     }
 
     public function next()

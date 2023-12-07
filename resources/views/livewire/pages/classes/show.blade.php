@@ -1,23 +1,25 @@
 <?php
 
-use App\Models\Classes;
+use App\Models\StudentRecord;
 
 use Illuminate\Support\Collection;
 use Livewire\Volt\Component;
 
-// customize na dapat yung classes according dun sa latest enrolled term yung madidisplay
 new class extends Component {
 
-    public Collection $classes;
+    public StudentRecord $record;
     public $daysOfWeek;
 
     public function mount(): void
     {
         // Retrieve the authenticated user
-        $user = Auth::user();
+        $this->user = Auth::user();
 
-        // Fetch all classes associated with the authenticated student
-        $this->classes = Classes::where('student_id', $user->id)->get();
+        // Fetch all classes associated with the latest term of the authenticated student
+        $this->record = StudentRecord::where('student_id', $this->user->id)
+            ->with('classes')
+            ->orderBy('id', 'desc')
+            ->first();
 
         $this->daysOfWeek = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     }
@@ -33,15 +35,15 @@ new class extends Component {
             <div class="px-6 py-4 mb-1 text-sm font-medium tracking-wider uppercase border-b-2 text-table-header bg-gray-50">
                 {{ $dayName }}
             </div>
-            @foreach ($classes as $class)
+            @foreach ($record->classes as $class)
                 @if ($class->day == $dayName)
                     <div class="p-2 pt-1">
-                        <x-class-block 
-                            time="{{ $this->formatTime($class->start_time) }} - {{ $this->formatTime($class->end_time) }}"  
-                            code="{{ $class->code }}" 
-                            section="{{ $class->section }}" 
-                            subject="{{ $class->name }}" 
-                            room="{{ $class->room }}" 
+                        <x-class-block
+                            time="{{ $this->formatTime($class->start_time) }} - {{ $this->formatTime($class->end_time) }}"
+                            code="{{ $class->code }}"
+                            section="{{ $class->section }}"
+                            subject="{{ $class->name }}"
+                            room="{{ $class->room }}"
                             type="{{ $class->type }}"/>
                     </div>
                 @endif

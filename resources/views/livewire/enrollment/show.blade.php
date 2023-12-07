@@ -21,24 +21,15 @@ new class extends Component {
     /**
      * Mount the component.
      */
-    public function mount(): void
+     public function mount(): void
     {
         $this->user = Auth::user();
-        $this->getStudentGrades();
-    }
 
-    public function getStudentGrades(): void
-    {
         $this->record = StudentRecord::where('student_id', $this->user->id)
-        ->latest()
-        ->first();
+                        ->latest()
+                        ->first();
 
-        $this->grades = Grade::where('student_id', $this->user->id)
-        ->where('student_record_id', $this->record->id)
-        ->with('classes')
-        ->get();
     }
-
     public function next()
     {
         $this->step++;

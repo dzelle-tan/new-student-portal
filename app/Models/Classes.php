@@ -12,9 +12,9 @@ class Classes extends Model
 {
     use HasFactory;
 
-    public function grades(): HasOne
+    public function grade(): HasOne
     {
-        return $this->hasOne(Grade::class);
+        return $this->hasOne(Grade::class, 'class_id');
     }
 
     public function professor(): BelongsTo
@@ -32,7 +32,7 @@ class Classes extends Model
         return $this->hasOne(SfeStatus::class);
     }
 
-    public function student(): BelongsTo
+    public function studentRecord(): BelongsTo
     {
         return $this->belongsTo(Student::class);
     }

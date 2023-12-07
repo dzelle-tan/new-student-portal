@@ -16,9 +16,9 @@ class StudentRecord extends Model
         'status',
     ];
 
-    public function grade(): HasMany
+    public function classes(): HasMany
     {
-        return $this->hasMany(Grade::class);
+        return $this->hasMany(Classes::class);
     }
 
     public function fee(): HasOne
