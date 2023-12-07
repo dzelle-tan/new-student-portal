@@ -98,7 +98,7 @@ class SfeAnswer extends Seeder
             'professor_id' => 1,
             'class_id' => 1,
             'sfe_question' => 5,
-            'answer' => '2 time',
+            'answer' => '2 times',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
