@@ -11,17 +11,16 @@ class EnrollmentDownloadsController extends Controller
     public $user;
     public $fee;
     public $record;
-    public $grades;
 
     public function downloadSchedule()
     {
         $this->user = Auth::user();
         $this->record = StudentRecord::where('student_id', $this->user->id)
-            ->with('grade', 'grade.classes')
+            ->with('classes')
             ->latest()
             ->first();
 
-        $pdf = Pdf::loadView('livewire.enrollment.downloadables.enrollment-schedule-pdf', [
+        $pdf = Pdf::loadView('livewire.pages.enrollment.downloadables.enrollment-schedule-pdf', [
             'user' => $this->user,
             'record' => $this->record
         ]);
@@ -37,7 +36,7 @@ class EnrollmentDownloadsController extends Controller
             ->latest()
             ->first();
 
-        $pdf = Pdf::loadView('livewire.enrollment.downloadables.enrollment-fee-pdf', ['record' => $this->record]);
+        $pdf = Pdf::loadView('livewire.pages.enrollment.downloadables.enrollment-fee-pdf', ['record' => $this->record]);
         return $pdf->download('fee-pdf.pdf');
         // return $pdf->stream();
     }
@@ -47,11 +46,11 @@ class EnrollmentDownloadsController extends Controller
     {
         $this->user = Auth::user();
         $this->record = StudentRecord::where('student_id', $this->user->id)
-            ->with('fee','grade', 'grade.classes')
+            ->with('fee', 'classes')
             ->latest()
             ->first();
 
-        $pdf = Pdf::loadView('livewire.enrollment.downloadables.enrollment-SER-pdf', [
+        $pdf = Pdf::loadView('livewire.pages.enrollment.downloadables.enrollment-SER-pdf', [
             'user' => $this->user,
             'record' => $this->record
         ]);

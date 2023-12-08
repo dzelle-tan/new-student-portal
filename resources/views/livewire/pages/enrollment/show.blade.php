@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Grade;
-use App\Models\Student;
 use App\Models\StudentRecord;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -12,11 +10,9 @@ use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
 
 new class extends Component {
+
     public $step = 1;
-    public $data;
     public StudentRecord $record;
-    public Collection $grades;
-    public Student $user;
 
     /**
      * Mount the component.
@@ -24,19 +20,11 @@ new class extends Component {
     public function mount(): void
     {
         $this->user = Auth::user();
-        $this->getStudentGrades();
-    }
 
-    public function getStudentGrades(): void
-    {
         $this->record = StudentRecord::where('student_id', $this->user->id)
-        ->latest()
-        ->first();
+                        ->latest()
+                        ->first();
 
-        $this->grades = Grade::where('student_id', $this->user->id)
-        ->where('student_record_id', $this->record->id)
-        ->with('classes')
-        ->get();
     }
 
     public function next()
@@ -66,7 +54,7 @@ new class extends Component {
                 <x-nav-link  href="{{ route('enrollmentSchedule') }}">
                     <x-primary-button class="mt-8 w-50">Download Schedule</x-primary-button>
                 </x-nav-link >
-                <livewire:enrollment.schedule/>
+                <livewire:pages.enrollment.schedule/>
                 <x-primary-button wire:click="next" class="mt-8 w-50">Next</x-primary-button>
             </div>
 
@@ -76,7 +64,7 @@ new class extends Component {
                 <x-nav-link  href="{{ route('enrollmentFee') }}">
                     <x-primary-button class="mt-8 w-50">Download Fees</x-primary-button>
                 </x-nav-link >
-                <livewire:enrollment.fee/>
+                <livewire:pages.enrollment.fee/>
                 <x-primary-button wire:click="next" class="mt-8 w-50">Next</x-primary-button>
                 <x-primary-button wire:click="back" class="mt-8 w-50">Back</x-primary-button>
             </div>
@@ -87,7 +75,7 @@ new class extends Component {
                 <x-nav-link  href="{{ route('enrollmentSER') }}">
                     <x-primary-button class="mt-8 w-50">Download SER</x-primary-button>
                 </x-nav-link >
-                <livewire:enrollment.ser/>
+                <livewire:pages.enrollment.ser/>
                 <x-primary-button wire:click="back" class="mt-8 w-50">Back</x-primary-button>
             </div>
         @endif

@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('student_id');
+            $table->unsignedInteger('student_record_id');
             $table->unsignedInteger('professor_id')->nullable();
             $table->string('code', 45)->nullable();
             $table->integer('section')->nullable();
@@ -33,8 +33,8 @@ return new class extends Migration
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
 
-            $table->foreign('student_id')
-                ->references('id')->on('students')
+            $table->foreign('student_record_id')
+                ->references('id')->on('student_records')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
         });

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Database\Seeders\SfeAnswer;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -36,16 +35,6 @@ class Student extends Authenticatable implements MustVerifyEmail
         'student_no' => 'integer',
     ];
 
-    public function classes(): HasMany
-    {
-        return $this->hasMany(Classes::class, 'class_id');
-    }
-
-    public function grades(): HasMany
-    {
-        return $this->hasMany(Grade::class);
-    }
-
     public function sfeAnswers(): HasMany
     {
         return $this->hasMany(SfeAnswer::class);
@@ -71,8 +60,4 @@ class Student extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(studentViolation::class);
     }
 
-    public function chirps(): HasMany
-    {
-        return $this->hasMany(Chirp::class);
-    }
 }

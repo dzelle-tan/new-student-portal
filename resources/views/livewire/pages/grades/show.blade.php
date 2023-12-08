@@ -1,45 +1,35 @@
 <?php
-use App\Models\Grade;
+
 use App\Models\Student;
 use App\Models\StudentRecord;
+
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
 
 
 new class extends Component
 {
     public $selectedTerm = "All";
+    public $totalUnits = 0;
     public Collection $terms;
-    public Collection $grades;
     public Student $user;
 
-    /**
-     * Mount the component.
-     */
     public function mount(): void
     {
         $this->user = Auth::user();
         $this->getAcademicYear();
     }
 
-    public function getStudentGrades(): void
-    {
-        $this->grades = Grade::where('student_id', $this->user->id)
-        ->with('classes')
-        ->get();
-    }
-
-
+    // Fetches the authenticated user's associated grades and academic year
     public function getAcademicYear(): void
     {
-        $this->getStudentGrades();
         $this->terms = StudentRecord::where('student_id', $this->user->id)
-        ->get();
+                        ->with('classes', 'classes.grade')
+                        ->get();
     }
 
+    // Extracts user input from dropdown
     public function updateSelectedTerm($value): void
     {
         $this->selectedTerm = $value;
@@ -49,7 +39,7 @@ new class extends Component
 <div class="space-y-3">
     <div class="p-4 pt-3 bg-white shadow sm:p-8 sm:pt-6 sm:rounded-md">
         <img src="{{ asset('images/plm-logo-with-header.png') }}" alt="PLM logo" class="h-16">
-        
+
         {{-- Student Information --}}
         <div class="mt-6 lg:items-center lg:w-5/6 xl:2/3 lg:flex lg:justify-between">
             <div>
@@ -60,7 +50,7 @@ new class extends Component
                 <div>
                     <x-info-label class="w-28">{{_("Name:")}}</x-info-label>
                     <span>{{ $user->first_name }} {{ $user->middle_name }} {{ $user->last_name }}</span>
-                </div>           
+                </div>
             </div>
             <div>
                 <div>
@@ -75,21 +65,14 @@ new class extends Component
                             <option value = "{{ $term->id }}">{{ $term->school_year }}-{{ $term->semester }}</option>
                         @endforeach
                     </select>
-                </div>             
+                </div>
             </div>
         </div>
 
         {{-- Grades --}}
-        @php
-            $groupedGrades = $grades->groupBy('student_record_id');
-            $totalUnits = 0;
-        @endphp
-        @foreach ($groupedGrades as $termId => $grades)
-            @if ($selectedTerm == 'All' || $termId == $selectedTerm)
-                @php
-                    $termDetails = collect($terms)->firstWhere('id', $termId);
-                @endphp
-                <h2 class="mt-8">{{ $termDetails->school_year }}, Term {{ $termDetails->semester }}</h2> 
+        @foreach ($terms as $term)
+            @if ($selectedTerm == 'All' || $term->id == $selectedTerm)
+                <h2 class="mt-8">{{ $term->school_year }}, Term {{ $term->semester }}</h2>
                 <div class="w-full mt-4 overflow-x-auto">
                     <table class="w-full text-left whitespace-nowrap">
                         <thead>
@@ -104,18 +87,18 @@ new class extends Component
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($grades as $grade)
+                            @foreach ($term->classes as $class)
                                 <tr class="text-sm border-b border-gray-200">
-                                    <td class="px-4 py-3">{{ $grade->classes->code }}</td>
-                                    <td class="px-4 py-3">{{ $grade->classes->section }}</td>
-                                    <td class="px-4 py-3">{{ $grade->classes->units }}</td>
-                                    <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $grade->classes->name }}</td>
-                                    <td class="px-4 py-3">{{ $grade->grade }}</td>
-                                    <td class="px-4 py-3">{{ $grade->completion_grade }}</td>
-                                    <td class="px-4 py-3">{{ $grade->remarks }}</td>
+                                    <td class="px-4 py-3">{{ $class->code }}</td>
+                                    <td class="px-4 py-3">{{ $class->section }}</td>
+                                    <td class="px-4 py-3">{{ $class->units }}</td>
+                                    <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->name }}</td>
+                                    <td class="px-4 py-3">{{ $class->grade->grade }}</td>
+                                    <td class="px-4 py-3">{{ $class->grade->completion_grade }}</td>
+                                    <td class="px-4 py-3">{{ $class->grade->remarks }}</td>
                                 </tr>
                                 @php
-                                    $totalUnits += $grade->classes->units;
+                                    $totalUnits += $class->units;
                                 @endphp
                             @endforeach
                         </tbody>
@@ -130,6 +113,5 @@ new class extends Component
                 @endphp
             @endif
         @endforeach
-        </div>
     </div>
 </div>
