@@ -42,8 +42,6 @@ new #[Layout('layouts.guest')] class extends Component
                 name="student_no"
                 placeholder="xxxxxxxxx"
                 required autofocus autocomplete="username" />
-
-            <x-input-error :messages="$errors->get('student_no')" class="mt-2" />
         </div>
 
         <!-- Password -->
@@ -62,9 +60,9 @@ new #[Layout('layouts.guest')] class extends Component
                             name="password"
                             placeholder="••••••••"
                             required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
+        <x-input-error :messages="$errors->get('student_no')" class="mt-2" />
+        <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
         <!-- Remember Me -->
         {{-- <div class="block mt-4">
