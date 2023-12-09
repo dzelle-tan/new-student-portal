@@ -4,6 +4,9 @@ use App\Livewire\Actions\Logout;
 use App\Livewire\Forms\LogoutForm;
 use Livewire\Volt\Component;
 
+//to be removed when 2FA is fixed
+use Illuminate\Support\Facades\Auth;
+
 new class extends Component
 {
     /**
@@ -11,9 +14,20 @@ new class extends Component
      */
     public function logout(Logout $logout): void
     {
+        
+//----- to be removed in the future kapag naayos na 2FA -----
+        
+        // Get the currently authenticated user
+        $user = Auth::user();
+
+        // Set email_verified_at to null and save the user
+        $user->email_verified_at = null;
+        $user->save();
+//-------------------------------------------------
+
         $logout();
 
-        $this->redirect('/', navigate: true);
+        $this->redirect('/login', navigate: true);
     }
 }; ?>
 

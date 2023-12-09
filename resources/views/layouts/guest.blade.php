@@ -19,11 +19,9 @@
             <div class="flex items-center justify-center w-full h-screen backdrop-brightness-75 bg-black/60">
                 <div class="w-full h-screen px-6 py-4 overflow-hidden bg-white shadow-md sm:mt-6 sm:max-w-md sm:rounded-lg sm:h-auto">
                     <div>
-                        <a href="/" wire:navigate>
-                            <img src="{{ asset('images/plm-logo-with-header.png') }}" alt="PLM logo" class="h-16">
-                        </a>
+                        <img src="{{ asset('images/plm-logo-with-header.png') }}" alt="PLM logo" class="h-16">
                     </div>
-                    <h1 class="mt-8 text-3xl font-bold text-primary">PLM Student Portal</h1>
+                    <h1 class="mt-4 text-3xl font-bold text-primary">PLM Student Portal</h1>
                     {{ $slot }}
                     <p class="mt-12">For more inquiries or concerns, please email <a href="mailto:ithelp@plm.edu.ph" class="text-primary">ithelp@plm.edu.ph</a>.</p>
                 </div>       
