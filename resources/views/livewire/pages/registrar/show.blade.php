@@ -17,7 +17,7 @@ new class extends Component
     public $total = 0;
     public $total_steps = 3;
     public $inputs;
-    public $current_step = 1;
+    public $step = 1;
     public $selectedDocument;
     public Collection $documentsInfo;
     public $selectedTerm = "";
@@ -58,7 +58,7 @@ new class extends Component
 
         $this->validateForm();
 
-        if ($this->current_step+1 == 2)
+        if ($this->step+1 == 2)
         {
 
             $total = 0;
@@ -75,17 +75,17 @@ new class extends Component
             $this->total = $total;
         }
 
-        if ($this->current_step < $this->total_steps)
+        if ($this->step < $this->total_steps)
         {
-            $this->current_step ++;
+            $this->step ++;
         }
     }
 
     public function decrementStep()
     {
-        if ($this->current_step > 1)
+        if ($this->step > 1)
         {
-            $this->current_step --;
+            $this->step --;
         }
 
     }
@@ -112,14 +112,14 @@ new class extends Component
             ]);
         }
 
-        $this->current_step ++;
+        $this->step ++;
         $this->js("alert('request saved')");
     }
 
 
     public function validateForm()
     {
-        if($this->current_step == 1)
+        if($this->step == 1)
         {
             $this->validate([
                 'purpose' => 'required',
@@ -134,7 +134,7 @@ new class extends Component
                 'inputs.*.no_of_copies.min'=>'The Number of Copies field must be at least 1',
             ]);
         }
-        elseif($this->current_step == 2)
+        elseif($this->step == 2)
         {
             $this->validate([
                 'mode'=>'required',
@@ -158,10 +158,10 @@ new class extends Component
 
 <div>
     {{-- Page/Step Indicator --}}
-    <x-progress-bar :step="$current_step" :descriptions="['Request Form', 'Payment', 'Request Sent!']"/>
+    <x-progress-bar :step="$step" :descriptions="['Request Form', 'Payment', 'Request Sent!']"/>
     {{-- Main Content --}}
     <div class="p-10 overflow-hidden text-gray-900 bg-white shadow-sm sm:rounded-lg min-h-[38rem]">
-        @if($current_step == 1)
+        @if($step == 1)
             <div class="flex justify-between">
                 <div>
                     <h2 class="mb-6 text-xl font-medium ml-9">Request Form</h2> 
@@ -226,7 +226,7 @@ new class extends Component
                     </a>
                 </div>
             </div>
-        @elseif($current_step == 2)
+        @elseif($step == 2)
             <div class="ml-9 w-[37.4rem]">
                 <h2 class="text-xl font-medium">Payment</h2>
                 <div class="w-full p-2 px-4 mt-4 overflow-x-auto border border-gray-200 rounded shadow">
@@ -300,7 +300,7 @@ new class extends Component
                 </form>
                 <x-input-error :messages="$errors->get('file')" class="mt-2" />
                 <div class="flex justify-between mt-4">
-                    @if($current_step > 1 and $current_step < $total_steps)
+                    @if($step > 1 and $step < $total_steps)
                     <div>
                         <x-primary-button wire:click="decrementStep" class="w-20 mt-8">Back</x-primary-button>
                     </div>
@@ -308,7 +308,7 @@ new class extends Component
                     <x-primary-button wire:click="save" class="w-20 mt-8">Save</x-primary-button>
                 </div>
             </div>
-        @elseif($current_step == 3)
+        @elseif($step == 3)
             <div class="w-[38rem] ml-9">
                 <h2 class="flex items-center text-2xl font-medium text-gray-800">
                     {{__("Request Sent!")}}
@@ -326,7 +326,7 @@ new class extends Component
             </div>
         @endif
     </div>
-    {{-- @if($current_step > 1 and $current_step < $total_steps)
+    {{-- @if($step > 1 and $step < $total_steps)
         <div class="ml-9">
             <x-primary-button wire:click="decrementStep" class="w-20 mt-8">Back</x-primary-button>
         </div>
