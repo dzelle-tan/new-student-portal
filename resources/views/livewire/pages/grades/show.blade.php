@@ -44,21 +44,21 @@ new class extends Component
         <div class="mt-6 lg:items-center lg:w-5/6 xl:2/3 lg:flex lg:justify-between">
             <div>
                 <div>
-                    <x-info-label class="w-28">{{_("Student No:")}}</x-info-label>
-                    <span>{{ $user->student_no }}</span>3
+                    <x-info-label class="w-24">{{_("Student No:")}}</x-info-label>
+                    <span>{{ $user->student_no }}</span>
                 </div>
                 <div>
-                    <x-info-label class="w-28">{{_("Name:")}}</x-info-label>
+                    <x-info-label class="w-24">{{_("Name:")}}</x-info-label>
                     <span>{{ $user->first_name }} {{ $user->middle_name }} {{ $user->last_name }}</span>
                 </div>
             </div>
             <div>
                 <div>
-                    <x-info-label class="w-28">{{_("Program:")}}</x-info-label>
+                    <x-info-label class="w-24">{{_("Program:")}}</x-info-label>
                     <span>{{ $user->degree_program }}</span>
                 </div>
                 <div>
-                    <x-info-label class="w-28">{{_("A.Y-Term:")}}</x-info-label>
+                    <x-info-label class="w-24">{{_("A.Y-Term:")}}</x-info-label>
                     <select class="px-2 py-0 border-gray-300 rounded-md w-36 form-control" wire:change="updateSelectedTerm($event.target.value)">
                         <option value = "All">All</option>
                         @foreach ($terms as $term)
