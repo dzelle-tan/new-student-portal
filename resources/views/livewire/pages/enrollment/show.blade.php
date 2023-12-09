@@ -39,6 +39,9 @@ new class extends Component {
 }; ?>
 
 <div>
+    {{-- Page/Step Indicator --}}
+    <x-progress-bar :step="$step" :descriptions="['Class Schedule', 'Assessment', 'Download SER']"/>
+    
     <div class="p-4 pt-3 bg-white sm:p-8 sm:pt-6 sm:rounded-md">
         <img src="{{ asset('images/plm-logo-with-header.png') }}" alt="PLM logo" class="h-16">
 
