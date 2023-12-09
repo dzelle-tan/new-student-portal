@@ -56,7 +56,7 @@ class EnrollmentDownloadsController extends Controller
         ]);
 
         $this->record->update([
-            'status' => 'enrolled'
+            'status' => 'Enrolled'
         ]);
         return $pdf->download('SER-pdf.pdf');
 
