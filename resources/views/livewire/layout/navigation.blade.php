@@ -209,7 +209,7 @@ new class extends Component
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
                 <div class="text-base font-medium text-gray-800" x-data="{ name: '{{ auth()->user()->student_no }}' }" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
-                <div class="text-sm font-medium text-gray-500">{{ auth()->user()->email }}</div>
+                <div class="text-sm font-medium text-gray-500">{{ auth()->user()->plm_email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">

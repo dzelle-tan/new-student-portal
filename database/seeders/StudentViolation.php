@@ -31,14 +31,14 @@ class StudentViolation extends Seeder
             [
                 'student_id' => 1,
                 'violation' => 'Loitering and/or making noise within the University premises.',
-                'violation_date' => '2023-11-10',
+                'violation_date' => '2023-12-11',
                 'count' => '1st Offense',
                 'offense_type' => 'Light Offense',
                 'type' => '1',
                 'resolution' => '5 hours Community Service',
                 'resolution_remarks' => 'Go to the OSDS Office',
-                'resolution_date' => '2022-11-13',
-                'status' => 'Closed',
+                'resolution_date' => '2023-12-15',
+                'status' => 'In Progress',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
