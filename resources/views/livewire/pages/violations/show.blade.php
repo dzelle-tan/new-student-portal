@@ -25,7 +25,7 @@ new class extends Component {
                 'count' => '',
                 'remarks' => '',
                 'resolution' => '',
-                'sm_no' => '',
+                'type' => '',
                 'status' => '',
             ],
         ]);
@@ -49,7 +49,7 @@ new class extends Component {
                     'count' => $violation->count,
                     'remarks' => $violation->resolution_remarks,
                     'resolution' => $violation->resolution,
-                    'sm_no' => $violation->sm_reference,
+                    'type' => $violation->type,
                     'status' => $violation->status,
                 ]);
 
@@ -75,11 +75,11 @@ new class extends Component {
                     <table class="w-full text-left whitespace-nowrap">
                         <thead>
                             <tr class="text-xs tracking-wider uppercase border-b border-gray-200 text-table-header bg-gray-50">
-                                <th class="px-4 py-3 font-medium">SM No.</th>
+                                <th class="px-4 py-3 font-medium">Type</th>
                                 <th class="px-4 py-3 font-medium">Violation</th>
                                 <th class="px-4 py-3 font-medium">Date</th>
                                 <th class="px-4 py-3 font-medium">Count</th>
-                                <th class="px-4 py-3 font-medium">Remarks</th>
+                                {{-- <th class="px-4 py-3 font-medium">Remarks</th> --}}
                                 <th class="px-4 py-3 font-medium">Resolution</th>
                                 <th class="px-4 py-3 font-medium">Status</th>
                             </tr>
@@ -87,11 +87,11 @@ new class extends Component {
                         <tbody>
                             @foreach ($offenses as $offense)
                                 <tr class="text-sm border-b border-gray-200">
-                                    <td class="px-4 py-3">{{ $offense['sm_no'] }}</td>
+                                    <td class="px-4 py-3">{{ $offense['type'] }}</td>
                                     <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $offense['violation'] }}</td>
                                     <td class="px-4 py-3">{{ $offense['date'] }}</td>
                                     <td class="px-4 py-3">{{ $offense['count'] }}</td>
-                                    <td class="px-4 py-3">{{ $offense['remarks'] }}</td>
+                                    {{-- <td class="px-4 py-3">{{ $offense['remarks'] }}</td> --}}
                                     <td class="px-4 py-3">{{ $offense['resolution'] }}</td>
                                     <td class="px-4 py-3 {{ $statusColors[$offense['status']] ?? 'text-gray-500' }}">{{ $offense['status'] }}</td>
                                 </tr>

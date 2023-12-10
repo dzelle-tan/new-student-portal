@@ -16,8 +16,9 @@ return new class extends Migration
             $table->unsignedInteger('student_id');
             $table->string('violation', 255)->nullable();
             $table->date('violation_date')->nullable();
+            $table->string('count', 45)->nullable();
             $table->string('offense_type', 45)->nullable();
-            $table->string('sm_reference', 45)->nullable();
+            $table->string('type', 45)->nullable();
             $table->string('resolution', 45)->nullable();
             $table->text('resolution_remarks')->nullable();
             $table->date('resolution_date')->nullable();
