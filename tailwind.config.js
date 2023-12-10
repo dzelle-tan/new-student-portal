@@ -17,6 +17,9 @@ export default {
             // fontFamily: {
             //     sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             // },
+            fontSize: {
+                'xxs': '0.6rem'
+            },
             backgroundImage: {
                 'login': "url('/images/login-bg.svg')",
             },

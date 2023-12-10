@@ -60,7 +60,7 @@ new class extends Component {
                 </tr>
                 <tr class="text-sm border-b border-gray-200">
                     <td class="px-4 py-3">{{ __("Student Welfare Fee") }}</td>
-                    <td class="px-4 py-3">{{ $record->fee->admission_fee }}</td>
+                    <td class="px-4 py-3">74.00</td>
                 </tr>
             </tbody>
         </table>

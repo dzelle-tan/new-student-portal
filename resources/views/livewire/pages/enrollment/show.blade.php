@@ -92,12 +92,18 @@ new class extends Component {
         {{-- Enrollment Step 3 --}}
         @elseif($step == 3)
             <div class="lg:py-2 lg:px-4">
-                <a href="{{ route('enrollmentSER') }}" class="flex items-center py-2 text-gray-500 rounded-md hover:border-secondary w-[10rem] justify-center border-gray-400 border hover:text-secondary">
-                    <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
-                    Download
-                </a>
+                <div class="flex items-center justify-between mb-10">
+                    <h2 class="text-2xl font-semibold text-gray-700">Download SER</h2>
+                    <a href="{{ route('enrollmentSER') }}" class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary">
+                        <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
+                        Download
+                    </a>
+                </div>
                 <livewire:pages.enrollment.ser/>
-                <x-primary-button wire:click="back" class="mt-8 w-50">Back</x-primary-button>
+                <button wire:click="back" class="flex items-center mt-12 font-medium underline transition-all duration-100 text-md w-50 text-primary hover:text-secondary hover:scale-110">
+                    <x-icon name="arrow-long-left" class="w-5 h-5 mr-2"/>
+                    Back
+                </button>
             </div>
         @endif
     </div>
