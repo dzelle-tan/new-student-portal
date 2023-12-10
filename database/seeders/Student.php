@@ -26,7 +26,7 @@ class Student extends Seeder
             'civil_status' => 'Single',
             'citizenship' => 'Filipino',
             'student_type' => 'Undergraduate',
-            'registration_status' => 'Enrolled',
+            'registration_status' => 'Regular',
             'college' => 'College of Engineering',
             'program_code' => 'BSCS',
             'degree_program' => 'Bachelor of Science in Computer Science',
