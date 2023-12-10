@@ -15,7 +15,8 @@ new class extends Component {
 
         $this->record = StudentRecord::where('student_id', $this->user->id)
             ->with('fee', 'classes')
-            ->latest()
+            ->orderBy('school_year', 'desc')
+            ->orderBy('semester', 'desc')
             ->first();
     }
 }; ?>
@@ -112,7 +113,7 @@ new class extends Component {
             </table>
             <div class="flex justify-between pt-2 text-sm">
                 <p>Remarks: This enrollment becomes official until all requirements are complied with.</p>
-                <p class="pr-8">Total Units: 20</p>
+                <p class="pr-8">Total Units: 15</p>
             </div>
         </div>
         <div class="flex flex-col justify-between flex-grow border text-xxs">
