@@ -17,9 +17,9 @@ new class extends Component {
         $this->studentRequests = StudentRequest::where('student_id', $this->user->id)
                                 ->with('documents')
                                 ->get();
-                                // dd($this->studentRequests->document->document_name);
 
         $this->modalData = $this->studentRequests->first();
+
         $this->statusColors = [
             'Released' => 'text-green-700',
             'Pending' => 'text-yellow-600',
@@ -30,13 +30,13 @@ new class extends Component {
     public function showRequestInfo($requestId)
     {
         $this->modalData = StudentRequest::find($requestId);
-        // dd($this->modalData);
         $this->dispatch('open-modal', name : 'request_info');
 }
 }; ?>
 
 <div class="space-y-3">
     <div class="p-6 overflow-hidden bg-white shadow-sm sm:rounded-lg">
+
         <table class="w-full text-left whitespace-nowrap">
             <thead>
                 <tr class="text-xs tracking-wider uppercase border-b border-gray-200 text-table-header bg-gray-50">
@@ -139,6 +139,5 @@ new class extends Component {
                 </x-slot>
             </x-pop-up>
         </div>
-
     </div>
 </div>
