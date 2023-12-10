@@ -171,12 +171,12 @@ new class extends Component
                                 <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
                                 Download
                             </a>
-                            <button class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary" x-data x-on:click="$dispatch('open-modal')">
+                            <button class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary" x-data x-on:click="$dispatch('open-modal', {name : 'TOF'})">
                                 <x-icon name="table-cells" class="w-5 h-5 mr-2"/>
                                 Table of Fees
                             </button>
                         </div>
-                        
+
                     </div>
                     <label class="ml-9">Request For</label>
                     @foreach($inputs as $key=>$value)
@@ -195,7 +195,7 @@ new class extends Component
                                         <option value = "{{ $document->id }}">{{ $document->document }}</option>
                                     @endforeach
                                 </select>
-                                
+
                                 <x-input-error :messages="$errors->get('inputs.'.$key.'.document_info_id')" class="{{ $loop->first ? 'ml-9' : '' }}" />
                             </div>
                             <div>
@@ -213,7 +213,7 @@ new class extends Component
                     <div class="flex flex-col mt-2 ml-9">
                         <label class="mt-8" for="purpose">Purpose of Request</label>
                         <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400 h-40"></textarea>
-                        <x-input-error :messages="$errors->get('purpose')" class="" />                     
+                        <x-input-error :messages="$errors->get('purpose')" class="" />
                     </div>
                     <div class="flex justify-end w-[39.5rem] mt-12">
                         <button wire:key="increment-button" wire:click="incrementStep" class="flex items-center mt-8 font-medium underline transition-all duration-100 text-md w-50 text-primary hover:text-secondary hover:scale-110">
