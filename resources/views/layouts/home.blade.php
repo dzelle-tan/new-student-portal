@@ -11,8 +11,9 @@
                 <livewire:pages.home.calendar />
             </div>
         </div>
-        <div class="flex flex-col col-span-1 p-4 bg-white shadow md:col-span-1 lg:row-span-2 sm:p-8 sm:rounded-md">
+        <div class="flex flex-col justify-between col-span-1 p-4 bg-white shadow md:col-span-1 lg:row-span-2 sm:p-8 sm:rounded-md">
             <livewire:pages.home.schedule />
+            <a href="{{ route('classes') }}" class="flex justify-end text-gray-500 underline">See more...</a>
         </div>
         <div class="flex flex-col col-span-1 p-4 bg-white shadow md:col-span-1 lg:row-span-1 sm:p-8 sm:rounded-md">
             <livewire:pages.home.quote />

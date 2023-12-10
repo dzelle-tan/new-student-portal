@@ -77,7 +77,7 @@ new class extends Component {
                         <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->name }}</td>
                         <td class="px-4 py-3 ">{{ $class->units }} </td>
                         <td class="px-4 py-3">{{ $class->day }} {{ $class->start_time }} {{_("-")}} {{ $class->end_time }}</td>
-                        <td class="px-4 py-3"> {{ $class->building }} {{ $class->room }}</td>
+                        <td class="px-4 py-3">{{ $class->room }}</td>
                     </tr>
                 @endforeach
             </tbody>
