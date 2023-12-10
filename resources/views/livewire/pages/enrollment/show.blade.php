@@ -42,41 +42,56 @@ new class extends Component {
     {{-- Page/Step Indicator --}}
     <x-progress-bar :step="$step" :descriptions="['Class Schedule', 'Assessment', 'Download SER']"/>
     
-    <div class="p-4 pt-3 bg-white sm:p-8 sm:pt-6 sm:rounded-md">
+    <div class="p-4 pt-4 bg-white sm:p-8 sm:pt-6 sm:rounded-md">
 
         {{-- Enrollment Step 1 --}}
         @if($step == 1)
-            <div>
+            <div class="lg:py-2 lg:px-4">
                 {{-- <x-nav-link  href="{{ route('enrollmentSchedule') }}">
                     <button class="mt-8 w-50">Download Schedule</button>
                 </x-nav-link > --}}
-                <a href="{{ route('enrollmentSchedule') }}" class="flex items-center py-2 text-gray-500 rounded-md hover:border-secondary w-[10rem] justify-center border-gray-400 border hover:text-secondary">
-                    <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
-                    Download
-                </a>
+                <div class="flex items-center mb-8 space-x-4">
+                    <h2 class="text-2xl font-semibold text-gray-700">Class Schedule</h2>
+                    <a href="{{ route('enrollmentSchedule') }}" class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary">
+                        <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
+                        Download
+                    </a>
+                </div>
                 <livewire:pages.enrollment.schedule/>
                 <div class="flex justify-end">
-                    <x-primary-button wire:click="next" class="mt-8 w-50">Next</x-primary-button>
+                    <button wire:click="next" class="flex items-center mt-8 font-medium underline transition-all duration-100 text-md w-50 text-primary hover:text-secondary hover:scale-110">
+                        Next
+                        <x-icon name="arrow-long-right" class="w-5 h-5 ml-2"/>
+                    </button>
                 </div>
             </div>
 
         {{-- Enrollment Step 2 --}}
         @elseif($step == 2)
-            <div>
-                <a href="{{ route('enrollmentFee') }}" class="flex items-center py-2 text-gray-500 rounded-md hover:border-secondary w-[10rem] justify-center border-gray-400 border hover:text-secondary">
-                    <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
-                    Download
-                </a>
+            <div class="lg:py-2 lg:px-4">
+                <div class="flex items-center mb-8 space-x-4">
+                    <h2 class="text-2xl font-semibold text-gray-700">Assessment</h2>
+                    <a href="{{ route('enrollmentFee') }}" class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary">
+                        <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
+                        Download
+                    </a>
+                </div>
                 <livewire:pages.enrollment.fee/>
-                <div class="flex justify-between">
-                    <x-primary-button wire:click="back" class="mt-8 w-50">Back</x-primary-button>
-                    <x-primary-button wire:click="next" class="mt-8 w-50">Next</x-primary-button>
+                <div class="flex justify-between mt-12">
+                    <button wire:click="back" class="flex items-center font-medium underline transition-all duration-100 text-md w-50 text-primary hover:text-secondary hover:scale-110">
+                        <x-icon name="arrow-long-left" class="w-5 h-5 mr-2"/>
+                        Back
+                    </button>
+                    <button wire:click="next" class="flex items-center font-medium underline transition-all duration-100 text-md w-50 text-primary hover:text-secondary hover:scale-110">
+                        Next
+                        <x-icon name="arrow-long-right" class="w-5 h-5 ml-2"/>
+                    </button>
                 </div>
             </div>
 
         {{-- Enrollment Step 3 --}}
         @elseif($step == 3)
-            <div>
+            <div class="lg:py-2 lg:px-4">
                 <a href="{{ route('enrollmentSER') }}" class="flex items-center py-2 text-gray-500 rounded-md hover:border-secondary w-[10rem] justify-center border-gray-400 border hover:text-secondary">
                     <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
                     Download
