@@ -113,7 +113,7 @@ new class extends Component
         }
 
         $this->step ++;
-        $this->js("alert('request saved')");
+        // $this->js("alert('Request Sent!')");
     }
 
 
@@ -160,11 +160,24 @@ new class extends Component
     {{-- Page/Step Indicator --}}
     <x-progress-bar :step="$step" :descriptions="['Request Form', 'Payment', 'Request Sent!']"/>
     {{-- Main Content --}}
-    <div class="p-10 overflow-hidden text-gray-900 bg-white shadow-sm sm:rounded-lg min-h-[38rem]">
+    <div class="p-10 overflow-hidden text-gray-900 bg-white shadow-sm sm:rounded-lg min-h-[38rem] flex justify-center">
         @if($step == 1)
-            <div class="flex justify-between">
+            <div class="w-[40rem] -ml-9">
                 <div>
-                    <h2 class="mb-6 text-xl font-medium ml-9">Request Form</h2> 
+                    <div class="flex items-start justify-between mb-10">
+                        <h2 class="text-2xl font-semibold text-gray-700 pl-9">Request Form</h2>
+                        <div class="flex space-x-2">
+                            <a href="{{ asset('files/OUR-Request-Form.pdf') }}" download class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary">
+                                <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
+                                Download
+                            </a>
+                            <button class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary" x-data x-on:click="$dispatch('open-modal')">
+                                <x-icon name="table-cells" class="w-5 h-5 mr-2"/>
+                                Table of Fees
+                            </button>
+                        </div>
+                        
+                    </div>
                     <label class="ml-9">Request For</label>
                     @foreach($inputs as $key=>$value)
                         <div class="flex">
@@ -199,11 +212,14 @@ new class extends Component
                     </div>
                     <div class="flex flex-col mt-2 ml-9">
                         <label class="mt-8" for="purpose">Purpose of Request</label>
-                        <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400 h-48"></textarea>
+                        <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400 h-40"></textarea>
                         <x-input-error :messages="$errors->get('purpose')" class="" />                     
                     </div>
-                    <div class="flex justify-end w-[39.5rem] mt-8">
-                        <x-primary-button wire:key="increment-button" wire:click="incrementStep" class="w-20 mt-12">Next</x-primary-button>
+                    <div class="flex justify-end w-[39.5rem] mt-12">
+                        <button wire:key="increment-button" wire:click="incrementStep" class="flex items-center mt-8 font-medium underline transition-all duration-100 text-md w-50 text-primary hover:text-secondary hover:scale-110">
+                            Next
+                            <x-icon name="arrow-long-right" class="w-5 h-5 ml-2"/>
+                        </button>
                     </div>
                 </div>
                 <div class="mr-9">
@@ -214,21 +230,11 @@ new class extends Component
                             </div>
                         </x-slot>
                     </x-pop-up>
-                    <button class="flex items-center py-2 text-gray-500 rounded hover:border-secondary w-[10rem] justify-center border-gray-400 border hover:text-secondary mb-3" x-data x-on:click="$dispatch('open-modal')">
-                        <x-icon name="table-cells" class="w-5 h-5 mr-2"/>
-                        Table of Fees
-                    </button>
-                    <a href="{{ asset('files/OUR-Request-Form.pdf') }}" download>
-                        <button class="flex items-center py-2 text-gray-500 rounded hover:border-secondary w-[10rem] justify-center border-gray-400 border hover:text-secondary">
-                            <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
-                            Download
-                        </button>
-                    </a>
                 </div>
             </div>
         @elseif($step == 2)
             <div class="ml-9 w-[37.4rem]">
-                <h2 class="text-xl font-medium">Payment</h2>
+                <h2 class="text-2xl font-semibold text-gray-700">Payment</h2>
                 <div class="w-full p-2 px-4 mt-4 overflow-x-auto border border-gray-200 rounded shadow">
                     <table class="w-full text-left whitespace-nowrap">
                         <thead>
@@ -299,17 +305,19 @@ new class extends Component
                     </label>
                 </form>
                 <x-input-error :messages="$errors->get('file')" class="mt-2" />
-                <div class="flex justify-between mt-4">
-                    @if($step > 1 and $step < $total_steps)
-                    <div>
-                        <x-primary-button wire:click="decrementStep" class="w-20 mt-8">Back</x-primary-button>
-                    </div>
-                    @endif
-                    <x-primary-button wire:click="save" class="w-20 mt-8">Save</x-primary-button>
+                <div class="flex justify-between mt-12">
+                    <button wire:click="decrementStep" class="flex items-center font-medium underline transition-all duration-100 text-md w-50 text-primary hover:text-secondary hover:scale-110">
+                        <x-icon name="arrow-long-left" class="w-5 h-5 mr-2"/>
+                        Back
+                    </button>
+                    <button wire:click="save" class="flex items-center font-medium underline transition-all duration-100 text-md w-50 text-primary hover:text-green-500 hover:scale-110">
+                        Submit
+                        <x-icon name="check-circle" class="w-5 h-5 ml-2"/>
+                    </button>
                 </div>
             </div>
         @elseif($step == 3)
-            <div class="w-[38rem] ml-9">
+            <div class="w-[40rem] ml-9">
                 <h2 class="flex items-center text-2xl font-medium text-gray-800">
                     {{__("Request Sent!")}}
                     <x-icon name="check-circle" class="w-6 h-6 ml-2 text-green-500"/>

@@ -60,7 +60,7 @@ new class extends Component {
                 </tr>
                 <tr class="text-sm border-b border-gray-200">
                     <td class="px-4 py-3">{{ __("Student Welfare Fee") }}</td>
-                    <td class="px-4 py-3">{{ $record->fee->admission_fee }}</td>
+                    <td class="px-4 py-3">74.00</td>
                 </tr>
             </tbody>
         </table>
@@ -95,7 +95,7 @@ new class extends Component {
         </table>
         <div class="p-4 border border-gray-300 rounded-md">
             <p class="mr-2 font-medium">Paying Status:</p>
-            <span>Covered by CHED Unifast (RA 10931)</span>
+            <span>Covered by <a href="https://lawphil.net/statutes/repacts/ra2017/ra_10931_2017.html" target="blank" class="hover:underline hover:text-blue-700">CHED Unifast (RA 10931)</a></span>
             <x-icon name="check-circle" class="inline-block w-5 h-5 text-green-500" />
         </div>
     </div>

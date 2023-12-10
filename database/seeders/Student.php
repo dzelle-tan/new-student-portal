@@ -25,7 +25,7 @@ class Student extends Seeder
             'biological_sex' => 'Female',
             'civil_status' => 'Single',
             'citizenship' => 'Filipino',
-            'student_type' => 'Undergraduate',
+            'student_type' => 'Old',
             'registration_status' => 'Regular',
             'college' => 'College of Engineering',
             'program_code' => 'BSCS',
