@@ -15,6 +15,8 @@ return new class extends Migration
             $table->increments('id');
             $table->unsignedInteger('semester_id');
             $table->string('event_name');
+            $table->string('student_status')->nullable(); // Distinction for graduating and non-graduating students
+            $table->string('student_type')->nullable(); // Distinction for undergraduate and graduate students
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->timestamps();

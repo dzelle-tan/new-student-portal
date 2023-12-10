@@ -3,18 +3,25 @@
 use App\Models\Semester;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection;
-
+use Illuminate\Support\Collection as col;
 use Livewire\Volt\Component;
 
 new class extends Component {
 
-    public Collection $semesters;
-    public Collection $events;
+    public $allEvents;
+    public $eventNames;
+    public Collection $terms;
 
     public function mount()
     {
-        $this->semesters = Semester::where('academic_year', '2023-2024')->get();
-        $this->events = Event::whereIn('semester_id', $this->semesters->pluck('id'))->get();
+        // Feth specified academic year
+        $this->terms = Semester::where('academic_year', '2023-2024')
+                        ->with('events')
+                        ->get();
+
+        // Retrieve events listed in specified academic year
+        $this->allEvents = $this->terms->flatMap->events->unique('event_name');
+        $this->eventNames = $this->allEvents->pluck('event_name');
     }
 
 }; ?>
@@ -24,32 +31,45 @@ new class extends Component {
     <div class="w-full max-h-full mt-4 overflow-x-auto overflow-y-auto">
         <table class="w-full text-left whitespace-nowrap">
             <thead>
+
+                {{-- Displays term header and dates  --}}
                 <tr class="text-xs tracking-wider uppercase border-b border-gray-200 text-table-header bg-gray-50">
                     <th class="px-4 py-3 font-medium">Event</th>
-                    @foreach ($semesters as $semester)
+                    @foreach ($terms as $term)
                         <th class="px-4 py-3 font-medium">
-                            {{ $semester->name }}
-                            <p class="text-xs font-normal normal-case">{{ date('m-d-Y', strtotime($semester->start_date)) }} - {{ date('m-d-Y', strtotime($semester->end_date)) }}</p>
+                            {{ $term->name }}
+                            <p class="text-xs font-normal normal-case">{{ date('m-d-Y', strtotime($term->start_date)) }} - {{ date('m-d-Y', strtotime($term->end_date)) }}</p>
                         </th>
                     @endforeach
                 </tr>
             </thead>
             <tbody>
-                @foreach ($events as $event)
+
+                {{-- Displays event name and their respective dates --}}
+                @foreach ($eventNames as $eventName)
                     <tr class="text-sm border-b border-gray-200">
                         <th class="max-w-xs px-4 py-3 overflow-auto font-medium text-gray-800 whitespace-normal">
-                            {{ $event->event_name }}
+                            {{ $eventName }}
                         </th>
-                        @foreach ($semesters as $semester)
+                        @foreach ($terms as $term)
                             <td class="px-4 py-3">
-                                @if ($event->start_date !== null)
-                                    @if($event->end_date !== null && (new DateTime($event->start_date))->format('Y') === (new DateTime($event->end_date))->format('Y'))
-                                        {{ (new DateTime($event->start_date))->format('M j') }}
+
+                                {{-- Checks if event is listed in the current term events --}}
+                                @if($term->events->contains('event_name', $eventName))
+                                    @php
+                                        $event = $term->events->firstWhere('event_name', $eventName);
+                                    @endphp
+                                    @if ($event->start_date !== null)
+                                        @if($event->end_date !== null && (new DateTime($event->start_date))->format('Y') === (new DateTime($event->end_date))->format('Y'))
+                                            {{ (new DateTime($event->start_date))->format('M j') }}
+                                        @else
+                                            {{ (new DateTime($event->start_date))->format('M j, Y') }}
+                                        @endif
+                                        @if($event->end_date !== null)
+                                            - {{ (new DateTime($event->end_date))->format('M j, Y') }}
+                                        @endif
                                     @else
-                                        {{ (new DateTime($event->start_date))->format('M j, Y') }}
-                                    @endif
-                                    @if($event->end_date !== null)
-                                        - {{ (new DateTime($event->end_date))->format('M j, Y') }}
+                                        {{ __("-") }}
                                     @endif
                                 @else
                                     {{ __("-") }}
