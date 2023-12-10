@@ -94,7 +94,8 @@ new class extends Component
                                     <td class="px-4 py-3">{{ $class->units }}</td>
                                     <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->name }}</td>
                                     <td class="px-4 py-3">{{ $class->grade->grade }}</td>
-                                    <td class="px-4 py-3">{{ $class->grade->completion_grade }}</td>
+                                    {{-- <td class="px-4 py-3">{{ $class->grade->completion_grade }}</td> --}}
+                                    <td class="px-4 py-3">-</td>
                                     <td class="px-4 py-3">{{ $class->grade->remarks }}</td>
                                 </tr>
                                 @php
