@@ -20,7 +20,7 @@ class Student extends Seeder
             'last_name' => 'Dela Cruz',
             'first_name' => 'Juanita',
             'middle_name' => 'Reyes',
-            'maiden_name' => '',
+            'maiden_name' => null,
             'pedigree' => 'Filipino',
             'biological_sex' => 'Female',
             'civil_status' => 'Single',

@@ -33,7 +33,7 @@ class Event extends Seeder
             'semester_id' => 1,
             'event_name' => 'Start of Classes',
             'start_date' => '2023-08-29',
-            'end_date' => '',
+            'end_date' => null,
             'created_at' => now(),
         ]);
 
@@ -133,7 +133,7 @@ class Event extends Seeder
             'semester_id' => 2,
             'event_name' => 'Start of Classes',
             'start_date' => '2024-02-05',
-            'end_date' => '',
+            'end_date' => null,
             'created_at' => now(),
         ]);
 
@@ -156,8 +156,8 @@ class Event extends Seeder
         DB::table('events')->insert([
             'semester_id' => 2,
             'event_name' => 'Christmas Vacation',
-            'start_date' => '',
-            'end_date' => '',
+            'start_date' => null,
+            'end_date' => null,
             'created_at' => now(),
         ]);
 
@@ -235,7 +235,7 @@ class Event extends Seeder
             'semester_id' => 3,
             'event_name' => 'Start of Classes',
             'start_date' => '2024-07-01',
-            'end_date' => '',
+            'end_date' => null,
             'created_at' => now(),
         ]);
 
@@ -258,8 +258,8 @@ class Event extends Seeder
         DB::table('events')->insert([
             'semester_id' => 3,
             'event_name' => 'Christmas Vacation',
-            'start_date' => '',
-            'end_date' => '',
+            'start_date' => null,
+            'end_date' => null,
             'created_at' => now(),
         ]);
 
