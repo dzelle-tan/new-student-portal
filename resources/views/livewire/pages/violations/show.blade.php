@@ -17,18 +17,7 @@ new class extends Component {
         $this->user = Auth::user();
 
         $this->offenseTypes = collect();
-        $this->offenses = collect([
-            [
-                'offense_type' => '',
-                'violation' => '',
-                'date' => '',
-                'count' => '',
-                'remarks' => '',
-                'resolution' => '',
-                'type' => '',
-                'status' => '',
-            ],
-        ]);
+        $this->offenses = collect();
 
         $this->statusColors = [
             'Closed' => 'text-green-700',
