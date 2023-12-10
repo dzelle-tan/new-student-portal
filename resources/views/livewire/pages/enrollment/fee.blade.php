@@ -93,5 +93,10 @@ new class extends Component {
                 </tr>
             </tbody>
         </table>
+        <div class="p-4 border border-gray-300 rounded-md">
+            <p class="mr-2 font-medium">Paying Status:</p>
+            <span>Covered by CHED Unifast (RA 10931)</span>
+            <x-icon name="check-circle" class="inline-block w-5 h-5 text-green-500" />
+        </div>
     </div>
 </div>

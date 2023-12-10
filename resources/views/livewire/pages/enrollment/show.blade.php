@@ -50,7 +50,7 @@ new class extends Component {
                 {{-- <x-nav-link  href="{{ route('enrollmentSchedule') }}">
                     <button class="mt-8 w-50">Download Schedule</button>
                 </x-nav-link > --}}
-                <div class="flex items-center mb-8 space-x-4">
+                <div class="flex items-center justify-between mb-10">
                     <h2 class="text-2xl font-semibold text-gray-700">Class Schedule</h2>
                     <a href="{{ route('enrollmentSchedule') }}" class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary">
                         <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
@@ -69,7 +69,7 @@ new class extends Component {
         {{-- Enrollment Step 2 --}}
         @elseif($step == 2)
             <div class="lg:py-2 lg:px-4">
-                <div class="flex items-center mb-8 space-x-4">
+                <div class="flex items-center justify-between mb-10">
                     <h2 class="text-2xl font-semibold text-gray-700">Assessment</h2>
                     <a href="{{ route('enrollmentFee') }}" class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary">
                         <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>

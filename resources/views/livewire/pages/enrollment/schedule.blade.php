@@ -51,7 +51,7 @@ new class extends Component {
             </div>
             <div>
                 <x-info-label class="w-24">{{_("A.Y Term:")}} </x-info-label>
-                <span>{{ $record->school_year }} {{ $record->semester }} </span>
+                <span>{{ $record->school_year }} - Term {{ $record->semester }} </span>
             </div>
         </div>
     </div>
@@ -66,6 +66,7 @@ new class extends Component {
                     <th class="px-4 py-3 font-medium">{{_("Subject Title")}}</th>
                     <th class="px-4 py-3 font-medium">{{_("Units")}}</th>
                     <th class="px-4 py-3 font-medium">{{_("Schedule")}}</th>
+                    <th class="px-4 py-3 font-medium">{{_("Type")}}</th>
                     <th class="px-4 py-3 font-medium">{{_("Room")}}</th>
                 </tr>
             </thead>
@@ -76,7 +77,8 @@ new class extends Component {
                         <td class="px-4 py-3">{{ $class->section }}</td>
                         <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->name }}</td>
                         <td class="px-4 py-3 ">{{ $class->units }} </td>
-                        <td class="px-4 py-3">{{ $class->day }} {{ $class->start_time }} {{_("-")}} {{ $class->end_time }}</td>
+                        <td class="px-4 py-3">{{ $class->day }} {{ date('g:i A', strtotime($class->start_time)) }} {{_("-")}} {{ date('g:i A', strtotime($class->end_time)) }}</td>
+                        <td class="px-4 py-3">{{ ucfirst($class->type) }}</td>
                         <td class="px-4 py-3">{{ $class->room }}</td>
                     </tr>
                 @endforeach
