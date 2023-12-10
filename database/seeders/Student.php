@@ -17,9 +17,9 @@ class Student extends Seeder
          DB::table('students')->insert([
             'email' => 'dzellefaith@gmail.com',
             'student_no' => '202101350',
-            'last_name' => 'Dela Cruz',
-            'first_name' => 'Juanita',
-            'middle_name' => 'Reyes',
+            'last_name' => 'Silang',
+            'first_name' => 'Maria Gabriela',
+            'middle_name' => 'Cariño',
             'maiden_name' => null,
             'pedigree' => 'Filipino',
             'biological_sex' => 'Female',
