@@ -166,7 +166,7 @@ new class extends Component
                 <div>
                     <div class="flex items-start justify-between mb-10">
                         <h2 class="text-2xl font-semibold text-gray-700 pl-9">Request Form</h2>
-                        <div class="space-y-2">
+                        <div class="flex space-x-2">
                             <a href="{{ asset('files/OUR-Request-Form.pdf') }}" download class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary">
                                 <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
                                 Download
@@ -215,7 +215,7 @@ new class extends Component
                         <textarea wire:model="purpose" type="text" id="purpose" class="w-[37.4rem] rounded border-gray-400 h-40"></textarea>
                         <x-input-error :messages="$errors->get('purpose')" class="" />                     
                     </div>
-                    <div class="flex justify-end w-[39.5rem] mt-8">
+                    <div class="flex justify-end w-[39.5rem] mt-12">
                         <button wire:key="increment-button" wire:click="incrementStep" class="flex items-center mt-8 font-medium underline transition-all duration-100 text-md w-50 text-primary hover:text-secondary hover:scale-110">
                             Next
                             <x-icon name="arrow-long-right" class="w-5 h-5 ml-2"/>
