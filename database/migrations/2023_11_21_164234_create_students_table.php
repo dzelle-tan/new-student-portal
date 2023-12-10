@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('last_name', 45)->default('hehe');
             $table->string('first_name', 45)->default('hehe');
             $table->string('middle_name', 45)->default('hehe');
-            $table->string('maiden_name', 255)->default('hehe');
+            $table->string('maiden_name', 255)->nullable();
             $table->string('pedigree', 45)->default('hehe');
             $table->string('biological_sex', 10)->default('hehe');
             $table->string('civil_status', 45)->default('hehe');
