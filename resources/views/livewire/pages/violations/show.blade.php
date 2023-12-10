@@ -89,7 +89,7 @@ new class extends Component {
                                 <tr class="text-sm border-b border-gray-200">
                                     <td class="px-4 py-3">{{ $offense['type'] }}</td>
                                     <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $offense['violation'] }}</td>
-                                    <td class="px-4 py-3">{{ $offense['date'] }}</td>
+                                    <td class="px-4 py-3">{{ date('M d, Y', strtotime($offense['date'])) }}</td>
                                     <td class="px-4 py-3">{{ $offense['count'] }}</td>
                                     {{-- <td class="px-4 py-3">{{ $offense['remarks'] }}</td> --}}
                                     <td class="px-4 py-3">{{ $offense['resolution'] }}</td>
