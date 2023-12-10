@@ -29,7 +29,7 @@ new class extends Component {
                     @foreach ($semesters as $semester)
                         <th class="px-4 py-3 font-medium">
                             {{ $semester->name }}
-                            <p class="text-xs font-normal normal-case">{{ $semester->start_date }} {{_("-") }} {{ $semester->end_date }}</p>
+                            <p class="text-xs font-normal normal-case">{{ date('m-d-Y', strtotime($semester->start_date)) }} - {{ date('m-d-Y', strtotime($semester->end_date)) }}</p>
                         </th>
                     @endforeach
                 </tr>
@@ -42,10 +42,17 @@ new class extends Component {
                         </th>
                         @foreach ($semesters as $semester)
                             <td class="px-4 py-3">
-                                @if ($event->start_date !== null && $event->end_date !== null)
-                                    {{ (new DateTime($event->start_date))->format('M j, Y') }} - {{ (new DateTime($event->end_date))->format('M j, Y') }}
+                                @if ($event->start_date !== null)
+                                    @if($event->end_date !== null && (new DateTime($event->start_date))->format('Y') === (new DateTime($event->end_date))->format('Y'))
+                                        {{ (new DateTime($event->start_date))->format('M j') }}
+                                    @else
+                                        {{ (new DateTime($event->start_date))->format('M j, Y') }}
+                                    @endif
+                                    @if($event->end_date !== null)
+                                        - {{ (new DateTime($event->end_date))->format('M j, Y') }}
+                                    @endif
                                 @else
-                                    {{ __("---") }}
+                                    {{ __("-") }}
                                 @endif
                             </td>
                         @endforeach
