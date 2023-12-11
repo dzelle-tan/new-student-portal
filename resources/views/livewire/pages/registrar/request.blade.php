@@ -228,7 +228,7 @@ new class extends Component
                     <x-pop-up name="TOF" title="Table of Fees">
                         <x-slot name="body">
                             <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
-                                table of fees to be placed here hehe
+                                Table of Fees
                             </div>
                         </x-slot>
                     </x-pop-up>
