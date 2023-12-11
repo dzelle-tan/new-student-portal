@@ -6,16 +6,25 @@ new class extends Component {
 
     public $view = 'Request';
 
-    public function changeView()
+    public function changeView($view)
     {
-        $this->view = $this->view == 'Request' ? 'Records' : 'Request';
+        $this->view = $view;
     }
 }; ?>
 
 <div>
-    <button wire:click="changeView">
-        {{ ($view) }}
-    </button>
+    <div class="p-1 mb-4 bg-gray-200 border rounded-md w-fit">
+        <button wire:click="changeView('Request')" 
+                class="{{ $view == 'Request' ? 'bg-white text-gray-800 shadow-md' : 'bg-transparent text-gray-500' }} px-2 py-1 rounded">
+            Request
+        </button>
+    
+        <button wire:click="changeView('Records')" 
+                class="{{ $view == 'Records' ? 'bg-white text-gray-800 shadow-md' : 'bg-transparent text-gray-500' }} px-2 py-1 rounded">
+            Records
+        </button>
+    </div>
+
     @if($view == 'Records')
         <livewire:pages.registrar.records />
     @elseif ($view == 'Request')

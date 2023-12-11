@@ -35,7 +35,7 @@ new class extends Component {
 }; ?>
 
 <div class="space-y-3">
-    <div class="p-6 overflow-hidden bg-white shadow-sm sm:rounded-lg">
+    <div class="p-6 overflow-x-auto bg-white shadow-sm sm:rounded-lg">
 
         <table class="w-full text-left whitespace-nowrap">
             <thead>
