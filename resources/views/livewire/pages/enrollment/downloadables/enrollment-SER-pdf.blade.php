@@ -311,7 +311,7 @@
     </div>
     <div class="text-center">
         <h3 class="text-xl">Student Enrollment Record</h3>
-        <p class="text-sm">Academic Year 2023-2024 Term 1</p>
+        <p class="text-sm">Academic Year 2023-2024 Term 2</p>
     </div>
     <div class="space-y-[-1px] mt-6 text-sm">
         <div class="flex space-x-[-1px]">
@@ -321,7 +321,7 @@
             </div>
             <div class="w-[30rem] border py-1 px-2">
                 <p class="text-xs">Student Name:</p>
-                <p class="uppercase">{{$user->last_name}}, {{$user->first_name}} {{$user->middle_name}} </p>
+                <p class="uppercase">{{$user->last_name}}, {{$user->first_name}} {{$user->middle_name}}</p>
             </div>
             <div class="w-[8rem] border py-1 px-2">
                 <p class="text-xs">Student Type:</p>

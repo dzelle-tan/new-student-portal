@@ -18,7 +18,6 @@ new class extends Component {
     }
 }; ?>
 
-
 <div class="w-full mt-4 overflow-x-auto md:flex md:space-x-8">
     <div class="space-y-8 md:w-96">
         <table class="w-full text-left whitespace-nowrap">
