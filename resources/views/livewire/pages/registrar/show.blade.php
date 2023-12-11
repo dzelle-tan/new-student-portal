@@ -14,12 +14,12 @@ new class extends Component {
 
 <div>
     <div class="p-1 mb-4 bg-gray-200 border rounded-md w-fit">
-        <button wire:click="changeView('Request')" 
+        <button wire:click="changeView('Request')"
                 class="{{ $view == 'Request' ? 'bg-white text-gray-800 shadow-md' : 'bg-transparent text-gray-500' }} px-2 py-1 rounded">
             Request
         </button>
-    
-        <button wire:click="changeView('Records')" 
+
+        <button wire:click="changeView('Records')"
                 class="{{ $view == 'Records' ? 'bg-white text-gray-800 shadow-md' : 'bg-transparent text-gray-500' }} px-2 py-1 rounded">
             Records
         </button>
