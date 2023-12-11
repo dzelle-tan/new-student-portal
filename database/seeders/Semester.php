@@ -37,28 +37,28 @@ class Semester extends Seeder
             ]
         ]);
 
-        // DB::table('semesters')->insert([
-        //     [
-        //         'name' => 'First Trimester',
-        //         'academic_year' => '2023-2024',
-        //         'start_date' => '2024-09-18',
-        //         'end_date' => '2024-01-14',
-        //         'created_at' => now(),
-        //     ],
-        //     [
-        //         'name' => 'Second Trimester',
-        //         'academic_year' => '2023-2024',
-        //         'start_date' => '2024-01-22',
-        //         'end_date' => '2024-04-05',
-        //         'created_at' => now(),
-        //     ],
-        //     [
-        //         'name' => 'Third Trimester',
-        //         'academic_year' => '2023-2024',
-        //         'start_date' => '2024-05-13',
-        //         'end_date' => '2024-07-25',
-        //         'created_at' => now(),
-        //     ]
-        // ]);
+        DB::table('semesters')->insert([
+            [
+                'name' => 'First Trimester',
+                'academic_year' => '2023-2024',
+                'start_date' => '2024-09-18',
+                'end_date' => '2024-01-14',
+                'created_at' => now(),
+            ],
+            [
+                'name' => 'Second Trimester',
+                'academic_year' => '2023-2024',
+                'start_date' => '2024-01-22',
+                'end_date' => '2024-04-05',
+                'created_at' => now(),
+            ],
+            [
+                'name' => 'Third Trimester',
+                'academic_year' => '2023-2024',
+                'start_date' => '2024-05-13',
+                'end_date' => '2024-07-25',
+                'created_at' => now(),
+            ]
+        ]);
     }
 }
