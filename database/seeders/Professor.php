@@ -52,5 +52,15 @@ class Professor extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+         DB::table('professors')->insert([
+            'last_name' => 'Mahusay',
+            'first_name' => 'Leisyl',
+            'middle_name' => 'O',
+            'pronouns' => 'she/her',
+            'plm_email' => 'lomahusay@plm.edu.ph',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

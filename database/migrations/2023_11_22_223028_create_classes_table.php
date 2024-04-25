@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('code', 45)->nullable();
             $table->integer('section')->nullable();
             $table->string('name', 255)->nullable();
+            $table->text('description')->nullable();
             $table->tinyInteger('units')->nullable();
             $table->string('day', 45)->nullable();
             $table->time('start_time')->nullable();
