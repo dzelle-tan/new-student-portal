@@ -2,10 +2,10 @@
     <div class="w-full h-full p-2 pl-3 space-y-3 border-l-4 rounded-md shadow-sm {{ $type === 'face-to-face' ? 'bg-indigo-50 border-primary-light-2 text-primary' : 'bg-amber-50 border-secondary-light-2 text-secondary-dark-1' }}" @click="showPrivacyPolicy = true">
         <p>{{ $time }}</p>
         <div>
-            <p>{{ $code }} - {{ $section }}</p>
+            <p class="text-xs">{{ $code }} - {{ $section }}</p>
             <p>{{ $subject }}</p>
         </div>
-        <p>{{ $room }}</p>
+        {{-- <p>{{ $room }}</p> --}}
     </div>
 
     <!-- Privacy Policy Modal -->
@@ -21,14 +21,22 @@
             <div class="max-w-screen-md p-6 overflow-y-auto prose" style="max-height: 70vh; background-color: #fff; border: 1px solid #e2e8f0; border-radius: 0.375rem; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);">
                 <h3 class="text-lg font-medium leading-6 text-gray-900">{{ $code }}</h3>
                 <h2 class="mb-2 text-2xl font-bold">{{ $subject }}</h2>
-                <p class="mt-4">In the Operating System (Lab) class, students explore key concepts and hands-on applications of operating systems, covering system processes, memory management, and file systems. Through practical exercises, they gain skills to design and optimize OS, preparing for real-world computer science challenges.</p>
+                <p class="mt-4">{{ $description }}</p>
                 
                 {{-- <h3 class="mb-2 text-lg font-semibold">Details:</h3> --}}
                 <div class="m-4 ml-0">
-                    <p><span class="font-medium">Credits:</span> 1</p>
+                    <p><span class="font-medium">Units:</span> {{ $units }}</p>
                     <p><span class="font-medium">Section:</span> {{ $section }}</p>
-                    <p><span class="font-medium">Where:</span> Gusaling Villuegas 311</p>
-                    <p><span class="font-medium">Faculty:</span> Prof. Raymund Dioses</p>
+                    <p><span class="font-medium">Mode:</span> {{ ucfirst($type) }}</p>
+                    @if(!empty($room))
+                        <p><span class="font-medium">Room:</span> {{ $room }}</p>
+                    @endif
+                    @if(!empty($building))
+                        <p><span class="font-medium">Building:</span> {{ $building }}</p>
+                    @endif
+                    @if(!empty($professor))
+                        <p><span class="font-medium">Faculty:</span> {{ $professor }}</p>
+                    @endif
                     {{-- <div class="flex items-center">
                         <img class="w-10 h-10 mr-4 rounded-full" src="/images/dioses.jpg" alt="Avatar of User">
                         <div class="text-sm">

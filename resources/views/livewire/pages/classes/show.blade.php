@@ -17,7 +17,7 @@ new class extends Component {
 
         // Fetch all classes associated with the latest term of the authenticated student
         $this->record = StudentRecord::where('student_id', $this->user->id)
-            ->with('classes')
+            ->with('classes', 'classes.professor')
             ->orderBy('id', 'desc')
             ->first();
 
@@ -41,10 +41,16 @@ new class extends Component {
                         <x-class-block
                             time="{{ $this->formatTime($class->start_time) }} - {{ $this->formatTime($class->end_time) }}"
                             code="{{ $class->code }}"
-                            section="{{ $class->section }}"
                             subject="{{ $class->name }}"
+                            description="{{ $class->description }}"
+                            units="{{ $class->units }}"
+                            section="{{ $class->section }}"
+                            type="{{ $class->type }}"
                             room="{{ $class->room }}"
-                            type="{{ $class->type }}"/>
+                            building="{{ $class->building }}"
+                            type="{{ $class->type }}"
+                            professor="{{ optional($class->professor)->first_name }} {{ optional($class->professor)->middle_name }}. {{ optional($class->professor)->last_name }}"
+                        />
                     </div>
                 @endif
             @endforeach
