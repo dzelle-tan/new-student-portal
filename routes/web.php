@@ -18,33 +18,33 @@ use Illuminate\Support\Facades\Route;
 
 // Routes for Downloading Documents involving Enrollment
 Route::get('/enrollment/schedule', [EnrollmentDownloadsController::class, 'downloadSchedule'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth'])
     ->name('enrollmentSchedule');
 
 Route::get('/enrollment/fees', [EnrollmentDownloadsController::class, 'downloadFee'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth'])
     ->name('enrollmentFee');
 
 Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSER'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth'])
     ->name('enrollmentSER');
 
 Route::view('/', 'welcome');
 
 Route::view('home', 'layouts.home')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth'])
     ->name('home');
 
 Route::view('profile', 'layouts.information.profile')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth'])
     ->name('profile');
 
 Route::get('classes', [ClassesController::class, 'index'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth'])
     ->name('classes');
 
 Route::view('grades', 'layouts.information.grades')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth'])
     ->name('grades');
 
 Route::view('registrar', 'layouts.services.registrar')
@@ -52,19 +52,19 @@ Route::view('registrar', 'layouts.services.registrar')
     ->name('registrar');
 
 Route::get('student_violations', [StudentViolationController::class, 'index'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth'])
     ->name('student_violations');
 
 Route::view('enrollment', 'layouts.services.enrollment')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth'])
     ->name('enrollment');
 
 Route::view('registrar', 'layouts.services.registrar')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth'])
     ->name('registrar');
 
 Route::view('evaluation', 'layouts.services.evaluation')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth'])
     ->name('evaluation');
 
 require __DIR__.'/auth.php';
