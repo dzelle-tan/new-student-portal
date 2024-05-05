@@ -14,6 +14,7 @@ new class extends Component
     public $totalUnits = 0;
     public Collection $terms;
     public Student $user;
+    public $totalGradePoints = 0;
 
     public function mount(): void
     {
@@ -38,6 +39,7 @@ new class extends Component
     {
         $this->selectedTerm = $value;
     }
+
 }; ?>
 
 <div class="space-y-3">
@@ -104,17 +106,22 @@ new class extends Component
                                 </tr>
                                 @php
                                     $totalUnits += $class->units;
+                                    $totalGradePoints += $class->units * $class->grade->grade;
                                 @endphp
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-                <div class="flex items-center justify-end py-2 pr-12 space-x-8 text-sm">
+                @php
+                    $gwa = $totalUnits > 0 ? number_format($totalGradePoints / $totalUnits, 4) : 0;
+                @endphp
+                <div class="flex items-center justify-end py-2 pr-10 space-x-8 text-sm">
                     <p>{{_("Total Units:")}} <span class="font-medium">{{ $totalUnits }}</span></p>
-                    <p>{{_("GWA:")}} <span class="font-medium">1.00</span></p>
+                    <p>{{_("GWA:")}} <span class="font-medium">{{ $gwa }}</span></p>
                 </div>
                 @php
-                    $totalUnits = 0;
+                    $totalUnits = 0;  // Reset for next term
+                    $totalGradePoints = 0;  // Reset for next term
                 @endphp
             @endif
         @endforeach
