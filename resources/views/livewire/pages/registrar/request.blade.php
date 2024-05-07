@@ -55,11 +55,7 @@ new class extends Component
 
     public function incrementStep()
     {
-
         $this->validateForm();
-
-        if ($this->step+1 == 2)
-        {
 
             $total = 0;
 
@@ -73,31 +69,30 @@ new class extends Component
             });
 
             $this->total = $total;
-        }
-
-        if ($this->step < $this->total_steps)
-        {
             $this->step ++;
-        }
     }
 
     public function decrementStep()
     {
-        if ($this->step > 1)
-        {
             $this->step --;
-        }
-
     }
 
     public function save()
     {
         $this->validateForm();
 
+        $currentYear = date("Y");
+        $randomNumber = mt_rand(10000, 99999);
+        $receiptNumber = $currentYear . $randomNumber;
+        
         $request = auth()->user()->studentRequests()->create([
-            'purpose' => $this->purpose,
             'mode' => $this->mode,
+            'purpose' => $this->purpose,
+            'receipt_no' => $receiptNumber,
+            'status' => 'Pending', // Default status
             'total' => $this->total,
+            'date_requested' => now(),
+            // 'expected_release' => date('Y-m-d', strtotime('+15 days')),
         ]);
 
         foreach($this->inputs as $input)
@@ -113,7 +108,6 @@ new class extends Component
         }
 
         $this->step ++;
-        // $this->js("alert('Request Sent!')");
     }
 
 
@@ -140,6 +134,7 @@ new class extends Component
                 'mode'=>'required',
                 'file' => 'required|file|mimes:pdf,jpg,jpeg,png|max:20480',
             ], [
+                'mode.required' => 'The mode of payment field is required',
                 'file.required' => 'The file field is required',
                 'file.file' => 'The file must be a file',
                 'file.mimes' => 'The file must be a file of type: pdf, jpg, jpeg, png',
@@ -270,6 +265,7 @@ new class extends Component
                         <option value="University Cashier">University Cashier</option>
                         <option value="Bank Transfer">Bank Transfer</option>
                     </select>
+                    <x-input-error :messages="$errors->get('mode')" class="mt-2" />
                 </div>
                 @if ($selectedTerm == 'Landbank')
                     <div class="mt-4 text-sm">
