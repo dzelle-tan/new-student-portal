@@ -7,6 +7,9 @@
     <div class="grid grid-cols-1 gap-3 py-6 mx-auto md:grid-cols-2 lg:grid-rows-3 lg:grid-cols-3 max-w-7xl sm:px-6 lg:px-8">
         <div class="col-span-1 space-y-3 md:col-span-2 lg:col-span-2 lg:row-span-3">
                 <livewire:pages.home.name />
+            <div class="p-4 bg-white shadow sm:p-8 sm:rounded-md">
+                {!! $chart->container() !!}
+            </div>
             <div class="p-4 bg-white shadow h-[40rem] sm:p-8 sm:rounded-md">
                 <livewire:pages.home.calendar />
             </div>
@@ -30,3 +33,6 @@
         </div>
     </div> --}}
 </x-app-layout>
+
+<script src="{{ $chart->cdn() }}"></script>
+{{ $chart->script() }}

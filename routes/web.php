@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EnrollmentDownloadsController;
 use App\Http\Controllers\StudentViolationController;
 use Illuminate\Support\Facades\Route;
@@ -31,9 +32,9 @@ Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSE
 
 Route::view('/', 'welcome');
 
-Route::view('home', 'layouts.home')
-    ->middleware(['auth'])
-    ->name('home');
+// Route::view('home', 'layouts.home')
+//     ->middleware(['auth'])
+//     ->name('home');
 
 Route::view('profile', 'layouts.information.profile')
     ->middleware(['auth'])
@@ -66,5 +67,10 @@ Route::view('registrar', 'layouts.services.registrar')
 Route::view('evaluation', 'layouts.services.evaluation')
     ->middleware(['auth'])
     ->name('evaluation');
+
+Route::get('/home', [HomeController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('home');
+
 
 require __DIR__.'/auth.php';
