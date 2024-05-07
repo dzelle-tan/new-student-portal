@@ -41,6 +41,23 @@ new class extends Component
 
     public function add()
     {
+        $this->validate([
+            'inputs.*.document_info_id'=>'required|numeric|min:1',
+            'inputs.*.no_of_copies'=>'required|numeric|min:1',
+        ], [
+            'inputs.*.document_info_id.required'=>'Select a document first',
+            'inputs.*.document_info_id.min'=>'Select a document first',
+            'inputs.*.no_of_copies.required'=>'The Number of Copies field is required',
+            'inputs.*.no_of_copies.numeric'=>'The Number of Copies field must be a number',
+            'inputs.*.no_of_copies.min'=>'The Number of Copies field must be at least 1',
+        ]);
+
+        // $selectedDocumentIds = array_column($this->inputs->toArray(), 'document_info_id');
+
+        // $this->documentsInfo = $this->documentsInfo->reject(function ($document) use ($selectedDocumentIds) {
+        //     return in_array($document->id, $selectedDocumentIds);
+        // });
+
         $this->inputs = $this->inputs->add([
             'no_of_copies' => 1,
             'document_info_id' => 0,
@@ -187,8 +204,8 @@ new class extends Component
                             @endif
                             <div class="mb-2 mr-2">
                                 <select class="py-2 overflow-auto w-[28rem] form-control overflow-ellipsis {{ $loop->first ? 'ml-9' : '' }} border-gray-300 rounded-md" wire:model="inputs.{{$key}}.document_info_id">
+                                    <option hidden value = "">--- Select a Document ---</option>
                                     @foreach ($documentsInfo as $document)
-                                        <option hidden value = "">--- Select a Document ---</option>
                                         <option value = "{{ $document->id }}">{{ $document->document }}</option>
                                     @endforeach
                                 </select>
