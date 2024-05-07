@@ -10,8 +10,6 @@ new class extends Component {
 
     public $allEvents;
     public $academicYear;
-    public $academicYearStart;
-    public $academicYearEnd;
     public $eventNames;
     public $now;
     public Collection $terms;
