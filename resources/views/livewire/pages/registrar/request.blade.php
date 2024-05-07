@@ -42,21 +42,16 @@ new class extends Component
     public function add()
     {
         $this->validate([
-            'inputs.*.document_info_id'=>'required|numeric|min:1',
+            'inputs.*.document_info_id'=>'required|numeric|min:1|distinct',
             'inputs.*.no_of_copies'=>'required|numeric|min:1',
         ], [
             'inputs.*.document_info_id.required'=>'Select a document first',
             'inputs.*.document_info_id.min'=>'Select a document first',
+            'inputs.*.document_info_id.distinct'=>'The same document should not be selected more than once. Increase quantity instead.',
             'inputs.*.no_of_copies.required'=>'The Number of Copies field is required',
             'inputs.*.no_of_copies.numeric'=>'The Number of Copies field must be a number',
             'inputs.*.no_of_copies.min'=>'The Number of Copies field must be at least 1',
         ]);
-
-        // $selectedDocumentIds = array_column($this->inputs->toArray(), 'document_info_id');
-
-        // $this->documentsInfo = $this->documentsInfo->reject(function ($document) use ($selectedDocumentIds) {
-        //     return in_array($document->id, $selectedDocumentIds);
-        // });
 
         $this->inputs = $this->inputs->add([
             'no_of_copies' => 1,
@@ -134,12 +129,13 @@ new class extends Component
         {
             $this->validate([
                 'purpose' => 'required',
-                'inputs.*.document_info_id'=>'required|numeric|min:1',
+                'inputs.*.document_info_id'=>'required|numeric|min:1|distinct',
                 'inputs.*.no_of_copies'=>'required|numeric|min:1',
             ], [
                 'purpose'=>'Purpose field is required',
                 'inputs.*.document_info_id.required'=>'The document name field is required',
                 'inputs.*.document_info_id.min'=>'The document name field is required',
+                'inputs.*.document_info_id.distinct'=>'The same document should not be selected more than once',
                 'inputs.*.no_of_copies.required'=>'The Number of Copies field is required',
                 'inputs.*.no_of_copies.numeric'=>'The Number of Copies field must be a number',
                 'inputs.*.no_of_copies.min'=>'The Number of Copies field must be at least 1',
