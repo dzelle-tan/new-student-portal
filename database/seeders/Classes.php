@@ -749,7 +749,7 @@ class Classes extends Seeder
                 'building' => '',
                 'room' => 'MS Teams',
                 'type' => 'online',
-                'description' => 'The Intelligent Systems class\'s lecture component gives an in-depth look at the principles, techniques, and applications of AI and machine learning. Topics covered could include search algorithms, knowledge representation, reasoning, planning, probabilistic models, neural networks, deep learning, and natural language processing.',
+                'description' => 'The Intelligent Systems class lecture component gives an in-depth look at the principles, techniques, and applications of AI and machine learning. Topics covered could include search algorithms, knowledge representation, reasoning, planning, probabilistic models, neural networks, deep learning, and natural language processing.',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
