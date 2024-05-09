@@ -19,13 +19,13 @@
         <div class="flex flex-col col-span-1 p-4 bg-white shadow md:col-span-1 lg:row-span-1 sm:p-8 sm:rounded-md">
             {{-- <livewire:pages.home.quote /> --}}
             <div class="flex gap-x-2">
-                <p class="mb-1 font-semibold">Quick Links</p>
-                <x-icon name="link" class="w-5 h-5" solid/>         
+                <p class="mb-1 font-semibold">Downloadables</p>
+                <x-icon name="arrow-down-tray" class="w-5 h-5" solid/>         
             </div>
-            <a href="{{ asset('files/University-Calendar2324.pdf') }}" download class="underline">
+            <a href="{{ asset('files/University-Calendar2324.pdf') }}" download class="text-gray-600 underline">
                 {{ __('OURRequestForm.pdf') }}
             </a>
-            <a href="{{ asset('files/University-Calendar2324.pdf') }}" download class="underline">
+            <a href="{{ asset('files/University-Calendar2324.pdf') }}" download class="text-gray-600 underline">
                 {{ __('UniversityCalendar2324.pdf') }}
             </a>
             
