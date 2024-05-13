@@ -9,19 +9,30 @@ use Livewire\Volt\Component;
 new class extends Component {
 
     public $allEvents;
+    public $academicYear;
     public $eventNames;
+    public $now;
     public Collection $terms;
 
     public function mount()
     {
         $this->user = Auth::user();
 
+        $now = Carbon::now();
+
+        // Retrieve current academic year
+        $semester = Semester::where('start_date', '<=', $now)
+                    ->where('end_date', '>=', $now)
+                    ->first();
+
+        $academicYear = $semester ? $semester->academic_year : null;
+
          // Feth specified academic year events considering student type and status
         if ($this->user->student_type === 'Graduate')
         {
             if (Carbon::parse($this->user->graduation_date)->year == Carbon::now()->year)
             {
-                $this->terms = Semester::where('academic_year', '2023-2024')
+                $this->terms = Semester::where('academic_year', $academicYear)
                         ->where('name', 'LIKE', '%Trimester')
                         ->with('events')
                         ->get();
@@ -30,7 +41,7 @@ new class extends Component {
             else
             {
 
-                $this->terms = Semester::where('academic_year', '2023-2024')
+                $this->terms = Semester::where('academic_year', $academicYear)
                     ->where('name', 'LIKE', '%Trimester')
                     ->with(['events' => function ($query) {
                                 $query->whereNull('student_status')
@@ -43,7 +54,7 @@ new class extends Component {
         {
             if (Carbon::parse($this->user->graduation_date)->year == Carbon::now()->year)
             {
-                $this->terms = Semester::where('academic_year', '2023-2024')
+                $this->terms = Semester::where('academic_year', $academicYear)
                         ->where('name', 'NOT LIKE', '%Trimester')
                         ->with('events')
                         ->get();
