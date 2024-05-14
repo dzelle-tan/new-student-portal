@@ -31,7 +31,7 @@ new class extends Component
     }
 }; ?>
 
-<nav x-data="{ open: false }" class="sticky top-0 z-10 bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="sticky top-0 z-10 bg-[#2D349A] border-secondary border-b-4">
     <!-- Primary Navigation Menu -->
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -114,7 +114,7 @@ new class extends Component
             <div class="hidden space-x-4 sm:flex sm:items-center sm:ms-6">
                 <!-- Calendar -->
                 <div class="relative inline-block group">
-                    <x-icon name="calendar-days" solid class="text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"/>
+                    <x-icon name="calendar-days" solid class="text-white transition duration-150 ease-in-out hover:text-slate-300 focus:outline-none"/>
 
                     <div class="absolute z-50 hidden w-24 text-center text-black transform -translate-x-1/2 bg-white border rounded-md left-1/2 group-hover:block">
                         <div class="text-sm py-0.5 font-medium text-white bg-red-700 rounded-t-md">
@@ -135,8 +135,12 @@ new class extends Component
                 <!-- Settings Dropdown -->
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none">
-                            <div x-data="{ name: '{{ auth()->user()->student_no }}' }" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+                        <button class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out bg-[#2D349A] rounded-md hover:text-slate-300 {{ Route::currentRouteNamed('profile') ? 'text-secondary-light-2' : '' }}">
+                            <div 
+                                x-data="{ name: '{{ auth()->user()->student_no }}' }" 
+                                x-text="name" 
+                                x-on:profile-updated.window="name = $event.detail.name"
+                            ></div>
 
                             <div class="ms-1">
                                 <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -163,7 +167,7 @@ new class extends Component
 
             <!-- Hamburger -->
             <div class="flex items-center -me-2 sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500">
+                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 text-white transition duration-150 ease-in-out rounded-md hover:bg-[#242a81]">
                     <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -181,7 +185,7 @@ new class extends Component
             </x-responsive-nav-link>
         </div>
 
-        <div class="py-4 border-t border-gray-200">
+        <div class="py-4 border-t border-[#242a81]">
             <x-responsive-nav-link :href="route('classes')" :active="request()->routeIs('classes')" wire:navigate>
                 {{ __('Classes') }}
             </x-responsive-nav-link>
@@ -193,7 +197,7 @@ new class extends Component
             </x-responsive-nav-link>
         </div>
         
-        <div class="py-4 border-t border-gray-200">
+        <div class="py-4 border-t border-[#242a81]">
             <x-responsive-nav-link :href="route('enrollment')" :active="request()->routeIs('enrollment')" wire:navigate>
                 {{ __('Enrollment') }}
             </x-responsive-nav-link>
@@ -206,10 +210,10 @@ new class extends Component
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
+        <div class="pt-4 pb-1 border-t border-[#242a81]">
             <div class="px-4">
-                <div class="text-base font-medium text-gray-800" x-data="{ name: '{{ auth()->user()->student_no }}' }" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
-                <div class="text-sm font-medium text-gray-500">{{ auth()->user()->plm_email }}</div>
+                <div class="text-base font-medium text-slate-200" x-data="{ name: '{{ auth()->user()->student_no }}' }" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+                <div class="text-sm font-medium text-slate-400">{{ auth()->user()->plm_email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">
