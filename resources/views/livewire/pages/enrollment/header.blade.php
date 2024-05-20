@@ -31,7 +31,7 @@ new class extends Component {
     {{-- Student Enrollment Status --}}
     <div class="flex items-center p-1 px-4 text-sm border border-gray-300 rounded-md">
         <p class="mr-2">{{_("Status:")}}</p>
-        <div class="{{ empty($record->status) ? 'bg-yellow-400' : 'bg-green-600' }} w-3 h-3 rounded-full mr-1"></div>
+        <div class="{{ $record->status !== 'Enrolled' ? 'bg-yellow-400' : 'bg-green-600' }} w-3 h-3 rounded-full mr-1"></div>
         <span>{{ ucwords($record->status ?? 'Enlisted') }}</span>
     </div>
 </div>
