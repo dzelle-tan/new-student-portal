@@ -10,7 +10,7 @@
             <div class="p-4 bg-white shadow sm:p-8 sm:rounded-md">
                 <h3 class="text-lg font-medium">{{__("General Weighted Average (GWA)")}}</h3>
                 {!! $chart->container() !!}
-                <p class="italic text-center">Year - Semester</p>
+                <p class="italic text-center">School Year - Term</p>
             </div>
             <div class="p-4 bg-white shadow h-[40rem] sm:p-8 sm:rounded-md">
                 <livewire:pages.home.calendar />

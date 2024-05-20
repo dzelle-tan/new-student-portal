@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('status', 45)->nullable();
             $table->string('school_year')->nullable();
             $table->unsignedTinyInteger('semester')->nullable();
-            $table->date('date_enrolled')->nullable();
+            $table->timestamp('date_enrolled')->nullable();
             $table->decimal('gwa', 5, 2)->nullable();
             $table->timestamps(); // // Created_at and updated_at columns
 
