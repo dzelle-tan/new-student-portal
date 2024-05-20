@@ -17,8 +17,39 @@ class GradesChart
         $this->studentId = $studentId ?? Auth::id();  // Default to authenticated user if no ID is provided
     }
 
+    // Update the GWA for each academic year
+    public function updateAcademicYearGWAs(): void
+    {
+        $records = StudentRecord::where('student_id', $this->studentId)->with('classes', 'classes.grade')->get();
+    
+        foreach ($records as $record) {
+            $totalUnits = 0;
+            $totalGradePoints = 0;
+    
+            foreach ($record->classes as $class) {
+                if ($class->grade) {
+                    $totalUnits += $class->units;
+                    $totalGradePoints += $class->units * $class->grade->grade;
+                }
+            }
+    
+            if ($totalUnits > 0) {
+                $gwa = $totalGradePoints / $totalUnits;
+            } else {
+                $gwa = 0; // Handle division by zero if no classes or no grades available
+            }
+    
+            // Update the GWA in the StudentRecord
+            $record->gwa = $gwa;
+            $record->save();
+        }
+    }   
+
     public function build(): \ArielMejiaDev\LarapexCharts\LineChart
     {
+
+        $this->updateAcademicYearGWAs();
+
         // Fetch GWAs for the student where the status is 'Completed'
         $records = StudentRecord::where('student_id', $this->studentId)
                                  ->where('status', 'Completed') // Only include records with 'Completed' status
