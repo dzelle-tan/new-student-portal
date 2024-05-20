@@ -17,8 +17,9 @@ class EnrollmentDownloadsController extends Controller
         $this->user = Auth::user();
         $this->record = StudentRecord::where('student_id', $this->user->id)
             ->with('classes')
-            ->latest()
-            ->first();
+            ->orderBy('school_year', 'desc') // First order by 'school_year'
+            ->orderBy('semester', 'desc')       // Then order by 'term' within the same 'school_year'
+            ->first(); // Fetches the most recent record based on these fields
 
         $pdf = Pdf::loadView('livewire.pages.enrollment.downloadables.enrollment-schedule-pdf', [
             'user' => $this->user,
@@ -33,8 +34,9 @@ class EnrollmentDownloadsController extends Controller
         $this->user = Auth::user();
         $this->record = StudentRecord::where('student_id', $this->user->id)
             ->with('fee')
-            ->latest()
-            ->first();
+            ->orderBy('school_year', 'desc') // First order by 'school_year'
+            ->orderBy('semester', 'desc')       // Then order by 'term' within the same 'school_year'
+            ->first(); // Fetches the most recent record based on these fields
 
         $pdf = Pdf::loadView('livewire.pages.enrollment.downloadables.enrollment-fee-pdf', ['record' => $this->record]);
         return $pdf->download('fee-pdf.pdf');
@@ -47,17 +49,26 @@ class EnrollmentDownloadsController extends Controller
         $this->user = Auth::user();
         $this->record = StudentRecord::where('student_id', $this->user->id)
             ->with('fee', 'classes')
-            ->latest()
-            ->first();
+            ->orderBy('school_year', 'desc') // First order by 'school_year'
+            ->orderBy('semester', 'desc')       // Then order by 'term' within the same 'school_year'
+            ->first(); // Fetches the most recent record based on these fields
 
         $pdf = Pdf::loadView('livewire.pages.enrollment.downloadables.enrollment-SER-pdf', [
             'user' => $this->user,
             'record' => $this->record
         ]);
 
-        $this->record->update([
-            'status' => 'Enrolled'
-        ]);
+        if ($this->record->date_enrolled === null) {
+            $this->record->update([
+                'status' => 'Enrolled',
+                'date_enrolled' => now()
+            ]);
+        } else {
+            $this->record->update([
+                'status' => 'Enrolled'
+            ]);
+        }
+    
         return $pdf->download('SER-pdf.pdf');
 
         // return $pdf->stream();
