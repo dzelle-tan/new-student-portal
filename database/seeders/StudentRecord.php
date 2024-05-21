@@ -18,8 +18,9 @@ class StudentRecord extends Seeder
             'control_no' => 202101350,
             'school_year' => '2021-2022',
             'semester' => 1,
-            'date_enrolled' => '2021-06-22',
+            'date_enrolled' => now(),
             'gwa' => 1.00,
+            'status' => 'Completed',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -29,8 +30,9 @@ class StudentRecord extends Seeder
             'control_no' => 202101350,
             'school_year' => '2021-2022',
             'semester' => 2,
-            'date_enrolled' => '2021-06-22',
+            'date_enrolled' => now(),
             'gwa' => 1.00,
+            'status' => 'Completed',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -40,8 +42,9 @@ class StudentRecord extends Seeder
             'control_no' => 202101350,
             'school_year' => '2022-2023',
             'semester' => 1,
-            'date_enrolled' => '2021-06-22',
+            'date_enrolled' => now(),
             'gwa' => 1.00,
+            'status' => 'Completed',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -51,8 +54,20 @@ class StudentRecord extends Seeder
             'control_no' => 202101350,
             'school_year' => '2022-2023',
             'semester' => 2,
-            'date_enrolled' => '2021-06-22',
+            'date_enrolled' => now(),
             'gwa' => 1.00,
+            'status' => 'Completed',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('student_records')->insert([
+            'student_id' => 1,
+            'control_no' => 202101350,
+            'school_year' => '2023-2024',
+            'semester' => 1,
+            'date_enrolled' => NULL,
+            'status' => 'Enlisted',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -62,7 +77,7 @@ class StudentRecord extends Seeder
             'control_no' => 202101350,
             'school_year' => '2023-2024',
             'semester' => 1,
-            'date_enrolled' => '2021-06-22',
+            'date_enrolled' => now(),
             'gwa' => 1.00,
             'created_at' => now(),
             'updated_at' => now()
@@ -73,7 +88,7 @@ class StudentRecord extends Seeder
             'control_no' => 202101350,
             'school_year' => '2022-2023',
             'semester' => 2,
-            'date_enrolled' => '2021-06-22',
+            'date_enrolled' => now(),
             'gwa' => 1.00,
             'created_at' => now(),
             'updated_at' => now()

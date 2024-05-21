@@ -181,10 +181,58 @@ new class extends Component
                                 <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
                                 Download
                             </a>
-                            <button class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary" x-data x-on:click="$dispatch('open-modal')">
-                                <x-icon name="table-cells" class="w-5 h-5 mr-2"/>
-                                Table of Fees
-                            </button>
+                            {{-- Table of Fees --}}
+                            <div x-data="{ showTable: false }">
+                                <button class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary" @click="showTable = true">
+                                    <x-icon name="table-cells" class="w-5 h-5 mr-2"/>
+                                    Table of Fees
+                                </button>
+                            
+                                <!-- Privacy Policy Modal -->
+                                <div x-show="showTable" class="fixed inset-0 z-10 flex items-center justify-center">
+                                    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                                    <!-- Modal panel -->
+                                    <div class="relative w-full max-w-screen-md m-4 overflow-hidden bg-white rounded-lg shadow-xl" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-200 transform opacity-100 scale-100" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" x-cloak @click.away="showTable = false">
+                                        {{-- Header --}}
+                                        <div class="px-6 py-4">
+                                            <h3 class="text-lg font-medium leading-6 text-gray-900">Table of Fees</h3>
+                                        </div>
+                                        {{-- Body --}}
+                                        <div class="max-w-screen-md p-6 overflow-y-auto prose" style="max-height: 70vh; background-color: #fff; border: 1px solid #e2e8f0; border-radius: 0.375rem; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);">
+                                            
+                                            <table class="min-w-full divide-y divide-gray-200">
+                                                <thead class="bg-gray-50">
+                                                    <tr>
+                                                        <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-r border-gray-200">
+                                                            Document Name
+                                                        </th>
+                                                        <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                                            Price
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="bg-white divide-y divide-gray-200">
+                                                    @foreach ($documentsInfo as $document)
+                                                        <tr>
+                                                            <td class="px-6 py-4 border-r border-gray-200 whitespace-nowrap">
+                                                                <div class="text-sm text-gray-900">{{ $document->document }}</div>
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                                <div class="text-sm text-gray-500">₱{{ $document->price }}</div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                            
+                                        </div>
+                                        {{-- Footer --}}
+                                        <div class="flex flex-row justify-end gap-4 p-4 px-4 py-3 bg-gray-50 sm:px-6 align-items">
+                                            <button @click="showTable = false" type="button" class="inline-flex justify-center px-4 py-2 text-base font-medium text-white bg-[#4049b1] border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 sm:w-auto sm:text-sm"> Close </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
