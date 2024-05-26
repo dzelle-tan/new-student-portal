@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('sfe_answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('student_id');
-            $table->unsignedInteger('professor_id');
+            $table->integer('student_no');
+            $table->integer('professor_id');
             $table->unsignedInteger('class_id');
             $table->unsignedInteger('sfe_question');
             $table->text('answer')->nullable();
@@ -26,12 +26,12 @@ return new class extends Migration
                 ->onUpdate('NO ACTION');
 
             $table->foreign('professor_id')
-                ->references('id')->on('professors')
+                ->references('professor_id')->on('professors')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
 
-            $table->foreign('student_id')
-                ->references('id')->on('students')
+            $table->foreign('student_no')
+                ->references('student_no')->on('students')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
 

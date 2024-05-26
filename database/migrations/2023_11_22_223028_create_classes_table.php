@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('student_record_id');
-            $table->unsignedInteger('professor_id')->nullable();
+            $table->integer('professor_id')->nullable();
             $table->string('code', 45)->nullable();
             $table->integer('section')->nullable();
             $table->string('name', 255)->nullable();
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->timestamps(); // Created_at and updated_at columns
 
             $table->foreign('professor_id')
-                ->references('id')->on('professors')
+                ->references('professor_id')->on('professors')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
 

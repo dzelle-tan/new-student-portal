@@ -15,7 +15,7 @@ class StudentViolation extends Seeder
     {
         DB::table('student_violations')->insert([
             [
-                'student_id' => 1,
+                'student_no' => 202101350,
                 'violation' => 'Non-wearing of the prescribed University Dress Code for school uniform.',
                 'violation_date' => '2022-10-10',
                 'count' => '1st Offense',
@@ -29,7 +29,7 @@ class StudentViolation extends Seeder
                 'updated_at' => now()
             ],
             [
-                'student_id' => 1,
+                'student_no' => 202101350,
                 'violation' => 'Loitering and/or making noise within the University premises.',
                 'violation_date' => '2023-12-11',
                 'count' => '1st Offense',
@@ -43,7 +43,7 @@ class StudentViolation extends Seeder
                 'updated_at' => now()
             ],
             [
-                'student_id' => 2,
+                'student_no' => 202101351,
                 'violation' => 'Unhygienic use of University facilities.',
                 'violation_date' => '2023-09-16',
                 'count' => '1st Offense',
@@ -57,7 +57,7 @@ class StudentViolation extends Seeder
                 'updated_at' => now()
             ],
             [
-                'student_id' => 3,
+                'student_no' => 20230001,
                 'violation' => 'Lending one’s ID card.',
                 'violation_date' => '2022-09-01',
                 'count' => '1st Offense',
@@ -71,7 +71,7 @@ class StudentViolation extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_id' => 4,
+                'student_no' => 20235002,
                 'violation' => 'Unauthorized use of funds or property of any person, group, class, organization/ student council.',
                 'violation_date' => '2023-10-10',
                 'count' => '1st Offense',

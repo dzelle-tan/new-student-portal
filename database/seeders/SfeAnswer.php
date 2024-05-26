@@ -14,8 +14,8 @@ class SfeAnswer extends Seeder
     public function run(): void
     {
         DB::table('sfe_answers')->insert([
-            'student_id' => 1,
-            'professor_id' => 1,
+            'student_no' => 202101350,
+            'professor_id' => 202101350,
             'class_id' => 1,
             'sfe_question' => 1,
             'answer' => 'Strongly Agree',
@@ -24,8 +24,8 @@ class SfeAnswer extends Seeder
         ]);
 
         DB::table('sfe_answers')->insert([
-            'student_id' => 1,
-            'professor_id' => 1,
+            'student_no' => 202101350,
+            'professor_id' => 202101350,
             'class_id' => 1,
             'sfe_question' => 2,
             'answer' => 'Agree',
@@ -34,8 +34,8 @@ class SfeAnswer extends Seeder
         ]);
 
         DB::table('sfe_answers')->insert([
-            'student_id' => 1,
-            'professor_id' => 2,
+            'student_no' => 202101350,
+            'professor_id' => 202101351,
             'class_id' => 1,
             'sfe_question' => 3,
             'answer' => 'Not Applicable',
@@ -44,8 +44,8 @@ class SfeAnswer extends Seeder
         ]);
 
         DB::table('sfe_answers')->insert([
-            'student_id' => 2,
-            'professor_id' => 3,
+            'student_no' => 202101351,
+            'professor_id' => 202101352,
             'class_id' => 1,
             'sfe_question' => 4,
             'answer' => '0 time',
@@ -54,8 +54,8 @@ class SfeAnswer extends Seeder
         ]);
 
         DB::table('sfe_answers')->insert([
-            'student_id' => 1,
-            'professor_id' => 1,
+            'student_no' => 202101350,
+            'professor_id' => 202101350,
             'class_id' => 1,
             'sfe_question' => 5,
             'answer' => '3 times',
@@ -64,8 +64,8 @@ class SfeAnswer extends Seeder
         ]);
 
         DB::table('sfe_answers')->insert([
-            'student_id' => 2,
-            'professor_id' => 1,
+            'student_no' => 202101351,
+            'professor_id' => 202101350,
             'class_id' => 1,
             'sfe_question' => 1,
             'answer' => '1.25',
@@ -74,8 +74,8 @@ class SfeAnswer extends Seeder
         ]);
 
         DB::table('sfe_answers')->insert([
-            'student_id' => 2,
-            'professor_id' => 1,
+            'student_no' => 202101351,
+            'professor_id' => 202101350,
             'class_id' => 1,
             'sfe_question' => 1,
             'answer' => 'Agree',
@@ -84,8 +84,8 @@ class SfeAnswer extends Seeder
         ]);
 
         DB::table('sfe_answers')->insert([
-            'student_id' => 3,
-            'professor_id' => 1,
+            'student_no' => 20230001,
+            'professor_id' => 202101350,
             'class_id' => 1,
             'sfe_question' => 3,
             'answer' => 'Not Applicable',
@@ -94,8 +94,8 @@ class SfeAnswer extends Seeder
         ]);
 
         DB::table('sfe_answers')->insert([
-            'student_id' => 2,
-            'professor_id' => 1,
+            'student_no' => 202101351,
+            'professor_id' => 202101350,
             'class_id' => 1,
             'sfe_question' => 5,
             'answer' => '2 times',

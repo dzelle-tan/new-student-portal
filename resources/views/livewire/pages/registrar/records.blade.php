@@ -14,7 +14,7 @@ new class extends Component {
     {
         // Retrieve the authenticated user
         $this->user = Auth::user();
-        $this->studentRequests = StudentRequest::where('student_id', $this->user->id)
+        $this->studentRequests = StudentRequest::where('student_no', $this->user->student_no)
                                 ->with('documents')
                                 ->get();
 

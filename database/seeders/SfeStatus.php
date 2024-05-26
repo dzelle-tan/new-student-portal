@@ -14,7 +14,7 @@ class SfeStatus extends Seeder
     public function run(): void
     {
         DB::table('sfe_statuses')->insert([
-            'student_id' => 1,
+            'student_no' => 202101350,
             'class_id' => 1,
             'aysem' => '20231',
             'status' => 'Completed',
@@ -24,7 +24,7 @@ class SfeStatus extends Seeder
         ]);
 
         DB::table('sfe_statuses')->insert([
-            'student_id' => 2,
+            'student_no' => 202101351,
             'class_id' => 1,
             'aysem' => '20231',
             'status' => 'Completed',
@@ -34,7 +34,7 @@ class SfeStatus extends Seeder
         ]);
 
         DB::table('sfe_statuses')->insert([
-            'student_id' => 3,
+            'student_no' => 20230001,
             'class_id' => 1,
             'aysem' => '20231',
             'status' => 'Completed',
@@ -44,7 +44,7 @@ class SfeStatus extends Seeder
         ]);
 
         DB::table('sfe_statuses')->insert([
-            'student_id' => 4,
+            'student_no' => 20235002,
             'class_id' => 1,
             'aysem' => '20231',
             'status' => 'Completed',
@@ -54,7 +54,7 @@ class SfeStatus extends Seeder
         ]);
 
         DB::table('sfe_statuses')->insert([
-            'student_id' => 5,
+            'student_no' => 20235003,
             'class_id' => 2,
             'aysem' => '20231',
             'status' => 'Completed',

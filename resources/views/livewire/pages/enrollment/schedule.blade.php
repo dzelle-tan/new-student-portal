@@ -23,7 +23,7 @@ new class extends Component {
 
     public function getStudentClass(): void
     {
-        $this->record = StudentRecord::where('student_id', $this->user->id)
+        $this->record = StudentRecord::where('student_no', $this->user->student_no)
                     ->with('classes')
                     ->orderBy('school_year', 'desc')
                     ->orderBy('semester', 'desc')

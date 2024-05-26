@@ -14,7 +14,7 @@ class StudentRecord extends Seeder
     public function run(): void
     {
         DB::table('student_records')->insert([
-            'student_id' => 1,
+            'student_no' => 202101350,
             'control_no' => 202101350,
             'school_year' => '2021-2022',
             'semester' => 1,
@@ -26,7 +26,7 @@ class StudentRecord extends Seeder
         ]);
 
         DB::table('student_records')->insert([
-            'student_id' => 1,
+            'student_no' => 202101350,
             'control_no' => 202101350,
             'school_year' => '2021-2022',
             'semester' => 2,
@@ -38,7 +38,7 @@ class StudentRecord extends Seeder
         ]);
 
         DB::table('student_records')->insert([
-            'student_id' => 1,
+            'student_no' => 202101350,
             'control_no' => 202101350,
             'school_year' => '2022-2023',
             'semester' => 1,
@@ -50,7 +50,7 @@ class StudentRecord extends Seeder
         ]);
 
         DB::table('student_records')->insert([
-            'student_id' => 1,
+            'student_no' => 202101350,
             'control_no' => 202101350,
             'school_year' => '2022-2023',
             'semester' => 2,
@@ -62,7 +62,7 @@ class StudentRecord extends Seeder
         ]);
 
         DB::table('student_records')->insert([
-            'student_id' => 1,
+            'student_no' => 202101350,
             'control_no' => 202101350,
             'school_year' => '2023-2024',
             'semester' => 1,
@@ -73,7 +73,7 @@ class StudentRecord extends Seeder
         ]);
 
         DB::table('student_records')->insert([
-            'student_id' => 2,
+            'student_no' => 202101351,
             'control_no' => 202101350,
             'school_year' => '2023-2024',
             'semester' => 1,
@@ -84,7 +84,7 @@ class StudentRecord extends Seeder
         ]);
 
         DB::table('student_records')->insert([
-            'student_id' => 2,
+            'student_no' => 202101351,
             'control_no' => 202101350,
             'school_year' => '2022-2023',
             'semester' => 2,

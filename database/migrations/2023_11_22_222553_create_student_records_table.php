@@ -14,7 +14,8 @@ return new class extends Migration
     {
         Schema::create('student_records', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('student_id');
+            // $table->unsignedInteger('control_no')->unique()->primary();
+            $table->integer('student_no');
             $table->unsignedInteger('control_no');
             $table->string('status', 45)->nullable();
             $table->string('school_year')->nullable();
@@ -23,8 +24,8 @@ return new class extends Migration
             $table->decimal('gwa', 5, 2)->nullable();
             $table->timestamps(); // // Created_at and updated_at columns
 
-            $table->foreign('student_id')
-                ->references('id')->on('students')
+            $table->foreign('student_no')
+                ->references('student_no')->on('students')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
         });

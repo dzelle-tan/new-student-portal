@@ -10,6 +10,8 @@ class Professor extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'professor_id';
+
     public function classes(): HasMany
     {
         return $this->hasMany(Classes::class, 'class_id');

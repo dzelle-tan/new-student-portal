@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('chirps', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('student_id');
+            $table->integer('student_no');
             $table->string('message');
             $table->timestamps();
 
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('student_no')
+                ->references('student_no')->on('students');
         });
     }
 
