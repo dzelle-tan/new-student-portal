@@ -14,7 +14,7 @@ class StudentRequest extends Seeder
     public function run(): void
     {
         DB::table('student_requests')->insert([
-            'student_id' => 1,
+            'student_no' => 202101350,
             'mode' => 'Online',
             'purpose' => 'For scholarship',
             'receipt_no' => 874205619,
@@ -30,7 +30,7 @@ class StudentRequest extends Seeder
         ]);
 
         DB::table('student_requests')->insert([
-            'student_id' => 2,
+            'student_no' => 202101351,
             'mode' => 'Online',
             'purpose' => 'For on-the-job training',
             'receipt_no' => 506913284,
@@ -46,7 +46,7 @@ class StudentRequest extends Seeder
         ]);
 
         DB::table('student_requests')->insert([
-            'student_id' => 2,
+            'student_no' => 202101351,
             'mode' => 'In-person',
             'purpose' => 'For job application',
             'receipt_no' => 729854163,
@@ -62,7 +62,7 @@ class StudentRequest extends Seeder
         ]);
 
         DB::table('student_requests')->insert([
-            'student_id' => 2,
+            'student_no' => 202101351,
             'mode' => 'Online',
             'purpose' => 'For scholarship',
             'receipt_no' => 185372940,
@@ -78,7 +78,7 @@ class StudentRequest extends Seeder
         ]);
 
         DB::table('student_requests')->insert([
-            'student_id' => 1,
+            'student_no' => 202101350,
             'mode' => 'In-person',
             'purpose' => 'For scholarship',
             'receipt_no' => 392618745,

@@ -16,8 +16,9 @@ new class extends Component {
         // Retrieve the authenticated user
         $this->user = Auth::user();
 
+
         // Fetches the latest term of the authenticated student
-        $this->record = StudentRecord::where('student_id', $this->user->id)
+        $this->record = StudentRecord::where('student_no', $this->user->student_no)
             ->orderBy('id', 'desc')
             ->first();
 

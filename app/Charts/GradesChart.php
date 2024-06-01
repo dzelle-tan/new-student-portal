@@ -20,7 +20,7 @@ class GradesChart
     // Update the GWA for each academic year
     public function updateAcademicYearGWAs(): void
     {
-        $records = StudentRecord::where('student_id', $this->studentId)->with('classes', 'classes.grade')->get();
+        $records = StudentRecord::where('student_no', $this->studentId)->with('classes', 'classes.grade')->get();
     
         foreach ($records as $record) {
             $totalUnits = 0;
@@ -51,7 +51,7 @@ class GradesChart
         $this->updateAcademicYearGWAs();
 
         // Fetch GWAs for the student where the status is 'Completed'
-        $records = StudentRecord::where('student_id', $this->studentId)
+        $records = StudentRecord::where('student_no', $this->studentId)
                                  ->where('status', 'Completed') // Only include records with 'Completed' status
                                  ->orderBy('school_year')
                                  ->orderBy('semester')

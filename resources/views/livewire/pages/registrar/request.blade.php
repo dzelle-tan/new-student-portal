@@ -104,7 +104,7 @@ new class extends Component
             'status' => 'Pending', // Default status
             'total' => $this->total,
             'date_requested' => now(),
-            // 'expected_release' => date('Y-m-d', strtotime('+15 days')),
+            'expected_release' => date('Y-m-d', strtotime('+15 days')),
         ]);
 
         foreach($this->inputs as $input)

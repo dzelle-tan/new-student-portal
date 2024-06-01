@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('sfe_statuses', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('student_id');
+            $table->integer('student_no');
             $table->unsignedInteger('class_id');
             $table->integer('aysem')->nullable();
             $table->string('status', 45)->nullable();
             $table->dateTime('date_finished')->nullable();
             $table->timestamps(); // Created_at and updated_at columns
 
-            $table->foreign('student_id')
-                ->references('id')->on('students')
+            $table->foreign('student_no')
+                ->references('student_no')->on('students')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
 

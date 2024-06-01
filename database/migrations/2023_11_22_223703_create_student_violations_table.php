@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('student_violations', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('student_id');
+            $table->integer('student_no');
             $table->string('violation', 255)->nullable();
             $table->date('violation_date')->nullable();
             $table->string('count', 45)->nullable();
@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('status', 45)->nullable();
             $table->timestamps(); // Created_at and updated_at columns
 
-            $table->foreign('student_id')
-                ->references('id')->on('students')
+            $table->foreign('student_no')
+                ->references('student_no')->on('students')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
         });

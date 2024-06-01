@@ -11,7 +11,7 @@ new class extends Component {
     public function mount()
     {
         $this->user = Auth::user();
-        $this->record = StudentRecord::where('student_id', $this->user->id)
+        $this->record = StudentRecord::where('student_no', $this->user->student_no)
             ->with('fee')
             ->latest()
             ->first();

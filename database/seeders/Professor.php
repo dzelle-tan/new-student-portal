@@ -14,6 +14,7 @@ class Professor extends Seeder
     public function run(): void
     {
          DB::table('professors')->insert([
+            'professor_id' => 202101350,
             'last_name' => 'Blanco',
             'first_name' => 'Mark Christopher',
             'middle_name' => 'Rodriguez',
@@ -24,6 +25,7 @@ class Professor extends Seeder
         ]);
 
          DB::table('professors')->insert([
+            'professor_id' => 202101351,
             'last_name' => 'Agustin',
             'first_name' => 'Vivien',
             'middle_name' => 'A',
@@ -34,6 +36,7 @@ class Professor extends Seeder
         ]);
 
          DB::table('professors')->insert([
+            'professor_id' => 202101352,
             'last_name' => 'Cruz',
             'first_name' => 'Joel',
             'middle_name' => 'H',
@@ -44,6 +47,7 @@ class Professor extends Seeder
         ]);
 
          DB::table('professors')->insert([
+            'professor_id' => 202101353,
             'last_name' => 'Dioses',
             'first_name' => 'Raymund',
             'middle_name' => 'M',
@@ -54,6 +58,7 @@ class Professor extends Seeder
         ]);
 
          DB::table('professors')->insert([
+            'professor_id' => 202101354,
             'last_name' => 'Mahusay',
             'first_name' => 'Leisyl',
             'middle_name' => 'O',

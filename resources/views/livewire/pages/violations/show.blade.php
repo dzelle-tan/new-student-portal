@@ -29,7 +29,7 @@ new class extends Component {
         // Define all possible offense types
         $this->allOffenseTypes = ['Light Offense', 'Less Grave Offense', 'Grave Offense'];
 
-        $this->violation = StudentViolation::where('student_id', $this->user->id)->get();
+        $this->violation = StudentViolation::where('student_no', $this->user->student_no)->get();
 
         if ($this->violation)
         {

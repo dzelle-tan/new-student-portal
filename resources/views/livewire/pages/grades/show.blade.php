@@ -25,9 +25,9 @@ new class extends Component
     // Fetches the authenticated user's associated grades and academic year
     public function getAcademicYear(): void
     {
-        $maxId = StudentRecord::where('student_id', $this->user->id)->max('id');
+        $maxId = StudentRecord::where('student_no', $this->user->student_no)->max('id');
 
-        $this->terms = StudentRecord::where('student_id', $this->user->id)
+        $this->terms = StudentRecord::where('student_no', $this->user->student_no)
                             ->where('id', '<>', $maxId)
                             ->with('classes', 'classes.grade')
                             ->orderBy('id', 'desc')
