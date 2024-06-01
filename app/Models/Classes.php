@@ -19,7 +19,7 @@ class Classes extends Model
 
     public function professor(): BelongsTo
     {
-        return $this->belongsTo(Professor::class);
+        return $this->belongsTo(Professor::class, 'professor_id', 'professor_id');
     }
 
     public function sfeAnswer(): HasMany

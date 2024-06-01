@@ -16,7 +16,7 @@ new class extends Component {
         $this->user = Auth::user();
 
         // Fetch all classes associated with the latest term of the authenticated student
-        $this->record = StudentRecord::where('student_id', $this->user->id)
+        $this->record = StudentRecord::where('student_no', $this->user->student_no)
             ->with('classes', 'classes.professor')
             ->orderBy('id', 'desc')
             ->first();

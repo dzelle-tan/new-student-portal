@@ -13,7 +13,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('professors', function (Blueprint $table) {
-            $table->increments('id');
+            // $table->increments('id');
+            $table->integer('professor_id')->unique()->primary();
             $table->string('last_name', 45)->nullable();
             $table->string('first_name', 45)->nullable();
             $table->string('middle_name', 45)->nullable();

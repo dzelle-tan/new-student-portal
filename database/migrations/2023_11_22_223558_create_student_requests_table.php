@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('student_requests', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('student_id');
+            $table->integer('student_no');
             $table->string('mode', 45)->nullable();
             $table->text('purpose')->nullable();
             $table->integer('receipt_no')->nullable();
@@ -26,8 +26,8 @@ return new class extends Migration
             $table->dateTime('date_received')->nullable();
             $table->timestamps(); // Created_at and updated_at columns
 
-            $table->foreign('student_id')
-                ->references('id')->on('students')
+            $table->foreign('student_no')
+                ->references('student_no')->on('students')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
         });

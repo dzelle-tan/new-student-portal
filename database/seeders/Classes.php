@@ -706,7 +706,7 @@ class Classes extends Seeder
             //third year, first sem
             [
                 'student_record_id' => 5,
-                'professor_id' => 4,
+                'professor_id' => 202101353,
                 'code' => 'CSC 0314',
                 'section' => 2,
                 'name' => 'Operating System (Lec)',
@@ -723,7 +723,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 5,
-                'professor_id' => 4,
+                'professor_id' => 202101353,
                 'code' => 'CSC 0314.1',
                 'section' => 2,
                 'name' => 'Operating System (Lab)',
@@ -740,7 +740,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 5,
-                'professor_id' => 3,
+                'professor_id' => 202101352,
                 'code' => 'CSC 0315',
                 'section' => 2,
                 'name' => 'Intelligent System (Lec)',
@@ -757,7 +757,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 5,
-                'professor_id' => 3,
+                'professor_id' => 202101352,
                 'code' => 'CSC 0315.1',
                 'section' => 2,
                 'name' => 'Intelligent System (Lab)',
@@ -774,7 +774,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 5,
-                'professor_id' => 5,
+                'professor_id' => 202101354,
                 'code' => 'CSC 0311',
                 'section' => 2,
                 'name' => 'Automata Theory and Formal Languages',
@@ -791,7 +791,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 5,
-                'professor_id' => 2,
+                'professor_id' => 202101351,
                 'code' => 'CSC 0312',
                 'section' => 2,
                 'name' => 'Programming Languages (Lec)',
@@ -808,7 +808,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 5,
-                'professor_id' => 2,
+                'professor_id' => 202101351,
                 'code' => 'CSC 0312.1',
                 'section' => 2,
                 'name' => 'Programming Languages (Lab)',
@@ -825,7 +825,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 5,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0313',
                 'section' => 2,
                 'name' => 'Software Engineering (Lec)',
@@ -842,7 +842,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 5,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0313.1',
                 'section' => 2,
                 'name' => 'Software Engineering (Lab)',
@@ -862,7 +862,7 @@ class Classes extends Seeder
             //second year, second sem
             [
                 'student_record_id' => 4,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0314.1',
                 'section' => 2,
                 'name' => 'Badminton',
@@ -879,7 +879,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 4,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0315.1',
                 'section' => 2,
                 'name' => 'The Entrepreneurial Mind',
@@ -896,7 +896,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 4,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0311',
                 'section' => 2,
                 'name' => 'Algorithm and Complexity',
@@ -913,7 +913,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 4,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0315',
                 'section' => 2,
                 'name' => 'Information Assurance Security',
@@ -930,7 +930,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 4,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0312.1',
                 'section' => 2,
                 'name' => 'Environmental Science',
@@ -947,7 +947,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 4,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0314',
                 'section' => 2,
                 'name' => 'Applications Development and Emerging Technologies (Lec)',
@@ -964,7 +964,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 4,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0313',
                 'section' => 2,
                 'name' => 'Applications Development and Emerging Technologies (Lab)',
@@ -981,7 +981,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 4,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0312',
                 'section' => 2,
                 'name' => 'Architecture and Organization (Lec)',
@@ -998,7 +998,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 4,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0313.1',
                 'section' => 2,
                 'name' => 'Architecture and Organization (Lab)',
@@ -1017,7 +1017,7 @@ class Classes extends Seeder
 // -------------------------------------------
             [
                 'student_record_id' => 3,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0212',
                 'section' => 2,
                 'name' => 'Object Oriented Programming (Lec)',
@@ -1034,7 +1034,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 3,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0212.1',
                 'section' => 2,
                 'name' => 'Object Oriented Programming (Lab)',
@@ -1051,7 +1051,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 3,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0213',
                 'section' => 2,
                 'name' => 'Logic Design and Digital Computer Circuits (Lec)',
@@ -1068,7 +1068,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 3,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0213.1',
                 'section' => 2,
                 'name' => 'Logic Design and Digital Computer Circuits (Lab)',
@@ -1085,7 +1085,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 3,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0224',
                 'section' => 2,
                 'name' => 'Operation Research',
@@ -1102,7 +1102,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 3,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'ICC 0105',
                 'section' => 2,
                 'name' => 'Information Management (Lec)',
@@ -1119,7 +1119,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 3,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'ICC 0105.1',
                 'section' => 2,
                 'name' => 'Information Management (Lab)',
@@ -1136,7 +1136,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 3,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'ITE 0001',
                 'section' => 2,
                 'name' => 'Living in the IT Era',
@@ -1153,7 +1153,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 3,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'ETH 0008',
                 'section' => 2,
                 'name' => 'Ethics',
@@ -1170,7 +1170,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 3,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'UTS 0003',
                 'section' => 2,
                 'name' => 'Understanding the Self',
@@ -1187,7 +1187,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 3,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'PE 13',
                 'section' => 2,
                 'name' => 'Basketball',
@@ -1205,7 +1205,7 @@ class Classes extends Seeder
 // -----------------------------------------------
             [
                 'student_record_id' => 2,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0223',
                 'section' => 2,
                 'name' => 'Human Computer Interaction',
@@ -1222,7 +1222,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 2,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0315.1',
                 'section' => 2,
                 'name' => 'Discrete Structures 2',
@@ -1239,7 +1239,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 2,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0311',
                 'section' => 2,
                 'name' => 'The Contemporary World',
@@ -1256,7 +1256,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 2,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0315',
                 'section' => 2,
                 'name' => 'Readings in Philippine History',
@@ -1273,7 +1273,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 2,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0312.1',
                 'section' => 2,
                 'name' => 'Life and Works of Rizal',
@@ -1290,7 +1290,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 2,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0314',
                 'section' => 2,
                 'name' => 'Data Structures and Algorithms (Lec)',
@@ -1307,7 +1307,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 2,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0313',
                 'section' => 2,
                 'name' => 'Data Structures and Algorithms (Lab)',
@@ -1324,7 +1324,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 2,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0312',
                 'section' => 2,
                 'name' => 'Intermediate Programming (Lec)',
@@ -1341,7 +1341,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 2,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0313.1',
                 'section' => 2,
                 'name' => 'Intermediate Programming (Lab)',
@@ -1361,7 +1361,7 @@ class Classes extends Seeder
 
             [
                 'student_record_id' => 1,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0314.1',
                 'section' => 2,
                 'name' => 'Foundation of Physical Activities',
@@ -1378,7 +1378,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 1,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0315.1',
                 'section' => 2,
                 'name' => 'Science, Technology and Society',
@@ -1395,7 +1395,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 1,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0311',
                 'section' => 2,
                 'name' => 'Purposive Communication',
@@ -1412,7 +1412,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 1,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0315',
                 'section' => 2,
                 'name' => 'Mathematics in the Modern World',
@@ -1429,7 +1429,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 1,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0312.1',
                 'section' => 2,
                 'name' => 'Discrete Structures 1',
@@ -1446,7 +1446,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 1,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0314',
                 'section' => 2,
                 'name' => 'Fundamentals of Programming (Lec)',
@@ -1463,7 +1463,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 1,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0313',
                 'section' => 2,
                 'name' => 'Fundamentals of Programming (Lab)',
@@ -1480,7 +1480,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 1,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0312',
                 'section' => 2,
                 'name' => 'Introduction to Computing (Lec)',
@@ -1497,7 +1497,7 @@ class Classes extends Seeder
             ],
             [
                 'student_record_id' => 1,
-                'professor_id' => 1,
+                'professor_id' => 202101350,
                 'code' => 'CSC 0313.1',
                 'section' => 2,
                 'name' => 'Introduction to Computing (Lab)',

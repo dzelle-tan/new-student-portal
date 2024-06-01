@@ -41,6 +41,18 @@ new class extends Component
 
     public function add()
     {
+        $this->validate([
+            'inputs.*.document_info_id'=>'required|numeric|min:1|distinct',
+            'inputs.*.no_of_copies'=>'required|numeric|min:1',
+        ], [
+            'inputs.*.document_info_id.required'=>'Select a document first',
+            'inputs.*.document_info_id.min'=>'Select a document first',
+            'inputs.*.document_info_id.distinct'=>'The same document should not be selected more than once. Increase quantity instead.',
+            'inputs.*.no_of_copies.required'=>'The Number of Copies field is required',
+            'inputs.*.no_of_copies.numeric'=>'The Number of Copies field must be a number',
+            'inputs.*.no_of_copies.min'=>'The Number of Copies field must be at least 1',
+        ]);
+
         $this->inputs = $this->inputs->add([
             'no_of_copies' => 1,
             'document_info_id' => 0,
@@ -55,11 +67,7 @@ new class extends Component
 
     public function incrementStep()
     {
-
         $this->validateForm();
-
-        if ($this->step+1 == 2)
-        {
 
             $total = 0;
 
@@ -73,31 +81,30 @@ new class extends Component
             });
 
             $this->total = $total;
-        }
-
-        if ($this->step < $this->total_steps)
-        {
             $this->step ++;
-        }
     }
 
     public function decrementStep()
     {
-        if ($this->step > 1)
-        {
             $this->step --;
-        }
-
     }
 
     public function save()
     {
         $this->validateForm();
 
+        $currentYear = date("Y");
+        $randomNumber = mt_rand(10000, 99999);
+        $receiptNumber = $currentYear . $randomNumber;
+        
         $request = auth()->user()->studentRequests()->create([
-            'purpose' => $this->purpose,
             'mode' => $this->mode,
+            'purpose' => $this->purpose,
+            'receipt_no' => $receiptNumber,
+            'status' => 'Pending', // Default status
             'total' => $this->total,
+            'date_requested' => now(),
+            'expected_release' => date('Y-m-d', strtotime('+15 days')),
         ]);
 
         foreach($this->inputs as $input)
@@ -113,7 +120,6 @@ new class extends Component
         }
 
         $this->step ++;
-        // $this->js("alert('Request Sent!')");
     }
 
 
@@ -123,12 +129,13 @@ new class extends Component
         {
             $this->validate([
                 'purpose' => 'required',
-                'inputs.*.document_info_id'=>'required|numeric|min:1',
+                'inputs.*.document_info_id'=>'required|numeric|min:1|distinct',
                 'inputs.*.no_of_copies'=>'required|numeric|min:1',
             ], [
                 'purpose'=>'Purpose field is required',
                 'inputs.*.document_info_id.required'=>'The document name field is required',
                 'inputs.*.document_info_id.min'=>'The document name field is required',
+                'inputs.*.document_info_id.distinct'=>'The same document should not be selected more than once',
                 'inputs.*.no_of_copies.required'=>'The Number of Copies field is required',
                 'inputs.*.no_of_copies.numeric'=>'The Number of Copies field must be a number',
                 'inputs.*.no_of_copies.min'=>'The Number of Copies field must be at least 1',
@@ -140,6 +147,7 @@ new class extends Component
                 'mode'=>'required',
                 'file' => 'required|file|mimes:pdf,jpg,jpeg,png|max:20480',
             ], [
+                'mode.required' => 'The mode of payment field is required',
                 'file.required' => 'The file field is required',
                 'file.file' => 'The file must be a file',
                 'file.mimes' => 'The file must be a file of type: pdf, jpg, jpeg, png',
@@ -240,8 +248,8 @@ new class extends Component
                             @endif
                             <div class="mb-2 mr-2">
                                 <select class="py-2 overflow-auto w-[28rem] form-control overflow-ellipsis {{ $loop->first ? 'ml-9' : '' }} border-gray-300 rounded-md" wire:model="inputs.{{$key}}.document_info_id">
+                                    <option hidden value = "">--- Select a Document ---</option>
                                     @foreach ($documentsInfo as $document)
-                                        <option hidden value = "">--- Select a Document ---</option>
                                         <option value = "{{ $document->id }}">{{ $document->document }}</option>
                                     @endforeach
                                 </select>
@@ -318,6 +326,7 @@ new class extends Component
                         <option value="University Cashier">University Cashier</option>
                         <option value="Bank Transfer">Bank Transfer</option>
                     </select>
+                    <x-input-error :messages="$errors->get('mode')" class="mt-2" />
                 </div>
                 @if ($selectedTerm == 'Landbank')
                     <div class="mt-4 text-sm">
