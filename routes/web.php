@@ -68,6 +68,18 @@ Route::view('evaluation', 'layouts.services.evaluation')
     ->middleware(['auth'])
     ->name('evaluation');
 
+Route::view('loa', 'layouts.directives.loa')
+    ->middleware(['auth'])
+    ->name('loa');
+
+Route::view('add_drop', 'layouts.directives.add_drop')
+    ->middleware(['auth'])
+    ->name('add_drop');
+
+Route::view('shifting', 'layouts.directives.shifting')
+    ->middleware(['auth'])
+    ->name('shifting');
+    
 Route::get('/home', [HomeController::class, 'index'])
     ->middleware(['auth'])
     ->name('home');

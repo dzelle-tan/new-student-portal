@@ -79,7 +79,7 @@ new class extends Component
                         </x-dropdown>
                     </x-div-nav-link>
                     <x-div-nav-link class="hidden sm:flex sm:items-center sm:ms-6"
-                                    :active="request()->routeIs('enrollment') || request()->routeIs('registrar') || request()->routeIs('evaluation')"
+                                    :active="request()->routeIs('enrollment') || request()->routeIs('registrar')"
                     >
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
@@ -102,9 +102,36 @@ new class extends Component
                                 <x-dropdown-link :href="route('registrar')" wire:navigate>
                                     {{ __('Registrar') }}
                                 </x-dropdown-link>
-                                {{-- <x-dropdown-link :href="route('evaluation')" wire:navigate>
-                                    {{ __('Evaluation') }}
-                                </x-dropdown-link> --}}
+                            </x-slot>
+                        </x-dropdown>
+                    </x-div-nav-link>
+                    <x-div-nav-link class="hidden sm:flex sm:items-center sm:ms-6"
+                                    :active="request()->routeIs('loa') || request()->routeIs('add_drop') || request()->routeIs('shifting')"
+                    >
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button class="inline-flex items-center py-2 text-sm font-medium leading-4 transition duration-150 ease-in-out border border-transparent rounded-md focus:outline-none">
+                                    <x-icon name="briefcase" class="w-5 h-5 mr-2" solid/>
+                                    <div x-data="{ name: 'Academic Directives' }" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+
+                                    <div class="ms-1">
+                                        <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('loa')" wire:navigate>
+                                    {{ __('LOA Request') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('add_drop')" wire:navigate>
+                                    {{ __('Add/Drop Request') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('shifting')" wire:navigate>
+                                    {{ __('Shifting Request') }}
+                                </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
                     </x-div-nav-link>
@@ -204,9 +231,18 @@ new class extends Component
             <x-responsive-nav-link :href="route('registrar')" :active="request()->routeIs('registrar')" wire:navigate>
                 {{ __('Registrar') }}
             </x-responsive-nav-link>
-            {{-- <x-responsive-nav-link :href="route('evaluation')" :active="request()->routeIs('evaluation')" wire:navigate>
-                {{ __('Evaluation') }}
-            </x-responsive-nav-link> --}}
+        </div>
+        
+        <div class="py-4 border-t border-[#242a81]">
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
+                {{ __('LOA Request') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
+                {{ __('Add/Drop Request') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
+                {{ __('Shifting Request') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
