@@ -22,7 +22,7 @@
             </div>
 
             <div class="card mt-4">
-                <div class="card-body bg-gray-100 overflow-y-auto max-h-60">
+                <div class="card-body bg-gray-100 overflow-x-auto">
                     <table class="table bg-white w-full">
                         <thead class="bg-gray-100">
                             <tr>
@@ -115,7 +115,7 @@
             </div>
 
             <div class="card mt-4">
-                <div class="card-body bg-gray-100 overflow-y-auto max-h-60">
+                <div class="card-body bg-gray-100 overflow-x-auto ">
                     <table class="table bg-white w-full">
                         <thead class="bg-gray-100">
                             <tr>
@@ -213,7 +213,7 @@
             </div>
 
             <div class="card mt-4">
-                <div class="card-body bg-gray-100 overflow-y-auto max-h-60">
+                <div class="card-body bg-gray-100 overflow-x-auto ">
                     <table class="table bg-white w-full">
                         <thead class="bg-gray-100">
                             <tr>
@@ -300,7 +300,7 @@
             </div>
 
             <div class="card mt-4">
-                <div class="card-body bg-gray-100 overflow-y-auto max-h-60">
+                <div class="card-body bg-gray-100 overflow-x-auto ">
                     <table class="table bg-white w-full">
                         <thead class="bg-gray-100">
                             <tr>
@@ -391,7 +391,7 @@
             </div>
 
             <div class="card mt-4">
-                <div class="card-body bg-gray-100 overflow-y-auto max-h-60">
+                <div class="card-body bg-gray-100 overflow-x-auto ">
                     <table class="table bg-white w-full">
                         <thead class="bg-gray-100">
                             <tr>
@@ -478,7 +478,7 @@
             </div>
 
             <div class="card mt-4">
-                <div class="card-body bg-gray-100 overflow-y-auto max-h-60">
+                <div class="card-body bg-gray-100 overflow-x-auto ">
                     <table class="table bg-white w-full">
                         <thead class="bg-gray-100">
                             <tr>
@@ -563,14 +563,18 @@
             <div class="flex justify-end">
                 <button @click="showConfirmSaveModal = false"
                     class="mr-4 px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
-                    <button @click="showConfirmSaveModal = false; showToast = true; setTimeout(() => { showToast = false; showModal = false; }, 3000);" class="px-4 py-2 bg-blue-600 text-white rounded-md">Confirm</button>
+                <button
+                    @click="showConfirmSaveModal = false; showToast = true; setTimeout(() => { showToast = false; showModal = false; }, 3000); $wire.pushCourseCodes();"
+                    class="px-4 py-2 bg-blue-600 text-white rounded-md">Confirm</button>
 
             </div>
         </div>
     </div>
 
     <!-- Toast Notification -->
-    <div x-show="showToast" x-transition class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 px-6 py-4 bg-green-500 text-white rounded-md shadow-md z-50" x-cloak>
+    <div x-show="showToast" x-transition
+        class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 px-6 py-4 bg-green-500 text-white rounded-md shadow-md z-50"
+        x-cloak>
         Study plan has been successfully saved. You can now proceed to submission of documents.
     </div>
 </div>
