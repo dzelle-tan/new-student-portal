@@ -43,10 +43,10 @@ new class extends Component {
     public $year_level;
     public $student_no;
     public $grade;
-
+    public bool $hasRecord;
 
     protected $listeners = ['pushCourseCodesFinal'];
-    
+
     public function mount()
     {
         $this->user = Auth::user();
@@ -56,7 +56,7 @@ new class extends Component {
         $this->getStudentClass();
 
         $this->courses = Course::all();
-        $this->tableBodyId = ''; 
+        $this->tableBodyId = '';
         $this->preRequisiteGrade = $this->getPrerequisiteGrade($this->pre_requisites);
         $this->updateTotalUnits32();
         $this->updateTotalUnits42();
@@ -64,7 +64,7 @@ new class extends Component {
         $this->updateTotalUnits62();
         $this->updateTotalUnits22();
         $this->updateTotalUnits21();
-        
+
         // Assuming you have access to $course object here
         foreach ($this->courses as $course) {
             // Get the grade for the current course
@@ -72,7 +72,7 @@ new class extends Component {
 
             // Get the prerequisite grade for the current course
             $preRequisiteGrade = $this->getPrerequisiteGrade($course->pre_requisites);
-    
+
             if (($grade === 5 && $course->year_lvl === 2 && $course->sem === 2) || ($preRequisiteGrade === 5 && $course->year_lvl === 2 && $course->sem === 2)) {
                 $targetTable = 'tableBody42';
                 $this->moveRowToDropdown($course->id, $targetTable);
@@ -86,10 +86,10 @@ new class extends Component {
             }
         }
         $request = StudyPlanValidations::where('student_no', '=', Auth::user()->student_no);
-        $tempExists = Validation::where('student_no', '=', Auth::user()->student_no)->exists();
         $requestExists = $request->exists();
 
         $this->requestStatus = "Pending";
+        $this->hasRecord = $requestExists;
         if ($requestExists) {
             $this->requestStatus = $request->first()->status;
         }
@@ -139,11 +139,11 @@ new class extends Component {
             });
 
         }
-    
+
         $this->courses = $this->courses->reject(function ($c) use ($courseId) {
             return $c->id === $courseId;
         });
-    
+
         $this->updateTotalUnits32();
         $this->updateTotalUnits42();
         $this->updateTotalUnits72();
@@ -153,10 +153,11 @@ new class extends Component {
 
     }
 
-    public function moveRowFromDropdownToTable($courseCode, $tableBodyId){
+    public function moveRowFromDropdownToTable($courseCode, $tableBodyId)
+    {
         $courseIndex = null;
         $dropdownContentRef = null;
-    
+
         switch ($tableBodyId) {
             case 'tableBody':
                 $dropdownContentRef = &$this->dropdownContent2_1;
@@ -177,7 +178,7 @@ new class extends Component {
                 $dropdownContentRef = &$this->dropdownContent4_2;
                 break;
         }
-    
+
         // Proceed only if $dropdownContentRef is defined
         if (isset($dropdownContentRef)) {
             foreach ($dropdownContentRef as $index => $course) {
@@ -186,7 +187,7 @@ new class extends Component {
                     break;
                 }
             }
-    
+
             if ($courseIndex !== null) {
                 $course = $dropdownContentRef[$courseIndex];
                 $this->courses->push($course);
@@ -225,7 +226,7 @@ new class extends Component {
             default:
                 return; // Return if the table body ID is not recognized
         }
-    
+
         // Check if the total units property exists in the class
         if (property_exists($this, $totalUnitsProperty)) {
             // If the unit change is positive, add it to the total units
@@ -245,17 +246,17 @@ new class extends Component {
         foreach ($this->courses as $course) {
             // Retrieve the grade for the current course from the BSCS_grade model
             $grade = BSCS_grade::where('course_code', $course->course_code)
-            ->where('student_no', $this->studentid)
-            ->value('grades');
+                ->where('student_no', $this->studentid)
+                ->value('grades');
 
-            
+
             // Retrieve the prerequisite grade from the BSCS_grade model if prerequisites exist
-            $prerequisiteGrade = $course->pre_requisites 
-            ? BSCS_grade::where('course_code', $course->pre_requisites)
-                         ->where('student_no', $this->studentid)
-                         ->value('grades')
-            : null;
-    
+            $prerequisiteGrade = $course->pre_requisites
+                ? BSCS_grade::where('course_code', $course->pre_requisites)
+                    ->where('student_no', $this->studentid)
+                    ->value('grades')
+                : null;
+
             // Include courses based on year level when grades are not 5
             if ($this->yearlevel === 2 && $course->year_lvl >= 2 && $prerequisiteGrade !== 5 && $grade !== 5 || $grade !== 5) {
                 $courseCodes[] = $course->course_code;
@@ -274,8 +275,8 @@ new class extends Component {
     {
         // Assuming $pre_requisite contains the course code of the prerequisite course
         $preRequisite = BSCS_grade::where('course_code', $preRequisiteCourseCode)
-                           ->where('student_no', $this->studentid)
-                           ->first();
+            ->where('student_no', $this->studentid)
+            ->first();
 
         // If the prerequisite course exists and has a grade, return the grade
         if ($preRequisite && isset($preRequisite->grades)) {
@@ -287,8 +288,8 @@ new class extends Component {
     {
         // Assuming there is a model named CourseGrade to represent the grades of each course
         $courseGrade = BSCS_grade::where('course_code', $courseCode)
-                                ->where('student_no', $this->studentid)
-                                ->first();
+            ->where('student_no', $this->studentid)
+            ->first();
 
         // If the course grade exists and has a grade, return the grade
         if ($courseGrade && isset($courseGrade->grades)) {
@@ -298,48 +299,50 @@ new class extends Component {
         // Return null if the course grade does not exist or does not have a grade
         return null;
     }
-    
-    public function pushCourseCodes(){
+
+    public function pushCourseCodes()
+    {
         $courseCodes = $this->getDisplayedCourseCodes();
-        
+
         // Get the validation record for the current student
         $validation = Validation::where('student_no', $this->studentid)->first();
-    
+
         if (!$validation) {
             $validation = new Validation();
             $validation->student_no = $this->studentid;
-            $validation->yearlvl = $this->yearlevel; 
+            $validation->yearlvl = $this->yearlevel;
             $validation->status = 'Pending';
             $validation->daterequest = Carbon::now(); //di to nagana not sure y
         }
-    
+
         $studyPlanCourseCodes = json_encode($courseCodes);
-        
+
         $validation->study_plan_course_code = $studyPlanCourseCodes;
-    
+
         $validation->save();
-    
+
         session()->flash('courseCodesNotification', 'Course codes pushed successfully.');
     }
 
-    public function pushCourseCodesFinal(){
+    public function pushCourseCodesFinal()
+    {
         $this->mount();
 
         // Get the validation record for the current student
         $validation = Validation::where('student_no', $this->studentid)->first();
-    
+
         if ($validation) {
             // Create or update the corresponding record in the study_plan_validations table
             $study_plan_validation = StudyPlanValidations::firstOrNew(['student_no' => $this->studentid]);
-    
+
             // Assign the attributes from the validation object to the study_plan_validation object
 
-            $study_plan_validation->student_no = $validation->student_no; 
-            $study_plan_validation->year_level = $validation->yearlvl; 
+            $study_plan_validation->student_no = $validation->student_no;
+            $study_plan_validation->year_level = $validation->yearlvl;
             $study_plan_validation->status = $validation->status;
             $study_plan_validation->date_of_request = $validation->daterequest;
             $study_plan_validation->study_plan = $validation->study_plan_course_code;
-    
+
             // Save the study_plan_validation object
             $study_plan_validation->save();
 
@@ -349,10 +352,11 @@ new class extends Component {
         return redirect()->back();
     }
 
-    private function checkGrades($course, $gradeThreshold){
+    private function checkGrades($course, $gradeThreshold)
+    {
         // Assuming $course has properties 'course_code' and 'course_name'
-        return isset($course->grades) && $course->grades === $gradeThreshold 
-            ? $course->course_code . ' - ' . $course->course_name 
+        return isset($course->grades) && $course->grades === $gradeThreshold
+            ? $course->course_code . ' - ' . $course->course_name
             : '';
     }
 
@@ -360,7 +364,7 @@ new class extends Component {
     {
         $this->totalUnits21 = $this->courses->where('year_lvl', 2)->where('sem', 1)->sum('units');
     }
-    
+
     private function updateTotalUnits22()
     {
         $this->totalUnits22 = $this->courses->where('year_lvl', 2)->where('sem', 2)->sum('units');
@@ -385,7 +389,13 @@ new class extends Component {
         $this->totalUnits62 = $this->courses->where('year_lvl', 4)->where('sem', 2)->sum('units');
     }
 };?>
-<div x-data="{ currentStep: 1, openPanel: 1, showConfirmModal: false, studentStatus: '{{ $studentStatus }}' }">
+<div x-data="{
+        currentStep: {{ $hasRecord ? 4 : 1 }},
+        openPanel: {{ $hasRecord ? 4 : 1 }},
+        showConfirmModal: false,
+        studentStatus: '{{ $studentStatus }}',
+        hasRecord: {{ $hasRecord ? 'true' : 'false' }}
+    }">
     {{-- Student Information --}}
     <div class="mt-6 mb-6 lg:items-center lg:w-5/6 xl:2/3 lg:flex lg:justify-between">
         <div>
@@ -461,10 +471,12 @@ new class extends Component {
             <div class="card custom-table-container mb-3">
                 <div class="card-body">
                     <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                        <button @click="openPanel === 1 ? openPanel = null : openPanel = 1"
-                            class="accordion text-3xl font-normal text-black-700">1. Requirements and
-                            Reminders
-                            <i class="fas fa-check-circle step-checkmark" style="font-size: 27px;"></i>
+                        <button type="button" @click="openPanel = 1"
+                            class="accordion text-3xl font-normal text-black-700" 
+                            :class="{ 'opacity-50 cursor-not-allowed': currentStep < 1 }"
+                            :disabled="currentStep < 1">
+                            1. Requirements and Reminders
+                            <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 1 || hasRecord }" style="font-size: 27px;"></i>
                         </button>
                         <div x-show="openPanel === 1" class="panel" x-transition>
                             <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">General Rules
@@ -504,7 +516,7 @@ new class extends Component {
                             <div class="flex justify-end mt-4">
                                 <button type="button"
                                     class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
-                                    @click="openPanel = 2">Proceed to Curriculum Checklist</button>
+                                    @click="openPanel = 2; currentStep = 2">Proceed to Curriculum Checklist</button>
                             </div>
                         </div>
                     </div>
@@ -514,10 +526,12 @@ new class extends Component {
             <div class="card custom-table-container mb-3">
                 <div class="card-body">
                     <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                        <button @click="openPanel === 2 ? openPanel = null : openPanel = 2"
-                            class="accordion text-3xl font-normal text-black-700">2. Download
-                            Curriculum Checklist
-                            <i class="fas fa-check-circle step-checkmark" style="font-size: 27px;"></i>
+                        <button type="button" @click="openPanel = 2"
+                            class="accordion text-3xl font-normal text-black-700"
+                            :class="{ 'opacity-50 cursor-not-allowed': currentStep < 2 }"
+                            :disabled="currentStep < 2">
+                            2. Download Curriculum Checklist
+                            <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 2 || hasRecord }" style="font-size: 27px;"></i>
                         </button>
                         <div x-show="openPanel === 2" class="panel" x-transition>
                             <br>
@@ -535,10 +549,10 @@ new class extends Component {
                             <div class="flex justify-between mt-4">
                                 <button type="button"
                                     class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
-                                    @click="openPanel = 1">Back to Requirements and Reminders</button>
+                                    @click="openPanel = 1; currentStep = 1">Back to Requirements and Reminders</button>
                                 <button type="button"
                                     class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
-                                    @click="openPanel = 3">Proceed to Create Study Plan</button>
+                                    @click="openPanel = 3; currentStep = 3">Proceed to Create Study Plan</button>
                             </div>
                         </div>
                     </div>
@@ -549,9 +563,12 @@ new class extends Component {
                 x-data="{ showModal: false, showConfirmSaveModal: false, showToast: false }">
                 <div class="card-body">
                     <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                        <button @click="openPanel === 3 ? openPanel = null : openPanel = 3"
-                            class="accordion text-3xl font-normal text-black-700">3. Create your Study Plan
-                            <i class="fas fa-check-circle step-checkmark" style="font-size: 27px;"></i>
+                        <button type="button" @click="openPanel = 3"
+                            class="accordion text-3xl font-normal text-black-700"
+                            :class="{ 'opacity-50 cursor-not-allowed': currentStep < 3 }"
+                            :disabled="currentStep < 3">
+                            3. Create your Study Plan
+                            <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 3 || hasRecord }" style="font-size: 27px;"></i>
                         </button>
                         <div x-show="openPanel === 3" class="panel" x-transition>
                             <p style="font-family: Inter, sans-serif; font-size: 26px; color: black;">Guidelines for Study
@@ -576,13 +593,13 @@ new class extends Component {
                             <div class="flex justify-between mt-4">
                                 <button type="button"
                                     class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
-                                    @click="openPanel = 2">Back to Download Curriculum Checklist</button>
+                                    @click="openPanel = 2; currentStep = 2">Back to Download Curriculum Checklist</button>
                                 <button type="button"
                                     class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
                                     @click="showModal = true">Create Study Plan</button>
                                 <button type="button"
                                     class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
-                                    @click="openPanel = 4; $wire.pushCourseCodesFinal();">Proceed to Submission of Documents</button>
+                                    @click="openPanel = 4; currentStep = 4; $wire.pushCourseCodesFinal();">Proceed to Submission of Documents</button>
                             </div>
                         </div>
                     </div>
@@ -615,10 +632,12 @@ new class extends Component {
               <div class="card custom-table-container mb-3">
                 <div class="card-body">
                     <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                        <button @click="openPanel === 4 ? openPanel = null : openPanel = 4"
-                            class="accordion text-3xl font-normal text-black-700">
+                        <button type="button" @click="openPanel = 4"
+                            class="accordion text-3xl font-normal text-black-700"
+                            :class="{ 'opacity-50 cursor-not-allowed': currentStep < 4 }"
+                            :disabled="currentStep < 4">
                             4. Await Approval
-                            <i class="fas fa-check-circle step-checkmark" style="font-size: 27px;"></i>
+                            <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 4 || hasRecord }" style="font-size: 27px;"></i>
                         </button>
                         <div x-show="openPanel === 4" class="panel" x-transition>
                             <p style="font-family: Inter, sans-serif; font-size: 26px; color:black; font-weight:bold;">Document Status: 
@@ -638,7 +657,7 @@ new class extends Component {
                             <div class="flex justify-between mt-4">
                                 <button type="button"
                                     class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
-                                    @click="openPanel = 3">Back to Create your Study Plan</button>
+                                    @click="openPanel = 3; currentStep = 3">Back to Create your Study Plan</button>
                                 @if( $requestStatus == "Approved")
                                 <button type="button"
                                     class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
