@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder
             SfeAnswer::class,
             Semester::class,
             Event::class,
+            BSCS_grades_seeder::class,
+            CourseSeeder::class,
         ]);
     }
 }

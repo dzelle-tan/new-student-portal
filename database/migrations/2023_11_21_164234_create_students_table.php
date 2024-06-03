@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
-            // $table->increments('id');
-            $table->integer('student_no')->unique()->primary();
+            $table->id(); // Auto-increment primary key
+            $table->integer('student_no')->unique();
             $table->string('email');
             $table->string('last_name', 45)->default('hehe');
             $table->string('first_name', 45)->default('hehe');
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('civil_status', 45)->default('hehe');
             $table->string('citizenship', 45)->default('hehe');
             $table->string('student_type', 45)->default('hehe');
+            $table->string('student_status', 45)->default('Regular');
             $table->string('registration_status', 45)->default('hehe');
             $table->string('college', 255)->default('hehe');
             $table->string('program_code', 45)->default('hehe');

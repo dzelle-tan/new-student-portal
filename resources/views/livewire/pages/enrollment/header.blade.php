@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 new class extends Component {
     public StudentRecord $record;
+    public string $studentStatus;
 
     /**
      * Mount the component.
@@ -19,8 +20,11 @@ new class extends Component {
         // Assume 'term' needs to be considered after 'school_year' for proper chronological order.
         $this->record = StudentRecord::where('student_no', $this->user->student_no)
             ->orderBy('school_year', 'desc') // First order by 'school_year'
-            ->orderBy('semester', 'desc')       // Then order by 'term' within the same 'school_year'
+            ->orderBy('semester', 'desc')    // Then order by 'term' within the same 'school_year'
             ->first(); // Fetches the most recent record based on these fields
+
+        // Assuming 'student_status' is a field in the User model
+        $this->studentStatus = $this->user->student_status;
     }
 }; ?>
 
@@ -40,8 +44,9 @@ new class extends Component {
         {{-- Student Type --}}
         <div class="flex items-center p-1 px-4 text-sm border border-gray-300 rounded-md">
             <p class="mr-2">{{ __("Student Type:") }}</p>
-            <div class="w-3 h-3 rounded-full mr-1 bg-blue-400"></div> {{-- Default to blue for display only --}}
-            <span>{{ ucwords('Regular') }}</span> {{-- Static text 'Regular' for display --}}
+            <div class="w-3 h-3 rounded-full mr-1 {{ $studentStatus === 'Regular' ? 'bg-green-600' : 'bg-blue-400' }}">
+            </div>
+            <span>{{ ucwords($studentStatus ?? 'Regular') }}</span>
         </div>
     </div>
 </div>
