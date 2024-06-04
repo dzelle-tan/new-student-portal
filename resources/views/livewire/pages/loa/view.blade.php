@@ -46,6 +46,7 @@ new class extends Component {
     public $student_no;
     public $grade;
     public bool $hasRecord;
+    public bool $hasRecord2;
     public $loarequestExists;
     public $loarequestStatus;
     public $values;
@@ -104,13 +105,12 @@ new class extends Component {
             }
         }
         $request = StudyPlanValidations::where('student_no', '=', Auth::user()->student_no);
-        $requestExists = $request->exists();
+        $this->hasRecord = $request->exists();
+        $this->requestStatus = $this->hasRecord ? $request->first()->status : "Pending";
 
-        $this->requestStatus = "Pending";
-        $this->hasRecord = $requestExists;
-        if ($requestExists) {
-            $this->requestStatus = $request->first()->status;
-        }
+        $request2 = LOARequest::where('student_no', '=', Auth::user()->student_no);
+        $this->hasRecord2 = $request2->exists();
+        $this->requestStatus = $this->hasRecord2 ? $request2->first()->status : "Pending";
 
     }
 
@@ -415,12 +415,12 @@ new class extends Component {
 };?>
 <div class="p-4 pt-4 bg-white sm:p-8 sm:pt-6 sm:rounded-md">
  <div x-data="{
-        currentStep: {{ $hasRecord ? 5 : 1 }},
+        currentStep: {{ $hasRecord2 ? 5 : 1 }},
         isStudyPlanCompleted: false,
-        openPanel: {{ $hasRecord ? 5 : 1 }},
+        openPanel: {{ $hasRecord2 ? 5 : 1 }},
         showConfirmModal: false,
         studentStatus: '{{ $studentStatus }}',
-        hasRecord: {{ $hasRecord ? 'true' : 'false' }}
+        hasRecord2: {{ $hasRecord2 ? 'true' : 'false' }}
     }">
     {{-- Student Information --}}
     <div class="mt-6 mb-6 lg:items-center lg:w-5/6 xl:2/3 lg:flex lg:justify-between">
@@ -465,7 +465,7 @@ new class extends Component {
                         :class="{ 'opacity-50 cursor-not-allowed': currentStep < 1 }"
                         :disabled="currentStep < 1">
                         1. Requirements and Reminders
-                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 1 || hasRecord }" style="font-size: 27px;"></i>
+                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 1 || hasRecord2 }" style="font-size: 27px;"></i>
                     </button>
                     <div x-show="openPanel === 1" class="panel" x-transition>
                         <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">General Rules
@@ -520,7 +520,7 @@ new class extends Component {
                         :class="{ 'opacity-50 cursor-not-allowed': currentStep < 2 }"
                         :disabled="currentStep < 2">
                         2. Download Curriculum Checklist
-                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 2 || hasRecord }" style="font-size: 27px;"></i>
+                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 2 || hasRecord2 }" style="font-size: 27px;"></i>
                     </button>
                     <div x-show="openPanel === 2" class="panel" x-transition>
                         <br>
@@ -552,7 +552,7 @@ new class extends Component {
                         :class="{ 'opacity-50 cursor-not-allowed': currentStep < 3 }"
                         :disabled="currentStep < 3">
                         3. Create your Study Plan
-                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 3 || hasRecord }" style="font-size: 27px;"></i>
+                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 3 || hasRecord2 }" style="font-size: 27px;"></i>
                     </button>
                     <div x-show="openPanel === 3" class="panel" x-transition>
                         <p style="font-family: Inter, sans-serif; font-size: 26px; color: black;">Guidelines for Study
@@ -637,7 +637,7 @@ new class extends Component {
                         :class="{ 'opacity-50 cursor-not-allowed': currentStep < 4 }"
                         :disabled="currentStep < 4">
                         4. Download and Fill-up Documents
-                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 4 || hasRecord }" style="font-size: 27px;"></i>
+                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 4 || hasRecord2 }" style="font-size: 27px;"></i>
                     </button>
                     <div x-show="openPanel === 4" class="panel" x-transition>
                         <br>
@@ -676,7 +676,7 @@ new class extends Component {
                 :class="{ 'opacity-50 cursor-not-allowed': currentStep < 5 }"
                 :disabled="currentStep < 5">
                 5. Document Submission and Approval
-                <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 5 || hasRecord }" style="font-size: 27px;"></i>
+                <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 5 || hasRecord2 }" style="font-size: 27px;"></i>
             </button>
             <div x-show="openPanel === 5" class="panel" x-transition>
                 <form action="{{ route('loa_request.post') }}" method="post" enctype="multipart/form-data">
