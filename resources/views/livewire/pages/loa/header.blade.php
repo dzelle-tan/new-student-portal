@@ -3,11 +3,13 @@
 use Livewire\Volt\Component;
 
 use App\Models\StudentRecord;
+use App\Models\LOARequest;
 use Illuminate\Support\Facades\Auth;
 
 new class extends Component {
     public StudentRecord $record;
     public string $studentStatus;
+    public $loaStatus;
 
     /**
      * Mount the component.
@@ -26,6 +28,10 @@ new class extends Component {
 
         // Assuming 'student_status' is a field in the User model
         $this->studentStatus = $this->user->student_status;
+
+        // Fetch the LOA request status
+        $loaRequest = LOARequest::where('student_no', $this->user->student_no)->first();
+        $this->loaStatus = $loaRequest ? $loaRequest->status : null;
     }
 }; ?>
 
@@ -34,13 +40,19 @@ new class extends Component {
         {{ __('Leave of Absence Requests') }}
     </h2>
     <div class="flex items-center space-x-4">
-        {{-- Student Request Status --}}
-        <div class="flex items-center p-1 px-4 text-sm border border-gray-300 rounded-md">
-            <p class="mr-2">{{ _("Status:") }}</p>
-            <div class="w-3 h-3 rounded-full mr-1 bg-yellow-400">
-            </div> <!-- To display status dynamically, add from model the status from LOA requests table -->
-            <span>{{ _("Pending") }}</span>
-        </div>
+         {{-- Student Request Status --}}
+         @if (in_array($loaStatus, ['Pending', 'Approved', 'Rejected']))
+            <div class="flex items-center p-1 px-4 text-sm border border-gray-300 rounded-md">
+                <p class="mr-2">{{ __("Status:") }}</p>
+                <div class="w-3 h-3 rounded-full mr-1 {{ 
+                    $loaStatus === 'Pending' ? 'bg-yellow-400' : (
+                    $loaStatus === 'Approved' ? 'bg-green-600' : (
+                    $loaStatus === 'Rejected' ? 'bg-red-600' : 'bg-gray-400'
+                )) }}">
+                </div>
+                <span>{{ $loaStatus }}</span>
+            </div>
+        @endif
         {{-- Student Type --}}
         <div class="flex items-center p-1 px-4 text-sm border border-gray-300 rounded-md">
             <p class="mr-2">{{ __("Student Type:") }}</p>

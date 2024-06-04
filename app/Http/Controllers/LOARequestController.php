@@ -62,6 +62,6 @@ class LOARequestController extends Controller
 
         $loaRequest->save();
 
-        return redirect()->back()->with('message', 'Documents submitted successfully.');
+        return redirect()->back();
     }
 }
