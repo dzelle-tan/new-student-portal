@@ -719,21 +719,21 @@ new class extends Component {
                     <div class="form-group">
                         <label>Follow the format: LastName_FirstName_ShiftForm</label>
                         <label class="font-medium border-2 border-gray-300 p-3 w-full block rounded cursor-pointer my-2 bg-gray-50" x-data="{ files: null }">
-                            <input type="file" class="sr-only" id="exampleInputFile1" x-on:change="files = Object.values($event.target.files)" accept="application/pdf" name="shifting_form" required>
+                            <input type="file" class="sr-only" id="exampleInputFile1" x-on:change="files = Object.values($event.target.files)" accept="application/pdf" name="shifting_form" :disabled="shiftingrequestStatus === 'Approved'" required>
                             <span x-text="files ? files.map(file => file.name).join(', ') : 'Upload Leave of Absence Form'"></span>
                         </label>
                     </div>
                     <div class="form-group">
                         <label>Follow the format: LastName_FirstName_LetterOfIntent</label>
                         <label class="font-medium border-2 border-gray-300 p-3 w-full block rounded cursor-pointer my-2 bg-gray-50" x-data="{ files: null }">
-                            <input type="file" class="sr-only" id="exampleInputFile2" x-on:change="files = Object.values($event.target.files)" accept="application/pdf" name="letter_of_intent" required>
+                            <input type="file" class="sr-only" id="exampleInputFile2" x-on:change="files = Object.values($event.target.files)" accept="application/pdf" name="letter_of_intent" :disabled="shiftingrequestStatus === 'Approved'" required>
                             <span x-text="files ? files.map(file => file.name).join(', ') : 'Upload Letter of Request'"></span>
                         </label>
                     </div>
                     <div class="form-group">
                         <label>Follow the format: LastName_FirstName_NoteOfUndertaking</label>
                         <label class="font-medium border-2 border-gray-300 p-3 w-full block rounded cursor-pointer my-2 bg-gray-50" x-data="{ files: null }">
-                            <input type="file" class="sr-only" id="exampleInputFile3" x-on:change="files = Object.values($event.target.files)" accept="application/pdf" name="note_of_undertaking" required>
+                            <input type="file" class="sr-only" id="exampleInputFile3" x-on:change="files = Object.values($event.target.files)" accept="application/pdf" name="note_of_undertaking" :disabled="shiftingrequestStatus === 'Approved'" required>
                             <span x-text="files ? files.map(file => file.name).join(', ') : 'Upload Note of Undertaking'"></span>
                         </label>
                     </div>
