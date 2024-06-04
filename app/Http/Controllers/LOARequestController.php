@@ -18,11 +18,19 @@ class LOARequestController extends Controller
         $request = LOARequest::where('student_no', $student_no)->first();
         $loarequestExists = $request ? true : false;
         $loarequestStatus = $request ? $request->status : null;
+        $loa_form = $request ? $request->loa_form : null; 
+        $letter_of_request = $request ? $request->letter_of_request : null;
+        $note_of_undertaking = $request ? $request->note_of_undertaking : null;
+        $clearance = $request ? $request->clearance : null;
 
         return view('layouts.directives.loa', [
             'loarequestExists' => $loarequestExists,
             'loarequestStatus' => $loarequestStatus,
             'user' => $user,
+            'loa_form' => $loa_form,  // Include document information in the data
+            'letter_of_request' => $letter_of_request,
+            'note_of_undertaking' => $note_of_undertaking,
+            'clearance' => $clearance,
         ]);
     }
 

@@ -8,6 +8,7 @@
             :loarequestExists="$loarequestExists"
             :loarequestStatus="$loarequestStatus"
             :user="$user"
+            :loa_form="$loa_form" :letter_of_request="$letter_of_request" :note_of_undertaking="$note_of_undertaking" :clearance="$clearance"
         />
     </div>
 </x-app-layout>

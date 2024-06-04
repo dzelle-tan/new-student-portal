@@ -49,14 +49,22 @@ new class extends Component {
     public $loarequestExists;
     public $loarequestStatus;
     public $values;
+    public $loa_form;
+    public $letter_of_request;
+    public $note_of_undertaking;
+    public $clearance;
 
     protected $listeners = ['pushCourseCodesFinal'];
 
-    public function mount($loarequestExists, $loarequestStatus, $user)
+    public function mount($loarequestExists, $loarequestStatus, $user, $loa_form, $letter_of_request, $note_of_undertaking, $clearance)
     {
         $this->loarequestExists = $loarequestExists;
         $this->loarequestStatus = $loarequestStatus;
         $this->user = $user;
+        $this->loa_form = $loa_form;
+        $this->letter_of_request = $letter_of_request;
+        $this->note_of_undertaking = $note_of_undertaking;
+        $this->clearance = $clearance;
 
         $this->user = Auth::user();
         $this->studentid = $this->user->student_no;
@@ -703,23 +711,24 @@ new class extends Component {
                     </div>
                     <button type="submit" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white">Submit Uploaded Documents</button>
                     </form>
-                    @if($loarequestExists)
-                        <br>
-                        <p style="font-family: Inter, sans-serif; font-size: 26px; color:black; font-weight:bold;">Document Status: 
-                            @if($loarequestStatus == "Pending")
-                                <strong style="color: #AB830F;">For Checking</strong>
-                            @elseif($loarequestStatus == "Rejected")
-                                <strong style="color: #e90c0c;">For Revision</strong>
-                            @elseif($loarequestStatus == "Approved")
-                                <strong style="color: #14ae5c;">For Submission Onsite</strong>
-                            @else
-                                <strong style="color: #000;">Status Not Found</strong>
-                            @endif
-                        </p>
-                        <p class="body-font">&nbsp;&nbsp;a. Submitted documents will be checked by corresponding department chairperson.</p>
-                        <p class="body-font">&nbsp;&nbsp;b. Refresh this page from time-to-time to know the status of your request.</p>
+                    @if($loarequestExists && ($loa_form || $letter_of_request || $note_of_undertaking || $clearance))
+                    <br>
+                    <p style="font-family: Inter, sans-serif; font-size: 26px; color:black; font-weight:bold;">
+                        Document Status:
+                    @if($loarequestStatus == "Pending")
+                        <strong style="color: #AB830F;">For Checking</strong>
+                        @elseif($loarequestStatus == "Rejected")
+                        <strong style="color: #e90c0c;">For Revision</strong>
+                        @elseif($loarequestStatus == "Approved")
+                        <strong style="color: #14ae5c;">For Submission Onsite</strong>
+                        @else
+                        <strong style="color: #000; font-size: 26px;">Status Not Found</strong>
+                        @endif
+                    </p>
+                    <p class="body-font">&nbsp;&nbsp;a. Submitted documents will be checked by corresponding department chairperson.</p>
+                    <p class="body-font">&nbsp;&nbsp;b. Refresh this page from time-to-time to know the status of your request.</p>
                     @else
-                        <p>No request exists.</p>
+                    <p></p>
                     @endif
                
             </div>
