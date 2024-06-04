@@ -27,13 +27,9 @@ class DatabaseSeeder extends Seeder
             Professor::class,
             Classes::class,
             Grade::class,
-            SfeDate::class,
-            SfeStatus::class,
-            SfeQuestion::class,
             StudentRequest::class,
             Document::class,
             StudentViolation::class,
-            SfeAnswer::class,
             Semester::class,
             Event::class,
         ]);
