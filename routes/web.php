@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EnrollmentDownloadsController;
 use App\Http\Controllers\StudentViolationController;
 use App\Http\Controllers\LOARequestController;
+use App\Http\Controllers\DownloadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,9 @@ Route::get('/enrollment/fees', [EnrollmentDownloadsController::class, 'downloadF
 Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSER'])
     ->middleware(['auth'])
     ->name('enrollmentSER');
+
+Route::get('download/{file}', [DownloadController::class, 'download'])
+    ->name('download');
 
 Route::view('/', 'welcome');
 
