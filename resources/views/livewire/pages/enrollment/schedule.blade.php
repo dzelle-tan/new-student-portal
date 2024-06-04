@@ -391,6 +391,7 @@ new class extends Component {
 };?>
 <div x-data="{
         currentStep: {{ $hasRecord ? 4 : 1 }},
+        isStudyPlanCompleted: false, 
         openPanel: {{ $hasRecord ? 4 : 1 }},
         showConfirmModal: false,
         studentStatus: '{{ $studentStatus }}',
@@ -465,6 +466,14 @@ new class extends Component {
         </div>
     @else
         {{-- Content for Irregular Students --}}
+        
+         {{-- Notification Box --}}
+         <div class="p-4 mb-6 bg-gray-100 border border-gray-300 rounded-md">
+    <div class="flex items-center justify-center text-center">
+        <x-icon name="information-circle" class="w-6 h-6 mr-2" solid />
+        <span class="font-medium">Follow steps one to four below. Failure to comply with a step prohibits you from proceeding forward with the request.</span>
+    </div>
+</div>
         <!-- Main content -->
         <section class="content">
             <!-- Step 1 -->
@@ -594,12 +603,21 @@ new class extends Component {
                                 <button type="button"
                                     class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
                                     @click="openPanel = 2; currentStep = 2">Back to Download Curriculum Checklist</button>
+                                <!-- Button to create study plan -->
                                 <button type="button"
                                     class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
                                     @click="showModal = true">Create Study Plan</button>
-                                <button type="button"
-                                    class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
-                                    @click="openPanel = 4; currentStep = 4; $wire.pushCourseCodesFinal();">Proceed to Submission of Documents</button>
+                                 <!-- Button to proceed to submission of documents -->
+                                 <button type="button"
+                                        class="btn p-2 border rounded-md text-white"
+                                        :class="{
+                                            'bg-[#2d349a] border-blue-100 cursor-pointer': isStudyPlanCompleted,
+                                            'bg-gray-400 border-gray-400 cursor-not-allowed': !isStudyPlanCompleted
+                                        }"
+                                        :disabled="!isStudyPlanCompleted"
+                                        @click="if(isStudyPlanCompleted) { openPanel = 4; currentStep = 4; $wire.pushCourseCodesFinal(); }">
+                                    Proceed to Submission of Documents
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -621,6 +639,15 @@ new class extends Component {
                         </div>
                         <div class="modal-body mt-4">
                             <livewire:study-plan /> <!-- Added study plan livewire component -->
+                            <!-- Button to mark study plan as completed -->
+                            <div class="flex justify-end mt-4">
+                            <button type="button"
+                        class="px-3 py-2 bg-blue-600 text-white rounded-md"
+                        @click="isStudyPlanCompleted = true; showModal = false;">
+                    Mark as Completed
+                </button>
+                            </div>
+                
                         </div>
                     </div>
                 </div>

@@ -269,15 +269,19 @@
                 </div>
             </div>
             <span id="totalUnits32">
-                {{ $totalUnits32 }}
-                @if ($totalUnits32 < 10)
-                    <span class="badge badge-success">Underload</span>
-                @elseif ($totalUnits32 >= 10 && $totalUnits32 <= 13)
-                    <span class="badge badge-primary">Normal Load</span>
-                @else
-                    <span class="badge badge-danger">Overload</span>
-                @endif
-            </span>
+                    {{ $totalUnits32 }}
+                    @if ($totalUnits32 < 10)
+                        <span
+                            class="inline-block px-3 py-1 text-sm font-semibold text-green-700 bg-green-200 rounded-full">Underload</span>
+                    @elseif ($totalUnits32 >= 10 && $totalUnits32 <= 13)
+                        <span
+                            class="inline-block px-3 py-1 text-sm font-semibold text-blue-700 bg-blue-200 rounded-full">Normal
+                            Load</span>
+                    @else
+                        <span
+                            class="inline-block px-3 py-1 text-sm font-semibold text-red-700 bg-red-200 rounded-full">Overload</span>
+                    @endif
+                </span>
 
             <h1 class="text-black text-2xl font-bold mt-8 mb-4">3rd Year 2nd Semester</h1>
             <div class="relative mb-4">
@@ -356,15 +360,19 @@
                 </div>
             </div>
             <span id="totalUnits42">
-                {{ $totalUnits42 }}
-                @if ($totalUnits42 < 10)
-                    <span class="badge badge-success">Underload</span>
-                @elseif ($totalUnits42 >= 10 && $totalUnits42 <= 13)
-                    <span class="badge badge-primary">Normal Load</span>
-                @else
-                    <span class="badge badge-danger">Overload</span>
-                @endif
-            </span>
+                    {{ $totalUnits42 }}
+                    @if ($totalUnits42 < 10)
+                        <span
+                            class="inline-block px-3 py-1 text-sm font-semibold text-green-700 bg-green-200 rounded-full">Underload</span>
+                    @elseif ($totalUnits42 >= 10 && $totalUnits42 <= 13)
+                        <span
+                            class="inline-block px-3 py-1 text-sm font-semibold text-blue-700 bg-blue-200 rounded-full">Normal
+                            Load</span>
+                    @else
+                        <span
+                            class="inline-block px-3 py-1 text-sm font-semibold text-red-700 bg-red-200 rounded-full">Overload</span>
+                    @endif
+                </span>
         </div>
     </div>
 
@@ -447,15 +455,19 @@
                 </div>
             </div>
             <span id="totalUnits72">
-                {{ $totalUnits72 }}
-                @if ($totalUnits72 < 10)
-                    <span class="badge badge-success">Underload</span>
-                @elseif ($totalUnits72 >= 10 && $totalUnits72 <= 13)
-                    <span class="badge badge-primary">Normal Load</span>
-                @else
-                    <span class="badge badge-danger">Overload</span>
-                @endif
-            </span>
+                    {{ $totalUnits72 }}
+                    @if ($totalUnits72 < 10)
+                        <span
+                            class="inline-block px-3 py-1 text-sm font-semibold text-green-700 bg-green-200 rounded-full">Underload</span>
+                    @elseif ($totalUnits72 >= 10 && $totalUnits72 <= 13)
+                        <span
+                            class="inline-block px-3 py-1 text-sm font-semibold text-blue-700 bg-blue-200 rounded-full">Normal
+                            Load</span>
+                    @else
+                        <span
+                            class="inline-block px-3 py-1 text-sm font-semibold text-red-700 bg-red-200 rounded-full">Overload</span>
+                    @endif
+                </span>
 
             <h1 class="text-black text-2xl font-bold mt-8 mb-4">4th Year 2nd Semester</h1>
             <div class="relative mb-4">
@@ -536,22 +548,26 @@
                 </div>
             </div>
             <span id="totalUnits62">
-                {{ $totalUnits62 }}
-                @if ($totalUnits62 < 10)
-                    <span class="badge badge-success">Underload</span>
-                @elseif ($totalUnits62 >= 10 && $totalUnits62 <= 13)
-                    <span class="badge badge-primary">Normal Load</span>
-                @else
-                    <span class="badge badge-danger">Overload</span>
-                @endif
-            </span>
+                    {{ $totalUnits62 }}
+                    @if ($totalUnits62 < 10)
+                        <span
+                            class="inline-block px-3 py-1 text-sm font-semibold text-green-700 bg-green-200 rounded-full">Underload</span>
+                    @elseif ($totalUnits62 >= 10 && $totalUnits62 <= 13)
+                        <span
+                            class="inline-block px-3 py-1 text-sm font-semibold text-blue-700 bg-blue-200 rounded-full">Normal
+                            Load</span>
+                    @else
+                        <span
+                            class="inline-block px-3 py-1 text-sm font-semibold text-red-700 bg-red-200 rounded-full">Overload</span>
+                    @endif
+                </span>
         </div>
     </div>
 
     <br>
     <div class="modal-footer flex justify-end mt-4">
         <button @click="showModal = false" class="mr-4 px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
-        <button @click="showConfirmSaveModal = true" class="px-4 py-2 bg-blue-600 text-white rounded-md">Save</button>
+        <button @click="showConfirmSaveModal = true" class="mr-1 px-4 py-2 bg-blue-600 text-white rounded-md">Save</button>
     </div>
 
     <!-- Confirmation Save Modal -->
@@ -564,7 +580,7 @@
                 <button @click="showConfirmSaveModal = false"
                     class="mr-4 px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
                 <button
-                    @click="showConfirmSaveModal = false; showToast = true; setTimeout(() => { showToast = false; showModal = false; }, 3000); $wire.pushCourseCodes();"
+                    @click="showConfirmSaveModal = false; showToast = true; setTimeout(() => { showToast = false; }, 3000); $wire.pushCourseCodes();"
                     class="px-4 py-2 bg-blue-600 text-white rounded-md">Confirm</button>
 
             </div>
