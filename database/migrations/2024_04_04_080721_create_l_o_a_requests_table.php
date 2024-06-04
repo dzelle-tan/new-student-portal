@@ -19,10 +19,10 @@ return new class extends Migration
             $table->date('date_of_request');
             $table->string('status');
             $table->text('study_plan')->nullable();
-            $table->text('loa_form');
-            $table->text('letter_of_request');
-            $table->text('note_of_undertaking');
-            $table->text('clearance');
+            $table->text('loa_form')->nullable();
+            $table->text('letter_of_request')->nullable();
+            $table->text('note_of_undertaking')->nullable();
+            $table->text('clearance')->nullable();
             $table->timestamps();
         });
     }
