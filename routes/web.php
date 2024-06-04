@@ -7,6 +7,8 @@ use App\Http\Controllers\StudentViolationController;
 use App\Http\Controllers\LOARequestController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\AddDropRequestController;
+use App\Http\Controllers\ShiftingRequestController;
+use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +62,16 @@ Route::get('add_drop', [AddDropRequestController::class, 'showAddDropRequestForm
     ->middleware(['auth'])
     ->name('add_drop');
 
+// Route to handle the Shifting file uploads submission
+Route::post('/shifting_request', [ShiftingRequestController::class, 'pushRequest'])
+    ->middleware(['auth'])
+    ->name('shifting_request.post');
+
+// Route to handle the view of Shifting request
+Route::get('shifting', [ShiftingRequestController::class, 'showShiftingRequestForm'])
+    ->middleware(['auth'])
+    ->name('shifting');
+
 // Route::view('home', 'layouts.home')
 //     ->middleware(['auth'])
 //     ->name('home');
@@ -95,12 +107,6 @@ Route::view('registrar', 'layouts.services.registrar')
 Route::view('evaluation', 'layouts.services.evaluation')
     ->middleware(['auth'])
     ->name('evaluation');
-
-
-
-Route::view('shifting', 'layouts.directives.shifting')
-    ->middleware(['auth'])
-    ->name('shifting');
 
 Route::get('/home', [HomeController::class, 'index'])
     ->middleware(['auth'])

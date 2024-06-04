@@ -591,6 +591,6 @@
     <div x-show="showToast" x-transition
         class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 px-6 py-4 bg-green-500 text-white rounded-md shadow-md z-50"
         x-cloak>
-        Study plan has been successfully saved. You can now proceed to submission of documents.
+        Study plan has been successfully saved.
     </div>
 </div>
