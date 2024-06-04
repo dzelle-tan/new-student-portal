@@ -30,7 +30,9 @@ Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSE
     ->middleware(['auth'])
     ->name('enrollmentSER');
 
-Route::view('/', 'welcome');
+Route::get('/', [HomeController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('home');
 
 // Route::view('home', 'layouts.home')
 //     ->middleware(['auth'])
