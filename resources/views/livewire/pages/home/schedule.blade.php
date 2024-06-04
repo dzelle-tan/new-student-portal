@@ -39,7 +39,7 @@ new class extends Component {
     <div class="flex mt-1 mb-8 space-x-1 text-sm">
         <x-icon name="calendar-days" solid class="w-5 h-5 text-gray-600"/><p>{{ date('F j, Y, l') }}</p>
     </div>
-    <div class="space-y-3">
+    <div class="space-y-3 overflow-auto max-h-[400px]">
         @if (!$classes->isEmpty())
             @foreach ($classes as $class)
                 <div class="w-full p-2 pl-3 space-y-3 border-l-4 rounded-md shadow-sm {{ $class->type === 'face-to-face' ? 'bg-indigo-50 border-primary-light-2 text-primary' : 'bg-amber-50 border-secondary-light-2 text-secondary-dark-1' }}">

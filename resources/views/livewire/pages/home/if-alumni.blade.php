@@ -41,6 +41,8 @@ new class extends Component
     </header>
 
     <div>
-        <x-primary-button>{{ __('Go To Alumni Portal') }}</x-primary-button>
+        <a href="https://alumni.plmerp24.cloud" target="_blank">
+            <x-primary-button>{{ __('Go To Alumni Portal') }}</x-primary-button>
+        </a>
     </div>
 </section>

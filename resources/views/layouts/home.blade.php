@@ -4,52 +4,49 @@
             {{ __('Home') }}
         </h2>
     </x-slot>
-    <div class="grid grid-cols-1 gap-3 py-6 mx-auto md:grid-cols-2 lg:grid-rows-6 lg:grid-cols-3 max-w-7xl sm:px-6 lg:px-8">
+    <div class="py-6 pb-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="relative grid grid-cols-1 col-span-1">
+            <div class="p-4 bg-white shadow sm:p-8 sm:rounded-md">
+                @if(\Carbon\Carbon::parse(Auth::user()->graduation_date)->isPast())
+                    {{-- Welcom Alumni --}}
+                    <livewire:pages.home.if-alumni />
+                @else
+                    {{-- Welcome <Name> --}}
+                    <livewire:pages.home.name />
+                @endif
+            </div>
+            <div class="absolute top-0 right-0 hidden h-full image-container lg:block">
+                <img src="{{ asset('images/plm.jpg') }}" class="h-full rounded-tr-md rounded-br-md"/>
+                <div class="absolute inset-0 bg-gradient-to-r from-white to-transparent"></div>
+            </div>  
+        </div>
+    </div>
+    <div class="grid grid-cols-1 gap-3 pb-6 mx-auto md:grid-cols-2 lg:grid-rows-6 lg:grid-cols-3 max-w-7xl sm:px-6 lg:px-8">
         <div class="col-span-1 space-y-3 md:col-span-2 lg:col-span-2 lg:row-span-6">
-                <livewire:pages.home.name />
+            
+            {{-- GWA Stats --}}
             <div class="p-4 bg-white shadow sm:p-8 sm:rounded-md">
                 <h3 class="text-lg font-medium">{{__("General Weighted Average (GWA)")}}</h3>
                 {!! $chart->container() !!}
                 <p class="italic text-center">School Year - Term</p>
             </div>
+            
+            {{-- University Calendar --}}
             <div class="p-4 bg-white shadow h-[40rem] sm:p-8 sm:rounded-md">
                 <livewire:pages.home.calendar />
             </div>
         </div>
-        <div class="flex flex-col col-span-1 p-4 bg-white shadow md:col-span-1 lg:row-span-1 sm:p-8 sm:rounded-md">
-            {{-- <livewire:pages.home.quote /> --}}
-            <div class="flex gap-x-2">
-                <p class="mb-1 font-semibold">Downloadables</p>
-                <x-icon name="arrow-down-tray" class="w-5 h-5" solid/>         
+        <div class="grid col-span-1 space-y-3 md:col-span-2 lg:col-span-1 lg:row-span-6">
+            <div class="p-4 bg-white sm:p-8 sm:rounded-md">
+                <livewire:pages.home.links />
             </div>
-            <a href="{{ asset('files/University-Calendar2324.pdf') }}" download class="text-gray-600 underline">
-                {{ __('OURRequestForm.pdf') }}
-            </a>
-            <a href="{{ asset('files/University-Calendar2324.pdf') }}" download class="text-gray-600 underline">
-                {{ __('UniversityCalendar2324.pdf') }}
-            </a>
-            
-            {{-- <div class="flex items-center justify-center w-full gap-x-6">
-                <a href="https://web2.plm.edu.ph/sfe/" target="_blank">
-                    <div class="space-y-2 text-center">
-                        <x-icon name="user-group" class="h-14 w-14" solid/>
-                        <p class="font-semibold">SFE</p>
-                    </div>
-                </a>
-                <a href="https://www.angpamantasan.org/" target="_blank">
-                    <div class="space-y-2 text-center">
-                        <x-icon name="newspaper" class="h-14 w-14" solid/>
-                        <p class="font-semibold text-[14px]">Ang <br /> Pamantasan</p>
-                    </div>
-                </a>
-            </div> --}}
-        </div>
-        <div class="flex flex-col justify-between col-span-1 p-4 bg-white shadow md:col-span-1 lg:row-span-3 sm:p-8 sm:rounded-md">
-            <livewire:pages.home.schedule />
-            <a href="{{ route('classes') }}" class="flex justify-end text-gray-500 underline">See more...</a>
-        </div>
-        <div class="flex flex-col col-span-1 p-4 bg-white shadow md:col-span-1 lg:row-span-2 sm:p-8 sm:rounded-md">
-            <livewire:pages.home.quote />
+            <div class="relative row-span-4 p-4 pb-20 bg-white shadow sm:p-8 sm:pb-20 sm:rounded-md">
+                <livewire:pages.home.schedule />
+                <a href="{{ route('classes') }}" class="absolute text-gray-500 underline right-8 bottom-8">See more...</a>
+            </div>
+            <div class="p-4 bg-white shadow sm:p-8 sm:rounded-md">
+                <livewire:pages.home.quote />
+            </div>
         </div>
     </div>
     {{-- <div class="py-0 sm:py-12">

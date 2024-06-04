@@ -12,7 +12,7 @@ new class extends Component {
     }
 }; ?>
 
-<div class="flex items-center p-4 bg-white shadow sm:p-8 sm:rounded-md">
+<div class="flex items-center">
     <x-icon name="fire" class="w-6 h-6 text-secondary animate-pulse"/>
     <x-icon name="building-library" class="w-6 h-6 text-primary-light-2"/>
     <h2 class="flex items-center relative w-[max-content]
