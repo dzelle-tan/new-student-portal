@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EnrollmentDownloadsController;
 use App\Http\Controllers\StudentViolationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VerifyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,5 +75,7 @@ Route::get('/home', [HomeController::class, 'index'])
     ->middleware(['auth'])
     ->name('home');
 
+Route::get('/verify', [VerifyController::class, 'verify'])
+    ->name('verify');
 
 require __DIR__.'/auth.php';
