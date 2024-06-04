@@ -395,7 +395,8 @@ new class extends Component {
         openPanel: {{ $hasRecord ? 4 : 1 }},
         showConfirmModal: false,
         studentStatus: '{{ $studentStatus }}',
-        hasRecord: {{ $hasRecord ? 'true' : 'false' }}
+        hasRecord: {{ $hasRecord ? 'true' : 'false' }},
+        requestStatus: '{{ $requestStatus }}'
     }">
     {{-- Student Information --}}
     <div class="mt-6 mb-6 lg:items-center lg:w-5/6 xl:2/3 lg:flex lg:justify-between">
@@ -480,13 +481,13 @@ new class extends Component {
             <div class="card custom-table-container mb-3">
                 <div class="card-body">
                     <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                        <button type="button" @click="openPanel = 1"
-                            class="accordion text-3xl font-normal text-black-700" 
-                            :class="{ 'opacity-50 cursor-not-allowed': currentStep < 1 }"
-                            :disabled="currentStep < 1">
-                            1. Requirements and Reminders
-                            <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 1 || hasRecord }" style="font-size: 27px;"></i>
-                        </button>
+                    <button type="button" @click="openPanel = 1"
+                        class="accordion text-3xl font-normal text-black-700" 
+                        :class="{ 'opacity-50 cursor-not-allowed text-gray-600': currentStep < 1 || requestStatus === 'Approved' }"
+                        :disabled="currentStep < 1 || requestStatus === 'Approved'">
+                        1. Requirements and Reminders
+                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 1 || hasRecord }" style="font-size: 27px;"></i>
+                    </button>
                         <div x-show="openPanel === 1" class="panel" x-transition>
                             <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">General Rules
                                 Guidelines</p>
@@ -535,13 +536,13 @@ new class extends Component {
             <div class="card custom-table-container mb-3">
                 <div class="card-body">
                     <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                        <button type="button" @click="openPanel = 2"
-                            class="accordion text-3xl font-normal text-black-700"
-                            :class="{ 'opacity-50 cursor-not-allowed': currentStep < 2 }"
-                            :disabled="currentStep < 2">
-                            2. Download Curriculum Checklist
-                            <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 2 || hasRecord }" style="font-size: 27px;"></i>
-                        </button>
+                    <button type="button" @click="openPanel = 2"
+                    class="accordion text-3xl font-normal text-black-700"
+                    :class="{ 'opacity-50 cursor-not-allowed text-gray-600': currentStep < 2 || requestStatus === 'Approved' }"
+                    :disabled="currentStep < 2 || requestStatus === 'Approved'">
+                    2. Download Curriculum Checklist
+                    <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 2 || hasRecord }" style="font-size: 27px;"></i>
+                </button>
                         <div x-show="openPanel === 2" class="panel" x-transition>
                             <br>
                             <a href="{{ route('download', 'course_checklist.xlsx') }}" class="btn btn-primary float-right" style="color: #2D349A; position: relative; bottom: 0px; left: 5px; width: 120px; height: 4ch;">
@@ -567,13 +568,13 @@ new class extends Component {
                 x-data="{ showModal: false, showConfirmSaveModal: false, showToast: false }">
                 <div class="card-body">
                     <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                        <button type="button" @click="openPanel = 3"
-                            class="accordion text-3xl font-normal text-black-700"
-                            :class="{ 'opacity-50 cursor-not-allowed': currentStep < 3 }"
-                            :disabled="currentStep < 3">
-                            3. Create your Study Plan
-                            <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 3 || hasRecord }" style="font-size: 27px;"></i>
-                        </button>
+                    <button type="button" @click="openPanel = 3"
+                    class="accordion text-3xl font-normal text-black-700"
+                    :class="{ 'opacity-50 cursor-not-allowed text-gray-600': currentStep < 3 || requestStatus === 'Approved' }"
+                    :disabled="currentStep < 3 || requestStatus === 'Approved'">
+                    3. Create your Study Plan
+                    <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 3 || hasRecord }" style="font-size: 27px;"></i>
+                </button>
                         <div x-show="openPanel === 3" class="panel" x-transition>
                             <p style="font-family: Inter, sans-serif; font-size: 26px; color: black;">Guidelines for Study
                                 Plans</p>
@@ -654,12 +655,12 @@ new class extends Component {
               <div class="card custom-table-container mb-3">
                 <div class="card-body">
                     <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                        <button type="button" @click="openPanel = 4"
-                            class="accordion text-3xl font-normal text-black-700"
-                            :class="{ 'opacity-50 cursor-not-allowed': currentStep < 4 }"
-                            :disabled="currentStep < 4">
-                            4. Await Approval
-                            <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 4 || hasRecord }" style="font-size: 27px;"></i>
+                    <button type="button" @click="openPanel = 4"
+                        class="accordion text-3xl font-normal text-black-700"
+                        :class="{ 'opacity-50 cursor-not-allowed text-gray-600': currentStep < 4 || requestStatus === 'Approved' }"
+                        :disabled="currentStep < 4 || requestStatus === 'Approved'">
+                        4. Await Approval
+                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 4 || hasRecord }" style="font-size: 27px;"></i>
                         </button>
                         <div x-show="openPanel === 4" class="panel" x-transition>
                             <p style="font-family: Inter, sans-serif; font-size: 26px; color:black; font-weight:bold;">Document Status: 
