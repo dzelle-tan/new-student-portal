@@ -6,6 +6,7 @@ use App\Http\Controllers\EnrollmentDownloadsController;
 use App\Http\Controllers\StudentViolationController;
 use App\Http\Controllers\LOARequestController;
 use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\AddDropRequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +50,16 @@ Route::get('loa', [LOARequestController::class, 'showLoaRequestForm'])
     ->middleware(['auth'])
     ->name('loa');
 
+// Route to handle the LOA file uploads submission
+Route::post('/add_drop_request', [AddDropRequestController::class, 'pushRequest'])
+->middleware(['auth'])
+->name('add_drop_request.post');
+
+// Route to show the view of Add Drop
+Route::get('add_drop', [AddDropRequestController::class, 'showAddDropRequestForm'])
+    ->middleware(['auth'])
+    ->name('add_drop');
+
 // Route::view('home', 'layouts.home')
 //     ->middleware(['auth'])
 //     ->name('home');
@@ -85,9 +96,7 @@ Route::view('evaluation', 'layouts.services.evaluation')
     ->middleware(['auth'])
     ->name('evaluation');
 
-Route::view('add_drop', 'layouts.directives.add_drop')
-    ->middleware(['auth'])
-    ->name('add_drop');
+
 
 Route::view('shifting', 'layouts.directives.shifting')
     ->middleware(['auth'])

@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             Event::class,
             BSCS_grades_seeder::class,
             CourseSeeder::class,
+            TemporaryClasses::class, // Added this seeder for temporary classes to be changed
         ]);
     }
 }
