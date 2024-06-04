@@ -417,7 +417,8 @@ new class extends Component {
         showAddDropModal: false,
         showAddDropConfirmSaveModal: false,
         showToast2: true,
-        showToast: false
+        showToast: false,
+        addDroprequestStatus: '{{ $addDroprequestStatus }}',
     }">
     {{-- Student Information --}}
     <div class="mt-6 mb-6 lg:items-center lg:w-5/6 xl:2/3 lg:flex lg:justify-between">
@@ -457,13 +458,16 @@ new class extends Component {
         <div class="card custom-table-container mb-3">
             <div class="card-body">
                 <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                    <button type="button" @click="openPanel = 1"
-                        class="accordion text-3xl font-normal text-black-700" 
-                        :class="{ 'opacity-50 cursor-not-allowed': currentStep < 1 }"
-                        :disabled="currentStep < 1">
-                        1. Requirements and Reminders
-                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 1 || hasRecord2 }" style="font-size: 27px;"></i>
-                    </button>
+                <button type="button" 
+                    class="accordion text-3xl font-normal text-black-700"
+                    :class="{
+                        'opacity-50 cursor-not-allowed  text-gray-600': currentStep < 1 || addDroprequestStatus === 'Approved'
+                    }"
+                    :disabled="currentStep < 1 || addDroprequestStatus === 'Approved'"
+                    @click="if (addDroprequestStatus !== 'Approved') { openPanel = 1 }">
+                    1. Requirements and Reminders
+                    <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 1 || hasRecord2 }" style="font-size: 27px;"></i>
+                </button>
                     <div x-show="openPanel === 1" class="panel" x-transition>
                         <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">General Rules
                             Guidelines</p>
@@ -513,10 +517,13 @@ new class extends Component {
         <div class="card custom-table-container mb-3">
             <div class="card-body">
                 <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                    <button type="button" @click="openPanel = 2"
+                <button type="button" 
                         class="accordion text-3xl font-normal text-black-700"
-                        :class="{ 'opacity-50 cursor-not-allowed': currentStep < 2 }"
-                        :disabled="currentStep < 2">
+                        :class="{
+                            'opacity-50 cursor-not-allowed  text-gray-600': currentStep < 2 || addDroprequestStatus === 'Approved'
+                        }"
+                        :disabled="currentStep < 2 || addDroprequestStatus === 'Approved'"
+                        @click="if (addDroprequestStatus !== 'Approved') { openPanel = 2 }">
                         2. Details of Change/Cancellation of Registration
                         <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 2 || hasRecord2 }" style="font-size: 27px;"></i>
                     </button>
@@ -578,13 +585,17 @@ new class extends Component {
         x-data="{ showModal: false, showConfirmSaveModal: false, showToast: false }">
             <div class="card-body">
                 <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                    <button type="button" @click="openPanel = 3"
+                <button type="button" 
                         class="accordion text-3xl font-normal text-black-700"
-                        :class="{ 'opacity-50 cursor-not-allowed': currentStep < 3 }"
-                        :disabled="currentStep < 3">
+                        :class="{
+                            'opacity-50 cursor-not-allowed  text-gray-600': currentStep < 3 || addDroprequestStatus === 'Approved'
+                        }"
+                        :disabled="currentStep < 3 || addDroprequestStatus === 'Approved'"
+                        @click="if (addDroprequestStatus !== 'Approved') { openPanel = 3 }">
                         3. Create your Study Plan
                         <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 3 || hasRecord2 }" style="font-size: 27px;"></i>
                     </button>
+
                     <div x-show="openPanel === 3" class="panel" x-transition>
                         <p style="font-family: Inter, sans-serif; font-size: 26px; color: black;">Guidelines for Study Plans</p>
                         <p class="body-font">&nbsp;&nbsp;a. Arrange your study plan considering the availability of courses. Major-specific subjects are exclusively offered in particular semesters.</p>
@@ -646,10 +657,13 @@ new class extends Component {
         <div class="card custom-table-container mb-3">
             <div class="card-body">
                 <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                    <button type="button" @click="openPanel = 4"
+                <button type="button" 
                         class="accordion text-3xl font-normal text-black-700"
-                        :class="{ 'opacity-50 cursor-not-allowed': currentStep < 4 }"
-                        :disabled="currentStep < 4">
+                        :class="{
+                            'opacity-50 cursor-not-allowed  text-gray-600': currentStep < 4 || addDroprequestStatus === 'Approved'
+                        }"
+                        :disabled="currentStep < 4 || addDroprequestStatus === 'Approved'"
+                        @click="if (addDroprequestStatus !== 'Approved') { openPanel = 4 }">
                         4. Download and Fill-up Documents
                         <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 4 || hasRecord2 }" style="font-size: 27px;"></i>
                     </button>
@@ -673,11 +687,14 @@ new class extends Component {
         <div class="card custom-table-container mb-3">
             <div class="card-body">
                 <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                    <button type="button" @click="openPanel = 5"
+                <button type="button" 
                         class="accordion text-3xl font-normal text-black-700"
-                        :class="{ 'opacity-50 cursor-not-allowed': currentStep < 5 }"
-                        :disabled="currentStep < 5">
-                        5. Document Submission and Approval
+                        :class="{
+                            'opacity-50 cursor-not-allowed  text-gray-600': currentStep < 5 || addDroprequestStatus === 'Approved'
+                        }"
+                        :disabled="currentStep < 5 || addDroprequestStatus === 'Approved'"
+                        @click="if (addDroprequestStatus !== 'Approved') { openPanel = 5 }">
+                        5. Add Drop Status and Approval
                         <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 5 || hasRecord2 }" style="font-size: 27px;"></i>
                     </button>
                     <div x-show="openPanel === 5" class="panel" x-transition>

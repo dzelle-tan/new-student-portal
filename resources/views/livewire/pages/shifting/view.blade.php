@@ -417,7 +417,8 @@ new class extends Component {
         openPanel: {{ $hasRecord2 ? 5 : 1 }},
         showConfirmModal: false,
         studentStatus: '{{ $studentStatus }}',
-        hasRecord2: {{ $hasRecord2 ? 'true' : 'false' }}
+        hasRecord2: {{ $hasRecord2 ? 'true' : 'false' }},
+        shiftingrequestStatus: '{{ $shiftingrequestStatus }}'
     }">
     {{-- Student Information --}}
     <div class="mt-6 mb-6 lg:items-center lg:w-5/6 xl:2/3 lg:flex lg:justify-between">
@@ -457,13 +458,13 @@ new class extends Component {
         <div class="card custom-table-container mb-3">
             <div class="card-body">
                 <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                    <button type="button" @click="openPanel = 1"
-                        class="accordion text-3xl font-normal text-black-700" 
-                        :class="{ 'opacity-50 cursor-not-allowed': currentStep < 1 }"
-                        :disabled="currentStep < 1">
-                        1. Requirements and Reminders
-                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 1 || hasRecord2 }" style="font-size: 27px;"></i>
-                    </button>
+                <button type="button" @click="if (shiftingrequestStatus !== 'Approved') { openPanel = 1 }"
+    class="accordion text-3xl font-normal text-black-700"
+    :class="{ 'opacity-50 cursor-not-allowed': currentStep < 1, ' text-gray-600': shiftingrequestStatus === 'Approved' }"
+    :disabled="currentStep < 1 || shiftingrequestStatus === 'Approved'">
+    1. Requirements and Reminders
+    <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 1 || hasRecord2 }" style="font-size: 27px;"></i>
+</button>
                     <div x-show="openPanel === 1" class="panel" x-transition>
                         <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">General Rules
                             Guidelines</p>
@@ -502,7 +503,7 @@ new class extends Component {
                         <div class="flex justify-end mt-4">
                             <button type="button"
                                 class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
-                                @click="openPanel = 2; currentStep = 2">Proceed to Curriculum Checklist</button>
+                                @click="if (shiftingrequestStatus !== 'Approved') { openPanel = 2; currentStep = 2 }">Proceed to Curriculum Checklist</button>
                         </div>
                     </div>
                 </div>
@@ -512,13 +513,14 @@ new class extends Component {
         <div class="card custom-table-container mb-3">
             <div class="card-body">
                 <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                    <button type="button" @click="openPanel = 2"
-                        class="accordion text-3xl font-normal text-black-700"
-                        :class="{ 'opacity-50 cursor-not-allowed': currentStep < 2 }"
-                        :disabled="currentStep < 2">
-                        2. Download Curriculum Checklist
-                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 2 || hasRecord2 }" style="font-size: 27px;"></i>
-                    </button>
+                <button type="button" @click="if (shiftingrequestStatus !== 'Approved') { openPanel = 2 }"
+    class="accordion text-3xl font-normal text-black-700"
+    :class="{ 'opacity-50 cursor-not-allowed': currentStep < 2, ' text-gray-600': shiftingrequestStatus === 'Approved' }"
+    :disabled="currentStep < 2 || shiftingrequestStatus === 'Approved'">
+    2. Download Curriculum Checklist
+    <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 2 || hasRecord2 }" style="font-size: 27px;"></i>
+</button>
+
                     <div x-show="openPanel === 2" class="panel" x-transition>
                         <br>
                         <a href="{{ route('download', 'course_checklist.xlsx') }}" class="btn btn-primary float-right" style="color: #2D349A; position: relative; bottom: 0px; left: 5px; width: 120px; height: 4ch;">
@@ -528,29 +530,29 @@ new class extends Component {
                         <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">Curriculum Checklist
                         </p>
                         <div class="flex justify-between mt-4">
-                            <button type="button"
+                        <button type="button"
                                 class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
-                                @click="openPanel = 1; currentStep = 1">Back to Requirements and Reminders</button>
-                            <button type="button"
+                                @click="if (shiftingrequestStatus !== 'Approved') { openPanel = 1; currentStep = 1 }">Back to Requirements and Reminders</button>
+                        <button type="button"
                                 class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
-                                @click="openPanel = 3; currentStep = 3">Proceed to Selecting A Program</button>
-                        </div>
+                                @click="if (shiftingrequestStatus !== 'Approved') { openPanel = 3; currentStep = 3 }">Proceed to Selecting A Program</button>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Step 3 -->
+        <!-- Step 3 --> 
         <div class="card custom-table-container mb-3 relative z-1"
             x-data="{ showProgramModal: false, showModal: false, showConfirmSaveModal: false, showToast: false }">
             <div class="card-body">
                 <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                    <button type="button" @click="openPanel = 3"
-                        class="accordion text-3xl font-normal text-black-700"
-                        :class="{ 'opacity-50 cursor-not-allowed': currentStep < 3 }"
-                        :disabled="currentStep < 3">
-                        3. Select a Program and Create your Study Plan
-                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 3 || hasRecord2 }" style="font-size: 27px;"></i>
-                    </button>
+                <button type="button" @click="if (shiftingrequestStatus !== 'Approved') { openPanel = 3 }"
+                    class="accordion text-3xl font-normal text-black-700"
+                    :class="{ 'opacity-50 cursor-not-allowed': currentStep < 3, ' text-gray-600': shiftingrequestStatus === 'Approved' }"
+                    :disabled="currentStep < 3 || shiftingrequestStatus === 'Approved'">
+                    3. Select a Program and Create your Study Plan
+                    <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 3 || hasRecord2 }" style="font-size: 27px;"></i>
+                </button>
                     <div x-show="openPanel === 3" class="panel" x-transition>
                         <p style="font-family: Inter, sans-serif; font-size: 26px; color:black;">Guidelines for Selecting a Program to Shift</p>
                             <!-- Content for letter 'a' -->
@@ -589,24 +591,21 @@ new class extends Component {
                         <p class="body-font">&nbsp;&nbsp;g. Underloaded units should also be verified by the college chairperson to ensure compliance with program requirements.</p>
 
                         <div class="flex justify-between mt-4">
-                            <button type="button"
+                        <button type="button"
                                 class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
-                                @click="openPanel = 2; currentStep = 2">Back to Download Curriculum Checklist</button>
-                            <button type="button"
+                                @click="if (shiftingrequestStatus !== 'Approved') { openPanel = 2; currentStep = 2 }">Back to Download Curriculum Checklist</button>
+                        <button type="button"
                                 class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
                                 @click="showModal = true">Create Study Plan</button>
-                            <!-- Button to proceed to submission of documents -->
-                            <button type="button"
-                                        class="btn p-2 border rounded-md text-white"
-                                        :class="{
-                                            'bg-[#2d349a] border-blue-100 cursor-pointer': isStudyPlanCompleted,
-                                            'bg-gray-400 border-gray-400 cursor-not-allowed': !isStudyPlanCompleted
-                                        }"
-                                        :disabled="!isStudyPlanCompleted"
-                                        @click="if(isStudyPlanCompleted) { openPanel = 4; currentStep = 4; $wire.pushCourseCodesFinal(); }">
-                                    Proceed to Downloading of Documents
-                                </button>
-                        </div>
+                        <button type="button"
+                                class="btn p-2 border rounded-md text-white"
+                                :class="{
+                                    'bg-[#2d349a] border-blue-100 cursor-pointer': isStudyPlanCompleted,
+                                    'bg-gray-400 border-gray-400 cursor-not-allowed': !isStudyPlanCompleted
+                                }"
+                                :disabled="!isStudyPlanCompleted"
+                                @click="if(isStudyPlanCompleted) { openPanel = 4; currentStep = 4; $wire.pushCourseCodesFinal(); }">Proceed to Downloading of Documents</button>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -666,12 +665,12 @@ new class extends Component {
         <div class="card custom-table-container mb-3">
             <div class="card-body">
                 <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                    <button type="button" @click="openPanel = 4"
+                                    <button type="button" @click="if (shiftingrequestStatus !== 'Approved') { openPanel = 4 }"
                         class="accordion text-3xl font-normal text-black-700"
-                        :class="{ 'opacity-50 cursor-not-allowed': currentStep < 4 }"
-                        :disabled="currentStep < 4">
+                        :class="{ 'opacity-50 cursor-not-allowed': currentStep < 4, ' text-gray-600': shiftingrequestStatus === 'Approved' }"
+                        :disabled="currentStep < 4 || shiftingrequestStatus === 'Approved'">
                         4. Download and Fill-up Documents
-                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 4 || hasRecord2 }" style="font-size: 27px;"></i>
+                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep > 4 || hasRecord2 }" style="font-size: 27px;"></i>
                     </button>
                     <div x-show="openPanel === 4" class="panel" x-transition>
                         <br>
@@ -685,8 +684,12 @@ new class extends Component {
                         <br>
                         <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">Note of Undertaking</p>
                         <div class="flex justify-between mt-4">
-                            <button type="button" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white" @click="openPanel = 3; currentStep = 3">Back to Create your Study Plan</button>
-                            <button type="button" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white" @click="openPanel = 5">Proceed to Document Submission and Approval</button>
+                            <button type="button"
+                                    class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
+                                    @click="if (shiftingrequestStatus !== 'Approved') { openPanel = 3; currentStep = 3 }">Back to Create your Study Plan</button>
+                            <button type="button"
+                                    class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
+                                    @click="if (shiftingrequestStatus !== 'Approved') { openPanel = 5; currentStep = 5 }">Proceed to Document Submission and Approval</button>
                         </div>
                     </div>
                 </div>
@@ -703,13 +706,13 @@ new class extends Component {
 <div class="card custom-table-container mb-3">
     <div class="card-body">
         <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-            <button type="button" @click="openPanel = 5"
-                class="accordion text-3xl font-normal text-black-700"
-                :class="{ 'opacity-50 cursor-not-allowed': currentStep < 5 }"
-                :disabled="currentStep < 5">
-                5. Document Submission and Approval
-                <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 5 || hasRecord2 }" style="font-size: 27px;"></i>
-            </button>
+        <button type="button" @click="openPanel = 5"
+    class="accordion text-3xl font-normal text-black-700"
+    :class="{ 'opacity-50 cursor-not-allowed': currentStep < 5 }"
+    :disabled="currentStep < 5">
+    5. Document Submission and Approval
+    <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 5 || hasRecord2 }" style="font-size: 27px;"></i>
+</button>
             <div x-show="openPanel === 5" class="panel" x-transition>
                 <form action="{{ route('shifting_request.post') }}" method="post" enctype="multipart/form-data">
                     @csrf
