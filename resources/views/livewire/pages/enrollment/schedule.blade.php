@@ -544,17 +544,12 @@ new class extends Component {
                         </button>
                         <div x-show="openPanel === 2" class="panel" x-transition>
                             <br>
-                            <button type="button" class="btn btn-primary float-right"
-                                style="color: #2D349A; position: relative; bottom: 0px; left: 5px; width: 120px; height: 4ch;">
-                                <i class="fas fa-download"
-                                    style="color: white; margin-right: .2rem; top: -0.2rem; position: relative; font-size: 15px;"></i>
-                                <span
-                                    style="color: white; margin-right: 0.2rem; top: -0.2rem; position: relative; font-size: 15px;">Download</span>
-                            </button>
+                            <a href="{{ route('download', 'course_checklist.xlsx') }}" class="btn btn-primary float-right" style="color: #2D349A; position: relative; bottom: 0px; left: 5px; width: 120px; height: 4ch;">
+                        <i class="fas fa-download" style="color: white; margin-right: .2rem; top: -0.2rem; position: relative; font-size: 15px;"></i>
+                        <span class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white">Download</span>
+                        </a>
                             <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">Curriculum Checklist
                             </p>
-                            <object data="http://localhost/enrollmentmod/generate-pdf" type="application/pdf" width="80%"
-                                height="400px" style="position: relative; top: 20px; left: 10%;"></object>
                             <div class="flex justify-between mt-4">
                                 <button type="button"
                                     class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
