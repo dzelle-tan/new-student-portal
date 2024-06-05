@@ -12,7 +12,7 @@ class StudentRequestModeSeeder extends Seeder
      */
     public function run(): void
     {
-        $modes = ['Cash', 'Online'];
+        $modes = ['Landbank', 'University Cashier'];
 
         foreach ($modes as $mode) {
             \App\Models\StudentRequestMode::create([

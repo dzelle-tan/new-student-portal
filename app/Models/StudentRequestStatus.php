@@ -14,4 +14,13 @@ class StudentRequestStatus extends Model
         'created_at',
         'updated_at',
     ];
+
+    protected $fillable = [
+        'status',
+    ];
+
+    public function requests(): HasMany
+    {
+        return $this->hasMany(StudentRequest::class);
+    }
 }

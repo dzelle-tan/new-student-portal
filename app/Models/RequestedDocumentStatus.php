@@ -14,4 +14,13 @@ class RequestedDocumentStatus extends Model
         'created_at',
         'updated_at',
     ];
+
+    protected $fillable = [
+        'status',
+    ];
+
+    public function requestedDocs(): HasMany
+    {
+        return $this->hasMany(RequestedDocument::class);
+    }
 }
