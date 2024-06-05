@@ -14,4 +14,13 @@ class RegistrationStatus extends Model
         'created_at',
         'updated_at',
     ];
+
+    /**
+     * Get the terms associated with the registration status.
+     */
+    public function terms(): HasMany
+    {
+        return $this->hasMany(StudentTerm::class, 'registration_status_id');
+    }
+
 }

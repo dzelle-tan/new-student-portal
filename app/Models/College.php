@@ -14,4 +14,9 @@ class College extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function programs()
+    {
+        return $this->hasMany(Program::class);
+    }    
 }
