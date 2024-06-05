@@ -23,9 +23,9 @@ Route::get('/enrollment/schedule', [EnrollmentDownloadsController::class, 'downl
     ->middleware(['auth'])
     ->name('enrollmentSchedule');
 
-// Route::get('/enrollment/fees', [EnrollmentDownloadsController::class, 'downloadFee'])
-//     ->middleware(['auth'])
-//     ->name('enrollmentFee');
+Route::get('/enrollment/fees', [EnrollmentDownloadsController::class, 'downloadFee'])
+    ->middleware(['auth'])
+    ->name('enrollmentFee');
 
 // Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSER'])
 //     ->middleware(['auth'])

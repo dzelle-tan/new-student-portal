@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\StudentRecord;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 
 new class extends Component {
@@ -12,11 +13,11 @@ new class extends Component {
     {
         $this->user = Auth::user();
         $this->record = StudentRecord::where('student_no', $this->user->student_no)
-            ->with('fee')
-            ->latest()
+            ->orderBy('aysem_id', 'desc')
             ->first();
     }
-}; ?>
+};
+?>
 
 <div class="w-full mt-4 overflow-x-auto md:flex md:space-x-8">
     <div class="space-y-8 md:w-96">
@@ -24,8 +25,8 @@ new class extends Component {
             <caption class="px-4 py-3 text-xs font-medium tracking-wider uppercase border-b border-gray-200 text-table-header bg-gray-50">{{_("TUITION FEE")}}</caption>
             <tbody>
                 <tr class="text-sm border-b border-gray-200">
-                    <td class="px-4 py-3">{{ __("Tuition Fee (:units units)", ['units' => $record->fee->tuition_units]) }}</td>
-                    <td class="px-4 py-3">{{ $record->fee->tuition_fee }}</td>
+                    <td class="px-4 py-3">{{ __("Tuition Fee (:units units)", ['units' => $record->tuition_units ?? 0]) }}</td>
+                    <td class="px-4 py-3">{{ number_format($record->tuition_fee, 2) }}</td>
                 </tr>
             </tbody>
         </table>
@@ -35,31 +36,31 @@ new class extends Component {
             <tbody>
                 <tr class="text-sm border-b border-gray-200">
                     <td class="px-4 py-3">{{ __("Athletic Fee") }}</td>
-                    <td class="px-4 py-3">{{ $record->fee->athletic_fee }}</td>
+                    <td class="px-4 py-3">{{ number_format($record->athletic_fee, 2) }}</td>
                 </tr>
                 <tr class="text-sm border-b border-gray-200">
                     <td class="px-4 py-3">{{ __("Cultural Activity") }}</td>
-                    <td class="px-4 py-3">{{ $record->fee->cultural_activity }}</td>
+                    <td class="px-4 py-3">{{ number_format($record->cultural_activity, 2) }}</td>
                 </tr>
                 <tr class="text-sm border-b border-gray-200">
                     <td class="px-4 py-3">{{ __("Guidance Fee") }}</td>
-                    <td class="px-4 py-3">{{ $record->fee->guidance_fee }}</td>
+                    <td class="px-4 py-3">{{ number_format($record->guidance_fee, 2) }}</td>
                 </tr>
                 <tr class="text-sm border-b border-gray-200">
                     <td class="px-4 py-3">{{ __("Library Fee") }}</td>
-                    <td class="px-4 py-3">{{ $record->fee->library_fee }}</td>
+                    <td class="px-4 py-3">{{ number_format($record->library_fee, 2) }}</td>
                 </tr>
                 <tr class="text-sm border-b border-gray-200">
                     <td class="px-4 py-3">{{ __("Medical/Dental Fee") }}</td>
-                    <td class="px-4 py-3">{{ $record->fee->medical_dental_fee }}</td>
+                    <td class="px-4 py-3">{{ number_format($record->medical_dental_fee, 2) }}</td>
                 </tr>
                 <tr class="text-sm border-b border-gray-200">
                     <td class="px-4 py-3">{{ __("Registration Fee") }}</td>
-                    <td class="px-4 py-3">{{ $record->fee->registration_fee }}</td>
+                    <td class="px-4 py-3">{{ number_format($record->registration_fee ?? 0, 2) }}</td>
                 </tr>
                 <tr class="text-sm border-b border-gray-200">
                     <td class="px-4 py-3">{{ __("Student Welfare Fee") }}</td>
-                    <td class="px-4 py-3">74.00</td>
+                    <td class="px-4 py-3">{{ number_format($record->student_welfare, 2) }}</td>
                 </tr>
             </tbody>
         </table>
@@ -69,8 +70,8 @@ new class extends Component {
             <caption class="px-4 py-3 text-xs font-medium tracking-wider uppercase border-b border-gray-200 text-table-header bg-gray-50">{{_("LABORATORY FEE")}}</caption>
             <tbody>
                 <tr class="text-sm border-b border-gray-200">
-                    <td class="px-4 py-3">{{ __("Category (:units Laboratory)", ['units' => $record->fee->laboratory_category]) }}</td>
-                    <td class="px-4 py-3">{{ $record->fee->laboratory_fee }}</td>
+                    <td class="px-4 py-3">{{ __("Category (:units Laboratory)", ['units' => $record->laboratory_category ?? 0]) }}</td>
+                    <td class="px-4 py-3">{{ number_format($record->laboratory_fee, 2) }}</td>
                 </tr>
             </tbody>
         </table>
@@ -80,15 +81,15 @@ new class extends Component {
             <tbody>
                 <tr class="text-sm border-b border-gray-200">
                     <td class="px-4 py-3">{{ __("Development Fund") }}</td>
-                    <td class="px-4 py-3">{{ $record->fee->registration_fee }}</td>
+                    <td class="px-4 py-3">{{ number_format($record->development_fund, 2) }}</td>
                 </tr>
                 <tr class="text-sm border-b border-gray-200">
                     <td class="px-4 py-3">{{ __("Ang Pamantasan Fee") }}</td>
-                    <td class="px-4 py-3">{{ $record->fee->ang_pamantasan_fee }}</td>
+                    <td class="px-4 py-3">{{ number_format($record->ang_pamantasan_fee, 2) }}</td>
                 </tr>
                 <tr class="text-sm border-b border-gray-200">
                     <td class="px-4 py-3">{{ __("Supreme Student Council") }}</td>
-                    <td class="px-4 py-3">{{ $record->fee->ssc_fee }}</td>
+                    <td class="px-4 py-3">{{ number_format($record->ssc_fee, 2) }}</td>
                 </tr>
             </tbody>
         </table>
