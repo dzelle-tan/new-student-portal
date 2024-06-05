@@ -28,6 +28,8 @@ new class extends Component
             ->with(['aysem', 'block.classes.grades', 'block.classes.course'])
             ->orderBy('id', 'desc')->get();
             // dd($this->terms);
+
+            // dd($this->terms->block->classes);
     }
 
     // Fetches the program titles associated with the student's terms
