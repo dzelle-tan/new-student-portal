@@ -1,16 +1,15 @@
 <?php
 
 use App\Models\Student;
-use App\Models\StudentRecord;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\StudentTerm;
 use Illuminate\Support\Facades\Auth;
-
 use Livewire\Volt\Component;
 
 new class extends Component {
 
-    public StudentRecord $record;
+    public $record;
     public Student $user;
+    public $programTitle;
 
     /**
      * Mount the component.
@@ -19,18 +18,23 @@ new class extends Component {
     {
         $this->user = Auth::user();
         $this->getStudentClass();
+        $latestTerm = $this->user->terms()->latest()->first();
+        $this->programTitle = $latestTerm->program->program_title ?? 'N/A';
     }
 
     public function getStudentClass(): void
     {
-        $this->record = StudentRecord::where('student_no', $this->user->student_no)
-                    ->with('classes')
-                    ->orderBy('school_year', 'desc')
-                    ->orderBy('semester', 'desc')
+        $this->record = StudentTerm::where('student_no', $this->user->student_no)
+                    ->with([
+                        'block.classes.course',
+                        'block.classes.classSchedules.classMode',
+                        'block.classes.classSchedules.room.building'
+                    ])
+                    ->orderBy('aysem_id', 'desc')
                     ->first();
-
     }
-}; ?>
+};
+?>
 
 <div>
     {{-- Student Information --}}
@@ -48,11 +52,11 @@ new class extends Component {
         <div>
             <div>
                 <x-info-label class="w-24">{{_("Program:")}}</x-info-label>
-                <span>{{ $user->degree_program }}</span>
+                <span>{{ $programTitle }}</span>
             </div>
             <div>
                 <x-info-label class="w-24">{{_("A.Y Term:")}} </x-info-label>
-                <span>{{ $record->school_year }} - Term {{ $record->semester }} </span>
+                <span>{{ $record->aysem->academic_year_code }} - Term {{ $record->aysem->semester }} </span>
             </div>
         </div>
     </div>
@@ -72,16 +76,18 @@ new class extends Component {
                 </tr>
             </thead>
             <tbody>
-                @foreach ($record->classes as $class)
-                    <tr class="text-sm border-b border-gray-200">
-                        <td class="px-4 py-3">{{ $class->code }}</td>
-                        <td class="px-4 py-3">{{ $class->section }}</td>
-                        <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->name }}</td>
-                        <td class="px-4 py-3 ">{{ $class->units }} </td>
-                        <td class="px-4 py-3">{{ $class->day }} {{ date('g:i A', strtotime($class->start_time)) }} {{_("-")}} {{ date('g:i A', strtotime($class->end_time)) }}</td>
-                        <td class="px-4 py-3">{{ ucfirst($class->type) }}</td>
-                        <td class="px-4 py-3">{{ $class->room }}</td>
-                    </tr>
+                @foreach ($record->block->classes as $class)
+                    @foreach ($class->classSchedules as $schedule)
+                        <tr class="text-sm border-b border-gray-200">
+                            <td class="px-4 py-3">{{ $class->course->subject_code }}</td>
+                            <td class="px-4 py-3">{{ $record->block->section }}</td>
+                            <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->course->subject_title }}</td>
+                            <td class="px-4 py-3 ">{{ $class->course->units }} </td>
+                            <td class="px-4 py-3">{{ $schedule->day }} {{ date('g:i A', strtotime($schedule->start_time)) }} {{_("-")}} {{ date('g:i A', strtotime($schedule->end_time)) }}</td>
+                            <td class="px-4 py-3">{{ ucfirst($schedule->classMode->mode_type) }}</td>
+                            <td class="px-4 py-3">{{ $schedule->room->room_name }} - {{ $schedule->room->building->building_name }}</td>
+                        </tr>
+                    @endforeach
                 @endforeach
             </tbody>
         </table>

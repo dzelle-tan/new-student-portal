@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\StudentRecord;
+use App\Models\StudentTerm;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -12,7 +12,7 @@ use Livewire\Volt\Component;
 new class extends Component {
 
     public $step = 1;
-    public StudentRecord $record;
+    public StudentTerm $record;
 
     /**
      * Mount the component.
@@ -21,10 +21,11 @@ new class extends Component {
     {
         $this->user = Auth::user();
 
-        $this->record = StudentRecord::where('student_no', $this->user->student_no)
-                        ->orderBy('school_year', 'desc') // First order by 'school_year'
-                        ->orderBy('semester', 'desc')       // Then order by 'term' within the same 'school_year'
-                        ->first(); // Fetches the most recent record based on these fields
+        // Fetches the most recent term based on 'aysem_id' to get the latest academic year and semester
+        $this->record = StudentTerm::where('student_no', $this->user->student_no)
+                        ->orderBy('aysem_id', 'desc')
+                        ->with(['aysem', 'block.classes.course', 'block.classes.grades'])
+                        ->first();
 
     }
 
@@ -48,9 +49,9 @@ new class extends Component {
         {{-- Enrollment Step 1 --}}
         @if($step == 1)
             <div class="lg:py-2 lg:px-4">
-                {{-- <x-nav-link  href="{{ route('enrollmentSchedule') }}">
+                <x-nav-link  href="{{ route('enrollmentSchedule') }}">
                     <button class="mt-8 w-50">Download Schedule</button>
-                </x-nav-link > --}}
+                </x-nav-link > 
                 <div class="flex items-center justify-between mb-10">
                     <h2 class="text-2xl font-semibold text-gray-700">Class Schedule</h2>
                     <a href="{{ route('enrollmentSchedule') }}" class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary">

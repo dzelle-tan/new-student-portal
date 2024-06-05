@@ -2,11 +2,11 @@
 
 use Livewire\Volt\Component;
 
-use App\Models\StudentRecord;
+use App\Models\StudentTerm;
 use Illuminate\Support\Facades\Auth;
 
 new class extends Component {
-    public StudentRecord $record;
+    public StudentTerm $record;
 
     /**
      * Mount the component.
@@ -17,10 +17,10 @@ new class extends Component {
 
         // Fetch the latest record based on 'school_year' and 'term'.
         // Assume 'term' needs to be considered after 'school_year' for proper chronological order.
-        $this->record = StudentRecord::where('student_no', $this->user->student_no)
-                        ->orderBy('school_year', 'desc') // First order by 'school_year'
-                        ->orderBy('semester', 'desc')       // Then order by 'term' within the same 'school_year'
-                        ->first(); // Fetches the most recent record based on these fields
+        $this->record = StudentTerm::where('student_no', $this->user->student_no)
+                        ->orderBy('aysem_id', 'desc')
+                        ->with(['aysem', 'block.classes.course', 'block.classes.grades'])
+                        ->first();
     }
 }; ?>
 
