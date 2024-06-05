@@ -12,7 +12,7 @@ class OffenseTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        $offenseTypes = ['Minor', 'Major', 'Grave']; // TODO: Temporary
+        $offenseTypes = ['Light Offense', 'Less Grave Offense', 'Grave Offense']; // TODO: Temporary
 
         foreach ($offenseTypes as $offenseType) {
             \App\Models\OffenseType::create([

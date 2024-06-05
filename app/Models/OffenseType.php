@@ -14,4 +14,11 @@ class OffenseType extends Model
         'created_at',
         'updated_at',
     ];
+
+    protected $fillable = ['type'];
+
+    public function violations() : HasMany
+    {
+        return $this->hasMany(StudentViolation::class, 'offense_type_id');
+    }
 }

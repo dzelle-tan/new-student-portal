@@ -35,14 +35,10 @@ class DatabaseSeeder extends Seeder
             BlockSeeder::class,
             RegistrationStatusSeeder::class,
             StudentTermSeeder::class,
-            StudentRecordSeeder::class,
-
-            // AcademicYearSeeder::class,
-            // RegistrationStatusSeeder::class,
-            // DaySeeder::class,
-            // ClassModeSeeder::class,
+            BlockSeeder::class,
+            OffenseTypeSeeder::class,
+            StudentViolationSeeder::class,
             // FeeStatusSeeder::class,
-            // OffenseTypeSeeder::class,
             // BuildingSeeder::class,
         ]);
     }
