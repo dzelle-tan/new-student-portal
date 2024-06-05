@@ -124,12 +124,24 @@ class Student extends Model implements AuthenticatableContract
         return $this->hasMany(StudentRequest::class, 'student_no', 'student_no');
     }
 
+    public function grades(): HasMany
+    {
+        return $this->hasMany(Grade::class, 'student_no');
+    }
+    
     protected static function booted()
     {
         static::created(function ($student) {
-            $randomPassword = Str::random(6);
+            // $student->generatePLMEmail();
+            $randomPassword = $student->student_no;
             $student->storePassword($randomPassword);
             StudentCredential::addToPendingCredentials($student->student_no, $randomPassword);
         });
     }
+
+    public function records(): HasMany
+    {
+        return $this->hasMany(StudentRecord::class, 'student_no');
+    }
+
 }

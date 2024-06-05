@@ -14,4 +14,12 @@ class ClassMode extends Model
         'created_at',
         'updated_at',
     ];
+
+    /**
+     * Get the class schedules for the class mode.
+     */
+    public function classSchedules(): HasMany
+    {
+        return $this->hasMany(ClassSchedule::class);
+    }    
 }

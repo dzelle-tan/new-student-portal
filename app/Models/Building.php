@@ -14,4 +14,12 @@ class Building extends Model
         'created_at',
         'updated_at',
     ];
+
+    /**
+     * Get the rooms for the building.
+     */
+    public function rooms(): HasMany
+    {
+        return $this->hasMany(Room::class);
+    }    
 }

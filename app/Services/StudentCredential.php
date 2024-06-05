@@ -18,12 +18,12 @@ class StudentCredential
     {
         PendingEmailStudentPortal::create([
             'student_no' => $studentId,
-            'temp_password' => $tempPassword,
+            'temp_password' => $studentId,
         ]);
 
         PendingEmailPLMEmail::create([
             'student_no' => $studentId,
-            'temp_password' => $tempPassword,
+            'temp_password' => $studentId,
         ]);
     }
 
