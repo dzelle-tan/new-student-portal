@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Classes extends Model
@@ -50,11 +51,11 @@ class Classes extends Model
         return $this->hasMany(Grade::class, 'class_id');
     }    
     
-    // /**
-    //  * Get the professor for the class.
-    //  */
-    // public function instructor()
-    // {
-    //     return $this->belongsTo(Instructor::class);
-    // }    
+    /**
+     * Get the professor for the class.
+     */
+    public function instructors(): BelongsToMany
+    {
+        return $this->belongsToMany(Instructor::class,  'class_faculty', 'class_id', 'instructor_id');
+    }    
 }

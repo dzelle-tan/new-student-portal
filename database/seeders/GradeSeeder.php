@@ -19,7 +19,7 @@ class GradeSeeder extends Seeder
         $data = [];
 
         // Generating grades for classes 1 to 47 for multiple students
-        for ($classId = 1; $classId <= 7; $classId++) {
+        for ($classId = 1; $classId <= 11; $classId++) {
             $remarks = $remarksOptions[array_rand($remarksOptions)];
             $grade = $grades[array_rand($grades)];
             $completionGrade = $grades[array_rand($grades)];

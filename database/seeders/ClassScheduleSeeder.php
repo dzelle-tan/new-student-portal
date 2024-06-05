@@ -77,6 +77,50 @@ class ClassScheduleSeeder extends Seeder
                 'class_mode_id' => 1,
                 'room_id' => 1,
             ],
+
+            // Operating System (Lec)
+            [
+                'day' => 'Monday',
+                'start_time' => '13:00:00',
+                'end_time' => '15:00:00',
+                'schedule_name' => 'Afternoon Lecture',
+                'class_id' => 8,
+                'class_mode_id' => 2,
+                'room_id' => 1,
+            ],
+
+            // Operating System (Lab)
+            [
+                'day' => 'Monday',
+                'start_time' => '09:00:00',
+                'end_time' => '12:00:00',
+                'schedule_name' => 'Afternoon Lecture',
+                'class_id' => 9,
+                'class_mode_id' => 1,
+                'room_id' => 1,
+            ],
+            
+            // Intelligent System (Lec) 
+            [
+                'day' => 'Monday',
+                'start_time' => '09:00:00',
+                'end_time' => '12:00:00',
+                'schedule_name' => 'Afternoon Lecture',
+                'class_id' => 10,
+                'class_mode_id' => 1,
+                'room_id' => 1,
+            ],
+
+            // Intelligent System (Lab)
+            [
+                'day' => 'Monday',
+                'start_time' => '09:00:00',
+                'end_time' => '12:00:00',
+                'schedule_name' => 'Afternoon Lecture',
+                'class_id' => 11,
+                'class_mode_id' => 2,
+                'room_id' => 1,
+            ],            
             // [
             //     'day' => 'Wednesday',
             //     'start_time' => '16:00:00',

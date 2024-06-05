@@ -37,7 +37,6 @@ class DatabaseSeeder extends Seeder
             BlockSeeder::class,
             RegistrationStatusSeeder::class,
             StudentTermSeeder::class,
-            BlockSeeder::class,
             OffenseTypeSeeder::class,
             StudentViolationSeeder::class,
             ClassSeeder::class,
@@ -57,7 +56,10 @@ class DatabaseSeeder extends Seeder
             StudentRequestSeeder::class,
             RequestedDocumentSeeder::class,
             SemesterSeeder::class,
-            EventSeeder::class,
+            EventSeeder::class,            
+            InstructorSeeder::class,
+            ClassFacultySeeder::class,
+
         ]);
     }
 }
