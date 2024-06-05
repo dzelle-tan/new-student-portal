@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\StudentRecord;
+use App\Models\StudentTerm;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,11 +16,14 @@ class EnrollmentDownloadsController extends Controller
     public function downloadSchedule()
     {
         $this->user = Auth::user();
-        $this->record = StudentRecord::where('student_no', $this->user->student_no)
-            ->with('classes')
-            ->orderBy('school_year', 'desc') // First order by 'school_year'
-            ->orderBy('semester', 'desc')       // Then order by 'term' within the same 'school_year'
-            ->first(); // Fetches the most recent record based on these fields
+        $this->record = StudentTerm::where('student_no', $this->user->student_no)
+                    ->with([
+                        'block.classes.course',
+                        'block.classes.classSchedules.classMode',
+                        'block.classes.classSchedules.room.building'
+                    ])
+                    ->orderBy('aysem_id', 'desc')
+                    ->first();
 
         $pdf = Pdf::loadView('livewire.pages.enrollment.downloadables.enrollment-schedule-pdf', [
             'user' => $this->user,
