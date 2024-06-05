@@ -13,4 +13,11 @@ class Instructor extends Model
         'created_at',
         'updated_at',
     ];
+    /**
+     * Get the classes for the professor.
+     */
+    public function classes()
+    {
+        return $this->hasMany(Classes::class);
+    }    
 }

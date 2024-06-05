@@ -38,5 +38,13 @@ class Block extends Model
     public function aysem(): BelongsTo
     {
         return $this->belongsTo(Aysem::class);
+    }
+    
+    /**
+     * Get the classes for the block.
+     */
+    public function classes(): HasMany
+    {
+        return $this->hasMany(Classes::class, 'block_id');
     }    
 }

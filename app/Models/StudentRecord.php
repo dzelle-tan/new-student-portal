@@ -37,5 +37,13 @@ class StudentRecord extends Model
     public function aysem(): BelongsTo
     {
         return $this->belongsTo(Aysem::class);
+    }
+    
+    /**
+     * Get the classes associated with the student record.
+     */
+    public function classes()
+    {
+        return $this->hasManyThrough(ClassSchedule::class, Classes::class, 'student_record_id', 'class_id');
     }    
 }

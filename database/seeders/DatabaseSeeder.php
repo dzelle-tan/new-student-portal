@@ -39,8 +39,13 @@ class DatabaseSeeder extends Seeder
             OffenseTypeSeeder::class,
             StudentViolationSeeder::class,
             ClassSeeder::class,
-            // FeeStatusSeeder::class,
-            // BuildingSeeder::class,
+            BuildingSeeder::class,
+            RoomSeeder::class,
+            ClassModeSeeder::class,
+            ClassScheduleSeeder::class,
+            StudentRecordSeeder::class,
+            FeeStatusSeeder::class,
+
         ]);
     }
 }

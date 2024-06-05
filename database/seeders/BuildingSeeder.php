@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Building;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,7 +21,7 @@ class BuildingSeeder extends Seeder
         ];
 
         foreach ($buildings as $building) {
-            \App\Models\Building::create($building);
+            Building::create($building);
         }
     }
 }

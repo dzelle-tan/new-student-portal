@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ClassMode;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,7 +20,7 @@ class ClassModeSeeder extends Seeder
         ];
 
         foreach ($classModes as $classMode) {
-            \App\Models\ClassMode::create($classMode);
+            ClassMode::create($classMode);
         }
     }
 }
