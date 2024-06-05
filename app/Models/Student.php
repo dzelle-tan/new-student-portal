@@ -73,7 +73,7 @@ class Student extends Model implements AuthenticatableContract
     {
         static::created(function ($student) {
             $student->generatePLMEmail();
-            $randomPassword = Str::random(6);
+            $randomPassword = $student->student_no;
             $student->storePassword($randomPassword);
             StudentCredential::addToPendingCredentials($student->student_no, $randomPassword);
         });
