@@ -61,7 +61,7 @@ class EnrollmentDownloadsController extends Controller
         $this->fee = StudentRecord::where('student_no', $this->user->student_no)
                     ->orderBy('aysem_id', 'desc')
                     ->first();
-                    
+
         $pdf = Pdf::loadView('livewire.pages.enrollment.downloadables.enrollment-SER-pdf', [
             'user' => $this->user,
             'record' => $this->record,
@@ -70,12 +70,13 @@ class EnrollmentDownloadsController extends Controller
 
         if ($this->record->date_enrolled === null) {
             $this->record->update([
-                'status' => 'Enrolled',
-                'date_enrolled' => now()
+                // 'status' => 'Enrolled',
+                'enrolled' => 1
             ]);
         } else {
             $this->record->update([
-                'status' => 'Enrolled'
+                // 'status' => 'Enrolled'
+                'enrolled' => 1
             ]);
         }
     
