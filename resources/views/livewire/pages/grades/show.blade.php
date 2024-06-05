@@ -2,7 +2,7 @@
 
 use App\Models\Student;
 use App\Models\StudentRecord;
-
+use App\Models\StudentTerm;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
@@ -15,11 +15,13 @@ new class extends Component
     public Collection $terms;
     public Student $user;
     public $totalGradePoints = 0;
+    public $latestProgramTitle;
 
     public function mount(): void
     {
         $this->user = Auth::user();
         $this->getAcademicYear();
+        $this->getLatestProgramTitle();
     }
 
     // Fetches the authenticated user's associated grades and academic year
@@ -33,7 +35,20 @@ new class extends Component
                             ->orderBy('id', 'desc')
                             ->get();
     }
+    // Fetches the program titles associated with the student's terms
+    public function getLatestProgramTitle(): void
+    {
+        $latestTerm = StudentTerm::where('student_no', $this->user->student_no)
+                        ->with('program')
+                        ->latest('student_term_id')
+                        ->first();
 
+        if ($latestTerm) {
+            $this->latestProgramTitle = $latestTerm->program->program_title;
+        } else {
+            $this->latestProgramTitle = "No Program Found";
+        }
+    }
     // Extracts user input from dropdown
     public function updateSelectedTerm($value): void
     {
@@ -61,7 +76,8 @@ new class extends Component
             <div>
                 <div>
                     <x-info-label class="w-24">{{_("Program:")}}</x-info-label>
-                    <span>{{ $user->degree_program }}</span>
+                    <!-- <span>{{ $user->degree_program }}</span> -->
+                    <span>{{ $latestProgramTitle }}</span>
                 </div>
                 <div>
                     <x-info-label class="w-24">{{_("A.Y-Term:")}}</x-info-label>
