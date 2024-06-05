@@ -46,9 +46,8 @@ new class extends Component
     {
         $this->selectedTerm = $value;
     }
-}; 
+};
 ?>
-
 <div class="space-y-3">
     <div class="p-4 pt-3 bg-white shadow sm:p-8 sm:pt-6 sm:rounded-md">
         <img src="{{ asset('images/plm-logo-with-header.png') }}" alt="PLM logo" class="h-16">
@@ -105,7 +104,7 @@ new class extends Component
                                 @foreach ($class->grades as $grade)
                                     <tr class="text-sm border-b border-gray-200">
                                         <td class="px-4 py-3">{{ $class->course->subject_code }}</td>
-                                        <td class="px-4 py-3">{{ $class->section }}</td>
+                                        <td class="px-4 py-3">{{ $term->block->section }}</td>
                                         <td class="px-4 py-3">{{ $class->course->units }}</td>
                                         <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->course->subject_title }}</td>
                                         <td class="px-4 py-3">{{ $grade->grade }}</td>
