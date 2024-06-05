@@ -27,9 +27,9 @@ Route::get('/enrollment/fees', [EnrollmentDownloadsController::class, 'downloadF
     ->middleware(['auth'])
     ->name('enrollmentFee');
 
-// Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSER'])
-//     ->middleware(['auth'])
-//     ->name('enrollmentSER');
+Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSER'])
+    ->middleware(['auth'])
+    ->name('enrollmentSER');
 
 Route::get('/', [HomeController::class, 'index'])
     ->middleware(['auth'])
