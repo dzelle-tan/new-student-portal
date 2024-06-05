@@ -1,5 +1,6 @@
 <?php
 use App\Models\StudentRequest;
+use App\Models\DocumentType;
 use Illuminate\Database\Eloquent\Collection;
 
 use Livewire\Volt\Component;
@@ -15,23 +16,23 @@ new class extends Component {
         // Retrieve the authenticated user
         $this->user = Auth::user();
         $this->studentRequests = StudentRequest::where('student_no', $this->user->student_no)
-                                ->with('documents')
+                                ->with(['documents', 'studentRequestStatus', 'studentRequestMode'])
                                 ->get();
 
         $this->modalData = $this->studentRequests->first();
 
         $this->statusColors = [
-            'Released' => 'text-green-700',
+            'Ready' => 'text-green-700',
             'Pending' => 'text-yellow-600',
-            'For Claiming' => 'text-red-600',
+            'Claimed' => 'text-red-600',
         ];
     }
 
     public function showRequestInfo($requestId)
     {
-        $this->modalData = StudentRequest::find($requestId);
+        $this->modalData = StudentRequest::with(['documents', 'studentRequestStatus', 'studentRequestMode'])->find($requestId);
         $this->dispatch('open-modal', name : 'request_info');
-}
+    }
 }; ?>
 
 <div class="space-y-3">
@@ -55,15 +56,15 @@ new class extends Component {
             @foreach ($studentRequests as $request)
                 @foreach ($request->documents as $index => $document)
                     <tr class="text-sm {{ $index === count($request->documents) - 1 ? 'border-b border-gray-200' : '' }}">
-                        <td class="px-4 py-3">{{ $document->document_name }}</td>
+                        <td class="px-4 py-3">{{ $document->documentType->document_name }}</td>
                         <td class="px-4 py-3">{{ $document->no_of_copies }}</td>
                         @if ($index === 0)
                             <td class="px-4 py-3">{{ $request->receipt_no }}</td>
                             <td class="px-4 py-3 min-w-[50px] max-w-[200px] whitespace-normal">{{ $request->purpose }}</td>
-                            <td class="px-4 py-3">{{ $request->total }}</td>
+                            <td class="px-4 py-3">₱{{ $request->total }}</td>
                             <td class="px-4 py-3">{{ date('M d, Y', strtotime($request->expected_release)) }}</td>
                             <td class="px-4 py-3">{{ date('M d, Y', strtotime($request->date_requested)) }}</td>
-                            <td class="px-4 py-3 {{ $statusColors[$request->status] ?? 'text-gray-500' }}">{{ $request->status }}</td>
+                            <td class="px-4 py-3 {{ $statusColors[$request->studentRequestStatus->status] ?? 'text-gray-500' }}">{{ $request->studentRequestStatus->status }}</td>
                             <td class="px-4 py-3">
                                 <button id="button-{{ $request->id }}" wire:click="showRequestInfo({{ $request->id }})">
                                     {{_('(i)') }}
@@ -82,20 +83,20 @@ new class extends Component {
                         <table>
                             <thead>
                                 <th class="px-4 py-3 font-medium">Document Name</th>
-                                <th class="px-4 py-3 font-medium">Amount</th>
                                 <th class="px-4 py-3 font-medium">No. of Copies</th>
+                                <th class="px-4 py-3 font-medium">Amount</th>
                             </thead>
                             <tbody>
                             @foreach ($modalData->documents as $document)
                                 <tr class="text-sm border-b border-gray-200">
-                                    <td class="px-4 py-3">{{ $document->document_name }}</td>
-                                    <td class="px-4 py-3">{{ $document->amount }}</td>
+                                    <td class="px-4 py-3">{{ $document->documentType->document_name }}</td>
                                     <td class="px-4 py-3">{{ $document->no_of_copies }}</td>
+                                    <td class="px-4 py-3">₱{{ $document->no_of_copies * $document->documentType->price }}</td>
                                 </tr>
                             @endforeach
                                 <tr class="text-sm" >
                                     <td class="px-4 py-3 font-medium">Mode of Payment</td>
-                                    <td class="px-4 py-3 font-medium">{{ $modalData->mode }}</td>
+                                    <td class="px-4 py-3 font-medium">{{ $modalData->studentRequestMode->mode }}</td>
                                 </tr>
                                 <tr class="text-sm" >
                                     <td class="px-4 py-3 font-medium">Purpose</td>
@@ -107,7 +108,7 @@ new class extends Component {
                                 </tr>
                                 <tr class="text-sm" >
                                     <td class="px-4 py-3 font-medium">Registrar Name</td>
-                                    <td class="px-4 py-3 font-medium">{{ $modalData->registrar_name }}</td>
+                                    <td class="px-4 py-3 font-medium">{{ $modalData->registrar_name ?? '-' }}</td>
                                 </tr>
                                 <tr class="text-sm" >
                                     <td class="px-4 py-3 font-medium">Total</td>

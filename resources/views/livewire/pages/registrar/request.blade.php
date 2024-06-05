@@ -317,13 +317,13 @@ new class extends Component
                                 <tr class="text-sm">
                                     <td class="px-4 py-2 max-w-[300px] whitespace-normal">{{ $value['document_name'] }}</td>
                                     <td class="px-4 py-2">{{ $value['no_of_copies'] }}</td>
-                                    <td class="px-4 py-2">{{ $value['amount'] }}</td>
+                                    <td class="px-4 py-2">₱{{ $value['amount'] }}</td>
                                 </tr>
                                 @endforeach
                                 <tr class="text-sm border-t border-gray-300 border-dashed">
                                     <td class="px-4 py-2 max-w-[300px] whitespace-normal"></td>
                                     <td class="px-4 py-2 text-right">{{_("Total:")}}</td>
-                                    <td class="px-4 py-2 font-medium">{{ $total }}</td>
+                                    <td class="px-4 py-2 font-medium">₱{{ $total }}</td>
                                 </tr>
                         </tbody>
                     </table>
