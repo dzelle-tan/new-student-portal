@@ -714,6 +714,7 @@ new class extends Component {
     <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 5 || hasRecord2 }" style="font-size: 27px;"></i>
 </button>
             <div x-show="openPanel === 5" class="panel" x-transition>
+                @if ($shiftingrequestStatus == "Rejected")
                 <form action="{{ route('shifting_request.post') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
@@ -741,18 +742,21 @@ new class extends Component {
                         <button type="submit" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white">Submit Uploaded Documents</button>
                     @endif
                 </form>
+                @endif
                 @if($shiftingrequestExists && ($shifting_form || $letter_of_intent || $note_of_undertaking))
                     <br>
                     <p style="font-family: Inter, sans-serif; font-size: 26px; color:black; font-weight:bold;">
-                        Document Status:
+                        Status:
                         @if($shiftingrequestStatus == "Pending")
-                            <strong style="color: #AB830F;">For Checking</strong>
+                        <strong style="color: #AB830F;">Pending</strong>
                         @elseif($shiftingrequestStatus == "Rejected")
-                            <strong style="color: #e90c0c;">For Revision</strong>
+                        <strong style="color: #e90c0c;">For Revision</strong>
+                        @elseif($shiftingrequestStatus == "Submit Onsite")
+                        <strong style="color: #AB830F;">For Submission Onsite</strong>
                         @elseif($shiftingrequestStatus == "Approved")
-                            <strong style="color: #14ae5c;">For Submission Onsite</strong>
+                        <strong style="color: #14ae5c;">Approved</strong>
                         @else
-                            <strong style="color: #000; font-size: 26px;">Status Not Found</strong>
+                        <strong style="color: #000; font-size: 26px;">Status Not Found</strong>
                         @endif
                     </p>
                     <p class="body-font">&nbsp;&nbsp;a. Submitted documents will be checked by corresponding department chairperson.</p>

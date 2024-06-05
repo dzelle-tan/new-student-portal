@@ -695,6 +695,7 @@ new class extends Component {
                 <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 5 || hasRecord2 }" style="font-size: 27px;"></i>
             </button>
             <div x-show="openPanel === 5" class="panel" x-transition>
+                @if($loarequestStatus == "Rejected")
                 <form action="{{ route('loa_request.post') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
@@ -728,17 +729,20 @@ new class extends Component {
                     @if($loarequestStatus != "Approved")
                         <button type="submit" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white">Submit Uploaded Documents</button>
                     @endif
-                    </form>
+                </form>
+                @endif
                     @if($loarequestExists && ($loa_form || $letter_of_request || $note_of_undertaking || $clearance))
                     <br>
                     <p style="font-family: Inter, sans-serif; font-size: 26px; color:black; font-weight:bold;">
-                        Document Status:
+                        Status:
                     @if($loarequestStatus == "Pending")
-                        <strong style="color: #AB830F;">For Checking</strong>
+                        <strong style="color: #AB830F;">Pending</strong>
                         @elseif($loarequestStatus == "Rejected")
                         <strong style="color: #e90c0c;">For Revision</strong>
+                        @elseif($loarequestStatus == "Submit Onsite")
+                        <strong style="color: #AB830F;">For Submission Onsite</strong>
                         @elseif($loarequestStatus == "Approved")
-                        <strong style="color: #14ae5c;">For Submission Onsite</strong>
+                        <strong style="color: #14ae5c;">Approved</strong>
                         @else
                         <strong style="color: #000; font-size: 26px;">Status Not Found</strong>
                         @endif
