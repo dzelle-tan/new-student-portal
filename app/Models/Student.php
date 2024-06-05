@@ -139,9 +139,6 @@ class Student extends Model implements AuthenticatableContract
         });
     }
 
-    /**
-     * Get the records associated with the student.
-     */
     public function records(): HasMany
     {
         return $this->hasMany(StudentRecord::class, 'student_no');

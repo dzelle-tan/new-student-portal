@@ -19,8 +19,8 @@ class BlockSeeder extends Seeder
                 'block_id' => 'B1',
                 'year_level' => 1,
                 'section' => 1,
-                'program_id' => 1, // Ensure this ID exists in the programs table
-                'aysem_id' => 1,   // Ensure this ID exists in the aysems table
+                'program_id' => 24, 
+                'aysem_id' => 118,  
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -28,12 +28,11 @@ class BlockSeeder extends Seeder
                 'block_id' => 'B2',
                 'year_level' => 2,
                 'section' => 1,
-                'program_id' => 2, // Ensure this ID exists in the programs table
-                'aysem_id' => 2,   // Ensure this ID exists in the aysems table
+                'program_id' => 24,
+                'aysem_id' => 117,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            // Add more records as needed
         ]);
     }
 }

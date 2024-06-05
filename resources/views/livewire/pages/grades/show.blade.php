@@ -26,7 +26,8 @@ new class extends Component
         // Fetch the terms taken by the student with aysem, block, classes, and grades details
         $this->terms = $this->user->terms()
             ->with(['aysem', 'block.classes.grades', 'block.classes.course'])
-            ->get();
+            ->orderBy('id', 'desc')->get();
+            // dd($this->terms);
     }
 
     // Fetches the program titles associated with the student's terms

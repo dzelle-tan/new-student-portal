@@ -36,7 +36,6 @@ class CourseSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            // Extracted courses from previous class seeder data
             [
                 'subject_code' => 'CSC 0314',
                 'subject_title' => 'Operating System (Lec)',
