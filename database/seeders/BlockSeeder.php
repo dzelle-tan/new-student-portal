@@ -2,39 +2,38 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BlockSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        $blocks = [
-            [
-                'block_id' => 'A1',
-                'year_level' => 1,
-                'section' => 1,
-                'program_id' => 1,
-                'aysem_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+        DB::table('blocks')->insert([
             [
                 'block_id' => 'B1',
-                'year_level' => 2,
+                'year_level' => 1,
                 'section' => 1,
-                'program_id' => 1,
-                'aysem_id' => 1,
+                'program_id' => 1, // Ensure this ID exists in the programs table
+                'aysem_id' => 1,   // Ensure this ID exists in the aysems table
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-        ];
-
-        foreach ($blocks as $block) {
-            \App\Models\Block::create($block);
-        }
+            [
+                'block_id' => 'B2',
+                'year_level' => 2,
+                'section' => 1,
+                'program_id' => 2, // Ensure this ID exists in the programs table
+                'aysem_id' => 2,   // Ensure this ID exists in the aysems table
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            // Add more records as needed
+        ]);
     }
 }

@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('students', function (Blueprint $table) {
-            $table->foreignId('biological_sex_id')->constrained();
-            $table->foreignId('civil_status_id')->constrained();
-            $table->foreignId('citizenship_id')->constrained();
-            $table->foreignId('city_id')->constrained();
-            $table->foreignId('birthplace_city_id')->constrained('cities', 'id');
-            $table->foreignId('aysem_id')->constrained();
+            $table->foreignId('biological_sex_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('civil_status_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('citizenship_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('city_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('birthplace_city_id')->constrained('cities', 'id')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('aysem_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

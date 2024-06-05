@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('program_title');
             $table->string('program_code');
-            $table->string('major');
             $table->string('degree');
             $table->string('degree_level');
             $table->integer('num_credits');

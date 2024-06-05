@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Services\PLMEmail;
 use App\Services\StudentCredential;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,7 +17,6 @@ use \Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Authenticatable;
-
 class Student extends Model implements AuthenticatableContract
 {
     use HasFactory, Notifiable, Authenticatable;
@@ -29,16 +29,16 @@ class Student extends Model implements AuthenticatableContract
         'updated_at',
     ];
 
-    private function generatePLMEmail() {
-        $this->plm_email = PLMEmail::generate($this->first_name, $this->middle_name, $this->last_name, $this->entry_date);
-        $this->save();
-    }
+    protected $casts = [
+        'birthdate' => 'date',
+        'entry_date' => 'date',
+    ];
 
-    public static function generateStudentNumber($entry_date, $city_id, $aysem_id) {
-        $entryYear = $entry_date->format('Y');
-        
+    public static function generateStudentNumber($academic_year, $city_id) {
         // Series number which is the next number in the total number of students in a specific aysem
-        $series = Student::where('aysem_id', $aysem_id)->count() + 1;
+        $series = Student::whereHas('aysem', function($query) use ($academic_year) {
+            $query->where('academic_year', $academic_year);
+        })->count() + 1;
         
         // Check if the student's 'city_id' belongs to 'Manila'
         $city = City::find($city_id);
@@ -47,7 +47,7 @@ class Student extends Model implements AuthenticatableContract
         // If the student lives in manila, create a variable with value 0, else 1
         $cityNumber = $cityIsManila ? 0 : 1;
 
-        $studentNo = $entryYear . $cityNumber . str_pad($series, 4, '0', STR_PAD_LEFT);
+        $studentNo = $academic_year . $cityNumber . str_pad($series, 4, '0', STR_PAD_LEFT);
         
         return $studentNo;
     }
@@ -57,13 +57,63 @@ class Student extends Model implements AuthenticatableContract
         $this->save();
     }
     
-    private function addTerm($aysemId) {
-        $this->terms()->create([
-            'aysem_id' => $aysemId,
-            'registration_status_id' => RegistrationStatus::where('status', 'Pending')->first()->id,
+    public function addTerm(int $aysem_id, int $programId, ?int $blockId, int $registrationStatusId, string $studentType, bool $graduating, bool $enrolled, int $yearLevel) {
+        StudentTerm::create([
+            'student_no' => $this->student_no,
+            'aysem_id' => $aysem_id,
+            'program_id' => $programId,
+            'block_id' => $blockId,
+            'registration_status_id' => $registrationStatusId,
+            'student_type' => $studentType,
+            'graduating' => $graduating,
+            'enrolled' => $enrolled,
+            'year_level' => $yearLevel,
         ]);
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    | Below are the relationships of the Student model with other models
+    |
+    */
+
+    public function terms(): HasMany
+    {
+        return $this->hasMany(StudentTerm::class, 'student_no', 'student_no');
+    }
+
+    public function biologicalSex(): BelongsTo
+    {
+        return $this->belongsTo(BiologicalSex::class);
+    }
+
+    public function civilStatus(): BelongsTo
+    {
+        return $this->belongsTo(CivilStatus::class);
+    }
+
+    public function citizenship(): BelongsTo
+    {
+        return $this->belongsTo(Citizenship::class);
+    }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function birthplaceCity(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function aysem(): BelongsTo
+    {
+        return $this->belongsTo(Aysem::class);
+    }
+    
     protected static function booted()
     {
         static::created(function ($student) {

@@ -31,7 +31,7 @@ class StudentFactory extends Factory
         $biologicalSex = BiologicalSex::all();
         $civilStatus = CivilStatus::first();
         $citizenship = Citizenship::first();
-        $aysem = Aysem::latest()->first();
+        $aysem = Aysem::where('academic_year', 2023)->where('semester', 1)->first();
         $lastName = $this->faker->lastName;
         $firstName = $this->faker->firstName;
         $middleName = $this->faker->lastName;
@@ -39,7 +39,7 @@ class StudentFactory extends Factory
         $mobileNo = '09' . $this->faker->unique()->numberBetween(100000000, 999999999);
 
         return [
-            'student_no' => Student::generateStudentNumber($entryDate, $city_id, $aysem->id),
+            'student_no' => Student::generateStudentNumber($aysem->academic_year, $city_id),
             'last_name' => $lastName,
             'first_name' => $firstName,
             'middle_name' => $middleName,
@@ -55,6 +55,7 @@ class StudentFactory extends Factory
             'city_id' => $city_id,
             'birthplace_city_id' => $cities->random()->id,
             'aysem_id' => $aysem->id,
+            'plm_email' => PLMEmail::generate($firstName, $middleName, $lastName, $aysem->academic_year),
         ];
     }
 }
