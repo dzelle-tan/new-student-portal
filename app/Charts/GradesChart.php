@@ -2,7 +2,7 @@
 
 namespace App\Charts;
 
-use App\Models\StudentRecord;
+use App\Models\StudentTerm;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,56 +10,56 @@ class GradesChart
 {
     protected $chart;
     protected $studentId;
+    protected $gwas;
 
     public function __construct(LarapexChart $chart, $studentId = null)
     {
         $this->chart = $chart;
-        $this->studentId = $studentId ?? Auth::id();  // Default to authenticated user if no ID is provided
+        $this->studentId = $studentId ?? Auth::id();  
+        $this->gwas = collect(); 
     }
 
     // Update the GWA for each academic year
     public function updateAcademicYearGWAs(): void
     {
-        $records = StudentRecord::where('student_no', $this->studentId)->with('classes', 'classes.grade')->get();
-    
-        foreach ($records as $record) {
+        $terms = StudentTerm::where('student_no', $this->studentId)
+            ->with(['block.classes.grades', 'block.classes.course', 'aysem'])
+            ->get();
+
+        foreach ($terms as $term) {
             $totalUnits = 0;
             $totalGradePoints = 0;
-    
-            foreach ($record->classes as $class) {
-                if ($class->grade) {
-                    $totalUnits += $class->units;
-                    $totalGradePoints += $class->units * $class->grade->grade;
+
+            foreach ($term->block->classes as $class) {
+                foreach ($class->grades as $grade) {
+                    $totalUnits += $class->course->units;
+                    $totalGradePoints += $class->course->units * $grade->grade;
                 }
             }
-    
+
             if ($totalUnits > 0) {
-                $gwa = $totalGradePoints / $totalUnits;
+                $gwa = round($totalGradePoints / $totalUnits, 2);
             } else {
                 $gwa = 0; // Handle division by zero if no classes or no grades available
             }
-    
-            // Update the GWA in the StudentRecord
-            $record->gwa = $gwa;
-            $record->save();
+
+            // Store the GWA and corresponding term details
+            $this->gwas->push([
+                'gwa' => $gwa,
+                'academic_year' => $term->aysem->academic_year_code,
+                'semester' => $term->aysem->semester
+            ]);
         }
-    }   
+    }
 
     public function build(): \ArielMejiaDev\LarapexCharts\LineChart
     {
-
         $this->updateAcademicYearGWAs();
 
-        // Fetch GWAs for the student where the status is 'Completed'
-        $records = StudentRecord::where('student_no', $this->studentId)
-                                 ->where('status', 'Completed') // Only include records with 'Completed' status
-                                 ->orderBy('school_year')
-                                 ->orderBy('semester')
-                                 ->get(['gwa', 'school_year', 'semester']);
-
-        $gwas = $records->pluck('gwa')->all();
-        $labels = $records->map(function ($record) {
-            return $record->school_year . '-' . $record->semester;
+        // Extract GWAs and labels for the chart
+        $gwas = $this->gwas->pluck('gwa')->all();
+        $labels = $this->gwas->map(function ($gwa) {
+            return $gwa['academic_year'] . '-' . $gwa['semester'];
         })->all();
 
         return $this->chart->lineChart()

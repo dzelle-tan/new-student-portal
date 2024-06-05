@@ -2,6 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Block;
+use App\Models\Program;
+use App\Models\RequestedDocument;
+use App\Models\StudentRequestMode;
+use App\Models\StudentTerm;
+use App\Models\Student;
+use App\Models\StudentRecord;
+use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,33 +20,46 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-
         $this->call([
-            Student::class,
-            StudentRecord::class,
-            Fee::class,
-            Professor::class,
-            Classes::class,
-            Grade::class,
-            SfeDate::class,
-            SfeStatus::class,
-            SfeQuestion::class,
-            StudentRequest::class,
-            Document::class,
-            StudentViolation::class,
-            SfeAnswer::class,
-            Semester::class,
-            Event::class,
-            BSCS_grades_seeder::class,
+            FeeStatusSeeder::class,
+            CitySeeder::class,
+            BiologicalSexSeeder::class,
+            CivilStatusSeeder::class,
+            CitizenshipSeeder::class,
+            AysemSeeder::class,
+            RegistrationStatusSeeder::class,
+            CollegeSeeder::class,
+            ProgramSeeder::class,
             CourseSeeder::class,
-            TemporaryClasses::class, // Added this seeder for temporary classes to be changed
+            StudentSeeder::class,
+            CollegeSeeder::class,
+            ProgramSeeder::class,
+            BlockSeeder::class,
+            RegistrationStatusSeeder::class,
+            StudentTermSeeder::class,
+            OffenseTypeSeeder::class,
+            StudentViolationSeeder::class,
+            ClassSeeder::class,
+            BuildingSeeder::class,
+            RoomSeeder::class,
+            ClassModeSeeder::class,
+            ClassScheduleSeeder::class,
+            StudentRecordSeeder::class,
+            FeeStatusSeeder::class,
+            GradeSeeder::class,
+            DaySeeder::class,
+            ClassModeSeeder::class,
+            StudentRequestStatusSeeder::class,
+            RequestedDocumentStatusSeeder::class,
+            DocumentTypeSeeder::class,
+            StudentRequestModeSeeder::class,
+            StudentRequestSeeder::class,
+            RequestedDocumentSeeder::class,
+            SemesterSeeder::class,
+            EventSeeder::class,            
+            InstructorSeeder::class,
+            ClassFacultySeeder::class,
+
         ]);
     }
 }

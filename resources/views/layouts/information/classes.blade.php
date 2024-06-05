@@ -19,4 +19,4 @@
         
         <livewire:pages.classes.show />
     </div>
-</x-app-layout>
+</x-app-layout> 

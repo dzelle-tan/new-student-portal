@@ -130,22 +130,22 @@
     <div class="mt-4 lg:items-center lg:w-5/6 xl:2/3 lg:flex lg:justify-between">
         <div>
             <div>
-                <span class="w-24">{{_("Student No:")}}</span>
+                <span class="w-24">{{ _("Student No:") }}</span>
                 <span>{{ $user->student_no }}</span>
             </div>
             <div>
-                <span class="w-24">{{_("Name:")}}</span>
+                <span class="w-24">{{ _("Name:") }}</span>
                 <span>{{ $user->first_name }} {{ $user->middle_name }} {{ $user->last_name }}</span>
             </div>
         </div>
         <div>
             <div>
-                <span class="w-24">{{_("Program:")}}</span>
+                <span class="w-24">{{ _("Program:") }}</span>
                 <span>{{ $user->degree_program }}</span>
             </div>
             <div>
-                <span class="w-24">{{_("A.Y Term:")}} </span>
-                <span>{{ $record->school_year }} - Term {{ $record->semester }} </span>
+                <span class="w-24">{{ _("A.Y Term:") }} </span>
+                <span>{{ $record->aysem->academic_year_code }} - Term {{ $record->aysem->semester }}</span>
             </div>
         </div>
     </div>
@@ -155,26 +155,30 @@
         <table class="w-full text-left whitespace-nowrap">
             <thead>
                 <tr class="text-xs tracking-wider uppercase border-b border-gray-200 text-table-header bg-gray-50">
-                    <th class="px-4 py-3 font-medium">{{_("Class Code")}}</th>
-                    <th class="px-4 py-3 font-medium">{{_("Section")}}</th>
-                    <th class="px-4 py-3 font-medium">{{_("Subject Title")}}</th>
-                    <th class="px-4 py-3 font-medium">{{_("Units")}}</th>
-                    <th class="px-4 py-3 font-medium">{{_("Schedule")}}</th>
-                    <th class="px-4 py-3 font-medium">{{_("Type")}}</th>
-                    <th class="px-4 py-3 font-medium">{{_("Room")}}</th>
+                    <th class="px-4 py-3 font-medium">{{ _("Class Code") }}</th>
+                    <th class="px-4 py-3 font-medium">{{ _("Section") }}</th>
+                    <th class="px-4 py-3 font-medium">{{ _("Subject Title") }}</th>
+                    <th class="px-4 py-3 font-medium">{{ _("Units") }}</th>
+                    <th class="px-4 py-3 font-medium">{{ _("Days") }}</th>
+                    <th class="px-4 py-3 font-medium">{{ _("Time") }}</th>
+                    <th class="px-4 py-3 font-medium">{{ _("Type") }}</th>
+                    <th class="px-4 py-3 font-medium">{{ _("Room") }}</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($record->classes as $class)
-                    <tr class="text-sm border-b border-gray-200">
-                        <td class="px-4 py-3">{{ $class->code }}</td>
-                        <td class="px-4 py-3">{{ $class->section }}</td>
-                        <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->name }}</td>
-                        <td class="px-4 py-3 ">{{ $class->units }} </td>
-                        <td class="px-4 py-3">{{ $class->day }} {{ date('g:i A', strtotime($class->start_time)) }} {{_("-")}} {{ date('g:i A', strtotime($class->end_time)) }}</td>
-                        <td class="px-4 py-3">{{ ucfirst($class->type) }}</td>
-                        <td class="px-4 py-3">{{ $class->room }}</td>
-                    </tr>
+                @foreach ($record->block->classes as $class)
+                    @foreach ($class->classSchedules as $schedule)
+                        <tr class="text-sm border-b border-gray-200">
+                            <td class="px-4 py-3">{{ $class->course->subject_code }}</td>
+                            <td class="px-4 py-3">{{ $record->block->section }}</td>
+                            <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->course->subject_title }}</td>
+                            <td class="px-4 py-3">{{ $class->course->units }}</td>
+                            <td class="px-4 py-3">{{ substr($schedule->day, 0, 3) }}</td>
+                            <td class="px-4 py-3">{{ date('g:i A', strtotime($schedule->start_time)) }} - {{ date('g:i A', strtotime($schedule->end_time)) }}</td>
+                            <td class="px-4 py-3">{{ ucfirst($schedule->classMode->mode_type) }}</td>
+                            <td class="px-4 py-3">{{ $schedule->room->room_name }} - <br> {{ $schedule->room->building->building_name }}</td>
+                        </tr>
+                    @endforeach
                 @endforeach
             </tbody>
         </table>

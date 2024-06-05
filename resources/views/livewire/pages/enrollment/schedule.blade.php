@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Student;
-use App\Models\StudentRecord;
+use App\Models\StudentTerm;
 use App\Models\StudyPlanValidations;
 use App\Models\Validation;
 use App\Models\Course;
@@ -12,9 +12,10 @@ use Carbon\Carbon;
 
 new class extends Component {
 
-    public StudentRecord $record;
+    public $record;
     public Student $user;
-    public string $studentStatus;
+    public string $studentStatus;    public $programTitle;
+
     public $requestStatus;
     public $studentid;
     public $Status;
@@ -54,6 +55,8 @@ new class extends Component {
         $this->yearlevel = $this->user->year_level;
         $this->studentStatus = $this->user->student_status; // Added student status
         $this->getStudentClass();
+        $latestTerm = $this->user->terms()->latest()->first();
+        $this->programTitle = $latestTerm->program->program_title ?? 'N/A';
 
         $this->courses = Course::all();
         $this->tableBodyId = '';
@@ -96,308 +99,19 @@ new class extends Component {
     }
     public function getStudentClass(): void
     {
-        $this->record = StudentRecord::where('student_no', $this->user->student_no)
-            ->with('classes')
-            ->orderBy('school_year', 'desc')
-            ->orderBy('semester', 'desc')
-            ->first();
+        $this->record = StudentTerm::where('student_no', $this->user->student_no)
+                    ->with([
+                        'block.classes.course',
+                        'block.classes.classSchedules.classMode',
+                        'block.classes.classSchedules.room.building'
+                    ])
+                    ->orderBy('aysem_id', 'desc')
+                    ->first();
     }
+};
+?>
 
-    public function moveRowToDropdown($courseId, $tableBody)
-    {
-        $course = $this->courses->firstWhere('id', $courseId);
-
-        if ($tableBody === 'tableBody32') {
-            $this->dropdownContent3_1[] = $course;
-            $this->courses = $this->courses->reject(function ($c) use ($courseId) {
-                return $c->id === $courseId;
-            });
-        } elseif ($tableBody === 'tableBody42') {
-            $this->dropdownContent3_2[] = $course;
-            $this->courses = $this->courses->reject(function ($c) use ($courseId) {
-                return $c->id === $courseId;
-            });
-        } elseif ($tableBody === 'tableBody72') {
-            $this->dropdownContent4_1[] = $course;
-            $this->courses = $this->courses->reject(function ($c) use ($courseId) {
-                return $c->id === $courseId;
-            });
-        } elseif ($tableBody === 'tableBody62') {
-            $this->dropdownContent4_2[] = $course;
-            $this->courses = $this->courses->reject(function ($c) use ($courseId) {
-                return $c->id === $courseId;
-            });
-        } elseif ($tableBody === 'tableBody22') {
-            $this->dropdownContent2_2[] = $course;
-            $this->courses = $this->courses->reject(function ($c) use ($courseId) {
-                return $c->id === $courseId;
-            });
-        } elseif ($tableBody === 'tableBody') {
-            $this->dropdownContent2_1[] = $course;
-            $this->courses = $this->courses->reject(function ($c) use ($courseId) {
-                return $c->id === $courseId;
-            });
-
-        }
-
-        $this->courses = $this->courses->reject(function ($c) use ($courseId) {
-            return $c->id === $courseId;
-        });
-
-        $this->updateTotalUnits32();
-        $this->updateTotalUnits42();
-        $this->updateTotalUnits72();
-        $this->updateTotalUnits62();
-        $this->updateTotalUnits22();
-        $this->updateTotalUnits21();
-
-    }
-
-    public function moveRowFromDropdownToTable($courseCode, $tableBodyId)
-    {
-        $courseIndex = null;
-        $dropdownContentRef = null;
-
-        switch ($tableBodyId) {
-            case 'tableBody':
-                $dropdownContentRef = &$this->dropdownContent2_1;
-                break;
-            case 'tableBody22':
-                $dropdownContentRef = &$this->dropdownContent2_2;
-                break;
-            case 'tableBody32':
-                $dropdownContentRef = &$this->dropdownContent3_1;
-                break;
-            case 'tableBody42':
-                $dropdownContentRef = &$this->dropdownContent3_2;
-                break;
-            case 'tableBody72':
-                $dropdownContentRef = &$this->dropdownContent4_1;
-                break;
-            case 'tableBody62':
-                $dropdownContentRef = &$this->dropdownContent4_2;
-                break;
-        }
-
-        // Proceed only if $dropdownContentRef is defined
-        if (isset($dropdownContentRef)) {
-            foreach ($dropdownContentRef as $index => $course) {
-                if ($course->course_code === $courseCode) { // Use -> instead of []
-                    $courseIndex = $index;
-                    break;
-                }
-            }
-
-            if ($courseIndex !== null) {
-                $course = $dropdownContentRef[$courseIndex];
-                $this->courses->push($course);
-                unset($dropdownContentRef[$courseIndex]);
-                $dropdownContentRef = array_values($dropdownContentRef); // Reset array keys
-                // Add the course to the table with the appropriate button
-                $this->updateTotalUnits($tableBodyId, $course->units); // Pass tableBodyId for proper update
-            } else {
-                // Handle course not found in dropdown (optional: error message)
-            }
-        }
-    }
-
-    public function updateTotalUnits($tableBodyId, $unitChange)
-    {
-        // Determine the total units property based on the table body ID
-        switch ($tableBodyId) {
-            case 'tableBody21':
-                $totalUnitsProperty = 'totalUnits22';
-                break;
-            case 'tableBody22':
-                $totalUnitsProperty = 'totalUnits22';
-                break;
-            case 'tableBody32':
-                $totalUnitsProperty = 'totalUnits32';
-                break;
-            case 'tableBody42':
-                $totalUnitsProperty = 'totalUnits42';
-                break;
-            case 'tableBody72':
-                $totalUnitsProperty = 'totalUnits72';
-                break;
-            case 'tableBody62':
-                $totalUnitsProperty = 'totalUnits62';
-                break;
-            default:
-                return; // Return if the table body ID is not recognized
-        }
-
-        // Check if the total units property exists in the class
-        if (property_exists($this, $totalUnitsProperty)) {
-            // If the unit change is positive, add it to the total units
-            if ($unitChange > 0) {
-                $this->$totalUnitsProperty += $unitChange;
-            }
-            // If the unit change is negative, subtract it from the total units
-            elseif ($unitChange < 0 && $this->$totalUnitsProperty >= abs($unitChange)) {
-                $this->$totalUnitsProperty += $unitChange;
-            }
-        }
-    }
-
-    public function getDisplayedCourseCodes()
-    {
-        $courseCodes = [];
-        foreach ($this->courses as $course) {
-            // Retrieve the grade for the current course from the BSCS_grade model
-            $grade = BSCS_grade::where('course_code', $course->course_code)
-                ->where('student_no', $this->studentid)
-                ->value('grades');
-
-
-            // Retrieve the prerequisite grade from the BSCS_grade model if prerequisites exist
-            $prerequisiteGrade = $course->pre_requisites
-                ? BSCS_grade::where('course_code', $course->pre_requisites)
-                    ->where('student_no', $this->studentid)
-                    ->value('grades')
-                : null;
-
-            // Include courses based on year level when grades are not 5
-            if ($this->yearlevel === 2 && $course->year_lvl >= 2 && $prerequisiteGrade !== 5 && $grade !== 5 || $grade !== 5) {
-                $courseCodes[] = $course->course_code;
-            } elseif ($this->yearlevel === 3 && $course->year_lvl >= 3 && $prerequisiteGrade !== 5 && $grade !== 5) {
-                $courseCodes[] = $course->course_code;
-            } elseif ($this->yearlevel === 4 && $course->year_lvl >= 4 && $prerequisiteGrade !== 5 && $grade !== 5) {
-                $courseCodes[] = $course->course_code;
-            } elseif ($course->year_lvl === $this->yearlevel && $prerequisiteGrade !== 5 && $grade !== 5) {
-                $courseCodes[] = $course->course_code;
-            }
-        }
-        return $courseCodes;
-    }
-
-    public function getPrerequisiteGrade($preRequisiteCourseCode)
-    {
-        // Assuming $pre_requisite contains the course code of the prerequisite course
-        $preRequisite = BSCS_grade::where('course_code', $preRequisiteCourseCode)
-            ->where('student_no', $this->studentid)
-            ->first();
-
-        // If the prerequisite course exists and has a grade, return the grade
-        if ($preRequisite && isset($preRequisite->grades)) {
-            return $preRequisite->grades;
-        }
-    }
-
-    public function getCourseGrade($courseCode)
-    {
-        // Assuming there is a model named CourseGrade to represent the grades of each course
-        $courseGrade = BSCS_grade::where('course_code', $courseCode)
-            ->where('student_no', $this->studentid)
-            ->first();
-
-        // If the course grade exists and has a grade, return the grade
-        if ($courseGrade && isset($courseGrade->grades)) {
-            return $courseGrade->grades;
-        }
-
-        // Return null if the course grade does not exist or does not have a grade
-        return null;
-    }
-
-    public function pushCourseCodes()
-    {
-        $courseCodes = $this->getDisplayedCourseCodes();
-
-        // Get the validation record for the current student
-        $validation = Validation::where('student_no', $this->studentid)->first();
-
-        if (!$validation) {
-            $validation = new Validation();
-            $validation->student_no = $this->studentid;
-            $validation->yearlvl = $this->yearlevel;
-            $validation->status = 'Pending';
-            $validation->daterequest = Carbon::now(); //di to nagana not sure y
-        }
-
-        $studyPlanCourseCodes = json_encode($courseCodes);
-
-        $validation->study_plan_course_code = $studyPlanCourseCodes;
-
-        $validation->save();
-
-        session()->flash('courseCodesNotification', 'Course codes pushed successfully.');
-    }
-
-    public function pushCourseCodesFinal()
-    {
-        $this->mount();
-
-        // Get the validation record for the current student
-        $validation = Validation::where('student_no', $this->studentid)->first();
-
-        if ($validation) {
-            // Create or update the corresponding record in the study_plan_validations table
-            $study_plan_validation = StudyPlanValidations::firstOrNew(['student_no' => $this->studentid]);
-
-            // Assign the attributes from the validation object to the study_plan_validation object
-
-            $study_plan_validation->student_no = $validation->student_no;
-            $study_plan_validation->year_level = $validation->yearlvl;
-            $study_plan_validation->status = $validation->status;
-            $study_plan_validation->date_of_request = $validation->daterequest;
-            $study_plan_validation->study_plan = $validation->study_plan_course_code;
-
-            // Save the study_plan_validation object
-            $study_plan_validation->save();
-
-            $validation->delete();
-        }
-
-        return redirect()->back();
-    }
-
-    private function checkGrades($course, $gradeThreshold)
-    {
-        // Assuming $course has properties 'course_code' and 'course_name'
-        return isset($course->grades) && $course->grades === $gradeThreshold
-            ? $course->course_code . ' - ' . $course->course_name
-            : '';
-    }
-
-    private function updateTotalUnits21()
-    {
-        $this->totalUnits21 = $this->courses->where('year_lvl', 2)->where('sem', 1)->sum('units');
-    }
-
-    private function updateTotalUnits22()
-    {
-        $this->totalUnits22 = $this->courses->where('year_lvl', 2)->where('sem', 2)->sum('units');
-    }
-
-    private function updateTotalUnits32()
-    {
-        $this->totalUnits32 = $this->courses->where('year_lvl', 3)->where('sem', 1)->sum('units');
-    }
-
-    private function updateTotalUnits42()
-    {
-        $this->totalUnits42 = $this->courses->where('year_lvl', 3)->where('sem', 2)->sum('units');
-    }
-    private function updateTotalUnits72()
-    {
-        $this->totalUnits72 = $this->courses->where('year_lvl', 4)->where('sem', 1)->sum('units');
-    }
-
-    private function updateTotalUnits62()
-    {
-        $this->totalUnits62 = $this->courses->where('year_lvl', 4)->where('sem', 2)->sum('units');
-    }
-};?>
-<div x-data="{
-        currentStep: {{ $hasRecord ? 4 : 1 }},
-        isStudyPlanCompleted: false, 
-        openPanel: {{ $hasRecord ? 4 : 1 }},
-        showConfirmModal: false,
-        studentStatus: '{{ $studentStatus }}',
-        hasRecord: {{ $hasRecord ? 'true' : 'false' }},
-        requestStatus: '{{ $requestStatus }}'
-    }">
+<div>
     {{-- Student Information --}}
     <div class="mt-6 mb-6 lg:items-center lg:w-5/6 xl:2/3 lg:flex lg:justify-between">
         <div>
@@ -413,11 +127,11 @@ new class extends Component {
         <div>
             <div>
                 <x-info-label class="w-24">{{_("Program:")}}</x-info-label>
-                <span>{{ $user->degree_program }}</span>
+                <span>{{ $programTitle }}</span>
             </div>
             <div>
                 <x-info-label class="w-24">{{_("A.Y Term:")}} </x-info-label>
-                <span>{{ $record->school_year }} - Term {{ $record->semester }} </span>
+                <span>{{ $record->aysem->academic_year_code }} - Term {{ $record->aysem->semester }} </span>
             </div>
         </div>
     </div>
@@ -439,19 +153,21 @@ new class extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($record->classes as $class)
+                    @foreach ($record->block->classes as $class)
+                        @foreach ($class->classSchedules as $schedule)
                         <tr class="text-sm border-b border-gray-200">
-                            <td class="px-4 py-3">{{ $class->code }}</td>
-                            <td class="px-4 py-3">{{ $class->section }}</td>
-                            <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->name }}</td>
-                            <td class="px-4 py-3 ">{{ $class->units }}</td>
-                            <td class="px-4 py-3">{{ $class->day }} {{ date('g:i A', strtotime($class->start_time)) }}
-                                {{_("-")}} {{ date('g:i A', strtotime($class->end_time)) }}
+                                <td class="px-4 py-3">{{ $class->course->subject_code }}</td>
+                                <td class="px-4 py-3">{{ $record->block->section }}</td>
+                                <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->course->subject_title }}</td>
+                                <td class="px-4 py-3 ">{{ $class->course->units }}</td>
+                                <td class="px-4 py-3">{{ $schedule->day }} {{ date('g:i A', strtotime($schedule->start_time)) }}
+                                {{_("-")}} {{ date('g:i A', strtotime($schedule->end_time)) }}
                             </td>
-                            <td class="px-4 py-3">{{ ucfirst($class->type) }}</td>
-                            <td class="px-4 py-3">{{ $class->room }}</td>
-                        </tr>
-                    @endforeach
+                                <td class="px-4 py-3">{{ ucfirst($schedule->classMode->mode_type) }}</td>
+                                <td class="px-4 py-3">{{ $schedule->room->room_name }} - {{ $schedule->room->building->building_name }}</td>
+                            </tr>
+                        @endforeach
+                @endforeach
                 </tbody>
             </table>
         </div>

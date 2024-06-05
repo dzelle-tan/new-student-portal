@@ -10,6 +10,7 @@ use App\Http\Controllers\AddDropRequestController;
 use App\Http\Controllers\ShiftingRequestController;
 use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VerifyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,9 @@ Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSE
 Route::get('download/{file}', [DownloadController::class, 'download'])
     ->name('download');
 
-Route::view('/', 'welcome');
+Route::get('/', [HomeController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('home');
 
 /* Routes for Academic Directives */
 
@@ -112,5 +115,7 @@ Route::get('/home', [HomeController::class, 'index'])
     ->middleware(['auth'])
     ->name('home');
 
+Route::get('/verify', [VerifyController::class, 'verify'])
+    ->name('verify');
 
 require __DIR__.'/auth.php';
