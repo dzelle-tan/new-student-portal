@@ -701,15 +701,17 @@ new class extends Component {
                         @if($addDroprequestExists && ($add_drop_form))
                             <br>
                             <p style="font-family: Inter, sans-serif; font-size: 26px; color:black; font-weight:bold;">Status: 
-                                @if($addDroprequestStatus == "Pending")
-                                    <strong style="color: #AB830F;">For Checking</strong>
-                                @elseif($addDroprequestStatus == "Rejected")
-                                    <strong style="color: #e90c0c;">For Revision</strong>
-                                @elseif($addDroprequestStatus == "Approved")
-                                    <strong style="color: #14ae5c;">For Submission Onsite</strong>
-                                @else
-                                    <strong style="color: #000;">Status Not Found</strong>
-                                @endif
+                        @if($addDroprequestStatus == "Pending")
+                        <strong style="color: #AB830F;">Pending</strong>
+                        @elseif($addDroprequestStatus == "Rejected")
+                        <strong style="color: #e90c0c;">For Revision</strong>
+                        @elseif($addDroprequestStatus == "Submit Onsite")
+                        <strong style="color: #AB830F;">For Submission Onsite</strong>
+                        @elseif($addDroprequestStatus == "Approved")
+                        <strong style="color: #14ae5c;">Approved</strong>
+                        @else
+                        <strong style="color: #000; font-size: 26px;">Status Not Found</strong>
+                        @endif
                             </p>
                             <p class="body-font">&nbsp;&nbsp;a. Submitted documents will be checked by corresponding department chairperson.</p>
                             <p class="body-font">&nbsp;&nbsp;b. Refresh this page from time-to-time to know the status of your request.</p>
