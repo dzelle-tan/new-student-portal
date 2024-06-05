@@ -25,11 +25,11 @@
         <div class="col-span-1 space-y-3 md:col-span-2 lg:col-span-2 lg:row-span-6">
             
             {{-- GWA Stats --}}
-            {{-- <div class="p-4 bg-white shadow sm:p-8 sm:rounded-md">
+            <div class="p-4 bg-white shadow sm:p-8 sm:rounded-md">
                 <h3 class="text-lg font-medium">{{__("General Weighted Average (GWA)")}}</h3>
                 {!! $chart->container() !!}
                 <p class="italic text-center">School Year - Term</p>
-            </div> --}}
+            </div> 
             
             {{-- University Calendar --}}
             <div class="p-4 bg-white shadow h-[40rem] sm:p-8 sm:rounded-md">
@@ -61,5 +61,5 @@
     </div> --}}
 </x-app-layout>
 
-{{-- <script src="{{ $chart->cdn() }}"></script>
-{{ $chart->script() }} --}}
+<script src="{{ $chart->cdn() }}"></script>
+{{ $chart->script() }}

@@ -56,7 +56,8 @@ class DatabaseSeeder extends Seeder
             StudentRequestSeeder::class,
             RequestedDocumentSeeder::class,
             SemesterSeeder::class,
-            EventSeeder::class,            InstructorSeeder::class,
+            EventSeeder::class,            
+            InstructorSeeder::class,
             ClassFacultySeeder::class,
 
         ]);
