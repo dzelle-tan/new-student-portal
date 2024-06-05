@@ -84,6 +84,56 @@ new class extends Component
                 </div>
             </div>
         </div>
-
+        
+        {{-- Grades --}}
+        @foreach ($terms as $term)
+            @if ($selectedTerm == 'All' || $term->id == $selectedTerm)
+                <h2 class="mt-8">{{ $term->school_year }}, Term {{ $term->semester }}</h2>
+                <div class="w-full mt-4 overflow-x-auto">
+                    <table class="w-full text-left whitespace-nowrap">
+                        <thead>
+                            <tr class="text-xs tracking-wider uppercase border-b border-gray-200 text-table-header bg-gray-50">
+                                <th class="px-4 py-3 font-medium">{{_("Subject Code")}}</th>
+                                <th class="px-4 py-3 font-medium">{{_("Section")}}</th>
+                                <th class="px-4 py-3 font-medium">{{_("Units")}}</th>
+                                <th class="px-4 py-3 font-medium">{{_("Subject Title")}}</th>
+                                <th class="px-4 py-3 font-medium">{{_("Grade")}}</th>
+                                <th class="px-4 py-3 font-medium">{{_("Completion Grade")}}</th>
+                                <th class="px-4 py-3 font-medium">{{_("Remarks")}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($term->classes as $class)
+                                <tr class="text-sm border-b border-gray-200">
+                                    <td class="px-4 py-3">{{ $class->code }}</td>
+                                    <td class="px-4 py-3">{{ $class->section }}</td>
+                                    <td class="px-4 py-3">{{ $class->units }}</td>
+                                    <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->name }}</td>
+                                    <td class="px-4 py-3">{{ $class->grade->grade }}</td>
+                                    {{-- <td class="px-4 py-3">{{ $class->grade->completion_grade }}</td> --}}
+                                    <td class="px-4 py-3">-</td>
+                                    <td class="px-4 py-3">{{ $class->grade->remarks }}</td>
+                                </tr>
+                                @php
+                                    $totalUnits += $class->units;
+                                    $totalGradePoints += $class->units * $class->grade->grade;
+                                @endphp
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                @php
+                    $gwa = $totalUnits > 0 ? number_format($totalGradePoints / $totalUnits, 4) : 0;
+                @endphp
+                <div class="flex items-center justify-end py-2 pr-10 space-x-8 text-sm">
+                    <p>{{_("Total Units:")}} <span class="font-medium">{{ $totalUnits }}</span></p>
+                    <p>{{_("GWA:")}} <span class="font-medium">{{ $gwa }}</span></p>
+                </div>
+                @php
+                    $totalUnits = 0;  // Reset for next term
+                    $totalGradePoints = 0;  // Reset for next term
+                @endphp
+            @endif
+        @endforeach
     </div>
 </div>
