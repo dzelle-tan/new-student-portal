@@ -1,4 +1,4 @@
-<x-app-layout>
+{{-- <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Grades') }}
@@ -10,4 +10,4 @@
             <livewire:pages.grades.show />
         </div>
     </div>
-</x-app-layout>
+</x-app-layout> --}}

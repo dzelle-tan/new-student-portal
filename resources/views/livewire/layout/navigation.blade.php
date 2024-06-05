@@ -21,7 +21,7 @@ new class extends Component
         $user = Auth::user();
 
         // Set email_verified_at to null and save the user
-        $user->email_verified_at = null;
+        // $user->email_verified_at = null;
         $user->save();
 //-------------------------------------------------
 

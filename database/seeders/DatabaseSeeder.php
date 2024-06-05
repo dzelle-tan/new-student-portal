@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\RequestedDocument;
+use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,26 +14,33 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-
         $this->call([
-            Student::class,
-            StudentRecord::class,
-            Fee::class,
-            Professor::class,
-            Classes::class,
-            Grade::class,
-            StudentRequest::class,
-            Document::class,
-            StudentViolation::class,
-            Semester::class,
-            Event::class,
+            CitySeeder::class,
+            BiologicalSexSeeder::class,
+            CivilStatusSeeder::class,
+            CitizenshipSeeder::class,
+            AcademicYearSeeder::class,
+            StudentSeeder::class,
+
+            // AcademicYearSeeder::class,
+            // RegistrationStatusSeeder::class,
+            // DaySeeder::class,
+            // ClassModeSeeder::class,
+            // FeeStatusSeeder::class,
+            // OffenseTypeSeeder::class,
+            // PaymentModeSeeder::class,
+            // StudentRequestStatusSeeder::class,
+            // RequestedDocumentStatusSeeder::class,
+            // CollegeSeeder::class,
+            // DegreeProgramSeeder::class,
+            // DocumentTypeSeeder::class,
+            // SubjectSeeder::class,
+            // ProfessorSeeder::class,
+            // BuildingSeeder::class,
+            // StudentClassSeeder::class,
+            // AssignedClassSeeder::class,
+            // StudentRequestSeeder::class,
+            // RequestedDocumentSeeder::class,
         ]);
     }
 }

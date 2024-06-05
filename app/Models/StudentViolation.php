@@ -10,8 +10,8 @@ class StudentViolation extends Model
 {
     use HasFactory;
 
-    public function student(): BelongsTo
-    {
-        return $this->belongsTo(Student::class);
-    }
+    protected $guarded = [
+        'created_at',
+        'updated_at',
+    ];
 }
