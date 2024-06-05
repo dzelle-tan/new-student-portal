@@ -14,4 +14,13 @@ class FeeStatus extends Model
         'created_at',
         'updated_at',
     ];
+    
+    /**
+     * Get the student records for the fee status.
+     */
+    public function studentRecords(): HasMany
+    {
+        return $this->hasMany(StudentRecord::class);
+    }
+
 }

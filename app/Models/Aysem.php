@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Aysem extends Model
@@ -14,6 +15,14 @@ class Aysem extends Model
         'created_at',
         'updated_at',
     ];
+
+     /**
+     * Get the academic year that owns the aysem.
+     */
+    public function academicYear(): BelongsTo
+    {
+        return $this->belongsTo(AcademicYear::class);
+    }
 
     /**
      * Get the terms associated with the academic year and semester.

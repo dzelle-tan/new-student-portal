@@ -42,7 +42,7 @@ class AcademicYearSeeder extends Seeder
             
             // 1st semester
             \App\Models\Aysem::create([
-                'academic_year_id' => $academicYear->id,
+                'academic_year_id' => $i + 1,
                 'semester_index' => 1,
                 'date_start' => $startDates[$i],
                 'date_end' => $year . '-02-01',
@@ -50,7 +50,7 @@ class AcademicYearSeeder extends Seeder
 
             // 2nd semester
             \App\Models\Aysem::create([
-                'academic_year_id' => $academicYear->id,
+                'academic_year_id' => $i + 1,
                 'semester_index' => 2,
                 'date_start' => $year . '-02-20',
                 'date_end' => $endDates[$i],

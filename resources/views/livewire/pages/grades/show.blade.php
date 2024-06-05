@@ -27,13 +27,10 @@ new class extends Component
     // Fetches the authenticated user's associated grades and academic year
     public function getAcademicYear(): void
     {
-        $maxId = StudentRecord::where('student_no', $this->user->student_no)->max('id');
-
-        $this->terms = StudentRecord::where('student_no', $this->user->student_no)
-                            ->where('id', '<>', $maxId)
-                            ->with('classes', 'classes.grade')
-                            ->orderBy('id', 'desc')
-                            ->get();
+        // Fetch the terms taken by the student
+        // $this->terms = $this->user->terms()->with('program', 'aysem', 'block', 'registrationStatus')->get();
+        $this->terms = $this->user->terms()->with('aysem.academicYear')->get();
+        // dd($this->terms);
     }
     // Fetches the program titles associated with the student's terms
     public function getLatestProgramTitle(): void
@@ -60,7 +57,6 @@ new class extends Component
 <div class="space-y-3">
     <div class="p-4 pt-3 bg-white shadow sm:p-8 sm:pt-6 sm:rounded-md">
         <img src="{{ asset('images/plm-logo-with-header.png') }}" alt="PLM logo" class="h-16">
-
         {{-- Student Information --}}
         <div class="mt-6 lg:items-center lg:w-5/6 xl:2/3 lg:flex lg:justify-between">
             <div>
@@ -76,7 +72,6 @@ new class extends Component
             <div>
                 <div>
                     <x-info-label class="w-24">{{_("Program:")}}</x-info-label>
-                    <!-- <span>{{ $user->degree_program }}</span> -->
                     <span>{{ $latestProgramTitle }}</span>
                 </div>
                 <div>
@@ -84,62 +79,14 @@ new class extends Component
                     <select class="px-2 py-0 border-gray-300 rounded-md w-36 form-control" wire:change="updateSelectedTerm($event.target.value)">
                         <option value = "All">All</option>
                         @foreach ($terms as $term)
-                            <option value = "{{ $term->id }}">{{ $term->school_year }}-{{ $term->semester }}</option>
+                            <option value="{{ $term->id }}">
+                                {{ $term->aysem->academicYear->academic_year_code }} - {{ $term->aysem->semester_index }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
             </div>
         </div>
 
-        {{-- Grades --}}
-        @foreach ($terms as $term)
-            @if ($selectedTerm == 'All' || $term->id == $selectedTerm)
-                <h2 class="mt-8">{{ $term->school_year }}, Term {{ $term->semester }}</h2>
-                <div class="w-full mt-4 overflow-x-auto">
-                    <table class="w-full text-left whitespace-nowrap">
-                        <thead>
-                            <tr class="text-xs tracking-wider uppercase border-b border-gray-200 text-table-header bg-gray-50">
-                                <th class="px-4 py-3 font-medium">{{_("Subject Code")}}</th>
-                                <th class="px-4 py-3 font-medium">{{_("Section")}}</th>
-                                <th class="px-4 py-3 font-medium">{{_("Units")}}</th>
-                                <th class="px-4 py-3 font-medium">{{_("Subject Title")}}</th>
-                                <th class="px-4 py-3 font-medium">{{_("Grade")}}</th>
-                                <th class="px-4 py-3 font-medium">{{_("Completion Grade")}}</th>
-                                <th class="px-4 py-3 font-medium">{{_("Remarks")}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($term->classes as $class)
-                                <tr class="text-sm border-b border-gray-200">
-                                    <td class="px-4 py-3">{{ $class->code }}</td>
-                                    <td class="px-4 py-3">{{ $class->section }}</td>
-                                    <td class="px-4 py-3">{{ $class->units }}</td>
-                                    <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->name }}</td>
-                                    <td class="px-4 py-3">{{ $class->grade->grade }}</td>
-                                    {{-- <td class="px-4 py-3">{{ $class->grade->completion_grade }}</td> --}}
-                                    <td class="px-4 py-3">-</td>
-                                    <td class="px-4 py-3">{{ $class->grade->remarks }}</td>
-                                </tr>
-                                @php
-                                    $totalUnits += $class->units;
-                                    $totalGradePoints += $class->units * $class->grade->grade;
-                                @endphp
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                @php
-                    $gwa = $totalUnits > 0 ? number_format($totalGradePoints / $totalUnits, 4) : 0;
-                @endphp
-                <div class="flex items-center justify-end py-2 pr-10 space-x-8 text-sm">
-                    <p>{{_("Total Units:")}} <span class="font-medium">{{ $totalUnits }}</span></p>
-                    <p>{{_("GWA:")}} <span class="font-medium">{{ $gwa }}</span></p>
-                </div>
-                @php
-                    $totalUnits = 0;  // Reset for next term
-                    $totalGradePoints = 0;  // Reset for next term
-                @endphp
-            @endif
-        @endforeach
     </div>
 </div>

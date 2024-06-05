@@ -16,4 +16,26 @@ class AcademicYear extends Model
         'created_at',
         'updated_at',
     ];
+
+    protected $fillable = [
+        'academic_year_code', 
+        'date_start', 
+        'date_end'
+    ];
+
+    /**
+     * Get the aysems for the academic year.
+     */
+    public function aysems(): HasMany
+    {
+        return $this->hasMany(Aysem::class);
+    }
+
+    /**
+     * Get the student records for the academic year.
+     */
+    public function studentRecords()
+    {
+        return $this->hasMany(StudentRecord::class);
+    }    
 }
