@@ -41,7 +41,7 @@
                 <livewire:pages.home.links />
             </div>
             <div class="relative row-span-4 p-4 pb-20 bg-white shadow sm:p-8 sm:pb-20 sm:rounded-md">
-                {{-- <livewire:pages.home.schedule /> --}}
+                <livewire:pages.home.schedule /> 
                 <a href="{{ route('classes') }}" class="absolute text-gray-500 underline right-8 bottom-8">See more...</a>
             </div>
             <div class="p-4 bg-white shadow sm:p-8 sm:rounded-md">
