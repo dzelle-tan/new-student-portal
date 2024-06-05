@@ -39,8 +39,9 @@ class DatabaseSeeder extends Seeder
             RequestedDocumentSeeder::class,
             StudentTermSeeder::class,
             BlockSeeder::class,
+            OffenseTypeSeeder::class,
+            StudentViolationSeeder::class,
             // FeeStatusSeeder::class,
-            // OffenseTypeSeeder::class,
             // BuildingSeeder::class,
         ]);
     }

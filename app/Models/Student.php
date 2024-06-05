@@ -114,6 +114,11 @@ class Student extends Model implements AuthenticatableContract
         return $this->belongsTo(Aysem::class);
     }
     
+    public function studentViolation(): HasMany
+    {
+        return $this->hasMany(studentViolation::class);
+    }
+
     protected static function booted()
     {
         static::created(function ($student) {
