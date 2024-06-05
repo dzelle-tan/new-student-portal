@@ -37,10 +37,8 @@ class EnrollmentDownloadsController extends Controller
     {
         $this->user = Auth::user();
         $this->record = StudentRecord::where('student_no', $this->user->student_no)
-            ->with('fee')
-            ->orderBy('school_year', 'desc') // First order by 'school_year'
-            ->orderBy('semester', 'desc')       // Then order by 'term' within the same 'school_year'
-            ->first(); // Fetches the most recent record based on these fields
+            ->orderBy('aysem_id', 'desc')
+            ->first();
 
         $pdf = Pdf::loadView('livewire.pages.enrollment.downloadables.enrollment-fee-pdf', ['record' => $this->record]);
         return $pdf->download('fee-pdf.pdf');
