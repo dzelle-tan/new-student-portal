@@ -49,15 +49,23 @@ class EnrollmentDownloadsController extends Controller
     public function downloadSER()
     {
         $this->user = Auth::user();
-        $this->record = StudentRecord::where('student_no', $this->user->student_no)
-            ->with('fee', 'classes')
-            ->orderBy('school_year', 'desc') // First order by 'school_year'
-            ->orderBy('semester', 'desc')       // Then order by 'term' within the same 'school_year'
-            ->first(); // Fetches the most recent record based on these fields
+        $this->record = StudentTerm::where('student_no', $this->user->student_no)
+                    ->with([
+                        'block.classes.course',
+                        'block.classes.classSchedules.classMode',
+                        'block.classes.classSchedules.room.building'
+                    ])
+                    ->orderBy('aysem_id', 'desc')
+                    ->first();
 
+        $this->fee = StudentRecord::where('student_no', $this->user->student_no)
+                    ->orderBy('aysem_id', 'desc')
+                    ->first();
+                    
         $pdf = Pdf::loadView('livewire.pages.enrollment.downloadables.enrollment-SER-pdf', [
             'user' => $this->user,
-            'record' => $this->record
+            'record' => $this->record,
+            'fee' => $this->fee
         ]);
 
         if ($this->record->date_enrolled === null) {

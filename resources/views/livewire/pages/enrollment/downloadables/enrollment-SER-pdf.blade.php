@@ -371,27 +371,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($record->classes as $class)
-                        <tr class="text-xs border-b border-gray-200">
-                            <td class="px-4 py-3">{{ $class->code }}</td>
-                            <td class="px-4 py-3">{{ $class->section }}</td>
-                            <td class="px-4 py-3 pr-8">{{ $class->name }}</td>
-                            <td class="px-4 py-3 ">{{ $class->units }}</td>
-                            <td class="px-4 py-3">{{ substr($class->day, 0, 3) }}</td>
-                            <td class="px-4 py-3">{{ date('g:i A', strtotime($class->start_time)) }} {{_("-")}} {{ date('g:i A', strtotime($class->end_time)) }}</td>
-                            <td class="px-4 py-3">
-                                @if ($class->type == 'face-to-face')
-                                    F2F
-                                @elseif ($class->type == 'online')
-                                    OL
-                                @else
-                                    -
-                                @endif
-                            </td>
-                            <td class="px-4 py-3">{{ $class->room }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
+                    @foreach ($record->block->classes as $class)
+                            @foreach ($class->classSchedules as $schedule)
+                                <tr class="text-xs border-b border-gray-200">
+                                    <td class="px-4 py-3">{{ $class->course->subject_code }}</td>
+                                    <td class="px-4 py-3">{{ $record->block->section }}</td>
+                                    <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $class->course->subject_title }}</td>
+                                    <td class="px-4 py-3">{{ $class->course->units }}</td>
+                                    <td class="px-4 py-3">{{ substr($schedule->day, 0, 3) }}</td>
+                                    <td class="px-4 py-3">{{ date('g:i A', strtotime($schedule->start_time)) }} - {{ date('g:i A', strtotime($schedule->end_time)) }}</td>
+                                    <td class="px-4 py-3">{{ ucfirst($schedule->classMode->mode_type) }}</td>
+                                    <td class="px-4 py-3">{{ $schedule->room->room_name }} - {{ $schedule->room->building->building_name }}</td>
+                                </tr>
+                            @endforeach
+                        @endforeach
+                    </tbody>
             </table>
             <div class="flex justify-between pt-2 text-sm">
                 <p>Remarks: This enrollment becomes official until all requirements are complied with.</p>
