@@ -37,7 +37,7 @@ new class extends Component {
 
 <div class="flex items-center justify-between">
     <h2 class="text-xl font-semibold leading-tight text-gray-800">
-        {{ __('Leave of Absence Requests') }}
+        {{ __('Shifting Requests') }}
     </h2>
     <div class="flex items-center space-x-4">
          {{-- Student Request Status --}}

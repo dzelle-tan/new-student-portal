@@ -471,38 +471,36 @@ new class extends Component {
                     <div x-show="openPanel === 1" class="panel" x-transition>
                         <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">General Rules
                             Guidelines</p>
-                        <p class="body-font">&nbsp;&nbsp;a. Students of respective degree programs must strictly observe
-                            the prescribed curriculum.</p>
-                        <p class="body-font">&nbsp;&nbsp;b. Each Department shall issue a Curriculum checklist/ Course
-                            Prospectus to the student, which shall be used until he/she graduates.</p>
-                        <p class="body-font">&nbsp;&nbsp;c. Students must enroll their subjects as scheduled on a
-                            particular semester/term with consideration of the required pre-requisites prior to
-                            enrolling.</p>
-                        <p class="body-font">&nbsp;&nbsp;d. To avoid re-enrolling a completed subject, the respective
-                            Deans must ensure that the student has properly accomplished the “Curriculum checklist/
-                            Course Prospectus”.</p>
-                        <p class="body-font">&nbsp;&nbsp;e. As an irregular student, it is required of you to submit
-                            your Study Plan containing a personalized curriculum of courses to be taken based on the
-                            Curriculum checklist/ Course Prospectus provided to you by your department.</p>
-                        <p class="body-font">&nbsp;&nbsp;f. Enlistment procedures of irregular students will be similar
-                            to enlistment of Physical Education (PE) courses. But this time, all courses will be
-                            enlisted by the student as per their approved Study Plan.</p>
-                        <p style="font-family: Inter, sans-serif; font-size: 26px; color:black;">Reminders and
-                            Regulations</p>
-                        <p class="body-font">&nbsp;&nbsp;a. A maximum residency of seven (7) years for undergraduate
-                            programs is allowed. Meaning, a student can reside up their 6th year. Academic year skipped
-                            due to Leave of Absence (LOA) is not counted.</p>
-                        <p class="body-font">&nbsp;&nbsp;b. In cases that students receive failing grade in a subject,
-                            they can only retake it once more. Meaning, a student can only take a course twice.</p>
-                        <p class="body-font">&nbsp;&nbsp;c. Subjects that have Pre-requisites cannot be taken unless
-                            their required subjects are accomplished.</p>
-                        <p class="body-font">&nbsp;&nbsp;d. Co-requisites are subjects that should be taken at the same
-                            time except in cases that they are to be taken separately as retakes.</p>
-                        <p class="body-font">&nbsp;&nbsp;e. Students that are Irregular due to failing grade in a
-                            subject are no longer eligible for Latin Honors (Cum Laude, etc.)</p>
-                        <p class="body-font">&nbsp;&nbsp;f. Students that are Irregular due to their approved LOA are
-                            still eligible for Latin Honors as long as their Study Plan follows the prescribed
-                            curriculum.</p>
+                    <!-- Content for letter 'a' -->
+                    <p class="body-font">&nbsp;&nbsp;a. A student may seek a leave of absence by a written petition to the respective department chair for evaluation. This written permission, together with the Leave of Absence Form, must be duly endorsed by the Dean to the Vice President for Academic Affairs, for approval.</p>
+                    <!-- Content for letter 'b' -->
+                    <p class="body-font">&nbsp;&nbsp;b. A student who leaves the college without an approved leave of absence shall be denied re-admission.</p></p>
+                    <!-- Content for letter 'c' -->
+                    <p class="body-font">&nbsp;&nbsp;c. A student is entitled to a leave of absence for a period not to exceed a total of one year.</p></p>
+                    <!-- Content for letter 'd' -->
+                    <p class="body-font">&nbsp;&nbsp;d. Duly approved Leave of Absence (LOA) shall not be counted as part of the residency of a student.</p></p>
+                    <!-- Content for letter 'e' -->
+                    <p class="body-font">&nbsp;&nbsp;e. Students who have taken a Leave of Absence (LOA) not exceeding two (2) semesters as endorsed by the Dean and duly approved by the Executive Vice President (EVP) may qualify for academic honors.</p></p>
+                    
+                    <p style="font-family: Inter, sans-serif; font-size: 26px; color:black;">Reminders and Regulations</p> 
+                    <!-- Content for letter 'f' -->
+                    <p class="body-font">&nbsp;&nbsp;a. Students of respective degree programs must strictly observe the prescribed curriculum. </p>
+                    <!-- Content for letter 'b' -->
+                    <p class="body-font">&nbsp;&nbsp;b. Each Department shall issue a Curriculum checklist/ Course Prospectus to the student, which shall be used until he/she graduates. </p>
+                    <!-- Content for letter 'c' -->
+                    <p class="body-font">&nbsp;&nbsp;c. Students must enroll their subjects as scheduled on a particular semester/term with consideration of the required pre-requisites prior to enrolling. </p>
+                    <!-- Content for letter 'd' -->
+                    <p class="body-font">&nbsp;&nbsp;d. To avoid re-enrolling a completed subject, the respective Deans must ensure that the student has properly accomplished the “Curriculum checklist/ Course Prospectus”. </p>
+                    <!-- Content for letter 'e' -->
+                    <p class="body-font">&nbsp;&nbsp;e. As an irregular student, it is required of you to submit your Study Plan containing a personalized curriculum of courses to be taken based of the Curriculum checklist/ Course Prospectus provided to you by your department. </p>
+                    <!-- Content for letter 'f' -->
+                    <p class="body-font">&nbsp;&nbsp;f. Enlistment procedures of irregular students will be similar to enlistment of Physical Education (PE) courses. But this time, all courses will be enlisted by the student as per their approved Study Plan.</p>
+                    <!-- Content for letter 'g' -->
+                    <p class="body-font">&nbsp;&nbsp;g. Students shall make sure that overloading and underloading does not happen in their study plan unless approved by dedicated chairperson or advising body.</p>
+                    <!-- Content for letter 'h' -->
+                    <p class="body-font">&nbsp;&nbsp;h. Subjects that have Pre-requisites cannot be taken unless their required subjects are accomplished.</p>
+                    <!-- Content for letter 'i' -->
+                    <p class="body-font">&nbsp;&nbsp;i. Co-requisites are subjects that should be taken at the same time except in cases that they are to be taken separately as retakes.</p>
                         <div class="flex justify-end mt-4">
                             <button type="button"
                                 class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
