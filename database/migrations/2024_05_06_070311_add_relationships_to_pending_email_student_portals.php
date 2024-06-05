@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pending_email_student_portals', function (Blueprint $table) {
-            $table->foreignId('student_no')->constrained('students', 'student_no')->cascadeOnDelete();
+            $table->foreignId('student_no')->constrained('students', 'student_no')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('pending_email_student_portals', function (Blueprint $table) {
-            $table->dropForeign(['student_id']);
+            $table->dropForeign(['student_no']);
         });
     }
 };

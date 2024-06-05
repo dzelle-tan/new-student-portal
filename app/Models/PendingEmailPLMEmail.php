@@ -14,4 +14,9 @@ class PendingEmailPLMEmail extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function student(): BelongsTo
+    {
+        return $this->belongsTo(Student::class, 'student_no', 'student_no');
+    }
 }

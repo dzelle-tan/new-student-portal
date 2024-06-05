@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Professor;
 use App\Models\Student;
+use Carbon\Carbon;
 
 class PLMEmail
 {
@@ -16,14 +17,13 @@ class PLMEmail
      * @param int $year
      * @return string
      */
-    public static function generate($firstName, $middleName, $lastName, $date)
+    public static function generate($firstName, $middleName, $lastName, $year)
     {
         // Example name: Juan Two Ang Dela Cruz, 2021
         // Expected output: jtadelacruz2021@plm.edu.ph
 
         $firstNameInitial = PLMEmail::getInitials($firstName);
         $middleNameInitial = PLMEmail::getInitials($middleName);
-        $year = $date->format('Y');
         $plmEmail = $firstNameInitial . $middleNameInitial . strtolower($lastName) . $year . '@plm.edu.ph';
 
         return PLMEmail::verifyUniqueness($plmEmail);

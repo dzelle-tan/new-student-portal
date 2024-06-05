@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('aysems', function (Blueprint $table) {
             $table->id();
-            $table->integer('semester_index');
+            $table->integer('academic_year');
+            $table->string('academic_year_code')->virtualAs('CONCAT(academic_year, "-", academic_year + 1)');
+            $table->integer('semester');
+            $table->string('academic_year_sem')->virtualAs('CONCAT(academic_year, "-", semester)');
             $table->date('date_end');
             $table->date('date_start');
             $table->timestamps();

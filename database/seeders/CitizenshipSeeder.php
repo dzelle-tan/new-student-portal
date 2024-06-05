@@ -14,6 +14,7 @@ class CitizenshipSeeder extends Seeder
     {
         $citizenships = [
             'Filipino',
+            'Foreigner',
         ];
 
         foreach ($citizenships as $citizenship) {

@@ -12,7 +12,7 @@ class RegistrationStatusSeeder extends Seeder
      */
     public function run(): void
     {
-        $registrationStatuses = ['Regular', 'Irregular', 'Graduated'];
+        $registrationStatuses = ['Regular', 'Irregular'];
 
         foreach ($registrationStatuses as $registrationStatus) {
             \App\Models\RegistrationStatus::create([

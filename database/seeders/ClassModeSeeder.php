@@ -12,12 +12,14 @@ class ClassModeSeeder extends Seeder
      */
     public function run(): void
     {
-        $classModes = ['Online', 'Onsite', 'Blended'];
+        $classModes = [
+            ['mode_code' => 'F2F', 'mode_type' => 'Face-to-Face'],
+            ['mode_code' => 'OL', 'mode_type' => 'Online'],
+            ['mode_code' => 'HYB', 'mode_type' => 'Hybrid'],
+        ];
 
         foreach ($classModes as $classMode) {
-            \App\Models\ClassMode::create([
-                'mode' => $classMode,
-            ]);
+            \App\Models\ClassMode::create($classMode);
         }
     }
 }

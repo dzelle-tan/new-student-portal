@@ -12,23 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('student_terms', function (Blueprint $table) {
-            $table->foreignId('student_no')->constrained('students', 'student_no')->cascadeOnDelete();
-            $table->foreignId('aysem_id')
-                ->nullable()
-                ->constrained()
-                ->cascadeOnDelete();
-            $table->foreignId('program_id')
-                ->nullable()
-                ->constrained()
-                ->cascadeOnDelete();
-            $table->foreignId('block_id')
-                ->nullable()
-                ->constrained()
-                ->cascadeOnDelete();
-            $table->foreignId('registration_status_id')
-                ->nullable()
-                ->constrained()
-                ->cascadeOnDelete();
+            $table->foreignId('student_no')->constrained('students', 'student_no')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('aysem_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('program_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('block_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('registration_status_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
@@ -38,11 +26,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('student_terms', function (Blueprint $table) {
-            $table->dropForeign(['student_id']);
+            $table->dropForeign(['student_no']);
             $table->dropForeign(['aysem_id']);
-            $table->dropForeign(['college_id']);
             $table->dropForeign(['program_id']);
             $table->dropForeign(['block_id']);
+            $table->dropForeign(['registration_status_id']);
         });
     }
 };

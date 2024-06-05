@@ -12,14 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('class_schedules', function (Blueprint $table) {
-            $table->foreignId('class_id')
-                    ->constrained('classes', 'id')
-                    ->cascadeOnDelete();
-            $table->foreignId('class_mode_id')
-                    ->constrained();
-            $table->foreignId('room_id')
-                    ->nullable()
-                    ->constrained();
+            $table->foreignId('class_id')->constrained('classes', 'id')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('class_mode_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('room_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

@@ -13,4 +13,5 @@ class Program extends Model
         'created_at',
         'updated_at',
     ];
+    protected $fillable = ['program_title'];
 }
