@@ -14,4 +14,13 @@ class StudentRequestMode extends Model
         'created_at',
         'updated_at',
     ];
+
+    protected $fillable = [
+        'mode',
+    ];
+
+    public function requests(): HasMany
+    {
+        return $this->hasMany(StudentRequest::class);
+    }
 }

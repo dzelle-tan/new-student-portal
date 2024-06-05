@@ -14,4 +14,13 @@ class DocumentType extends Model
         'created_at',
         'updated_at',
     ];
+    protected $fillable = [
+        'document_name',
+        'price',
+    ];
+
+    public function requestedDocs(): HasMany
+    {
+        return $this->hasMany(RequestedDocument::class);
+    }
 }
