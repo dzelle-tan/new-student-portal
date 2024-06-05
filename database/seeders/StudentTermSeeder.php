@@ -93,11 +93,11 @@ class StudentTermSeeder extends Seeder
             ],
             [
                 'student_no' => 202310001,
-                'student_type' => 'Irregular',
+                'student_type' => 'Regular',
                 'graduating' => false,
                 'enrolled' => true,
                 'year_level' => 2,
-                'aysem_id' => 1,
+                'aysem_id' => 112,
                 'program_id' => 1,
                 'block_id' => 2,
                 'registration_status_id' => 2,
