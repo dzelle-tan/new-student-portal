@@ -15,7 +15,7 @@ new class extends Component {
         $this->user = Auth::user();
 
         // Fetch the latest student term
-        $latestTerm = $this->user->terms()->with('block.classes.classSchedules', 'block.classes.classSchedules.classMode', 'block.classes.classSchedules.room')->latest('id')->first();
+        $latestTerm = $this->user->terms()->with('block.classes.classSchedules', 'block.classes.classSchedules.classMode', 'block.classes.classSchedules.room', 'block.classes.instructors')->latest('id')->first();
 
         // Get the classes for the latest term
         if ($latestTerm && $latestTerm->block) {
@@ -53,7 +53,7 @@ new class extends Component {
                                 type="{{ $classSchedule->classMode->mode_type }}"
                                 room="{{ $classSchedule->room->room_name }}"
                                 building="{{ $classSchedule->room->building->building_name }}"
-                                professor="{{ optional($classSchedule->professor)->first_name }} {{ optional($classSchedule->professor)->middle_name }}. {{ optional($classSchedule->professor)->last_name }}"
+                                professor="{{ $classModel->instructors->first()->first_name ?? '' }} {{ $classModel->instructors->first()->middle_name ?? '' }}. {{ $classModel->instructors->first()->last_name ?? '' }}"
                             />
                         </div>
                     @endif

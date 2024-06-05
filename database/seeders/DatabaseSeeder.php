@@ -45,6 +45,8 @@ class DatabaseSeeder extends Seeder
             StudentRecordSeeder::class,
             FeeStatusSeeder::class,
             GradeSeeder::class,
+            InstructorSeeder::class,
+            ClassFacultySeeder::class,
 
         ]);
     }
