@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Block;
 use App\Models\Program;
 use App\Models\RequestedDocument;
+use App\Models\StudentRequestMode;
+use App\Models\StudentTerm;
 use App\Models\Student;
 use App\Models\StudentRecord;
 use App\Models\User;
@@ -45,7 +47,16 @@ class DatabaseSeeder extends Seeder
             StudentRecordSeeder::class,
             FeeStatusSeeder::class,
             GradeSeeder::class,
-            InstructorSeeder::class,
+            DaySeeder::class,
+            ClassModeSeeder::class,
+            StudentRequestStatusSeeder::class,
+            RequestedDocumentStatusSeeder::class,
+            DocumentTypeSeeder::class,
+            StudentRequestModeSeeder::class,
+            StudentRequestSeeder::class,
+            RequestedDocumentSeeder::class,
+            SemesterSeeder::class,
+            EventSeeder::class,            InstructorSeeder::class,
             ClassFacultySeeder::class,
 
         ]);
