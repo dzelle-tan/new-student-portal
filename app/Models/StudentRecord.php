@@ -34,8 +34,8 @@ class StudentRecord extends Model
     /**
      * Get the academic year that owns the student record.
      */
-    public function academicYear(): BelongsTo
+    public function aysem(): BelongsTo
     {
-        return $this->belongsTo(AcademicYear::class);
+        return $this->belongsTo(Aysem::class);
     }    
 }

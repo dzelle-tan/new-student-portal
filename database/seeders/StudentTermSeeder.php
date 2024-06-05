@@ -14,7 +14,7 @@ class StudentTermSeeder extends Seeder
     {
         $studentTerms = [
             [
-                'student_no' => 202410001,
+                'student_no' => 202310001,
                 'student_type' => 'Regular',
                 'graduating' => false,
                 'enrolled' => true,
@@ -27,7 +27,7 @@ class StudentTermSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_no' => 202410001,
+                'student_no' => 202310001,
                 'student_type' => 'Regular',
                 'graduating' => false,
                 'enrolled' => true,
@@ -40,7 +40,7 @@ class StudentTermSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_no' => 202410001,
+                'student_no' => 202310001,
                 'student_type' => 'Regular',
                 'graduating' => false,
                 'enrolled' => true,
@@ -53,7 +53,7 @@ class StudentTermSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_no' => 202410001,
+                'student_no' => 202310001,
                 'student_type' => 'Regular',
                 'graduating' => false,
                 'enrolled' => true,
@@ -66,7 +66,7 @@ class StudentTermSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_no' => 202410001,
+                'student_no' => 202310001,
                 'student_type' => 'Regular',
                 'graduating' => false,
                 'enrolled' => true,
@@ -79,7 +79,7 @@ class StudentTermSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_no' => 202410001,
+                'student_no' => 202310001,
                 'student_type' => 'Regular',
                 'graduating' => false,
                 'enrolled' => true,
@@ -92,7 +92,7 @@ class StudentTermSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'student_no' => 202410002,
+                'student_no' => 202310001,
                 'student_type' => 'Irregular',
                 'graduating' => false,
                 'enrolled' => true,

@@ -15,9 +15,9 @@ class StudentRecordSeeder extends Seeder
     {
         $studentRecords = [
             [
-                'student_no' => 202410001,
+                'student_no' => 202310001,
                 'fee_status_id' => 1,
-                'academic_year_id' => 1,
+                'aysem_id' => 118,
                 'semester' => 1,
                 'date_enrolled' => '2024-01-10',
                 'tuition_fee' => 1500.00,
@@ -43,9 +43,9 @@ class StudentRecordSeeder extends Seeder
             ],
 
             [
-                'student_no' => 202410001,
+                'student_no' => 202310001,
                 'fee_status_id' => 1,
-                'academic_year_id' => 1,
+                'aysem_id' => 1,
                 'semester' => 2,
                 'date_enrolled' => '2024-01-10',
                 'tuition_fee' => 1500.00,
@@ -71,9 +71,9 @@ class StudentRecordSeeder extends Seeder
             ],
 
             [
-                'student_no' => 202410001,
+                'student_no' => 202310001,
                 'fee_status_id' => 1,
-                'academic_year_id' => 2,
+                'aysem_id' => 2,
                 'semester' => 1,
                 'date_enrolled' => '2024-01-10',
                 'tuition_fee' => 1500.00,
@@ -99,9 +99,9 @@ class StudentRecordSeeder extends Seeder
             ],
 
             [
-                'student_no' => 202410001,
+                'student_no' => 202310001,
                 'fee_status_id' => 1,
-                'academic_year_id' => 1,
+                'aysem_id' => 1,
                 'semester' => 2,
                 'date_enrolled' => '2024-01-10',
                 'tuition_fee' => 1500.00,

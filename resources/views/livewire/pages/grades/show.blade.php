@@ -15,7 +15,7 @@ new class extends Component
     public Collection $terms;
     public Student $user;
     public $totalGradePoints = 0;
-    public $latestProgramTitle;
+    public $programTitle;
 
     public function mount(): void
     {
@@ -24,28 +24,25 @@ new class extends Component
         $this->getLatestProgramTitle();
     }
 
-    // Fetches the authenticated user's associated grades and academic year
     public function getAcademicYear(): void
     {
-        // Fetch the terms taken by the student
-        // $this->terms = $this->user->terms()->with('program', 'aysem', 'block', 'registrationStatus')->get();
-        $this->terms = $this->user->terms()->with('aysem.academicYear')->get();
-        // dd($this->terms);
+        // Fetch the terms taken by the student with aysem details
+        $this->terms = $this->user->records()->with('aysem')->get();
+
     }
+
     // Fetches the program titles associated with the student's terms
     public function getLatestProgramTitle(): void
     {
-        $latestTerm = StudentTerm::where('student_no', $this->user->student_no)
-                        ->with('program')
-                        ->latest('student_term_id')
-                        ->first();
-
-        if ($latestTerm) {
-            $this->latestProgramTitle = $latestTerm->program->program_title;
+        // Fetch the student's program
+        $latestTerm = $this->user->terms()->latest('id')->with('program')->first();
+        if ($latestTerm ) {
+            $this->programTitle = $latestTerm->program->program_title;
         } else {
-            $this->latestProgramTitle = "No Program Found";
+            $this->programTitle = "No Program Found";
         }
     }
+
     // Extracts user input from dropdown
     public function updateSelectedTerm($value): void
     {
@@ -72,7 +69,7 @@ new class extends Component
             <div>
                 <div>
                     <x-info-label class="w-24">{{_("Program:")}}</x-info-label>
-                    <span>{{ $latestProgramTitle }}</span>
+                    <span>{{ $programTitle }}</span>
                 </div>
                 <div>
                     <x-info-label class="w-24">{{_("A.Y-Term:")}}</x-info-label>
@@ -80,7 +77,7 @@ new class extends Component
                         <option value = "All">All</option>
                         @foreach ($terms as $term)
                             <option value="{{ $term->id }}">
-                                {{ $term->aysem->academicYear->academic_year_code }} - {{ $term->aysem->semester_index }}
+                                {{ $term->aysem->academic_year_code }} - {{ $term->aysem->semester }}
                             </option>
                         @endforeach
                     </select>
