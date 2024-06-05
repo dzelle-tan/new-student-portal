@@ -40,6 +40,14 @@ class Classes extends Model
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class, 'course_id');
+    }
+    
+    /**
+     * Get the grades for the class.
+     */
+    public function grades(): HasMany
+    {
+        return $this->hasMany(Grade::class, 'class_id');
     }    
     
     // /**

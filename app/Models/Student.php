@@ -119,6 +119,11 @@ class Student extends Model implements AuthenticatableContract
         return $this->hasMany(studentViolation::class);
     }
 
+    public function grades(): HasMany
+    {
+        return $this->hasMany(Grade::class, 'student_no');
+    }
+    
     protected static function booted()
     {
         static::created(function ($student) {
