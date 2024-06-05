@@ -33,7 +33,7 @@
             
             {{-- University Calendar --}}
             <div class="p-4 bg-white shadow h-[40rem] sm:p-8 sm:rounded-md">
-                {{-- <livewire:pages.home.calendar /> --}}
+                <livewire:pages.home.calendar />
             </div>
         </div>
         <div class="grid col-span-1 space-y-3 md:col-span-2 lg:col-span-1 lg:row-span-6">
