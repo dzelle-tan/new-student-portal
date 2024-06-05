@@ -12,7 +12,7 @@ class HomeController extends Controller
      */
     public function index(GradesChart $chart)
     {
-        return view('layouts.home', ['chart' => $chart->build()]);
+        return view('layouts.home');
     }
 
     /**

@@ -19,17 +19,17 @@ use App\Http\Controllers\VerifyController;
 */
 
 // Routes for Downloading Documents involving Enrollment
-Route::get('/enrollment/schedule', [EnrollmentDownloadsController::class, 'downloadSchedule'])
-    ->middleware(['auth'])
-    ->name('enrollmentSchedule');
+// Route::get('/enrollment/schedule', [EnrollmentDownloadsController::class, 'downloadSchedule'])
+//     ->middleware(['auth'])
+//     ->name('enrollmentSchedule');
 
-Route::get('/enrollment/fees', [EnrollmentDownloadsController::class, 'downloadFee'])
-    ->middleware(['auth'])
-    ->name('enrollmentFee');
+// Route::get('/enrollment/fees', [EnrollmentDownloadsController::class, 'downloadFee'])
+//     ->middleware(['auth'])
+//     ->name('enrollmentFee');
 
-Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSER'])
-    ->middleware(['auth'])
-    ->name('enrollmentSER');
+// Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSER'])
+//     ->middleware(['auth'])
+//     ->name('enrollmentSER');
 
 Route::get('/', [HomeController::class, 'index'])
     ->middleware(['auth'])

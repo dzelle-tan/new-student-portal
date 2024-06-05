@@ -9,7 +9,11 @@ use Livewire\Volt\Component;
 
 new class extends Component
 {
-    public Student $user;
+    public $user;
+    public $programTitle;
+    public $yearLevel;
+    public $registrationStatus;
+    public $studentType;
 
     /**
      * Mount the component.
@@ -17,6 +21,19 @@ new class extends Component
     public function mount(): void
     {
         $this->user = Auth::user();
+        $latestTerm = $this->user->terms()->latest()->first();
+
+        if ($latestTerm) {
+            $this->programTitle = $latestTerm->program->program_title ?? 'N/A';
+            $this->yearLevel = $latestTerm->year_level ?? 'N/A';
+            $this->registrationStatus = $latestTerm->registrationStatus->registration_status ?? 'N/A';
+            $this->studentType = $latestTerm->student_type ?? 'N/A';
+        } else {
+            $this->programTitle = 'N/A';
+            $this->yearLevel = 'N/A';
+            $this->registrationStatus = 'N/A';
+            $this->studentType = 'N/A';
+        }
     }
 }; ?>
 
@@ -42,31 +59,31 @@ new class extends Component
         </div>
         <div>
             <x-info-label class="w-36">{{_("Degree Program:")}}</x-info-label>
-            <span class="inline-block w-54">{{ $user->degree_program }}</span>
+            <span class="inline-block w-54">{{ $programTitle }}</span>
         </div>
         <div>
             <x-info-label class="w-36">{{_("Year Level:")}}</x-info-label>
-            <span>{{ $user->year_level }}</span>
+            <span>{{ $yearLevel }}</span>
         </div>
         <div>
             <x-info-label class="w-36">{{_("Registration Status:")}}</x-info-label>
-            <span>{{ $user->registration_status }}</span>
+            <span>{{ $registrationStatus }}</span>
         </div>
         <div>
             <x-info-label class="w-36">{{_("Student Type:")}}</x-info-label>
-            <span>{{ $user->student_type }}</span>
+            <span>{{ $studentType }}</span>
         </div>
-        <div>
+        {{-- <div>
             <x-info-label class="w-36">{{_("Pedigree:")}}</x-info-label>
             <span>{{ $user->pedigree }}</span>
-        </div>
+        </div> --}}
         <div>
             <x-info-label class="w-36">{{_("PLM Email:")}}</x-info-label>
             <span>{{ $user->plm_email }}</span>
         </div>
         <div>
             <x-info-label class="w-36">{{_("Personal Email:")}}</x-info-label>
-            <span>{{ $user->email }}</span>
+            <span>{{ $user->personal_email }}</span>
         </div>
         <div>
             <x-info-label class="w-36">{{_("Mobile No:")}}</x-info-label>

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\DocumentInfo;
+use App\Models\DocumentType;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Rule;
@@ -12,25 +12,25 @@ new class extends Component
     use WithFileUploads;
 
     public $file;
-    public $mode = "";
+    public $mode = 1;
     public $purpose = "";
     public $total = 0;
     public $total_steps = 3;
     public $inputs;
     public $step = 1;
     public $selectedDocument;
-    public Collection $documentsInfo;
+    public Collection $documentsType;
     public $selectedTerm = "";
 
     public function mount(): void
     {
-        $this->documentsInfo = DocumentInfo::all();
+        $this->documentsType = DocumentType::all();
 
         $this->fill([
             'inputs' => collect([
                 [
                     'amount' => 0,
-                    'document_info_id' => 0,
+                    'document_type_id' => 0,
                     'document_name' => "",
                     'no_of_copies' => 1,
                     'id' => uniqid(),
@@ -42,12 +42,12 @@ new class extends Component
     public function add()
     {
         $this->validate([
-            'inputs.*.document_info_id'=>'required|numeric|min:1|distinct',
+            'inputs.*.document_type_id'=>'required|numeric|min:1|distinct',
             'inputs.*.no_of_copies'=>'required|numeric|min:1',
         ], [
-            'inputs.*.document_info_id.required'=>'Select a document first',
-            'inputs.*.document_info_id.min'=>'Select a document first',
-            'inputs.*.document_info_id.distinct'=>'The same document should not be selected more than once. Increase quantity instead.',
+            'inputs.*.document_type_id.required'=>'Select a document first',
+            'inputs.*.document_type_id.min'=>'Select a document first',
+            'inputs.*.document_type_id.distinct'=>'The same document should not be selected more than once. Increase quantity instead.',
             'inputs.*.no_of_copies.required'=>'The Number of Copies field is required',
             'inputs.*.no_of_copies.numeric'=>'The Number of Copies field must be a number',
             'inputs.*.no_of_copies.min'=>'The Number of Copies field must be at least 1',
@@ -55,7 +55,7 @@ new class extends Component
 
         $this->inputs = $this->inputs->add([
             'no_of_copies' => 1,
-            'document_info_id' => 0,
+            'document_type_id' => 0,
             'id' => uniqid(),
         ]);
     }
@@ -72,9 +72,9 @@ new class extends Component
             $total = 0;
 
             $this->inputs = $this->inputs->map(function ($input) use (&$total) {
-                $documentDetails = collect($this->documentsInfo)->firstWhere('id', $input['document_info_id']);
+                $documentDetails = collect($this->documentsType)->firstWhere('id', $input['document_type_id']);
                 $input['amount'] = $input['no_of_copies'] * $documentDetails->price;
-                $input['document_name'] = $documentDetails->document;
+                $input['document_name'] = $documentDetails->document_name;
                 $total += $input['amount'];
 
                 return $input;
@@ -98,12 +98,13 @@ new class extends Component
         $receiptNumber = $currentYear . $randomNumber;
         
         $request = auth()->user()->studentRequests()->create([
-            'mode' => $this->mode,
+            'student_request_mode_id' => $this->mode,
             'purpose' => $this->purpose,
             'receipt_no' => $receiptNumber,
-            'status' => 'Pending', // Default status
+            'student_request_status_id' => 1, 
             'total' => $this->total,
             'date_requested' => now(),
+            'date_of_payment' => now(),
             'expected_release' => date('Y-m-d', strtotime('+15 days')),
         ]);
 
@@ -111,11 +112,13 @@ new class extends Component
         {
             $request->documents()->create([
 
-                $documentDetails = collect($this->documentsInfo)->firstWhere('id', $input['document_info_id']),
-                'amount' => $input['amount'],
-                'document_name' => $documentDetails->document,
+                $documentDetails = collect($this->documentsType)->firstWhere('id', $input['document_type_id']),
+                // 'amount' => $input['amount'],
+                'document_type_id' => $input['document_type_id'],
+                'requested_document_status_id' => 1,
                 'no_of_copies' => $input['no_of_copies'],
-
+                'updated_at' => now(),
+                'created_at' => now(),
             ]);
         }
 
@@ -129,13 +132,13 @@ new class extends Component
         {
             $this->validate([
                 'purpose' => 'required',
-                'inputs.*.document_info_id'=>'required|numeric|min:1|distinct',
+                'inputs.*.document_type_id'=>'required|numeric|min:1|distinct',
                 'inputs.*.no_of_copies'=>'required|numeric|min:1',
             ], [
                 'purpose'=>'Purpose field is required',
-                'inputs.*.document_info_id.required'=>'The document name field is required',
-                'inputs.*.document_info_id.min'=>'The document name field is required',
-                'inputs.*.document_info_id.distinct'=>'The same document should not be selected more than once',
+                'inputs.*.document_type_id.required'=>'The document name field is required',
+                'inputs.*.document_type_id.min'=>'The document name field is required',
+                'inputs.*.document_type_id.distinct'=>'The same document should not be selected more than once',
                 'inputs.*.no_of_copies.required'=>'The Number of Copies field is required',
                 'inputs.*.no_of_copies.numeric'=>'The Number of Copies field must be a number',
                 'inputs.*.no_of_copies.min'=>'The Number of Copies field must be at least 1',
@@ -161,6 +164,13 @@ new class extends Component
     public function updateSelectedTerm($value): void
     {
         $this->selectedTerm = $value;
+
+        if ($value === 'Landbank') {
+            $this->mode = 1;
+        } else {
+            $this->mode = 2;
+        }
+        
     }
 
 }; ?>
@@ -212,10 +222,10 @@ new class extends Component
                                                     </tr>
                                                 </thead>
                                                 <tbody class="bg-white divide-y divide-gray-200">
-                                                    @foreach ($documentsInfo as $document)
+                                                    @foreach ($documentsType as $document)
                                                         <tr>
                                                             <td class="px-6 py-4 border-r border-gray-200 whitespace-nowrap">
-                                                                <div class="text-sm text-gray-900">{{ $document->document }}</div>
+                                                                <div class="text-sm text-gray-900">{{ $document->document_name }}</div>
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap">
                                                                 <div class="text-sm text-gray-500">₱{{ $document->price }}</div>
@@ -247,14 +257,14 @@ new class extends Component
                                 </div>
                             @endif
                             <div class="mb-2 mr-2">
-                                <select class="py-2 overflow-auto w-[28rem] form-control overflow-ellipsis {{ $loop->first ? 'ml-9' : '' }} border-gray-300 rounded-md" wire:model="inputs.{{$key}}.document_info_id">
+                                <select class="py-2 overflow-auto w-[28rem] form-control overflow-ellipsis {{ $loop->first ? 'ml-9' : '' }} border-gray-300 rounded-md" wire:model="inputs.{{$key}}.document_type_id">
                                     <option hidden value = "">--- Select a Document ---</option>
-                                    @foreach ($documentsInfo as $document)
-                                        <option value = "{{ $document->id }}">{{ $document->document }}</option>
+                                    @foreach ($documentsType as $document)
+                                        <option value = "{{ $document->id }}">{{ $document->document_name }}</option>
                                     @endforeach
                                 </select>
 
-                                <x-input-error :messages="$errors->get('inputs.'.$key.'.document_info_id')" class="{{ $loop->first ? 'ml-9' : '' }}" />
+                                <x-input-error :messages="$errors->get('inputs.'.$key.'.document_type_id')" class="{{ $loop->first ? 'ml-9' : '' }}" />
                             </div>
                             <div>
                                 <x-text-input wire:model="inputs.{{$key}}.no_of_copies" type="number" placeholder="No. of Copies" class="w-[8.9rem]"/>
@@ -307,24 +317,23 @@ new class extends Component
                                 <tr class="text-sm">
                                     <td class="px-4 py-2 max-w-[300px] whitespace-normal">{{ $value['document_name'] }}</td>
                                     <td class="px-4 py-2">{{ $value['no_of_copies'] }}</td>
-                                    <td class="px-4 py-2">{{ $value['amount'] }}</td>
+                                    <td class="px-4 py-2">₱{{ $value['amount'] }}</td>
                                 </tr>
                                 @endforeach
                                 <tr class="text-sm border-t border-gray-300 border-dashed">
                                     <td class="px-4 py-2 max-w-[300px] whitespace-normal"></td>
                                     <td class="px-4 py-2 text-right">{{_("Total:")}}</td>
-                                    <td class="px-4 py-2 font-medium">{{ $total }}</td>
+                                    <td class="px-4 py-2 font-medium">₱{{ $total }}</td>
                                 </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="mt-6">
                     <label for="paymentMode" class="block text-sm text-gray-700">Mode of Payment</label>
-                    <select id="paymentMode" class="w-full border-gray-300 rounded-md form-control" wire:model="mode" wire:change="updateSelectedTerm($event.target.value)">
+                    <select id="paymentMode" class="w-full border-gray-300 rounded-md form-control" wire:change="updateSelectedTerm($event.target.value)">
                         <option hidden value="">--- Select Mode of Payment ---</option>
                         <option value="Landbank">Landbank</option>
                         <option value="University Cashier">University Cashier</option>
-                        <option value="Bank Transfer">Bank Transfer</option>
                     </select>
                     <x-input-error :messages="$errors->get('mode')" class="mt-2" />
                 </div>

@@ -11,22 +11,28 @@ class StudentRequest extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'created_at',
+        'updated_at',
+    ];
+
     protected $fillable = [
-        'mode',
+        'student_request_mode_id',
         'purpose',
         'receipt_no',
         'registrar_name',
-        'status',
+        'student_request_status_id', 
         'total',
         'date_of_payment',
         'expected_release',
         'date_requested',
+        'date_of_payment',
         'date_received',
     ];
 
     public function documents(): HasMany
     {
-        return $this->hasMany(Document::class);
+        return $this->hasMany(RequestedDocument::class);
     }
 
     public function student(): BelongsTo
@@ -34,4 +40,13 @@ class StudentRequest extends Model
         return $this->belongsTo(Student::class);
     }
 
+    public function studentRequestStatus(): BelongsTo
+    {
+        return $this->belongsTo(StudentRequestStatus::class);
+    }
+
+    public function studentRequestMode(): BelongsTo
+    {
+        return $this->belongsTo(StudentRequestMode::class);
+    }
 }

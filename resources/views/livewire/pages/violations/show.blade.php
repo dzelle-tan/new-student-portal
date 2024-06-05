@@ -2,6 +2,7 @@
 
 use App\Models\Student;
 use App\Models\StudentViolation;
+use App\Models\offenseType;
 use Illuminate\Support\Collection;
 
 use Livewire\Volt\Component;
@@ -27,31 +28,27 @@ new class extends Component {
         ];
 
         // Define all possible offense types
-        $this->allOffenseTypes = ['Light Offense', 'Less Grave Offense', 'Grave Offense'];
+        $this->allOffenseTypes = OffenseType::pluck('type');
 
-        $this->violation = StudentViolation::where('student_no', $this->user->student_no)->get();
+        $this->violations = StudentViolation::with('offenseType')
+            ->where('student_no', $this->user->student_no)
+            ->get();
 
-        if ($this->violation)
-        {
-            foreach ($this->violation as $violation)
-            {
-                $this->offenses->push([
-                    'offense_type' => $violation->offense_type,
-                    'violation' => $violation->violation,
-                    'date' => $violation->violation_date,
-                    'count' => $violation->count,
-                    'remarks' => $violation->resolution_remarks,
-                    'resolution' => $violation->resolution,
-                    'type' => $violation->type,
-                    'status' => $violation->status,
-                ]);
+        foreach ($this->violations as $violation) {
+            $this->offenses->push([
+                'violation' => $violation->violation,
+                'date' => $violation->violation_date,
+                'resolution' => $violation->resolution,
+                'offense_type' => $violation->offenseType->type,
+                'sm_reference' => $violation->sm_reference,
+                'resolution_date' => $violation->resolution_date,
+                // Add other fields as needed
+            ]);
 
-                $this->offenseTypes->push($violation->offense_type);
-            }
-
-            $this->offenseTypes = $this->offenseTypes->unique();
-
+            $this->offenseTypes->push($violation->offenseType->type);
         }
+
+        $this->offenseTypes = $this->offenseTypes->unique();
     }
 }; ?>
 
@@ -72,22 +69,23 @@ new class extends Component {
                                     <th class="px-4 py-3 font-medium">Type</th>
                                     <th class="px-4 py-3 font-medium">Violation</th>
                                     <th class="px-4 py-3 font-medium">Date</th>
-                                    <th class="px-4 py-3 font-medium">Count</th>
+                                    {{-- <th class="px-4 py-3 font-medium">Count</th> --}}
                                     {{-- <th class="px-4 py-3 font-medium">Remarks</th> --}}
                                     <th class="px-4 py-3 font-medium">Resolution</th>
-                                    <th class="px-4 py-3 font-medium">Status</th>
+                                    <th class="px-4 py-3 font-medium">Resolution Date</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($offenses as $offense)
                                     <tr class="text-sm border-b border-gray-200">
-                                        <td class="px-4 py-3">{{ $offense['type'] }}</td>
+                                        <td class="px-4 py-3">{{ $offense['sm_reference'] }}</td>
                                         <td class="px-4 py-3 min-w-[200px] max-w-[300px] whitespace-normal">{{ $offense['violation'] }}</td>
                                         <td class="px-4 py-3">{{ date('M d, Y', strtotime($offense['date'])) }}</td>
-                                        <td class="px-4 py-3">{{ $offense['count'] }}</td>
+                                        {{-- <td class="px-4 py-3">{{ $offense['count'] }}</td> --}}
                                         {{-- <td class="px-4 py-3">{{ $offense['remarks'] }}</td> --}}
                                         <td class="px-4 py-3">{{ $offense['resolution'] }}</td>
-                                        <td class="px-4 py-3 {{ $statusColors[$offense['status']] ?? 'text-gray-500' }}">{{ $offense['status'] }}</td>
+                                        <td class="px-4 py-3">{{ date('M d, Y', strtotime($offense['resolution_date'])) }}</td>
+                                        {{-- <td class="px-4 py-3 {{ $statusColors[$offense['status']] ?? 'text-gray-500' }}">{{ $offense['status'] }}</td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
