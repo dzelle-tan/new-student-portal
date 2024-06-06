@@ -4,6 +4,7 @@ use App\Models\Student;
 use App\Models\StudentRecord;
 use App\Models\StudyPlanValidations;
 use App\Models\Validation;
+use App\Models\StudentTerm;
 use App\Models\Course;
 use App\Models\BSCS_grade;
 use App\Models\AddDropRequest;
@@ -14,9 +15,9 @@ use Carbon\Carbon;
 
 new class extends Component {
     use WithFileUploads;
-    public StudentRecord $record;
+    public $record;
     public Student $user;
-    public string $studentStatus;
+    public $studentStatus;
     public $requestStatus;
     public $studentid;
     public $Status;
@@ -63,7 +64,10 @@ new class extends Component {
 
         $this->user = Auth::user();
         $this->studentid = $this->user->student_no;
-        $this->studentStatus = $this->user->student_status; // Added student status
+        $record = StudentTerm::where('student_no', $this->user->student_no)
+            ->latest()
+            ->first(); // Fetches the most recent record based on these fields
+        $this->studentStatus = $record->student_status; // Added student status
         $this->getStudentClass();
 
 
@@ -110,11 +114,14 @@ new class extends Component {
 
     public function getStudentClass(): void
     {
-        $this->record = StudentRecord::where('student_no', $this->user->student_no)
-            ->with('classes')
-            ->orderBy('school_year', 'desc')
-            ->orderBy('semester', 'desc')
-            ->first();
+        $this->record = StudentTerm::where('student_no', $this->user->student_no)
+                    ->with([
+                        'block.classes.course',
+                        'block.classes.classSchedules.classMode',
+                        'block.classes.classSchedules.room.building'
+                    ])
+                    ->orderBy('aysem_id', 'desc')
+                    ->first();
     }
 
 

@@ -5,6 +5,7 @@ use App\Models\StudentRecord;
 use App\Models\StudyPlanValidations;
 use App\Models\Validation;
 use App\Models\Course;
+use App\Models\StudentTerm;
 use App\Models\BSCS_grade;
 use App\Models\ShiftingRequest;
 use Illuminate\Support\Facades\Auth;
@@ -14,9 +15,9 @@ use Carbon\Carbon;
 
 new class extends Component {
     use WithFileUploads;
-    public StudentRecord $record;
+    public $record;
     public Student $user;
-    public string $studentStatus;
+    public $studentStatus;
     public $requestStatus;
     public $studentid;
     public $Status;
@@ -67,8 +68,10 @@ new class extends Component {
 
         $this->user = Auth::user();
         $this->studentid = $this->user->student_no;
-        $this->yearlevel = $this->user->year_level;
-        $this->studentStatus = $this->user->student_status; // Added student status
+
+        $currStudentTerm = StudentTerm::where('student_no', $this->studentid)->latest()->first();
+        $this->yearlevel = $currStudentTerm->year_level;
+        $this->studentStatus = $currStudentTerm->student_status; // Added student status
         $this->getStudentClass();
 
 
@@ -115,11 +118,14 @@ new class extends Component {
 
     public function getStudentClass(): void
     {
-        $this->record = StudentRecord::where('student_no', $this->user->student_no)
-            ->with('classes')
-            ->orderBy('school_year', 'desc')
-            ->orderBy('semester', 'desc')
-            ->first();
+        $this->record = StudentTerm::where('student_no', $this->user->student_no)
+                    ->with([
+                        'block.classes.course',
+                        'block.classes.classSchedules.classMode',
+                        'block.classes.classSchedules.room.building'
+                    ])
+                    ->orderBy('aysem_id', 'desc')
+                    ->first();
     }
 
 
@@ -676,10 +682,6 @@ new class extends Component {
                         <i class="fas fa-download" style="color: white; margin-right: .2rem; top: -0.2rem; position: relative; font-size: 15px;"></i>
                         <span class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white">Download</span>
                         </a>
-                        <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">Shifting Form</p>
-                        <br>
-                        <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">Letter of Intent</p>
-                        <br>
                         <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">Note of Undertaking</p>
                         <div class="flex justify-between mt-4">
                             <button type="button"

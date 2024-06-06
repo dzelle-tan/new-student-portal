@@ -4,6 +4,7 @@ use App\Models\Student;
 use App\Models\StudentRecord;
 use App\Models\StudyPlanValidations;
 use App\Models\Validation;
+use App\Models\StudentTerm;
 use App\Models\Course;
 use App\Models\BSCS_grade;
 use App\Models\LOARequest;
@@ -14,9 +15,9 @@ use Carbon\Carbon;
 
 new class extends Component {
     use WithFileUploads;
-    public StudentRecord $record;
+    public $record;
     public Student $user;
-    public string $studentStatus;
+    public $studentStatus;
     public $requestStatus;
     public $studentid;
     public $Status;
@@ -64,13 +65,14 @@ new class extends Component {
         $this->user = $user;
         $this->loa_form = $loa_form;
         $this->letter_of_request = $letter_of_request;
-        $this->note_of_undertaking = $note_of_undertaking;
         $this->clearance = $clearance;
 
         $this->user = Auth::user();
         $this->studentid = $this->user->student_no;
-        $this->yearlevel = $this->user->year_level;
-        $this->studentStatus = $this->user->student_status; // Added student status
+
+        $currStudentTerm = StudentTerm::where('student_no', $this->studentid)->latest()->first();
+        $this->yearlevel = $currStudentTerm->year_level;
+        $this->studentStatus = $currStudentTerm->student_status; // Added student status
         $this->getStudentClass();
 
 
@@ -117,11 +119,14 @@ new class extends Component {
 
     public function getStudentClass(): void
     {
-        $this->record = StudentRecord::where('student_no', $this->user->student_no)
-            ->with('classes')
-            ->orderBy('school_year', 'desc')
-            ->orderBy('semester', 'desc')
-            ->first();
+        $this->record = StudentTerm::where('student_no', $this->user->student_no)
+                    ->with([
+                        'block.classes.course',
+                        'block.classes.classSchedules.classMode',
+                        'block.classes.classSchedules.room.building'
+                    ])
+                    ->orderBy('aysem_id', 'desc')
+                    ->first();
     }
 
 
@@ -361,9 +366,11 @@ new class extends Component {
         // Assign the attributes from the validation object to the LOARequest object
         $loaRequest->student_no = $validation->student_no; 
         $loaRequest->status = 'Pending';
-        $loaRequest->year_level = $validation->yearlvl;
+        $currStudentTerm = StudentTerm::where('student_no', $validation->student_no)->latest()->first();
+        $loaRequest->year_level = $currStudentTerm->year_level;
         $loaRequest->date_of_request = Carbon::now();
-        $loaRequest->study_plan = $validation->study_plan_course_code;
+        // $loaRequest->study_plan = $validation->study_plan_course_code;
+        $loaRequest->study_plan = "";
 
         // Save the LOARequest object
         $loaRequest->save();
@@ -657,15 +664,9 @@ new class extends Component {
                         <span class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white">Download</span>
                         </a>
                         <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">Leave of Absence Form</p>
-                        <br>
-                        <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">Letter of Request for LOA</p>
-                        <br>
-                        <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">Note of Undertaking</p>
-                        <br>
-                        <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">Clearance from OSDS</p>
                         <div class="flex justify-between mt-4">
                             <button type="button" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white" @click="openPanel = 3; currentStep = 3">Back to Create your Study Plan</button>
-                            <button type="button" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white" @click="openPanel = 5">Proceed to Document Submission and Approval</button>
+                            <button type="button" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white" @click="openPanel = 5; currentStep = 5;">Proceed to Document Submission and Approval</button>
                         </div>
                     </div>
                 </div>
@@ -685,10 +686,10 @@ new class extends Component {
         <button type="button" 
                 class="accordion text-3xl font-normal text-black-700"
                 :class="{
-                    'opacity-50 cursor-not-allowed  text-gray-600': currentStep < 5 || loarequestStatus === 'Approved'
+                    'opacity-50 cursor-not-allowed  text-gray-600': currentStep < 5'
                 }"
-                :disabled="currentStep < 5 || loarequestStatus === 'Approved'"
-                @click="if (loarequestStatus !== 'Approved') { openPanel = 5 }">
+                :disabled="currentStep < 5"
+                @click="openPanel = 5">
                 5. Document Submission and Approval
                 <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 5 || hasRecord2 }" style="font-size: 27px;"></i>
             </button>

@@ -56,7 +56,7 @@ new class extends Component {
 
         $currStudentTerm = $this->getLatestStudentTerm();
         $this->yearlevel = $currStudentTerm->year_level;
-        $this->studentStatus = $currStudentTerm->registrationStatus(); // Added student status
+        $this->studentStatus = "Irregular"; // Added student status
         $this->getStudentClass();
         $latestTerm = $this->user->terms()->latest()->first();
         $this->programTitle = $latestTerm->program->program_title ?? 'N/A';

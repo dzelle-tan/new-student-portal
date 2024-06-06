@@ -4,11 +4,12 @@ use Livewire\Volt\Component;
 
 use App\Models\StudentRecord;
 use App\Models\AddDropRequest;
+use App\Models\StudentTerm;
 use Illuminate\Support\Facades\Auth;
 
 new class extends Component {
-    public StudentRecord $record;
-    public string $studentStatus;
+    public $record;
+    public $studentStatus;
     public $addDropStatus;
 
     /**
@@ -21,13 +22,12 @@ new class extends Component {
 
         // Fetch the latest record based on 'school_year' and 'term'.
         // Assume 'term' needs to be considered after 'school_year' for proper chronological order.
-        $this->record = StudentRecord::where('student_no', $this->user->student_no)
-            ->orderBy('school_year', 'desc') // First order by 'school_year'
-            ->orderBy('semester', 'desc')    // Then order by 'term' within the same 'school_year'
+        $this->record = StudentTerm::where('student_no', $this->user->student_no)
+            ->latest()
             ->first(); // Fetches the most recent record based on these fields
 
         // Assuming 'student_status' is a field in the User model
-        $this->studentStatus = $this->user->student_status;
+        $this->studentStatus = $this->record->student_type;
 
         // Fetch the Add Drop request status
         $addDropRequest = AddDropRequest::where('student_no', $this->user->student_no)->first();
