@@ -6,9 +6,10 @@ use Livewire\Component;
 use App\Models\Course;
 use App\Models\Validation;
 use App\Models\BSCS_grade;
+use App\Models\Classes;
 use App\Models\StudyPlanValidations;
 use App\Models\Student;
-use App\Models\StudentRecord;
+use App\Models\StudentTerm;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Http\Response;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 
 class StudyPlan extends Component
 {
-    public $courses = [];
+    public $classes = [];
 
     public $dropdownContent2_1 = [];
 
@@ -59,7 +60,7 @@ class StudyPlan extends Component
         $this->studentStatus = $this->user->student_status; // Added student status
         $this->getStudentClass();
 
-        $this->courses = Course::all();
+        $this->courses = Classes::all();
         $this->tableBodyId = ''; 
         $this->preRequisiteGrade = $this->getPrerequisiteGrade($this->pre_requisites);
         $this->updateTotalUnits32();
@@ -92,11 +93,8 @@ class StudyPlan extends Component
     }
     public function getStudentClass(): void
     {
-        $this->record = StudentRecord::where('student_no', $this->user->student_no)
-            ->with('classes')
-            ->orderBy('school_year', 'desc')
-            ->orderBy('semester', 'desc')
-            ->first();
+        $currStudentTerm = StudentTerm::where('student_no', $this->user->student_no)->latest()->first();
+        $this->record = Classes::where('minimum_year_level', $currStudentTerm->year_level)->with('courses');
     }
 
     public function moveRowToDropdown($courseId, $tableBody)
@@ -237,6 +235,7 @@ class StudyPlan extends Component
 
     public function getDisplayedCourseCodes()
     {
+        return ;
         $courseCodes = [];
         foreach ($this->courses as $course) {
             // Retrieve the grade for the current course from the BSCS_grade model
@@ -346,7 +345,7 @@ class StudyPlan extends Component
     }
 
     public function render(){  
-        $courses = Course::all();
+        $classes = Classes::all();
         $validations = Validation::all();
         $bscs_grades = BSCS_grade::all();
         $study_plan_validations = StudyPlanValidations::all();
@@ -375,7 +374,7 @@ class StudyPlan extends Component
         }
 
         return view('livewire.study-plan', [
-            'courses' => $courses,
+            'courses' => $classes,
             'student' => $student,
             'validations' => $validations,
             'bscs_grades' => $bscs_grades,
