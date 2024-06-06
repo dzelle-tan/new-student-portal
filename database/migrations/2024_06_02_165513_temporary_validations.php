@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,8 +12,6 @@ return new class extends Migration
     {
         Schema::create('temporary_validations', function (Blueprint $table) {
             $table->id(); // Auto-increment primary key
-            $table->integer('student_no');
-            $table->foreign('student_no')->references('student_no')->on('students')->onDelete('NO ACTION')->onUpdate('NO ACTION');
             $table->integer('yearlvl')->nullable();
             $table->date('daterequest')->nullable();
             $table->string('status', 50)->nullable();

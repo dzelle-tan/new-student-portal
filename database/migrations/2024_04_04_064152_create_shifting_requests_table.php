@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,8 +12,6 @@ return new class extends Migration
     {
         Schema::create('shifting_requests', function (Blueprint $table) {
             $table->id(); // changed this back to id instead of shifting_id because of eloquent model default id
-            $table->integer('student_no');
-            $table->foreign('student_no')->references('student_no')->on('students')->onDelete('NO ACTION')->onUpdate('NO ACTION');
             $table->string('new_degree_program');
             $table->text('study_plan')->nullable();
             $table->text('letter_of_intent')->nullable();
