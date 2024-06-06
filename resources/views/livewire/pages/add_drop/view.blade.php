@@ -669,41 +669,10 @@ new class extends Component {
                         }"
                         :disabled="currentStep < 4 || addDroprequestStatus === 'Approved'"
                         @click="if (addDroprequestStatus !== 'Approved') { openPanel = 4 }">
-                        4. Download and Fill-up Documents
+                        4. Await for Approval
                         <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 4 || hasRecord2 }" style="font-size: 27px;"></i>
                     </button>
                     <div x-show="openPanel === 4" class="panel" x-transition>
-                        <br>
-                        <a href="{{ route('download', 'add_drop_form.pdf') }}" class="btn btn-primary float-right" style="color: #2D349A; position: relative; bottom: 0px; left: 5px; width: 120px; height: 4ch;">
-                        <i class="fas fa-download" style="color: white; margin-right: .2rem; top: -0.2rem; position: relative; font-size: 15px;"></i>
-                        <span class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white">Download</span>
-                        </a>
-                        <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">Add/Drop Form</p>
-                        <div class="flex justify-between mt-4">
-                            <button type="button" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white" @click="openPanel = 3; currentStep = 3">Back to Create your Study Plan</button>
-                            <button type="button" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white" @click="openPanel = 5">Proceed to Document Submission and Approval</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Step 5 -->
-        <div class="card custom-table-container mb-3">
-            <div class="card-body">
-                <div class="p-4 bg-blue-100 border border-blue-400 rounded-md">
-                <button type="button" 
-                        class="accordion text-3xl font-normal text-black-700"
-                        :class="{
-                            'opacity-50 cursor-not-allowed  text-gray-600': currentStep < 5 || addDroprequestStatus === 'Approved'
-                        }"
-                        :disabled="currentStep < 5 || addDroprequestStatus === 'Approved'"
-                        @click="if (addDroprequestStatus !== 'Approved') { openPanel = 5 }">
-                        5. Add Drop Status and Approval
-                        <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 5 || hasRecord2 }" style="font-size: 27px;"></i>
-                    </button>
-                    <div x-show="openPanel === 5" class="panel" x-transition>
-                        @if($addDroprequestExists && ($add_drop_form))
                             <br>
                             <p style="font-family: Inter, sans-serif; font-size: 26px; color:black; font-weight:bold;">Status: 
                         @if($addDroprequestStatus == "Pending")
@@ -715,18 +684,21 @@ new class extends Component {
                         @elseif($addDroprequestStatus == "Approved")
                         <strong style="color: #14ae5c;">Approved</strong>
                         @else
-                        <strong style="color: #000; font-size: 26px;">Status Not Found</strong>
+                        <strong style="color: #AB830F;">Pending</strong>
                         @endif
                             </p>
                             <p class="body-font">&nbsp;&nbsp;a. Submitted documents will be checked by corresponding department chairperson.</p>
                             <p class="body-font">&nbsp;&nbsp;b. Refresh this page from time-to-time to know the status of your request.</p>
-                        @else
-                            <p></p>
-                        @endif
+                        <div class="flex justify-between mt-4">
+                            <button type="button" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white" @click="openPanel = 3; currentStep = 3">Back to Create your Study Plan</button>
+                           
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+    
     </section>
 </div>
 </div>

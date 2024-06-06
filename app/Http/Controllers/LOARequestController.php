@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\LOARequest;
 use App\Models\Validation;
+use App\Models\StudentTerm;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,14 +39,15 @@ class LOARequestController extends Controller
     {
         $user = Auth::user();
         $student_no = $user->student_no;
-        $year_level = $user->year_level;
 
         # Basic Info
         $loaRequest = LOARequest::where('student_no', $student_no)->first();
         $validation = Validation::where('student_no', $student_no)->first();
         $loaRequest = $loaRequest == null ? new LOARequest() : $loaRequest;
         $loaRequest->student_no = $student_no;
-        $loaRequest->year_level = $year_level;
+
+        $currentTerm = StudentTerm::where('student_no', $student_no)->latest()->first();
+        $loaRequest->year_level = $currentTerm->year_level;
         $loaRequest->date_of_request = Carbon::now();
         $loaRequest->status = 'Pending';
 

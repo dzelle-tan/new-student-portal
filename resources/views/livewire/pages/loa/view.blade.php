@@ -65,6 +65,7 @@ new class extends Component {
         $this->user = $user;
         $this->loa_form = $loa_form;
         $this->letter_of_request = $letter_of_request;
+        $this->note_of_undertaking = $note_of_undertaking;
         $this->clearance = $clearance;
 
         $this->user = Auth::user();
@@ -664,9 +665,10 @@ new class extends Component {
                         <span class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white">Download</span>
                         </a>
                         <p style="font-family: Inter, sans-serif; font-size: 24px; color:black;">Leave of Absence Form</p>
+                        
                         <div class="flex justify-between mt-4">
                             <button type="button" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white" @click="openPanel = 3; currentStep = 3">Back to Create your Study Plan</button>
-                            <button type="button" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white" @click="openPanel = 5; currentStep = 5;">Proceed to Document Submission and Approval</button>
+                            <button type="button" class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white" @click="openPanel = 5">Proceed to Document Submission and Approval</button>
                         </div>
                     </div>
                 </div>
@@ -686,15 +688,15 @@ new class extends Component {
         <button type="button" 
                 class="accordion text-3xl font-normal text-black-700"
                 :class="{
-                    'opacity-50 cursor-not-allowed  text-gray-600': currentStep < 5'
+                    'opacity-50 cursor-not-allowed  text-gray-600': currentStep < 5 || loarequestStatus === 'Approved'
                 }"
-                :disabled="currentStep < 5"
-                @click="openPanel = 5">
+                :disabled="currentStep < 5 || loarequestStatus === 'Approved'"
+                @click="if (loarequestStatus !== 'Approved') { openPanel = 5 }">
                 5. Document Submission and Approval
                 <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 5 || hasRecord2 }" style="font-size: 27px;"></i>
             </button>
-            <div x-show="openPanel === 5" class="panel" x-transition>
-                @if($loarequestStatus == "Rejected")
+            <div x-show="openPanel === 5" class="panel" x-transition>   
+            @if($loarequestStatus !="Approved")
                 <form action="{{ route('loa_request.post') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">

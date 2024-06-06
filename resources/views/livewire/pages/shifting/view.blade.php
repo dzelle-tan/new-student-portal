@@ -424,7 +424,7 @@ new class extends Component {
         showConfirmModal: false,
         studentStatus: '{{ $studentStatus }}',
         hasRecord2: {{ $hasRecord2 ? 'true' : 'false' }},
-        shiftingrequestStatus: '{{ $shiftingrequestStatus }}'
+        shiftingrequestStatus: '{{ $shiftingrequestStatus }}',
     }">
     {{-- Student Information --}}
     <div class="mt-6 mb-6 lg:items-center lg:w-5/6 xl:2/3 lg:flex lg:justify-between">
@@ -714,7 +714,7 @@ new class extends Component {
     <i class="fas fa-check-circle step-checkmark" :class="{ 'text-green-500': currentStep === 5 || hasRecord2 }" style="font-size: 27px;"></i>
 </button>
             <div x-show="openPanel === 5" class="panel" x-transition>
-                @if ($shiftingrequestStatus == "Rejected")
+                @if($shiftingrequestStatus !="Approved")
                 <form action="{{ route('shifting_request.post') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">

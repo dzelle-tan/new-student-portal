@@ -55,6 +55,6 @@ class AddDropRequestController extends Controller
 
         $addDropRequest->save();
 
-        return redirect()->back()->with('status', 'Request submitted successfully!');
+        return redirect()->back();
     }
 }

@@ -1,7 +1,4 @@
 <div>
-    <div>
-        <p class="px-4 py-6 text-center text-red-500 font-bold">Once you've submitted your documents onsite, you cannot change your program anymore.</p>
-    </div>
     <form wire:submit.prevent="saveNewProgram" class="max-w-lg mx-auto">
         <div class="form-group">
             <label for="selectProgram" class="font-bold">Choose a Program:</label>
