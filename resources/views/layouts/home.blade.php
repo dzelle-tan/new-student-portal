@@ -26,9 +26,7 @@
             
             {{-- GWA Stats --}}
             <div class="p-4 bg-white shadow sm:p-8 sm:rounded-md">
-                <h3 class="text-lg font-medium">{{__("General Weighted Average (GWA)")}}</h3>
-                {!! $chart->container() !!}
-                <p class="italic text-center">School Year - Term</p>
+                <livewire:pages.home.grades-stats />
             </div> 
             
             {{-- University Calendar --}}
@@ -60,6 +58,3 @@
         </div>
     </div> --}}
 </x-app-layout>
-
-<script src="{{ $chart->cdn() }}"></script>
-{{ $chart->script() }}
