@@ -8,6 +8,8 @@ use App\Models\StudentTerm;
 use App\Models\Course;
 use App\Models\BSCS_grade;
 use App\Models\AddDropRequest;
+use App\Models\ShiftingRequest;
+use App\Models\LoaRequest;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 use Livewire\WithFileUploads;
@@ -21,6 +23,7 @@ new class extends Component {
     public $latestTerm;
     public $programTitle;
     public $requestStatus;
+    public $otherRequestExists;
     public $studentid;
     public $Status;
     public $pre_requisites;
@@ -69,6 +72,7 @@ new class extends Component {
         $this->latestTerm = $this->user->terms()->latest()->first();
         $this->studentStatus = $this->latestTerm->registrationStatus->registration_status; // Added student status
         $this->programTitle = $this->latestTerm->program->program_title ?? 'N/A';
+        $this->otherRequestExists = $this->checkOtherRequests();
 
         $this->courses = Course::all();
         $this->tableBodyId = '';
@@ -108,6 +112,19 @@ new class extends Component {
         $this->hasRecord2 = $request2->exists();
         $this->requestStatus = $this->hasRecord2 ? $request2->first()->status : "Pending";
 
+    }
+
+    public function checkOtherRequests()
+    {
+        if (ShiftingRequest::where('student_no', $this->studentid)->exists()) {
+            return true;
+        }
+
+        else if (LoaRequest::where('student_no', $this->studentid)->exists()) {
+            return true;
+        }
+
+        return false;
     }
 
 
@@ -437,6 +454,16 @@ new class extends Component {
         </div>
     </div>
 
+    @if ($otherRequestExists)
+    {{-- Notification Box --}}
+    <div class="p-4 mb-6 bg-gray-100 border border-gray-300 rounded-md">
+        <div class="flex items-center justify-center text-center">
+            <x-icon name="information-circle" class="w-6 h-6 mr-2" solid />
+            <span class="font-medium">Only one request can be processed at any given time. Resolve all other requests you have first.</span>
+        </div>
+    </div>
+
+    @else
     {{-- Notification Box --}}
     <div class="p-4 mb-6 bg-gray-100 border border-gray-300 rounded-md">
         <div class="flex items-center justify-center text-center">
@@ -686,5 +713,6 @@ new class extends Component {
 
     
     </section>
+    @endif
 </div>
 </div>
