@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EnrollmentDownloadsController;
+use App\Http\Controllers\GradesDownloadController;
 use App\Http\Controllers\StudentViolationController;
 use App\Http\Controllers\LOARequestController;
 use App\Http\Controllers\DownloadController;
@@ -38,6 +39,10 @@ Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSE
 
 Route::get('download/{file}', [DownloadController::class, 'download'])
     ->name('download');
+
+Route::get('/grades/gradesPDF', [GradesDownloadController::class, 'downloadGrades'])
+    ->middleware(['auth'])
+    ->name('downloadGradesPDF');
 
 Route::get('/', [HomeController::class, 'index'])
     ->middleware(['auth'])

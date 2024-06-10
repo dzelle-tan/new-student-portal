@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     
-    <div class="py-12 mx-auto space-y-3 text-gray-900 max-w-7xl sm:px-6 lg:px-8">
+    <div class="py-12 mx-auto space-y-3 text-gray-900 max-w-[96rem] sm:px-6 lg:px-8">
         <div class="flex p-6 overflow-hidden text-base bg-white shadow-sm sm:rounded-lg">
             <x-icon name="information-circle" class="flex-shrink-0 w-5 mr-2" /> 
             <div>

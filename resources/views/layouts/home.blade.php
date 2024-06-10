@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
+        <h2 class="text-lg font-semibold leading-tight text-gray-800">
             {{ __('Home') }}
         </h2>
     </x-slot>
-    <div class="py-6 pb-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div class="pt-6 pb-3 mx-auto max-w-[96rem] sm:px-6 lg:px-8">
         <div class="relative grid grid-cols-1 col-span-1">
             <div class="p-4 bg-white shadow sm:p-8 sm:rounded-md">
                 @if(isset(Auth::user()->graduation_date) && !empty(Auth::user()->graduation_date) && \Carbon\Carbon::parse(Auth::user()->graduation_date)->isPast())
@@ -21,14 +21,12 @@
             </div>  
         </div>
     </div>
-    <div class="grid grid-cols-1 gap-3 pb-6 mx-auto md:grid-cols-2 lg:grid-rows-6 lg:grid-cols-3 max-w-7xl sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-3 pb-6 mx-auto md:grid-cols-2 lg:grid-rows-6 lg:grid-cols-3 max-w-[96rem] sm:px-6 lg:px-8">
         <div class="col-span-1 space-y-3 md:col-span-2 lg:col-span-2 lg:row-span-6">
             
             {{-- GWA Stats --}}
             <div class="p-4 bg-white shadow sm:p-8 sm:rounded-md">
-                <h3 class="text-lg font-medium">{{__("General Weighted Average (GWA)")}}</h3>
-                {!! $chart->container() !!}
-                <p class="italic text-center">School Year - Term</p>
+                <livewire:pages.home.grades-stats />
             </div> 
             
             {{-- University Calendar --}}
@@ -37,7 +35,7 @@
             </div>
         </div>
         <div class="grid col-span-1 space-y-3 md:col-span-2 lg:col-span-1 lg:row-span-6">
-            <div class="p-4 bg-white sm:p-8 sm:rounded-md">
+            <div class="p-4 bg-white shadow sm:p-8 sm:rounded-md">
                 <livewire:pages.home.links />
             </div>
             <div class="relative row-span-4 p-4 pb-20 bg-white shadow sm:p-8 sm:pb-20 sm:rounded-md">
@@ -60,6 +58,3 @@
         </div>
     </div> --}}
 </x-app-layout>
-
-<script src="{{ $chart->cdn() }}"></script>
-{{ $chart->script() }}

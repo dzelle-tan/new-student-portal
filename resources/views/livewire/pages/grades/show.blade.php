@@ -13,12 +13,24 @@ new class extends Component
     public Student $user;
     public $totalGradePoints = 0;
     public $programTitle;
+    public $registrationStatus;
+    public $studentType;
 
     public function mount(): void
     {
         $this->user = Auth::user();
         $this->getAcademicYear();
         $this->getLatestProgramTitle();
+
+        $latestTerm = $this->user->terms()->latest()->first();
+
+        if ($latestTerm) {
+            $this->registrationStatus = $latestTerm->registrationStatus->registration_status ?? 'N/A';
+            $this->studentType = $latestTerm->student_type ?? 'N/A';
+        } else {
+            $this->registrationStatus = 'N/A';
+            $this->studentType = 'N/A';
+        }
     }
 
     public function getAcademicYear(): void
@@ -46,12 +58,19 @@ new class extends Component
     public function updateSelectedTerm($value): void
     {
         $this->selectedTerm = $value;
+        session(['selectedTerm' => $this->selectedTerm]);
     }
 };
 ?>
 <div class="space-y-3">
     <div class="p-4 pt-3 bg-white shadow sm:p-8 sm:pt-6 sm:rounded-md">
-        <img src="{{ asset('images/plm-logo-with-header.png') }}" alt="PLM logo" class="h-16">
+        <div class="flex justify-between">
+            <img src="{{ asset('images/plm-logo-with-header.png') }}" alt="PLM logo" class="h-16">
+            <a href="{{ route('downloadGradesPDF') }}" class="flex items-center justify-center px-4 py-1 text-sm text-gray-500 border border-gray-400 rounded-md hover:border-secondary hover:text-secondary max-h-10">
+                <x-icon name="arrow-down-tray" class="w-5 h-5 mr-2"/>
+                Download
+            </a>
+        </div>
         {{-- Student Information --}}
         <div class="mt-6 lg:items-center lg:w-5/6 xl:2/3 lg:flex lg:justify-between">
             <div>
@@ -63,14 +82,22 @@ new class extends Component
                     <x-info-label class="w-24">{{ _("Name:") }}</x-info-label>
                     <span>{{ $user->first_name }} {{ $user->middle_name }} {{ $user->last_name }}</span>
                 </div>
-            </div>
-            <div>
                 <div>
                     <x-info-label class="w-24">{{ _("Program:") }}</x-info-label>
                     <span>{{ $programTitle }}</span>
                 </div>
+            </div>
+            <div>
                 <div>
-                    <x-info-label class="w-24">{{ _("A.Y-Term:") }}</x-info-label>
+                    <x-info-label class="w-40">{{ _("Student Type:") }}</x-info-label>
+                    <span>{{ $studentType }}</span>
+                </div>
+                <div>
+                    <x-info-label class="w-40">{{ _("Registration Status:") }}</x-info-label>
+                    <span>{{ $registrationStatus }}</span>
+                </div>
+                <div>
+                    <x-info-label class="w-40">{{ _("A.Y-Term:") }}</x-info-label>
                     <select class="px-2 py-0 border-gray-300 rounded-md w-36 form-control" wire:change="updateSelectedTerm($event.target.value)">
                         <option value="All">All</option>
                         @foreach ($terms as $term)

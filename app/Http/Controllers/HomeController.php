@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Charts\GradesChart;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -10,10 +9,10 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(GradesChart $chart)
+    public function index()
     {
         // return view('layouts.home');
-        return view('layouts.home', ['chart' => $chart->build()]);
+        return view('layouts.home');
     }
 
     /**
