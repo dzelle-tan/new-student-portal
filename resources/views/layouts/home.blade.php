@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="grid col-span-1 space-y-3 md:col-span-2 lg:col-span-1 lg:row-span-6">
-            <div class="p-4 bg-white sm:p-8 sm:rounded-md">
+            <div class="p-4 bg-white shadow sm:p-8 sm:rounded-md">
                 <livewire:pages.home.links />
             </div>
             <div class="relative row-span-4 p-4 pb-20 bg-white shadow sm:p-8 sm:pb-20 sm:rounded-md">
