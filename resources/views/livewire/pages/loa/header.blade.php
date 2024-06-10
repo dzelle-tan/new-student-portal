@@ -27,7 +27,7 @@ new class extends Component {
             ->first(); // Fetches the most recent record based on these fields
 
         // Assuming 'student_status' is a field in the User model
-        $this->studentStatus = $this->record->student_type;
+        $this->studentStatus = $this->record->registrationStatus->registration_status;
 
         // Fetch the LOA request status
         $loaRequest = LOARequest::where('student_no', $this->user->student_no)->first();
@@ -55,7 +55,7 @@ new class extends Component {
         @endif
         {{-- Student Type --}}
         <div class="flex items-center p-1 px-4 text-sm border border-gray-300 rounded-md">
-            <p class="mr-2">{{ __("Student Type:") }}</p>
+            <p class="mr-2">{{ __("Registration Status:") }}</p>
             <div class="w-3 h-3 rounded-full mr-1 {{ $studentStatus === 'Regular' ? 'bg-green-600' : 'bg-blue-400' }}">
             </div>
             <span>{{ ucwords($studentStatus ?? 'Regular') }}</span>
