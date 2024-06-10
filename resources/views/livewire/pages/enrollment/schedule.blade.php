@@ -17,6 +17,8 @@ new class extends Component {
     public Student $user;
     public $studentStatus;
     public $programTitle;
+    public $latestTerm;
+    public bool $isEnlisted;
     public $requestStatus;
     public $studentid;
     public $Status;
@@ -54,12 +56,14 @@ new class extends Component {
         $this->user = Auth::user();
         $this->studentid = $this->user->student_no;
 
-        $currStudentTerm = $this->getLatestStudentTerm();
-        $this->yearlevel = $currStudentTerm->year_level;
-        $this->studentStatus = $currStudentTerm->registrationStatus->registration_status; // Added student status
-        $this->getStudentClass();
-        $latestTerm = $this->user->terms()->latest()->first();
-        $this->programTitle = $latestTerm->program->program_title ?? 'N/A';
+        $this->latestTerm = $this->user->terms()->latest()->first();
+        $this->yearlevel = $this->latestTerm->year_level;
+        $this->studentStatus = $this->latestTerm->registrationStatus->registration_status; // Added student status
+        $this->programTitle = $this->latestTerm->program->program_title ?? 'N/A';
+        $this->isEnlisted = $this->latestTerm->block != null;
+        if ($this->isEnlisted) {
+            $this->getStudentClass();
+        }
 
         $this->courses = Course::all();
         $this->tableBodyId = '';
@@ -99,11 +103,6 @@ new class extends Component {
         if ($requestExists) {
             $this->requestStatus = $request->first()->status;
         }
-    }
-
-    public function getLatestStudentTerm()
-    {
-        return StudentTerm::where('student_no', $this->user->student_no)->latest()->first();
     }
 
     public function getStudentClass(): void
@@ -437,12 +436,13 @@ new class extends Component {
             </div>
             <div>
                 <x-info-label class="w-24">{{_("A.Y Term:")}} </x-info-label>
-                <span>{{ $record->aysem->academic_year_code }} - Term {{ $record->aysem->semester }} </span>
+                <span>{{ $latestTerm->aysem->academic_year_code }} - Term {{ $latestTerm->aysem->semester }} </span>
             </div>
         </div>
     </div>
 
     {{-- Conditional Content --}}
+    @if($isEnlisted)
     @if($studentStatus == 'Regular')
         {{-- Schedule --}}
         <div class="w-full mt-4 overflow-x-auto">
@@ -715,4 +715,15 @@ new class extends Component {
             </div>
         </section>
     @endif
+
+    {{-- Display when student is not enlisted yet --}}
+    @else
+    <div class="p-4 mb-6 bg-gray-100 border border-gray-300 rounded-md">
+        <div class="flex items-center justify-center text-center">
+            <x-icon name="information-circle" class="w-6 h-6 mr-2" solid />
+            <span class="font-medium">You are currently not enlisted in the system. Contact your chairperson if this notice persists throughout the enrollment period.</span>
+        </div>
+    </div>
+    @endif
+
 </div>

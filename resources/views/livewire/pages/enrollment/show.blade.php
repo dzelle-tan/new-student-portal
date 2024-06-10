@@ -26,7 +26,11 @@ new class extends Component {
                         ->orderBy('aysem_id', 'desc')
                         ->with(['aysem', 'block.classes.course', 'block.classes.grades'])
                         ->first();
+        $this->studentStatus = $this->record->registrationStatus->registration_status; // Added student status
 
+        if($this->record->enrolled == 1) {
+            $this->step = 3;
+        }
     }
 
     public function next()
