@@ -18,6 +18,7 @@ new class extends Component {
     public $record;
     public Student $user;
     public $studentStatus;
+    public $latestTerm;
     public $programTitle;
     public $requestStatus;
     public $studentid;
@@ -65,14 +66,9 @@ new class extends Component {
 
         $this->user = Auth::user();
         $this->studentid = $this->user->student_no;
-        $record = StudentTerm::where('student_no', $this->user->student_no)
-            ->latest()
-            ->first(); // Fetches the most recent record based on these fields
-        $this->studentStatus = $record->student_status; // Added student status
-        $this->getStudentClass();
-        $latestTerm = $this->user->terms()->latest()->first();
-        $this->programTitle = $latestTerm->program->program_title ?? 'N/A';
-
+        $this->latestTerm = $this->user->terms()->latest()->first();
+        $this->studentStatus = $this->latestTerm->registrationStatus->registration_status; // Added student status
+        $this->programTitle = $this->latestTerm->program->program_title ?? 'N/A';
 
         $this->courses = Course::all();
         $this->tableBodyId = '';
@@ -112,19 +108,6 @@ new class extends Component {
         $this->hasRecord2 = $request2->exists();
         $this->requestStatus = $this->hasRecord2 ? $request2->first()->status : "Pending";
 
-    }
-
-
-    public function getStudentClass(): void
-    {
-        $this->record = StudentTerm::where('student_no', $this->user->student_no)
-                    ->with([
-                        'block.classes.course',
-                        'block.classes.classSchedules.classMode',
-                        'block.classes.classSchedules.room.building'
-                    ])
-                    ->orderBy('aysem_id', 'desc')
-                    ->first();
     }
 
 
@@ -449,7 +432,7 @@ new class extends Component {
             </div>
             <div>
                 <x-info-label class="w-24">{{_("A.Y Term:")}} </x-info-label>
-                <span>{{ $record->aysem->academic_year_code }} - Term {{ $record->aysem->semester }} </span>
+                <span>{{ $latestTerm->aysem->academic_year_code }} - Term {{ $latestTerm->aysem->semester }} </span>
             </div>
         </div>
     </div>
