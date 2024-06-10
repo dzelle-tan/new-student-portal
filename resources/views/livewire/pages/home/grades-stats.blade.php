@@ -81,30 +81,30 @@ new class extends Component {
         color: '#ab830f'
     }],
         chart: {
-        height: 200,
-        type: 'line',
-        zoom: {
-        enabled: false
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        curve: 'straight'
-    },
-    grid: {
-        row: {
-        colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
-        opacity: 0.5
+            height: 200,
+            type: 'line',
+            zoom: {
+            enabled: false
+            }
         },
-    },
-    xaxis: {
-        categories: labels,
-    },
-    yaxis: {
-        reversed: true, // Add this line to reverse the y-axis
-    }
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'straight'
+        },
+        grid: {
+            row: {
+            colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
+            opacity: 0.5
+            },
+        },
+        xaxis: {
+            categories: labels,
+        },
+        yaxis: {
+            reversed: true, // Add this line to reverse the y-axis
+        }
     };
 
     var chart = new ApexCharts(document.querySelector("#chart"), options);

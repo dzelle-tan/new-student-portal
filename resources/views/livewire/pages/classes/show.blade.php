@@ -49,7 +49,7 @@ new class extends Component {
                                 subject="{{ $classModel->course->subject_title }}"
                                 description="{{ $classModel->course->description }}"
                                 units="{{ $classModel->course->units }}"
-                                section="{{ $classModel->section }}"
+                                section="{{ $classModel->block->section }}"
                                 type="{{ $classSchedule->classMode->mode_type }}"
                                 room="{{ $classSchedule->room->room_name }}"
                                 building="{{ $classSchedule->room->building->building_name }}"

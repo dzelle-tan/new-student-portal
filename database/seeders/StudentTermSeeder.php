@@ -58,7 +58,7 @@ class StudentTermSeeder extends Seeder
             // 2022-2023, Term 1
             [
                 'student_no' => 202310001,
-                'student_type' => 'Regular',
+                'student_type' => 'Old',
                 'graduating' => false,
                 'enrolled' => true,
                 'year_level' => 1,
@@ -72,7 +72,7 @@ class StudentTermSeeder extends Seeder
             // 2022-2023, Term 2
             [
                 'student_no' => 202310001,
-                'student_type' => 'Regular',
+                'student_type' => 'Old',
                 'graduating' => false,
                 'enrolled' => true,
                 'year_level' => 1,
@@ -86,7 +86,7 @@ class StudentTermSeeder extends Seeder
             // 2023-2024, Term 1
             [
                 'student_no' => 202310001,
-                'student_type' => 'Regular',
+                'student_type' => 'Old',
                 'graduating' => false,
                 'enrolled' => true,
                 'year_level' => 1,

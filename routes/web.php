@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EnrollmentDownloadsController;
+use App\Http\Controllers\GradesDownloadController;
 use App\Http\Controllers\StudentViolationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VerifyController;
@@ -30,6 +31,10 @@ Route::get('/enrollment/fees', [EnrollmentDownloadsController::class, 'downloadF
 Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSER'])
     ->middleware(['auth'])
     ->name('enrollmentSER');
+
+Route::get('/grades/gradesPDF', [GradesDownloadController::class, 'downloadGrades'])
+    ->middleware(['auth'])
+    ->name('downloadGradesPDF');
 
 Route::get('/', [HomeController::class, 'index'])
     ->middleware(['auth'])
