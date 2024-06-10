@@ -18,6 +18,7 @@ new class extends Component {
     public $record;
     public Student $user;
     public $studentStatus;
+    public $programTitle;
     public $requestStatus;
     public $studentid;
     public $Status;
@@ -75,6 +76,8 @@ new class extends Component {
         $this->yearlevel = $currStudentTerm->year_level;
         $this->studentStatus = $currStudentTerm->student_status; // Added student status
         $this->getStudentClass();
+        $latestTerm = $this->user->terms()->latest()->first();
+        $this->programTitle = $latestTerm->program->program_title ?? 'N/A';
 
 
         $this->courses = Course::all();
@@ -446,11 +449,11 @@ new class extends Component {
         <div>
             <div>
                 <x-info-label class="w-24">{{_("Program:")}}</x-info-label>
-                <span>{{ $user->degree_program }}</span>
+                <span>{{ $programTitle }}</span>
             </div>
             <div>
                 <x-info-label class="w-24">{{_("A.Y Term:")}} </x-info-label>
-                <span>{{ $record->school_year }} - Term {{ $record->semester }} </span>
+                <span>{{ $record->aysem->academic_year_code }} - Term {{ $record->aysem->semester }} </span>
             </div>
         </div>
     </div>
