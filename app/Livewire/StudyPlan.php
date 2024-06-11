@@ -5,8 +5,8 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Course;
 use App\Models\Validation;
+use App\Models\Grade;
 use App\Models\Classes;
-use App\Models\BSCS_grade;
 use App\Models\StudyPlanValidations;
 use App\Models\Student;
 use App\Models\StudentTerm;
@@ -227,27 +227,27 @@ public function mount()
         $courseCodes = [];
         foreach ($this->courses as $course) {
             // Retrieve the grade for the current course from the BSCS_grade model
-            $grade = BSCS_grade::where('subject_code', $course->subject_code)
+            $grade = Grade::where('course_code', $course->course_code)
             ->where('student_no', $this->studentid)
             ->value('grades');
 
             
             // Retrieve the prerequisite grade from the BSCS_grade model if prerequisites exist
             $prerequisiteGrade = $course->pre_requisites 
-            ? BSCS_grade::where('subject_code', $course->pre_requisites)
+            ? Grade::where('course_code', $course->pre_requisites)
                          ->where('student_no', $this->studentid)
                          ->value('grades')
             : null;
     
             // Include courses based on year level when grades are not 5
-            if ($this->yearlevel === 2 && $course->year_lvl >= 2 && $prerequisiteGrade !== 5 && $grade !== 5 || $grade !== 5) {
-                $courseCodes[] = $course->subject_code;
-            } elseif ($this->yearlevel === 3 && $course->year_lvl >= 3 && $prerequisiteGrade !== 5 && $grade !== 5) {
-                $courseCodes[] = $course->subject_code;
-            } elseif ($this->yearlevel === 4 && $course->year_lvl >= 4 && $prerequisiteGrade !== 5 && $grade !== 5) {
-                $courseCodes[] = $course->subject_code;
-            } elseif ($course->year_lvl === $this->yearlevel && $prerequisiteGrade !== 5 && $grade !== 5) {
-                $courseCodes[] = $course->subject_code;
+            if ($this->yearlevel === 2 && $course->year_lvl >= 2) {
+                $courseCodes[] = $course->course_code;
+            } elseif ($this->yearlevel === 3 && $course->year_lvl >= 3) {
+                $courseCodes[] = $course->course_code;
+            } elseif ($this->yearlevel === 4 && $course->year_lvl >= 4) {
+                $courseCodes[] = $course->course_code;
+            } elseif ($course->year_lvl === $this->yearlevel) {
+                $courseCodes[] = $course->course_code;
             }
         }
         return $courseCodes;
@@ -308,7 +308,7 @@ public function mount()
     public function render(){  
         $courses = Course::all();
         $validations = Validation::all();
-        $bscs_grades = BSCS_grade::all();
+        $bscs_grades = Grade::all();
         $study_plan_validations = StudyPlanValidations::all();
         $student = Student::all();
 
