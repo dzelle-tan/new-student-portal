@@ -268,7 +268,6 @@ new class extends Component {
 
     public function getDisplayedCourseCodes()
     {
-        return ;
         $courseCodes = [];
         foreach ($this->courses as $course) {
             // Retrieve the grade for the current course from the BSCS_grade model

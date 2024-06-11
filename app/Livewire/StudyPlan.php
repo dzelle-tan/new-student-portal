@@ -223,31 +223,30 @@ public function mount()
 
     public function getDisplayedCourseCodes()
     {
-        return ;
         $courseCodes = [];
         foreach ($this->courses as $course) {
             // Retrieve the grade for the current course from the BSCS_grade model
-            $grade = Grade::where('course_code', $course->course_code)
-            ->where('student_no', $this->studentid)
-            ->value('grades');
+            // $grade = Grade::where('course_code', $course->course_code)
+            // ->where('student_no', $this->studentid)
+            // ->value('grades');
 
             
-            // Retrieve the prerequisite grade from the BSCS_grade model if prerequisites exist
-            $prerequisiteGrade = $course->pre_requisites 
-            ? Grade::where('course_code', $course->pre_requisites)
-                         ->where('student_no', $this->studentid)
-                         ->value('grades')
-            : null;
+            // // Retrieve the prerequisite grade from the BSCS_grade model if prerequisites exist
+            // $prerequisiteGrade = $course->pre_requisites 
+            // ? Grade::where('course_code', $course->pre_requisites)
+            //              ->where('student_no', $this->studentid)
+            //              ->value('grades')
+            // : null;
     
             // Include courses based on year level when grades are not 5
             if ($this->yearlevel === 2 && $course->year_lvl >= 2) {
-                $courseCodes[] = $course->course_code;
+                $courseCodes[] = $course->subject_code;
             } elseif ($this->yearlevel === 3 && $course->year_lvl >= 3) {
-                $courseCodes[] = $course->course_code;
+                $courseCodes[] = $course->subject_code;
             } elseif ($this->yearlevel === 4 && $course->year_lvl >= 4) {
-                $courseCodes[] = $course->course_code;
+                $courseCodes[] = $course->subject_code;
             } elseif ($course->year_lvl === $this->yearlevel) {
-                $courseCodes[] = $course->course_code;
+                $courseCodes[] = $course->subject_code;
             }
         }
         return $courseCodes;
@@ -271,7 +270,7 @@ public function mount()
     
         $studyPlanCourseCodes = json_encode($courseCodes);
         
-        $validation->study_plan_subject_code = $studyPlanCourseCodes;
+        $validation->study_plan_course_code = $studyPlanCourseCodes;
     
         $validation->save();
     
@@ -294,7 +293,7 @@ public function mount()
             $study_plan_validation->year_level = $validation->yearlvl; 
             $study_plan_validation->status = $validation->status;
             $study_plan_validation->date_of_request = $validation->daterequest;
-            $study_plan_validation->study_plan = $validation->study_plan_subject_code;
+            $study_plan_validation->study_plan = $validation->study_plan_course_code;
     
             // Save the study_plan_validation object
             $study_plan_validation->save();
