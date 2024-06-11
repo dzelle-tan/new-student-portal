@@ -676,13 +676,17 @@ new class extends Component {
                         </button>
                         <div x-show="openPanel === 4" class="panel" x-transition>
                             <p style="font-family: Inter, sans-serif; font-size: 26px; color:black; font-weight:bold;">Document Status: 
-                                @if( $requestStatus == "Pending")
-                                <strong style="color: #AB830F;">For Checking</strong>
-                                @elseif( $requestStatus == "Rejected")
+                            @if($requestStatus == "Pending")
+                                <strong style="color: #AB830F;">Pending</strong>
+                            @elseif($requestStatus == "Rejected")
                                 <strong style="color: #e90c0c;">For Revision</strong>
-                                @elseif( $requestStatus == "Approved")
-                                <strong style="color: #14ae5c;">For Submission Onsite</strong>
-                                @endif
+                            @elseif($requestStatus == "Submit Onsite")
+                                <strong style="color: #AB830F;">For Submission Onsite</strong>
+                            @elseif($requestStatus == "Approved")
+                                <strong style="color: #14ae5c;">Approved</strong>
+                            @else
+                                <strong style="color: #000; font-size: 26px;">Status Not Found</strong>
+                            @endif
                             </p>
                             <p class="body-font">&nbsp;&nbsp;a. Submitted documents will be checked by corresponding
                                 department chairperson.</p>
@@ -693,11 +697,6 @@ new class extends Component {
                                 <button type="button"
                                     class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
                                     @click="openPanel = 3; currentStep = 3">Back to Create your Study Plan</button>
-                                @if( $requestStatus == "Approved")
-                                <button type="button"
-                                    class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
-                                    @click="openPanel = 5">Click next button to continue</button>
-                                @endif
                             </div>
                         </div>
                     </div>
