@@ -5,8 +5,8 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Course;
 use App\Models\Validation;
-use App\Models\BSCS_grade;
 use App\Models\Classes;
+use App\Models\BSCS_grade;
 use App\Models\StudyPlanValidations;
 use App\Models\Student;
 use App\Models\StudentTerm;
@@ -17,10 +17,11 @@ use Illuminate\Support\Facades\Livewire;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Aysem;
 
 class StudyPlan extends Component
 {
-    public $classes = [];
+    public $courses = [];
 
     public $dropdownContent2_1 = [];
 
@@ -52,45 +53,30 @@ class StudyPlan extends Component
 
     protected $listeners = ['pushCourseCodesFinal'];
     
-    public function mount()
-    {
-        $this->user = Auth::user();
-        $this->studentid = $this->user->student_no;
-        $this->yearlevel = $this->user->year_level;
-        $this->studentStatus = $this->user->student_status; // Added student status
-        $this->getStudentClass();
+public function mount()
+{
+    $this->user = Auth::user();
+    $this->studentid = $this->user->student_no;
+    $this->yearlevel = $this->user->year_level;
+    $this->studentStatus = $this->user->student_status; // Added student status
+    $this->getStudentClass();
 
-        $this->courses = Classes::all();
-        $this->tableBodyId = ''; 
-        $this->preRequisiteGrade = $this->getPrerequisiteGrade($this->pre_requisites);
-        $this->updateTotalUnits32();
-        $this->updateTotalUnits42();
-        $this->updateTotalUnits72();
-        $this->updateTotalUnits62();
-        $this->updateTotalUnits22();
-        $this->updateTotalUnits21();
-        
-        // Assuming you have access to $course object here
-        foreach ($this->courses as $course) {
-            // Get the grade for the current course
-            $grade = $this->getCourseGrade($course->course_code);
 
-            // Get the prerequisite grade for the current course
-            $preRequisiteGrade = $this->getPrerequisiteGrade($course->pre_requisites);
+
+        $this->courses = Course::all();
+
     
-            if (($grade === 5 && $course->year_lvl === 2 && $course->sem === 2) || ($preRequisiteGrade === 5 && $course->year_lvl === 2 && $course->sem === 2)) {
-                $targetTable = 'tableBody42';
-                $this->moveRowToDropdown($course->id, $targetTable);
-            } elseif ($preRequisiteGrade === 5 && $course->year_lvl === 3 && $course->sem === 1) {
-                $targetTable = 'tableBody72';
-                $this->moveRowToDropdown($course->id, $targetTable);
-            } elseif (($grade === 5 && $course->year_lvl === 3 && $course->sem === 2) || ($preRequisiteGrade === 5 && $course->year_lvl === 3 && $course->sem === 2)) {
+    $this->tableBodyId = ''; 
+    $this->updateTotalUnits32();
+    $this->updateTotalUnits42();
+    $this->updateTotalUnits72();
+    $this->updateTotalUnits62();
+    $this->updateTotalUnits22();
+    $this->updateTotalUnits21();
+    
 
-                $targetTable = 'tableBody62';
-                $this->moveRowToDropdown($course->id, $targetTable);
-            }
-        }
-    }
+}
+
     public function getStudentClass(): void
     {
         $currStudentTerm = StudentTerm::where('student_no', $this->user->student_no)->latest()->first();
@@ -126,7 +112,7 @@ class StudyPlan extends Component
             $this->courses = $this->courses->reject(function ($c) use ($courseId) {
                 return $c->id === $courseId;
             });
-        } elseif ($tableBody === 'tableBody') {
+        } elseif ($tableBody === 'tableBody21') {
             $this->dropdownContent2_1[] = $course;
             $this->courses = $this->courses->reject(function ($c) use ($courseId) {
                 return $c->id === $courseId;
@@ -147,12 +133,13 @@ class StudyPlan extends Component
 
     }
 
+
     public function moveRowFromDropdownToTable($courseCode, $tableBodyId){
         $courseIndex = null;
         $dropdownContentRef = null;
     
         switch ($tableBodyId) {
-            case 'tableBody':
+            case 'tableBody21':
                 $dropdownContentRef = &$this->dropdownContent2_1;
                 break;
             case 'tableBody22':
@@ -175,7 +162,7 @@ class StudyPlan extends Component
         // Proceed only if $dropdownContentRef is defined
         if (isset($dropdownContentRef)) {
             foreach ($dropdownContentRef as $index => $course) {
-                if ($course->course_code === $courseCode) { // Use -> instead of []
+                if ($course->subject_code === $courseCode) { // Use -> instead of []
                     $courseIndex = $index;
                     break;
                 }
@@ -194,12 +181,13 @@ class StudyPlan extends Component
         }
     }
 
+
     public function updateTotalUnits($tableBodyId, $unitChange)
     {
         // Determine the total units property based on the table body ID
         switch ($tableBodyId) {
             case 'tableBody21':
-                $totalUnitsProperty = 'totalUnits22';
+                $totalUnitsProperty = 'totalUnits21';
                 break;
             case 'tableBody22':
                 $totalUnitsProperty = 'totalUnits22';
@@ -239,60 +227,33 @@ class StudyPlan extends Component
         $courseCodes = [];
         foreach ($this->courses as $course) {
             // Retrieve the grade for the current course from the BSCS_grade model
-            $grade = BSCS_grade::where('course_code', $course->course_code)
+            $grade = BSCS_grade::where('subject_code', $course->subject_code)
             ->where('student_no', $this->studentid)
             ->value('grades');
 
             
             // Retrieve the prerequisite grade from the BSCS_grade model if prerequisites exist
             $prerequisiteGrade = $course->pre_requisites 
-            ? BSCS_grade::where('course_code', $course->pre_requisites)
+            ? BSCS_grade::where('subject_code', $course->pre_requisites)
                          ->where('student_no', $this->studentid)
                          ->value('grades')
             : null;
     
             // Include courses based on year level when grades are not 5
             if ($this->yearlevel === 2 && $course->year_lvl >= 2 && $prerequisiteGrade !== 5 && $grade !== 5 || $grade !== 5) {
-                $courseCodes[] = $course->course_code;
+                $courseCodes[] = $course->subject_code;
             } elseif ($this->yearlevel === 3 && $course->year_lvl >= 3 && $prerequisiteGrade !== 5 && $grade !== 5) {
-                $courseCodes[] = $course->course_code;
+                $courseCodes[] = $course->subject_code;
             } elseif ($this->yearlevel === 4 && $course->year_lvl >= 4 && $prerequisiteGrade !== 5 && $grade !== 5) {
-                $courseCodes[] = $course->course_code;
+                $courseCodes[] = $course->subject_code;
             } elseif ($course->year_lvl === $this->yearlevel && $prerequisiteGrade !== 5 && $grade !== 5) {
-                $courseCodes[] = $course->course_code;
+                $courseCodes[] = $course->subject_code;
             }
         }
         return $courseCodes;
     }
 
-    public function getPrerequisiteGrade($preRequisiteCourseCode)
-    {
-        // Assuming $pre_requisite contains the course code of the prerequisite course
-        $preRequisite = BSCS_grade::where('course_code', $preRequisiteCourseCode)
-                           ->where('student_no', $this->studentid)
-                           ->first();
 
-        // If the prerequisite course exists and has a grade, return the grade
-        if ($preRequisite && isset($preRequisite->grades)) {
-            return $preRequisite->grades;
-        }
-    }
-
-    public function getCourseGrade($courseCode)
-    {
-        // Assuming there is a model named CourseGrade to represent the grades of each course
-        $courseGrade = BSCS_grade::where('course_code', $courseCode)
-                                ->where('student_no', $this->studentid)
-                                ->first();
-
-        // If the course grade exists and has a grade, return the grade
-        if ($courseGrade && isset($courseGrade->grades)) {
-            return $courseGrade->grades;
-        }
-
-        // Return null if the course grade does not exist or does not have a grade
-        return null;
-    }
     
     public function pushCourseCodes(){
         $courseCodes = $this->getDisplayedCourseCodes();
@@ -310,7 +271,7 @@ class StudyPlan extends Component
     
         $studyPlanCourseCodes = json_encode($courseCodes);
         
-        $validation->study_plan_course_code = $studyPlanCourseCodes;
+        $validation->study_plan_subject_code = $studyPlanCourseCodes;
     
         $validation->save();
     
@@ -333,7 +294,7 @@ class StudyPlan extends Component
             $study_plan_validation->year_level = $validation->yearlvl; 
             $study_plan_validation->status = $validation->status;
             $study_plan_validation->date_of_request = $validation->daterequest;
-            $study_plan_validation->study_plan = $validation->study_plan_course_code;
+            $study_plan_validation->study_plan = $validation->study_plan_subject_code;
     
             // Save the study_plan_validation object
             $study_plan_validation->save();
@@ -345,7 +306,7 @@ class StudyPlan extends Component
     }
 
     public function render(){  
-        $classes = Classes::all();
+        $courses = Course::all();
         $validations = Validation::all();
         $bscs_grades = BSCS_grade::all();
         $study_plan_validations = StudyPlanValidations::all();
@@ -374,7 +335,7 @@ class StudyPlan extends Component
         }
 
         return view('livewire.study-plan', [
-            'courses' => $classes,
+            'courses' => $courses,
             'student' => $student,
             'validations' => $validations,
             'bscs_grades' => $bscs_grades,
@@ -399,38 +360,195 @@ class StudyPlan extends Component
     }
 
     private function checkGrades($course, $gradeThreshold){
-        // Assuming $course has properties 'course_code' and 'course_name'
+        // Assuming $course has properties 'subject_code' and 'course_title'
         return isset($course->grades) && $course->grades === $gradeThreshold 
-            ? $course->course_code . ' - ' . $course->course_name 
+            ? $course->subject_code . ' - ' . $course->course_title 
             : '';
     }
 
     private function updateTotalUnits21()
     {
-        $this->totalUnits21 = $this->courses->where('year_lvl', 2)->where('sem', 1)->sum('units');
+        // Initialize total units to zero
+        $this->totalUnits21 = 0;
+
+        // Loop through each course
+        foreach ($this->courses as $course) {
+            // Fetch the corresponding class record using parent_class_code
+            $class = Classes::where('parent_class_code', $course['subject_code'])->first();
+
+            // Initialize minimum_year_level and semester to default values
+            $minimum_year_level = null;
+            $semester = null;
+
+            if ($class) {
+                $minimum_year_level = $class->minimum_year_level;
+
+                // Fetch the corresponding aysem record using aysem_id
+                $aysem = Aysem::find($class->aysem_id);
+                if ($aysem) {
+                    $semester = $aysem->semester;
+                }
+            }
+
+            // Sum the units if the course matches the criteria
+            if ($minimum_year_level === 2 && $semester === 1) {
+                $this->totalUnits21 += $course['units'];
+            }
+        }
     }
     
     private function updateTotalUnits22()
     {
-        $this->totalUnits22 = $this->courses->where('year_lvl', 2)->where('sem', 2)->sum('units');
+        // Initialize total units to zero
+        $this->totalUnits22 = 0;
+
+        // Loop through each course
+        foreach ($this->courses as $course) {
+            // Fetch the corresponding class record using parent_class_code
+            $class = Classes::where('parent_class_code', $course['subject_code'])->first();
+
+            // Initialize minimum_year_level and semester to default values
+            $minimum_year_level = null;
+            $semester = null;
+
+            if ($class) {
+                $minimum_year_level = $class->minimum_year_level;
+
+                // Fetch the corresponding aysem record using aysem_id
+                $aysem = Aysem::find($class->aysem_id);
+                if ($aysem) {
+                    $semester = $aysem->semester;
+                }
+            }
+
+            // Sum the units if the course matches the criteria
+            if ($minimum_year_level === 2 && $semester === 2) {
+                $this->totalUnits22 += $course['units'];
+            }
+        }
     }
 
     private function updateTotalUnits32()
     {
-        $this->totalUnits32 = $this->courses->where('year_lvl', 3)->where('sem', 1)->sum('units');
+        // Initialize total units to zero
+        $this->totalUnits32 = 0;
+
+        // Loop through each course
+        foreach ($this->courses as $course) {
+            // Fetch the corresponding class record using parent_class_code
+            $class = Classes::where('parent_class_code', $course['subject_code'])->first();
+
+            // Initialize minimum_year_level and semester to default values
+            $minimum_year_level = null;
+            $semester = null;
+
+            if ($class) {
+                $minimum_year_level = $class->minimum_year_level;
+
+                // Fetch the corresponding aysem record using aysem_id
+                $aysem = Aysem::find($class->aysem_id);
+                if ($aysem) {
+                    $semester = $aysem->semester;
+                }
+            }
+
+            // Sum the units if the course matches the criteria
+            if ($minimum_year_level === 3 && $semester === 1) {
+                $this->totalUnits32 += $course['units'];
+            }
+        }
     }
 
     private function updateTotalUnits42()
     {
-        $this->totalUnits42 = $this->courses->where('year_lvl', 3)->where('sem', 2)->sum('units');
+        // Initialize total units to zero
+        $this->totalUnits42 = 0;
+
+        // Loop through each course
+        foreach ($this->courses as $course) {
+            // Fetch the corresponding class record using parent_class_code
+            $class = Classes::where('parent_class_code', $course['subject_code'])->first();
+
+            // Initialize minimum_year_level and semester to default values
+            $minimum_year_level = null;
+            $semester = null;
+
+            if ($class) {
+                $minimum_year_level = $class->minimum_year_level;
+
+                // Fetch the corresponding aysem record using aysem_id
+                $aysem = Aysem::find($class->aysem_id);
+                if ($aysem) {
+                    $semester = $aysem->semester;
+                }
+            }
+
+            // Sum the units if the course matches the criteria
+            if ($minimum_year_level === 3 && $semester === 2) {
+                $this->totalUnits22 += $course['units'];
+            }
+        }
     }
+
     private function updateTotalUnits72()
     {
-        $this->totalUnits72 = $this->courses->where('year_lvl', 4)->where('sem', 1)->sum('units');
+        // Initialize total units to zero
+        $this->totalUnits72 = 0;
+
+        // Loop through each course
+        foreach ($this->courses as $course) {
+            // Fetch the corresponding class record using parent_class_code
+            $class = Classes::where('parent_class_code', $course['subject_code'])->first();
+
+            // Initialize minimum_year_level and semester to default values
+            $minimum_year_level = null;
+            $semester = null;
+
+            if ($class) {
+                $minimum_year_level = $class->minimum_year_level;
+
+                // Fetch the corresponding aysem record using aysem_id
+                $aysem = Aysem::find($class->aysem_id);
+                if ($aysem) {
+                    $semester = $aysem->semester;
+                }
+            }
+
+            // Sum the units if the course matches the criteria
+            if ($minimum_year_level === 4 && $semester === 1) {
+                $this->totalUnits72 += $course['units'];
+            }
+        }
     }
 
     private function updateTotalUnits62()
     {
-        $this->totalUnits62 = $this->courses->where('year_lvl', 4)->where('sem', 2)->sum('units');
+        // Initialize total units to zero
+        $this->totalUnits62 = 0;
+
+        // Loop through each course
+        foreach ($this->courses as $course) {
+            // Fetch the corresponding class record using parent_class_code
+            $class = Classes::where('parent_class_code', $course['subject_code'])->first();
+
+            // Initialize minimum_year_level and semester to default values
+            $minimum_year_level = null;
+            $semester = null;
+
+            if ($class) {
+                $minimum_year_level = $class->minimum_year_level;
+
+                // Fetch the corresponding aysem record using aysem_id
+                $aysem = Aysem::find($class->aysem_id);
+                if ($aysem) {
+                    $semester = $aysem->semester;
+                }
+            }
+
+            // Sum the units if the course matches the criteria
+            if ($minimum_year_level === 4 && $semester === 2) {
+                $this->totalUnits62 += $course['units'];
+            }
+        }
     }
 }
