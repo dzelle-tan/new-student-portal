@@ -182,7 +182,7 @@
                 <button  class="mr-4 px-4 py-2 bg-gray-300 rounded-md"
                     @click="showAddDropConfirmSaveModal = false">Cancel</button>
                 <button  class="px-4 py-2 bg-blue-600 text-white rounded-md"
-                    @click="showAddDropConfirmSaveModal = false; showToast2 = true; setTimeout(() => { showToast2 = false; }, 3000); $wire.saveChanges();">
+                    @click="showAddDropConfirmSaveModal = false; showAddDropModal=false; isAddDropCompleted=true; showToast2 = true; setTimeout(() => { showToast2 = false; }, 3000); $wire.saveChanges();">
                     Save Changes</button>
             </div>
         </div>

@@ -620,7 +620,7 @@ new class extends Component {
                                         }"
                                         :disabled="!isStudyPlanCompleted"
                                         @click="if(isStudyPlanCompleted) { openPanel = 4; currentStep = 4; $wire.pushCourseCodesFinal(); }">
-                                    Proceed to Downloading of Documents
+                                    Proceed to Downloading of Documents 
                                 </button>
                         </div>
                     </div>
@@ -643,14 +643,6 @@ new class extends Component {
                     </div>
                     <div class="modal-body mt-4">
                         <livewire:study-plan /> <!-- Added study plan livewire component -->
-                        <!-- Button to mark study plan as completed -->
-                        <div class="flex justify-end mt-4">
-                            <button type="button"
-                        class="px-3 py-2 bg-blue-600 text-white rounded-md"
-                        @click="isStudyPlanCompleted = true; showModal = false;">
-                        Mark as Completed
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>

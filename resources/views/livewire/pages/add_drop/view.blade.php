@@ -524,7 +524,7 @@ new class extends Component {
                         <div class="flex justify-end mt-4">
                             <button type="button"
                                 class="btn p-2 border border-blue-100 rounded-md bg-[#2d349a] text-white"
-                                @click="openPanel = 2; currentStep = 2">Proceed to Curriculum Checklist</button>
+                                @click="openPanel = 2; currentStep = 2">Proceed to Details of Change</button>
                         </div>
                     </div>
                 </div>
@@ -586,14 +586,6 @@ new class extends Component {
                 </div>
                 <div class="modal-body mt-4">
                     <livewire:add-drop-details /> <!-- Added add/drop details Livewire component -->
-                    <!-- Button to mark add/drop as completed -->
-                    <div class="flex justify-end mt-4">
-                        <button type="button"
-                            class="px-3 py-2 bg-blue-600 text-white rounded-md"
-                            @click="isAddDropCompleted = true; showAddDropModal = false;">
-                            Mark as Completed
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -658,14 +650,6 @@ new class extends Component {
                     </div>
                     <div class="modal-body mt-4">
                         <livewire:study-plan /> <!-- Added study plan livewire component -->
-                        <!-- Button to mark study plan as completed -->
-                        <div class="flex justify-end mt-4">
-                            <button type="button"
-                                class="px-3 py-2 bg-blue-600 text-white rounded-md"
-                                @click="isStudyPlanCompleted = true; showModal = false;">
-                                Mark as Completed
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
