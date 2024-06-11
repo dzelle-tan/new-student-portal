@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\StudentTerm;
+use App\Models\StudyPlanValidations;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -13,6 +14,7 @@ new class extends Component {
 
     public $step = 1;
     public StudentTerm $record;
+    public $studyPlanApproved = false;
     public string $studentStatus;
     /**
      * Mount the component.
@@ -30,6 +32,11 @@ new class extends Component {
 
         if($this->record->enrolled == 1) {
             $this->step = 3;
+        }
+
+        $studyPlanValidation = StudyPlanValidations::where('student_no', $this->user->student_no)->first();
+        if($studyPlanValidation->exists()) {
+            $this->studyPlanApproved = $studyPlanValidation->status == 'Approved';
         }
     }
 
@@ -72,7 +79,7 @@ new class extends Component {
                 </div>
                 <livewire:pages.enrollment.schedule/>
                 <div class="flex justify-end">
-                    <button @click="if ('{{ $studentStatus }}' === 'Irregular') showConfirmModal = true; else $wire.next()"
+                    <button @click="if ('{{ $studentStatus }}' === 'Irregular' && '{{ !$studyPlanApproved }}') showConfirmModal = true; else $wire.next()"
                         class="flex items-center mt-8 font-medium underline transition-all duration-100 text-md w-50 text-primary hover:text-secondary hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed">
                         Next
                         <x-icon name="arrow-long-right" class="w-5 h-5 ml-2"/>
@@ -129,11 +136,10 @@ new class extends Component {
     <!-- Modal -->
     <div x-show="showConfirmModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10" x-cloak>
         <div class="bg-white p-6 rounded-md">
-            <h2 class="text-xl font-semibold mb-4">Complete Forms</h2>
-            <p class="mb-4">Please make sure all forms are completed before proceeding.</p>
+            <h2 class="text-xl font-semibold mb-4">Await Approval</h2>
+            <p class="mb-4">You cannot proceed to the next step until your study plan has been approved.</p>
             <div class="flex justify-end">
-                <button @click="showConfirmModal = false" class="mr-4 px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
-                <button @click="showConfirmModal = false; $wire.next()" class="px-4 py-2 bg-blue-600 text-white rounded-md">Proceed</button>
+                <button @click="showConfirmModal = false" class="mr-4 px-4 py-2 bg-gray-300 rounded-md">Okay</button>
             </div>
         </div>
     </div>
