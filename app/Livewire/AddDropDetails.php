@@ -74,13 +74,13 @@ class AddDropDetails extends Component
             'reason' => $this->reason == 'others' ? $this->otherReasons : $this->reason,
         ];
 
-        AddDropRequest::create([
-            'student_no' => $student->student_no,
-            'add_drop_form' => json_encode($addDropDetails),
-            'status' => 'Pending',
-            'date_of_request' => now(),
-        ]);
+        $addDropRequest = AddDropRequest::firstOrNew(['student_no' => $student->student_no]);
+        $addDropRequest->student_no = $student->student_no;
+        $addDropRequest->add_drop_form = json_encode($addDropDetails);
+        $addDropRequest->status = 'Pending';
+        $addDropRequest->date_of_request = now();
 
+        $addDropRequest->save();
     }
 
     public function render()
