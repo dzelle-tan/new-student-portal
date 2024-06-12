@@ -35,7 +35,7 @@ new class extends Component {
         }
 
         $studyPlanValidation = StudyPlanValidations::where('student_no', $this->user->student_no)->first();
-        if($studyPlanValidation->exists()) {
+        if($studyPlanValidation != null) {
             $this->studyPlanApproved = $studyPlanValidation->status == 'Approved';
         }
     }
