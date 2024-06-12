@@ -579,7 +579,7 @@
                 <button @click="showConfirmSaveModal = false"
                     class="mr-4 px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
                 <button
-                    @click="showConfirmSaveModal = false; showToast = true; setTimeout(() => { showToast = false; }, 3000); $wire.pushCourseCodes();"
+                    @click="showConfirmSaveModal = false; showModal = false; isStudyPlanCompleted = true; showToast = true; setTimeout(() => { showToast = false; }, 3000); $wire.pushCourseCodes();"
                     class="px-4 py-2 bg-blue-600 text-white rounded-md">Confirm</button>
 
             </div>
