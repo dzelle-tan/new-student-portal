@@ -115,7 +115,11 @@ new class extends Component {
                     ])
                     ->orderBy('aysem_id', 'desc')
                     ->first();
-    }
+
+        if ($this->record->block == null) {
+            $this->record = null;
+        }
+    } 
 
     public function getPrerequisiteGrade($preRequisiteCourseCode)
     {
@@ -458,6 +462,7 @@ new class extends Component {
                     </tr>
                 </thead>
                 <tbody>
+                    @if ($this->record != null)
                     @foreach ($record->block->classes as $class)
                         @foreach ($class->classSchedules as $schedule)
                         <tr class="text-sm border-b border-gray-200">
@@ -473,6 +478,7 @@ new class extends Component {
                         </tr>
                         @endforeach
                     @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
