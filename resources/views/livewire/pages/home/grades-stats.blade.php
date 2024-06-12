@@ -40,25 +40,28 @@ new class extends Component {
             $totalUnits = 0;
             $totalGradePoints = 0;
 
-            foreach ($term->block->classes as $class) {
-                foreach ($class->grades as $grade) {
-                    $totalUnits += $class->course->units;
-                    $totalGradePoints += $class->course->units * $grade->grade;
+            if($term->block != null) {
+                foreach ($term->block->classes as $class) {
+                    foreach ($class->grades as $grade) {
+                        $totalUnits += $class->course->units;
+                        $totalGradePoints += $class->course->units * $grade->grade;
+                    }
                 }
+
+                if ($totalUnits > 0) {
+                    $gwa = round($totalGradePoints / $totalUnits, 2);
+                } else {
+                    $gwa = 0; // Handle division by zero if no classes or no grades available
+                }
+
+                // Store the GWA and corresponding term details
+                $this->gwas->push([
+                    'gwa' => $gwa,
+                    'academic_year' => $term->aysem->academic_year_code,
+                    'semester' => $term->aysem->semester
+                ]);
             }
 
-            if ($totalUnits > 0) {
-                $gwa = round($totalGradePoints / $totalUnits, 2);
-            } else {
-                $gwa = 0; // Handle division by zero if no classes or no grades available
-            }
-
-            // Store the GWA and corresponding term details
-            $this->gwas->push([
-                'gwa' => $gwa,
-                'academic_year' => $term->aysem->academic_year_code,
-                'semester' => $term->aysem->semester
-            ]);
         }
     }
     

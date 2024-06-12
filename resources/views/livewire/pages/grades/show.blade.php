@@ -128,6 +128,7 @@ new class extends Component
                             </tr>
                         </thead>
                         <tbody>
+                            @if($term->block != null)
                             @foreach ($term->block->classes as $class)
                                 @foreach ($class->grades as $grade)
                                     <tr class="text-sm border-b border-gray-200">
@@ -145,6 +146,7 @@ new class extends Component
                                     @endphp
                                 @endforeach
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

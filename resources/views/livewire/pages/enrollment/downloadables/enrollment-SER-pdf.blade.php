@@ -329,7 +329,7 @@
             </div>
             <div class="w-[8rem] border py-1 px-2">
                 <p class="text-xs">Year Level:</p>
-                <p>3</p>
+                <p>{{ $user->year_level }}</p>
             </div>
             <div class="flex-grow px-2 py-1 border">
                 <p class="text-xs">Control No:</p>

@@ -39,6 +39,25 @@
                 </li>
             </ul>
         </li>     
+        <li x-data="{ open: true }">
+            <button @click="open = !open" type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-primary-light-1">
+                <x-icon name="building-office-2" class="w-5 h-5" solid/>
+                <span class="flex-1 font-semibold text-left ms-3 rtl:text-right whitespace-nowrap">Academic Directives</span>
+                <x-icon name="chevron-right" class="w-5 h-5" x-show="!open" solid/>
+                <x-icon name="chevron-down" class="w-5 h-5" x-show="open" solid/>
+            </button>
+            <ul x-show="open" class="py-2 space-y-2">
+                <li>
+                    <a href="{{ route('loa') }}" wire:navigate class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-primary-light-1">LoA Request</a>
+                </li>
+                <li>
+                    <a href="{{ route('add_drop') }}" wire:navigate class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-primary-light-1">Add/Drop Request</a>
+                </li>
+                <li>
+                    <a href="{{ route('shifting') }}" wire:navigate class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-primary-light-1">Shifting Request</a>
+                </li>
+            </ul>
+        </li>     
     </ul>
     <a href="#" class="flex w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg ems-center mtflex group hover:bg-gray-100 dark:text-white dark:hover:bg-primary-light-1">
         <x-icon name="arrow-uturn-left" class="w-5 h-5"/>

@@ -8,7 +8,7 @@ use Livewire\Volt\Component;
 
 new class extends Component {
 
-    public Collection $classes;
+    public $classes;
     public $daysOfWeek;
 
     public function mount(): void
@@ -23,7 +23,7 @@ new class extends Component {
             ->first();
 
        // Fetch all classes associated with the latest term of the authenticated student for today
-       if ($latestTerm) {
+       if ($latestTerm && $latestTerm->block != null) {
             $this->classes = $latestTerm->block->classes->filter(function ($class) {
                 return $class->classSchedules->contains(function ($schedule) {
                     return $schedule->day === date('l');

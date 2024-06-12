@@ -132,9 +132,18 @@ new class extends Component
             <x-responsive-nav-link :href="route('registrar')" :active="request()->routeIs('registrar')" wire:navigate>
                 {{ __('Registrar') }}
             </x-responsive-nav-link>
-            {{-- <x-responsive-nav-link :href="route('evaluation')" :active="request()->routeIs('evaluation')" wire:navigate>
-                {{ __('Evaluation') }}
-            </x-responsive-nav-link> --}}
+        </div>
+        
+        <div class="py-4 border-t border-[#242a81]">
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
+                {{ __('LOA Request') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
+                {{ __('Add/Drop Request') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
+                {{ __('Shifting Request') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

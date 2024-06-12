@@ -5,6 +5,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EnrollmentDownloadsController;
 use App\Http\Controllers\GradesDownloadController;
 use App\Http\Controllers\StudentViolationController;
+use App\Http\Controllers\LOARequestController;
+use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\AddDropRequestController;
+use App\Http\Controllers\ShiftingRequestController;
+use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VerifyController;
 
@@ -32,6 +37,9 @@ Route::get('/enrollment/SER', [EnrollmentDownloadsController::class, 'downloadSE
     ->middleware(['auth'])
     ->name('enrollmentSER');
 
+Route::get('download/{file}', [DownloadController::class, 'download'])
+    ->name('download');
+
 Route::get('/grades/gradesPDF', [GradesDownloadController::class, 'downloadGrades'])
     ->middleware(['auth'])
     ->name('downloadGradesPDF');
@@ -39,6 +47,38 @@ Route::get('/grades/gradesPDF', [GradesDownloadController::class, 'downloadGrade
 Route::get('/', [HomeController::class, 'index'])
     ->middleware(['auth'])
     ->name('home');
+
+/* Routes for Academic Directives */
+
+// Route to handle the LOA file uploads submission
+Route::post('/loa_request', [LOARequestController::class, 'pushRequest'])
+    ->middleware(['auth'])
+    ->name('loa_request.post');
+
+// Route to show the view of LOA
+Route::get('loa', [LOARequestController::class, 'showLoaRequestForm'])
+    ->middleware(['auth'])
+    ->name('loa');
+
+// Route to handle the LOA file uploads submission
+Route::post('/add_drop_request', [AddDropRequestController::class, 'pushRequest'])
+->middleware(['auth'])
+->name('add_drop_request.post');
+
+// Route to show the view of Add Drop
+Route::get('add_drop', [AddDropRequestController::class, 'showAddDropRequestForm'])
+    ->middleware(['auth'])
+    ->name('add_drop');
+
+// Route to handle the Shifting file uploads submission
+Route::post('/shifting_request', [ShiftingRequestController::class, 'pushRequest'])
+    ->middleware(['auth'])
+    ->name('shifting_request.post');
+
+// Route to handle the view of Shifting request
+Route::get('shifting', [ShiftingRequestController::class, 'showShiftingRequestForm'])
+    ->middleware(['auth'])
+    ->name('shifting');
 
 // Route::view('home', 'layouts.home')
 //     ->middleware(['auth'])
