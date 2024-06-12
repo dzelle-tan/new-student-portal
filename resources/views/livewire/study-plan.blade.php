@@ -52,7 +52,7 @@
                                     }
                                 }
                             @endphp
-                  			@if($minimum_year_level === 2 && $semester === 1)
+                  			@if($minimum_year_level == 2 && $semester == 1)
                              <tr id="row_{{ $course->id }}">
                                <td class="text-black px-4 py-2">{{ $course->subject_code }}</td>
                                <td class="text-black px-4 py-2">{{ $course->subject_title }}</td>
@@ -121,38 +121,46 @@
                             </tr>
                         </thead>
                         <tbody id="tableBody22">
-                    @foreach ($courses as $course)
-                	    @php
-                                // Fetch the corresponding class record using parent_class_code
-                                $class = \App\Models\Classes::where('parent_class_code', $course->subject_code)->first();
-                                
-                                // Initialize minimum_year_level and semester to default values
-                                $minimum_year_level = null;
-                                $semester = null;
+                        @foreach ($courses as $course)
+                        @php
+                            // Fetch the corresponding class record using parent_class_code
+                            $class = \App\Models\Classes::where('parent_class_code', $course->subject_code)->first();
+                            
+                            // Initialize minimum_year_level and semester to default values
+                            $minimum_year_level = null;
+                            $semester = null;
 
-                                if ($class) {
-                                    $minimum_year_level = $class->minimum_year_level;
+                            if ($class) {
+                                $minimum_year_level = $class->minimum_year_level;
 
-                                    // Fetch the corresponding aysem record using aysem_id
-                                    $aysem = \App\Models\Aysem::find($class->aysem_id);
-                                    if ($aysem) {
-                                        $semester = $aysem->semester;
-                                    }
+                                // Fetch the corresponding aysem record using aysem_id
+                                $aysem = \App\Models\Aysem::find($class->aysem_id);
+                                if ($aysem) {
+                                    $semester = $aysem->semester;
                                 }
-                            @endphp
-                  			@if($minimum_year_level === 2 && $semester === 2)
-                             <tr id="row_{{ $course->id }}">
-                               <td class="text-black px-4 py-2">{{ $course->subject_code }}</td>
-                               <td class="text-black px-4 py-2">{{ $course->subject_title }}</td>
-                               <td class="text-black px-4 py-2">{{ $course->units }}</td>
-                               <td class="text-black px-4 py-2">{{ $course->pre_requisite }}</td>
+                            }
 
-                               <td class="px-4 py-2">
-                                    <button wire:click="moveRowToDropdown({{ $course->id }}, 'tableBody22', '{{ $tableBodyId }}')" class="btn btn-danger btn-sm">X</button>
-                               </td>
-                             </tr>
-                          @endif                                    
-                    @endforeach
+                            $preRequisiteGrade = $this->getPrerequisiteGrade($course->pre_requisite);
+                            $grade = $this->getCourseGrade($course->subject_code);
+
+                        @endphp
+                            @if (($minimum_year_level == 2 && $semester == 2) ||
+                                ($minimum_year_level == 1 && $semester == 2  && $grade == 5))
+                                @if ($preRequisiteGrade != 5 && $grade != 5)
+                                    <tr id="row_{{ $course->id }}">
+                                        <td class="text-black px-4 py-2">{{ $course->subject_code }}</td>
+                                        <td class="text-black px-4 py-2">{{ $course->subject_title }}</td>
+                                        <td class="text-black px-4 py-2">{{ $course->units }}</td>
+                                        <td class="text-black px-4 py-2">{{ $course->pre_requisite }}</td>
+                                        <td class="text-black px-4 py-2">{{ $grade }}</td>
+
+                                        <td class="px-4 py-2">
+                                            <button wire:click="moveRowToDropdown({{ $course->id }}, 'tableBody22', '{{ $tableBodyId }}')" class="btn btn-danger btn-sm">X</button>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endif                                    
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -231,19 +239,29 @@
                                             $semester = $aysem->semester;
                                         }
                                     }
+
+                                    $preRequisiteGrade = $this->getPrerequisiteGrade($course->pre_requisite);
+                                    $grade = $this->getCourseGrade($course->subject_code);
+                                    
                                 @endphp
-                                @if($minimum_year_level === 3 && $semester === 1)
+                            @if (($minimum_year_level == 3 && $semester == 1) ||
+                                ($minimum_year_level == 2 && $semester == 1 && $grade == 5))
+                            @if ($preRequisiteGrade !== 5)
                                 <tr id="row_{{ $course->id }}">
                                 <td class="text-black px-4 py-2">{{ $course->subject_code }}</td>
                                 <td class="text-black px-4 py-2">{{ $course->subject_title }}</td>
                                 <td class="text-black px-4 py-2">{{ $course->units }}</td>
                                 <td class="text-black px-4 py-2">{{ $course->pre_requisite }}</td>
+                                <td class="text-black px-4 py-2">{{ $preRequisiteGrade }}</td>
+                                <td class="text-black px-4 py-2">{{ $grade }}</td>
+
 
                                 <td class="px-4 py-2">
                                         <button wire:click="moveRowToDropdown({{ $course->id }}, 'tableBody32', '{{ $tableBodyId }}')" class="btn btn-danger btn-sm">X</button>
                                 </td>
                                 </tr>
-                            @endif                                    
+                                @endif
+                            @endif               
                         @endforeach          
                         </tbody>
                     </table>
@@ -316,9 +334,14 @@
                                         $semester = $aysem->semester;
                                     }
                                 }
+
+                                $preRequisiteGrade = $this->getPrerequisiteGrade($course->pre_requisite);
+                                $grade = $this->getCourseGrade($course->subject_code);
                             @endphp
-                  			@if($minimum_year_level === 3 && $semester === 2)
-                             <tr id="row_{{ $course->id }}">
+                              @if (($minimum_year_level == 3 && $semester == 2) ||
+                                ($minimum_year_level == 2 && $semester == 2 && $grade == 5))
+                                @if ($preRequisiteGrade != 5)
+                                <tr id="row_{{ $course->id }}">
                                <td class="text-black px-4 py-2">{{ $course->subject_code }}</td>
                                <td class="text-black px-4 py-2">{{ $course->subject_title }}</td>
                                <td class="text-black px-4 py-2">{{ $course->units }}</td>
@@ -328,6 +351,7 @@
                                     <button wire:click="moveRowToDropdown({{ $course->id }}, 'tableBody42', '{{ $tableBodyId }}')" class="btn btn-danger btn-sm">X</button>
                                </td>
                              </tr>
+                             @endif
                           @endif                                    
                     @endforeach
                         </tbody>
@@ -405,20 +429,26 @@
                                             $semester = $aysem->semester;
                                         }
                                     }
+                                    $preRequisiteGrade = $this->getPrerequisiteGrade($course->pre_requisite);
+                                    $grade = $this->getCourseGrade($course->subject_code);
                                 @endphp
-                                @if($minimum_year_level === 4 && $semester === 1)
-                                <tr id="row_{{ $course->id }}">
-                                <td class="text-black px-4 py-2">{{ $course->subject_code }}</td>
-                                <td class="text-black px-4 py-2">{{ $course->subject_title }}</td>
-                                <td class="text-black px-4 py-2">{{ $course->units }}</td>
-                                <td class="text-black px-4 py-2">{{ $course->pre_requisite }}</td>
-                                  
+                                @if (($minimum_year_level == 4 && $semester == 1) ||
+                                ($minimum_year_level == 3 && $semester == 1 && $grade == 5  ||
+                                ($minimum_year_level == 3 && $semester == 1 && $preRequisiteGrade == 5)))
+                                    @if ($preRequisiteGrade != 5 || $preRequisiteGrade == 5 )
+                                        <tr id="row_{{ $course->id }}">
+                                        <td class="text-black px-4 py-2">{{ $course->subject_code }}</td>
+                                        <td class="text-black px-4 py-2">{{ $course->subject_title }}</td>
+                                        <td class="text-black px-4 py-2">{{ $course->units }}</td>
+                                        <td class="text-black px-4 py-2">{{ $course->pre_requisite }}</td>
+                                        
 
-                                <td class="px-4 py-2">
-                                        <button wire:click="moveRowToDropdown({{ $course->id }}, 'tableBody72', '{{ $tableBodyId }}')" class="btn btn-danger btn-sm">X</button>
-                                </td>
-                                </tr>
-                            @endif                                    
+                                        <td class="px-4 py-2">
+                                                <button wire:click="moveRowToDropdown({{ $course->id }}, 'tableBody72', '{{ $tableBodyId }}')" class="btn btn-danger btn-sm">X</button>
+                                        </td>
+                                        </tr>
+                                    @endif
+                                @endif                                    
                         @endforeach
                         </tbody>
                     </table>
@@ -474,7 +504,7 @@
                         </thead>
                         <tbody id="tableBody62">
                         @foreach ($courses as $course)
-                            @php
+                                @php
                                     // Fetch the corresponding class record using parent_class_code
                                     $class = \App\Models\Classes::where('parent_class_code', $course->subject_code)->first();
                                     
@@ -491,19 +521,25 @@
                                             $semester = $aysem->semester;
                                         }
                                     }
+                                    $preRequisiteGrade = $this->getPrerequisiteGrade($course->pre_requisite);
+                                    $grade = $this->getCourseGrade($course->subject_code);
                                 @endphp
-                                @if($minimum_year_level === 4 && $semester === 2)
+
+                                @if (($minimum_year_level == 4 && $semester == 2) ||
+                                    ($minimum_year_level == 3 && $semester== 2 && $preRequisiteGrade == 5) ||
+                                    ($minimum_year_level == 3 && $semester == 2 && $grade == 5) ||
+                                    ($minimum_year_level == 2 && $semester == 2 && $grade == 5))
+                                @if ($preRequisiteGrade != 5)
                                 <tr id="row_{{ $course->id }}">
                                 <td class="text-black px-4 py-2">{{ $course->subject_code }}</td>
                                 <td class="text-black px-4 py-2">{{ $course->subject_title }}</td>
                                 <td class="text-black px-4 py-2">{{ $course->units }}</td>
                                 <td class="text-black px-4 py-2">{{ $course->pre_requisite }}</td>
-                                  
-
                                 <td class="px-4 py-2">
                                         <button wire:click="moveRowToDropdown({{ $course->id }}, 'tableBody62', '{{ $tableBodyId }}')" class="btn btn-danger btn-sm">X</button>
                                 </td>
                                 </tr>
+                                @endif
                             @endif                                    
                         @endforeach
                         </tbody>
@@ -543,7 +579,7 @@
                 <button @click="showConfirmSaveModal = false"
                     class="mr-4 px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
                 <button
-                    @click="showConfirmSaveModal = false; showModal=false; isStudyPlanCompleted=true; showToast = true; setTimeout(() => { showToast = false; }, 3000); $wire.pushCourseCodes();"
+                    @click="showConfirmSaveModal = false; showToast = true; setTimeout(() => { showToast = false; }, 3000); $wire.pushCourseCodes();"
                     class="px-4 py-2 bg-blue-600 text-white rounded-md">Confirm</button>
 
             </div>
