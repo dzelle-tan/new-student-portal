@@ -341,7 +341,7 @@ class StudyPlan extends Component
     
         $studyPlanCourseCodes = json_encode($courseCodes);
         
-        $validation->study_plan_subject_code = $studyPlanCourseCodes;
+        $validation->study_plan_course_code = $studyPlanCourseCodes;
     
         $validation->save();
     
@@ -364,7 +364,7 @@ class StudyPlan extends Component
             $study_plan_validation->year_level = $validation->yearlvl; 
             $study_plan_validation->status = $validation->status;
             $study_plan_validation->date_of_request = $validation->daterequest;
-            $study_plan_validation->study_plan = $validation->study_plan_subject_code;
+            $study_plan_validation->study_plan = $validation->study_plan_course_code;
     
             // Save the study_plan_validation object
             $study_plan_validation->save();
